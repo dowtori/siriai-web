@@ -70,7 +70,7 @@ export default function PhilosophySection() {
         className="relative flex-1 flex items-center justify-center min-h-[440px]"
       >
         <div className="w-full max-w-4xl">
-          <TurntableCarousel height={500} />
+          <TurntableCarousel height={580} />
         </div>
       </motion.div>
 

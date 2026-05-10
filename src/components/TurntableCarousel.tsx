@@ -46,15 +46,15 @@ const CARDS = [
 ];
 
 const N = CARDS.length;
-const RADIUS = 190;
-const CARD_SIZE = 128;
+const RADIUS = 252;
+const CARD_SIZE = 164;
 const AUTO_VEL = 0.22;
 
 interface Props {
   height?: number;
 }
 
-export default function TurntableCarousel({ height = 480 }: Props) {
+export default function TurntableCarousel({ height = 520 }: Props) {
   const wheelRef = useRef<HTMLDivElement>(null);
   const angleRef = useRef(0);
   const velRef = useRef(AUTO_VEL);
@@ -75,7 +75,7 @@ export default function TurntableCarousel({ height = 480 }: Props) {
       angleRef.current += velRef.current;
     }
     if (wheelRef.current) {
-      wheelRef.current.style.transform = `rotateX(-11deg) rotateY(${angleRef.current}deg)`;
+      wheelRef.current.style.transform = `rotateX(-13deg) rotateY(${angleRef.current}deg)`;
     }
     rafRef.current = requestAnimationFrame(animate);
   }, []);
@@ -90,7 +90,7 @@ export default function TurntableCarousel({ height = 480 }: Props) {
   return (
     <div
       className="relative w-full overflow-hidden select-none cursor-grab active:cursor-grabbing"
-      style={{ height, perspective: "900px" }}
+      style={{ height, perspective: "780px" }}
       onPointerDown={(e) => {
         isDragging.current = true;
         lastX.current = e.clientX;
@@ -115,6 +115,24 @@ export default function TurntableCarousel({ height = 480 }: Props) {
         isHovering.current = true;
       }}
     >
+      {/* central core glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 96,
+          height: 96,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(255,255,255,0.22) 0%, rgba(160,80,255,0.14) 40%, transparent 68%)",
+          boxShadow:
+            "0 0 72px 32px rgba(130,60,255,0.18), 0 0 140px 70px rgba(60,100,255,0.1)",
+          pointerEvents: "none",
+        }}
+      />
+
       {/* 3D wheel */}
       <div
         ref={wheelRef}
@@ -125,7 +143,7 @@ export default function TurntableCarousel({ height = 480 }: Props) {
           width: 0,
           height: 0,
           transformStyle: "preserve-3d",
-          transform: "rotateX(-11deg) rotateY(0deg)",
+          transform: "rotateX(-13deg) rotateY(0deg)",
         }}
       >
         {CARDS.map((card, i) => {
@@ -144,30 +162,30 @@ export default function TurntableCarousel({ height = 480 }: Props) {
                 overflow: "hidden",
                 background: card.gradient,
                 boxShadow:
-                  "0 6px 36px rgba(0,0,0,0.75), inset 0 1px 0 rgba(255,255,255,0.3)",
+                  "0 8px 48px rgba(0,0,0,0.8), 0 0 28px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.32)",
               }}
             >
-              {/* center highlight — simulates frosted glass depth */}
+              {/* center highlight */}
               <div
                 style={{
                   position: "absolute",
                   inset: 0,
                   borderRadius: "50%",
                   background:
-                    "radial-gradient(circle at 50% 45%, rgba(255,255,255,0.15) 0%, transparent 60%)",
+                    "radial-gradient(circle at 50% 45%, rgba(255,255,255,0.18) 0%, transparent 60%)",
                   pointerEvents: "none",
                 }}
               />
-              {/* glassmorphism shimmer top-left */}
+              {/* glassmorphism shimmer */}
               <div
                 style={{
                   position: "absolute",
                   inset: 0,
                   borderRadius: "50%",
                   background:
-                    "linear-gradient(135deg, rgba(255,255,255,0.26) 0%, rgba(255,255,255,0.04) 45%, transparent 60%)",
+                    "linear-gradient(135deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.04) 45%, transparent 60%)",
                   backdropFilter: "blur(1px)",
-                  border: "1px solid rgba(255,255,255,0.22)",
+                  border: "1px solid rgba(255,255,255,0.24)",
                   pointerEvents: "none",
                 }}
               />
@@ -178,7 +196,7 @@ export default function TurntableCarousel({ height = 480 }: Props) {
                   inset: 0,
                   borderRadius: "50%",
                   background:
-                    "radial-gradient(circle at 50% 115%, rgba(0,0,0,0.55) 0%, transparent 55%)",
+                    "radial-gradient(circle at 50% 115%, rgba(0,0,0,0.6) 0%, transparent 55%)",
                   pointerEvents: "none",
                 }}
               />
@@ -190,7 +208,7 @@ export default function TurntableCarousel({ height = 480 }: Props) {
                   left: 0,
                   right: 0,
                   textAlign: "center",
-                  fontSize: 8.5,
+                  fontSize: 9.5,
                   fontWeight: 700,
                   letterSpacing: "0.13em",
                   textTransform: "uppercase",
@@ -207,7 +225,7 @@ export default function TurntableCarousel({ height = 480 }: Props) {
         })}
       </div>
 
-      {/* depth vignette — matches section bg #111110 */}
+      {/* depth vignette */}
       <div
         style={{
           position: "absolute",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useCallback, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 
 const IMAGE_DATA = [
@@ -22,16 +22,58 @@ const IMAGE_DATA = [
   { src: "/works/compounding.png", alt: "Compounding" },
 ];
 
+const TARGET_VEL = 0.38;
+
 function PhotoCircle({ src, alt }: { src: string; alt: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const angleRef = useRef(0);
+  const velRef = useRef(0);
+  const isHovering = useRef(false);
+  const isAnimating = useRef(false);
+  const rafRef = useRef(0);
+
+  const startAnimation = useCallback(() => {
+    if (isAnimating.current) return;
+    isAnimating.current = true;
+
+    const tick = () => {
+      if (isHovering.current) {
+        velRef.current += (TARGET_VEL - velRef.current) * 0.05;
+      } else {
+        velRef.current *= 0.93;
+      }
+
+      if (Math.abs(velRef.current) < 0.005 && !isHovering.current) {
+        velRef.current = 0;
+        isAnimating.current = false;
+        return;
+      }
+
+      angleRef.current += velRef.current;
+      if (containerRef.current) {
+        containerRef.current.style.transform = `rotate(${angleRef.current}deg)`;
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  useEffect(() => () => cancelAnimationFrame(rafRef.current), []);
 
   return (
     <div
-      className="relative aspect-square overflow-hidden rounded-full cursor-pointer group"
+      ref={containerRef}
+      className="relative aspect-square overflow-hidden rounded-full cursor-pointer"
       onMouseEnter={() => {
-        if (overlayRef.current) overlayRef.current.style.backdropFilter = "blur(5px)";
+        isHovering.current = true;
+        if (overlayRef.current) overlayRef.current.style.backdropFilter = "blur(6px)";
+        startAnimation();
       }}
       onMouseLeave={() => {
+        isHovering.current = false;
         if (overlayRef.current) overlayRef.current.style.backdropFilter = "blur(0px)";
       }}
     >
@@ -40,7 +82,7 @@ function PhotoCircle({ src, alt }: { src: string; alt: string }) {
         alt={alt}
         loading="lazy"
         decoding="async"
-        className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+        className="w-full h-full object-cover"
       />
 
       <div
@@ -52,7 +94,7 @@ function PhotoCircle({ src, alt }: { src: string; alt: string }) {
           background:
             "linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0.32) 100%)",
           backdropFilter: "blur(0px)",
-          transition: "backdrop-filter 400ms ease",
+          transition: "backdrop-filter 450ms ease",
           pointerEvents: "none",
         }}
       />
