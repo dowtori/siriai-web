@@ -15,13 +15,31 @@ const FIELDS = [
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", company: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Supabase 또는 이메일 API 연결
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError("전송에 실패했습니다. 잠시 후 다시 시도해 주세요.");
+      }
+    } catch {
+      setError("전송에 실패했습니다. 잠시 후 다시 시도해 주세요.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -121,11 +139,16 @@ export default function ContactPage() {
                       />
                     </div>
 
+                    {error && (
+                      <p className="text-[13px] text-red-600/80">{error}</p>
+                    )}
+
                     <button
                       type="submit"
-                      className="self-start mt-2 px-8 py-3.5 rounded-full bg-black text-white text-[13px] font-medium hover:bg-black/80 transition-colors duration-200"
+                      disabled={loading}
+                      className="self-start mt-2 px-8 py-3.5 rounded-full bg-black text-white text-[13px] font-medium hover:bg-black/80 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      보내기
+                      {loading ? "전송 중..." : "보내기"}
                     </button>
                   </form>
                 )}

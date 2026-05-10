@@ -219,7 +219,7 @@ export default function WorksSection() {
             transition={{ duration: 1, delay: 0.18 }}
             className="relative"
           >
-            <div className="grid grid-cols-4 gap-2 md:gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
               {IMAGE_DATA.map((item, i) => (
                 <PhotoCircle key={i} url={item.url} label={item.label} alt={item.alt} />
               ))}

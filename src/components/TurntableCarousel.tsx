@@ -89,7 +89,7 @@ export default function TurntableCarousel({ height = 480 }: Props) {
 
   return (
     <div
-      className="relative w-full select-none cursor-grab active:cursor-grabbing"
+      className="relative w-full overflow-hidden select-none cursor-grab active:cursor-grabbing"
       style={{ height, perspective: "900px" }}
       onPointerDown={(e) => {
         isDragging.current = true;
