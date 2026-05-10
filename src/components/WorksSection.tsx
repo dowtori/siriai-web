@@ -4,97 +4,25 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const IMAGE_DATA = [
-  {
-    url: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=400&fit=crop&crop=center",
-    label: "Data Flow",
-    alt: "Circuit board macro",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=400&fit=crop&crop=center",
-    label: "AI Strategy",
-    alt: "Digital code matrix",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop&crop=center",
-    label: "Insight",
-    alt: "Digital globe",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&crop=center",
-    label: "Architecture",
-    alt: "Abstract geometric neon",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&h=400&fit=crop&crop=center",
-    label: "Literacy",
-    alt: "Futuristic glass architecture",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=400&fit=crop&crop=center",
-    label: "Logic",
-    alt: "Server room",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&h=400&fit=crop&crop=center",
-    label: "Workflow",
-    alt: "Network nodes",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d8?w=400&h=400&fit=crop&crop=center",
-    label: "Integration",
-    alt: "Neural AI visualization",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=400&fit=crop&crop=center",
-    label: "Analysis",
-    alt: "Open architecture interior",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=400&fit=crop&crop=center",
-    label: "Mapping",
-    alt: "Laptop dark code screen",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?w=400&h=400&fit=crop&crop=center",
-    label: "Training",
-    alt: "Light trails abstract",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=400&h=400&fit=crop&crop=center",
-    label: "Automation",
-    alt: "Forest organic structure",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=400&fit=crop&crop=center",
-    label: "Decision",
-    alt: "Abstract light streaks",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&crop=center",
-    label: "Structure",
-    alt: "Dramatic coastal cliffs",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1551808525-ddddbbec6021?w=400&h=400&fit=crop&crop=center",
-    label: "Execution",
-    alt: "Abstract grid pattern",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=400&fit=crop&crop=center",
-    label: "Alignment",
-    alt: "Dark digital interface",
-  },
+  { src: "/works/context.png", alt: "Context" },
+  { src: "/works/signal.png", alt: "Signal" },
+  { src: "/works/question.png", alt: "Question" },
+  { src: "/works/edge.png", alt: "Edge" },
+  { src: "/works/clarity.png", alt: "Clarity" },
+  { src: "/works/modeling.png", alt: "Modeling" },
+  { src: "/works/oversight.png", alt: "Oversight" },
+  { src: "/works/trace.png", alt: "Trace" },
+  { src: "/works/flow.png", alt: "Flow" },
+  { src: "/works/rhythm.png", alt: "Rhythm" },
+  { src: "/works/connection.png", alt: "Connection" },
+  { src: "/works/momentum.png", alt: "Momentum" },
+  { src: "/works/evidence.png", alt: "Evidence" },
+  { src: "/works/benchmark.png", alt: "Benchmark" },
+  { src: "/works/learning.png", alt: "Learning" },
+  { src: "/works/compounding.png", alt: "Compounding" },
 ];
 
-function PhotoCircle({
-  url,
-  label,
-  alt,
-}: {
-  url: string;
-  label: string;
-  alt: string;
-}) {
+function PhotoCircle({ src, alt }: { src: string; alt: string }) {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -108,14 +36,13 @@ function PhotoCircle({
       }}
     >
       <img
-        src={url}
+        src={src}
         alt={alt}
         loading="lazy"
         decoding="async"
-        className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.08]"
+        className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
       />
 
-      {/* gradient + blur overlay */}
       <div
         ref={overlayRef}
         style={{
@@ -123,33 +50,12 @@ function PhotoCircle({
           inset: 0,
           borderRadius: "50%",
           background:
-            "linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0.48) 100%)",
+            "linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0.32) 100%)",
           backdropFilter: "blur(0px)",
           transition: "backdrop-filter 400ms ease",
           pointerEvents: "none",
         }}
       />
-
-      {/* label */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "22%",
-          left: 0,
-          right: 0,
-          textAlign: "center",
-          fontSize: 9,
-          fontWeight: 600,
-          letterSpacing: "0.14em",
-          textTransform: "uppercase",
-          color: "rgba(255,255,255,0.75)",
-          textShadow: "0 1px 8px rgba(0,0,0,0.9)",
-          userSelect: "none",
-          pointerEvents: "none",
-        }}
-      >
-        {label}
-      </div>
     </div>
   );
 }
@@ -221,7 +127,7 @@ export default function WorksSection() {
           >
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
               {IMAGE_DATA.map((item, i) => (
-                <PhotoCircle key={i} url={item.url} label={item.label} alt={item.alt} />
+                <PhotoCircle key={i} src={item.src} alt={item.alt} />
               ))}
             </div>
           </motion.div>
