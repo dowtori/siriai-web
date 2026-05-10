@@ -159,7 +159,7 @@ export default function WorksSection() {
   const inView = useInView(ref, { once: true, margin: "-15%" });
 
   return (
-    <section ref={ref} className="bg-[#111110] py-36 px-8 overflow-hidden">
+    <section ref={ref} className="bg-[#111110] py-36 px-8 overflow-hidden" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
       <div className="max-w-6xl mx-auto">
         <div className="flex items-start justify-between mb-20 flex-wrap gap-6">
           <motion.p
