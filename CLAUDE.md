@@ -2,6 +2,33 @@
 
 # Siriai Web — Agent Context
 
+## 새 로컬 환경 빠른 시작
+
+```bash
+# 1. 클론
+git clone https://github.com/dowtori/siriai-web.git
+cd siriai-web
+
+# 2. 의존성 설치
+npm install
+
+# 3. 환경변수 설정 (.env.local 생성)
+# SUPABASE_URL=...
+# SUPABASE_SERVICE_ROLE_KEY=...
+# → 미설정 시 contact form은 console.log fallback으로 동작 (개발 무관)
+
+# 4. 개발 서버
+npm run dev          # http://localhost:3000
+
+# 5. 배포
+npx vercel --prod    # Vercel 프로덕션 배포
+```
+
+**환경변수** (`SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`)는 Vercel 대시보드 → Project Settings → Environment Variables에도 설정 필요.  
+**Supabase 테이블** (`contact_submissions`) 미생성 시 문의 폼 제출이 500 에러 → 운영 전 생성 필수.
+
+---
+
 ## 프로젝트 개요
 
 **Siriai** — AI 아키텍처 설계·AI 리터러시 구축 전문 컨설팅 기업 공식 웹사이트.  
