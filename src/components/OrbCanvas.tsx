@@ -4,6 +4,8 @@ import { useRef, useMemo, useEffect } from "react";
 import type { MutableRefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { Sparkles } from "@react-three/drei";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 const N             = 160;
 const SPHERE_R      = 1.8;
@@ -316,6 +318,23 @@ export default function OrbCanvas() {
         dpr={typeof window !== "undefined" ? Math.min(window.devicePixelRatio, 2) : 1}
       >
         <Network mouse={mouse} />
+        <Sparkles
+          count={45}
+          scale={5.2}
+          size={1.6}
+          speed={0.3}
+          color="#c4b5fd"
+          opacity={0.5}
+        />
+        <EffectComposer>
+          <Bloom
+            intensity={0.7}
+            luminanceThreshold={0.08}
+            luminanceSmoothing={0.9}
+            mipmapBlur
+            radius={0.85}
+          />
+        </EffectComposer>
       </Canvas>
     </div>
   );
