@@ -2,6 +2,11 @@
 
 # Siriai Web — Agent Context
 
+> 버전: v2.0 (2026-05-11 기준)  
+> 자세한 요구사항 → [`PRD.md`](./PRD.md)
+
+---
+
 ## 새 로컬 환경 빠른 시작
 
 ```bash
@@ -21,94 +26,119 @@ npm install
 npm run dev          # http://localhost:3000
 
 # 5. 배포
-npx vercel --prod    # Vercel 프로덕션 배포
+npx vercel --prod    # Vercel 프로덕션 배포 (또는 git push → 자동 배포)
 ```
-
-**환경변수** (`SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`)는 Vercel 대시보드 → Project Settings → Environment Variables에도 설정 필요.  
-**Supabase 테이블** (`contact_submissions`) 미생성 시 문의 폼 제출이 500 에러 → 운영 전 생성 필수.
 
 ---
 
 ## 프로젝트 개요
 
 **Siriai** — AI 아키텍처 설계·AI 리터러시 구축 전문 컨설팅 기업 공식 웹사이트.  
-핵심 메시지: "AI를 쓰는 것이 아니라, AI로 생각하는 것."
+핵심 메시지: **"AI를 쓰는 것이 아니라, AI로 생각하는 것."**
 
-자세한 요구사항은 [`PRD.md`](./PRD.md)를 참고한다.
+인플루언서 비즈니스는 수익 채널 중 하나 — 브랜딩 전면에는 AI 역량을 내세운다.
 
 ---
 
 ## 기술 스택
 
-- **Framework:** Next.js App Router (NOT Pages Router)
-- **Language:** TypeScript (strict)
-- **Styling:** Tailwind CSS v4
-- **Animation:** framer-motion (`useInView`, `motion`, stagger)
-- **3D/WebGL:** `@react-three/fiber`, `@react-three/drei`, `@react-three/postprocessing`
-- **DB:** `@supabase/supabase-js` (contact form 제출 저장)
-- **Package manager:** npm
-- **Deployment:** Vercel (`npx vercel --prod`, GitHub push 시 자동 배포)
+| 항목 | 세부 |
+|------|------|
+| Framework | Next.js 16 App Router (NOT Pages Router) |
+| Language | TypeScript strict |
+| Styling | Tailwind CSS v4 |
+| Animation | framer-motion (`useScroll`, `useTransform`, `useInView`, `motion`) |
+| Smooth Scroll | Lenis (duration: 1.55, spring easing) |
+| 3D/WebGL | `@react-three/fiber`, `@react-three/drei`, `@react-three/postprocessing` |
+| DB | `@supabase/supabase-js` |
+| Deployment | Vercel (GitHub push → 자동 배포) |
 
 ---
 
-## 페이지 구조
+## 현재 페이지 구조 (v2.0 — 15 섹션)
 
 ```
 / (홈페이지)  src/app/page.tsx
+│
+│  [Global Fixed]
+├── ScrollProgressBar  — 상단 1.5px 보라 그라디언트 진행 바 (spring 물리)
+├── SectionIndicator   — 우측 고정 도트 레일 11개 + 섹션 번호/레이블 (md 이상만 노출)
 ├── Navigation
-├── HeroSection          — cream #F4F1EB, WebGL orb (OrbCanvas)
-├── PhilosophySection    — dark #111110, 헤드라인 + TurntableCarousel + 3-col features
-├── WorksSection         — dark #111110, 텍스트 + 4×4 포토서클 그리드 (커스텀 이미지)
-├── CTASection           — cream #F4F1EB, 문의하기 CTA
-└── FooterSection
+│
+│  [Main]
+├── id="s-hero"         HeroSection          — cream, WebGL 오브, 단어 stagger
+├── id="s-connection"   ConnectionSection    — cream, 좌텍 + 우카드 패럴랙스 + exit
+├── id="s-relationship" RelationshipIntro    — cream, 우텍 + 좌카드(mirror) + exit
+├── id="s-architecture" ArchitectureSection  — dark olive #3D3B2A, 2-col 카드 + CTA
+├── id="s-philosophy"   PhilosophySection    — dark, sticky 280vh scroll-scrub
+├── id="s-aistudio"     AIStudioSection      — cream, 텍스트 + AI 툴 마키 + exit
+├── id="s-creator"      CreatorSection       — dark, 풀스크린 패럴랙스 배경
+├── id="s-archiving"    ArchivingSection     — cream, 좌텍 + 2×3 그리드 + exit
+│
+│  [Dark Act — div.bg-[#111110] 공유 래퍼]
+├── id="s-manifesto"    ManifestoQuoteSection — 스크롤 스크럽 줄별 reveal
+├── id="s-growth"       GrowthSection         — SVG 성장 곡선 pathLength 드로우
+│
+├── id="s-services"     ServicesSection      — cream, 2×2 서비스 카드
+├──                     WorksSection         — dark, 4×4 포토서클 그리드
+├──                     CTASection           — cream, 문의하기 버튼
+└──                     FooterSection
 
-/contact  src/app/contact/page.tsx
+/contact    src/app/contact/page.tsx
 /portfolio  src/app/portfolio/page.tsx
 /api/contact  src/app/api/contact/route.ts  (POST → Supabase insert)
 ```
+
+**중요**: 각 섹션은 `<div id="s-xxx">` 래퍼 안에 있음. SectionIndicator가 이 ID로 IntersectionObserver를 붙임. ID 변경 시 `SectionIndicator.tsx`의 `SECTIONS` 배열도 함께 수정.
+
+---
+
+## 스크롤 UX 핵심 원칙
+
+- **스냅 스크롤 금지** — 유저 스크롤 제어 탈취 안 함
+- **섹션 exit 애니메이션** — Connection, RelationshipIntro, AIStudio, Archiving 4개 크림 섹션에 적용
+  - `useScroll offset: ["start end", "end start"]` + `useTransform [0.60→0.90] opacity [1→0], y [0→-28px]`
+- **Philosophy sticky**: `height: "280vh"` container + `sticky top-0 h-screen` inner — 데스크톱 전용
+- **Dark Act**: ManifestoQuote + Growth는 `<div className="bg-[#111110]">` 공유 래퍼로 묶임. 두 컴포넌트에서 개별 `bg-[#111110]` 제거됨.
+- **진입 easing**: `[0.16, 1, 0.3, 1]`, stagger `delay + 0.08~0.12s`
 
 ---
 
 ## 컴포넌트 아키텍처
 
 ### 핵심 설계 원칙
-- **RAF 직접 DOM 조작**: 애니메이션이 많은 컴포넌트는 `requestAnimationFrame` + `ref.style.transform` 직접 변경. framer-motion 오버헤드 회피.
-- **단방향 진입 트리거**: `useInView({ once: true, margin: "-10~-20%" })`로 스크롤 진입 시 1회만 실행.
-- **hover는 ref 기반 inline style 변경**: CSS transition이 있으므로 RAF 불필요 (단, 회전 인터랙션은 RAF 사용).
+- **RAF 직접 DOM 조작**: 고빈도 애니메이션 (`TurntableCarousel`, `PhotoCircle`) — framer-motion 오버헤드 회피
+- **단방향 진입 트리거**: `useInView({ once: true, margin: "-10%" })`
+- **scroll-linked**: `useScroll` + `useTransform` — 값만 선언, Framer Motion이 RAF 최적화
+
+### `ScrollProgressBar.tsx`
+- `useScroll()` (페이지 전체) + `useSpring(scrollYProgress, { stiffness: 180, damping: 28 })`
+- 상단 고정, z-index 200, `origin-left` + `scaleX`
+
+### `SectionIndicator.tsx`
+- IntersectionObserver로 `id="s-xxx"` 요소 감지 (`rootMargin: "-42% 0px -42% 0px"`)
+- `SECTIONS` 배열로 섹션 메타 관리 (id, num, label, dark 여부)
+- 다크/크림 전환 시 dot/text 색상 자동 전환 (CSS `transition: 500ms`)
+- `hidden md:flex` — 모바일 숨김
 
 ### `OrbCanvas.tsx`
-- Three.js + GLSL 커스텀 셰이더, HeroSection에서 `dynamic import (ssr: false)` 사용
-- 마우스 추적 → uniform `uMouse`로 광원 이동
-- Fresnel rim + 이리데슨트 무지개 효과
-- `Sparkles` (count=45, color=#c4b5fd) + `EffectComposer > Bloom` (intensity=0.7, luminanceThreshold=0.08) 적용 완료
+- Three.js + GLSL 커스텀 셰이더, `dynamic import (ssr: false)`
+- 마우스 → `uMouse` uniform → 광원 이동, Fresnel rim + 이리데슨트
+- `Sparkles` (count=45, color=#c4b5fd) + `Bloom` (intensity=0.7)
 
 ### `TurntableCarousel.tsx`
-- CSS 3D transform (`preserve-3d`, `rotateY`, `translateZ`)으로 8개 카드 원형 오비팅
-- 상수: `RADIUS=252`, `CARD_SIZE=164`, `AUTO_VEL=0.22`
-- `rotateX(-13deg)`, `perspective: 780px`
-- 중앙 코어 글로우(보라/청색 방사형) 추가 — 궤도의 시각적 앵커
-- RAF 루프 자동 회전, `PointerEvent` + `setPointerCapture` 드래그 인터랙션
-- `PhilosophySection`에서 `height={580}`으로 사용
+- CSS 3D preserve-3d, 8개 카드, `RADIUS=252`, `CARD_SIZE=164`, `AUTO_VEL=0.22`
+- `perspective: 780px`, `rotateX(-13deg)`, 중앙 코어 글로우
+- RAF 자동 회전 + PointerEvent 드래그
 
 ### `PhilosophySection.tsx`
-- ManifestoSection + FeaturesSection 통합 컴포넌트 (두 파일은 page.tsx에서 미사용, 삭제 안 함)
-- 구조: `Philosophy` 라벨 → 헤드라인 → TurntableCarousel (max-w-4xl) → 3-col feature grid
-- `min-h-screen`, 단일 `useInView` ref로 전체 stagger 제어
+- Desktop: `PhilosophyDesktop` (`hidden md:block`, height 280vh, sticky)
+- Mobile: `PhilosophyMobile` (`md:hidden`, useInView)
+- scroll-scrub 구간: headline [0→0.12] → carousel [0.08→0.3] → features [0.62→0.85]
 
 ### `WorksSection.tsx`
-- 좌: 텍스트 블록 + 통계 (30+, 12+, 100%)
-- 우: `PhotoCircle` 4×4 그리드 (16개 커스텀 이미지, `public/works/*.png`)
-- 이미지 라벨: Context, Signal, Question, Edge, Clarity, Modeling, Oversight, Trace, Flow, Rhythm, Connection, Momentum, Evidence, Benchmark, Learning, Compounding
-- `PhotoCircle`: 이미지에 라벨·한글 설명이 내장되어 있어 오버레이 라벨 없음
-- hover: RAF 기반 회전 가속(→0.38°/frame) + blur 오버레이. 해제 시 0.93× 감속 후 RAF 자동 정지
-
-### `CTASection.tsx`
-- cream `#F4F1EB` bg, 문의하기(`/contact`) + 포트폴리오(`/portfolio`) 버튼
-
-### `/api/contact/route.ts`
-- POST: name, company, email, message → Supabase `contact_submissions` 테이블 insert
-- 환경변수: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
-- 미설정 시 콘솔 로그 fallback (개발 환경)
+- `PhotoCircle`: RAF 기반 hover 회전 (TARGET_VEL=0.38, 감속 0.93×)
+- 이미지 16종: Context, Signal, Question, Edge, Clarity, Modeling, Oversight, Trace, Flow, Rhythm, Connection, Momentum, Evidence, Benchmark, Learning, Compounding
 
 ---
 
@@ -116,41 +146,47 @@ npx vercel --prod    # Vercel 프로덕션 배포
 
 | 속성 | 값 |
 |------|----|
-| Dark bg | `#111110` |
 | Cream bg | `#F4F1EB` |
-| Dark 텍스트 | `white` / `white/85` / `white/35` / `white/25` |
-| Cream 텍스트 | `black` / `black/40` / `black/30` |
-| 헤드라인 | `clamp(2rem, 3.5vw, 4.8rem)`, `font-bold`, `leading-[1.18~1.25]` |
-| 섹션 레이블 | `text-[11px] tracking-[0.22em] uppercase` |
+| Dark bg | `#111110` |
+| Dark olive | `#3D3B2A` |
+| 보라 액센트 | `#c4b5fd` / `#818cf8` |
+| 헤드라인 | `clamp(2rem, 3.5vw, 4.8rem)`, font-bold, leading-[1.18~1.25] |
+| 레이블 | `text-[11px] tracking-[0.22em] uppercase` |
 | 본문 | `text-[14px] leading-[1.9]` |
-| wordBreak | `keep-all` (한국어) |
-| 진입 easing | `[0.16, 1, 0.3, 1]` (spring-like) |
-| stagger | `delay + 0.08~0.1s` |
+| wordBreak | `keep-all` (한국어 필수) |
+| 진입 easing | `[0.16, 1, 0.3, 1]` |
 
 ---
 
-## 브랜드 원칙 (코드 작성 시 카피 가이드)
+## 브랜드 원칙 (카피 가이드)
 
 - AI 도구 나열 X → AI 운영 **구조** 설계 O
-- "인플루언서 비즈니스" 전면 노출 금지 — 수익 채널 중 하나로만
+- "인플루언서 비즈니스" 전면 노출 금지
 - 핵심 키워드: 아키텍처, 리터러시, 구조, 판단, 실행, 데이터
 - 어조: 간결·단호. 설명적이지 않고 선언적.
 
 ---
 
-## 미구현 백로그
+## 다음 작업 우선순위
 
-| 항목 | 우선순위 |
-|------|----------|
-| SEO / OG 메타태그 (`layout.tsx`) | Medium |
-| HeroSection 모바일 — OrbCanvas 숨김으로 hero 허전함 보완 | Low |
-| Supabase `contact_submissions` 테이블 생성 + 환경변수 설정 | 운영 필수 |
+### 즉시
+1. **Supabase 테이블 생성** — `contact_submissions` + Vercel 환경변수
+2. **SEO/OG 메타태그** — `layout.tsx`에 title, description, og:image 추가
+
+### 비주얼 완성
+1. ArchivingSection 그리드 → 실제 콘텐츠 썸네일 교체 (CSS placeholder 현재)
+2. RelationshipIntroSection 카드 → 실제 UI 목업 이미지 (Figma export)
+3. ConnectionSection 메트릭 수치 → 실제 성과 데이터
+
+### UX 개선
+1. Navigation scroll compact (고정 높이 축소 + bg blur 강화)
+2. ArchitectureSection → PhilosophySection 색상 전환 처리 (olive→dark)
+3. SectionIndicator 모바일 버전
 
 ---
 
-## 중요 결정 사항 (히스토리)
+## 주의사항
 
-- **PhilosophySection 통합**: ManifestoSection + FeaturesSection이 동일 bg·동일 AI 철학 텍스트로 시각적 피로 유발 → 단일 섹션으로 병합.
-- **WorksSection 포토서클**: 비닐레코드 CSS 메타포 폐기 → 커스텀 제작 이미지(Context~Compounding 16종) + 글래스모피즘. 이미지에 라벨·한글 설명 내장.
-- **contact form**: 이메일 전송(Resend) → Supabase DB 저장 방식으로 전환. 현대적 UX(제출 후 대기) 선호.
-- **ManifestoSection.tsx, FeaturesSection.tsx** 파일 유지 (참고용, page.tsx 미사용).
+- `ManifestoSection.tsx`, `FeaturesSection.tsx` — 레거시 파일, `page.tsx` 미사용. 삭제 가능.
+- Dark Act 래퍼 (`bg-[#111110]`): `ManifestoQuoteSection` + `GrowthSection` 두 컴포넌트 자체에는 bg 없음. 래퍼가 담당.
+- SectionIndicator ID 목록 `s-hero` ~ `s-services` — 섹션 추가/제거 시 반드시 SECTIONS 배열 동기화.

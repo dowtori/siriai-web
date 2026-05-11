@@ -40,6 +40,15 @@ body {
   overflow-x: hidden;
 }
 
+/* Marquee animation for AIStudioSection */
+@keyframes siriai-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
+}
+.animate-siriai-marquee {
+  animation: siriai-marquee 24s linear infinite;
+}
+
 /* 스크롤바 스타일 */
 ::-webkit-scrollbar {
   width: 4px;
