@@ -3,13 +3,13 @@
 import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
-const GRID_ITEMS = [
-  { gradient: "from-[#e8d5c0] to-[#d4b896]" },
-  { gradient: "from-[#c5d8e8] to-[#a8c4d8]" },
-  { gradient: "from-[#d4c8e8] to-[#b8a8d4]" },
-  { gradient: "from-[#c8e0d0] to-[#a8c8b8]" },
-  { gradient: "from-[#e8e0c8] to-[#d4c8a8]" },
-  { gradient: "from-[#e0c8c8] to-[#c8a8a8]" },
+const ARCHIVE_CARDS = [
+  { label: "콘텐츠 도달",   value: "2.4M", sub: "impressions", bar: 78, tag: "Instagram", bg: "bg-[#ece6f5]", bar_color: "#c4b5fd" },
+  { label: "인게이지먼트",  value: "9.2%", sub: "avg. rate",   bar: 92, tag: "TikTok",    bg: "bg-[#e8f4ec]", bar_color: "#4ade80" },
+  { label: "크리에이터 ROI", value: "4.7×", sub: "return",     bar: 85, tag: "YouTube",   bg: "bg-[#fef9e7]", bar_color: "#fbbf24" },
+  { label: "오디언스 구조", value: "68%",  sub: "F · 24–34",  bar: 68, tag: "분석됨",    bg: "bg-[#e8edf8]", bar_color: "#818cf8" },
+  { label: "채널 성과",    value: "A+",   sub: "성과 등급",   bar: 95, tag: "아카이빙",  bg: "bg-[#fdf2f0]", bar_color: "#f87171" },
+  { label: "신뢰 지수",    value: "91",   sub: "brand trust", bar: 91, tag: "누적됨",    bg: "bg-[#f0f4f8]", bar_color: "#94a3b8" },
 ];
 
 export default function ArchivingSection() {
@@ -68,11 +68,11 @@ export default function ArchivingSection() {
             </motion.p>
           </div>
 
-          {/* right: 2×3 grid */}
+          {/* right: 2×3 archive data cards */}
           <div className="flex-1 grid grid-cols-3 gap-3">
-            {GRID_ITEMS.map((item, i) => (
+            {ARCHIVE_CARDS.map((card, i) => (
               <motion.div
-                key={i}
+                key={card.label}
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{
@@ -80,8 +80,29 @@ export default function ArchivingSection() {
                   ease: [0.16, 1, 0.3, 1],
                   delay: 0.25 + i * 0.07,
                 }}
-                className={`aspect-square rounded-xl bg-gradient-to-br ${item.gradient}`}
-              />
+                className={`rounded-xl ${card.bg} p-4 flex flex-col justify-between aspect-square`}
+              >
+                <div className="flex flex-col gap-1">
+                  <span className="text-[9px] tracking-[0.1em] uppercase text-black/30 font-medium">
+                    {card.label}
+                  </span>
+                  <span className="text-[22px] font-bold text-black/75 leading-none">
+                    {card.value}
+                  </span>
+                  <span className="text-[9px] text-black/30">{card.sub}</span>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <div className="h-1 w-full bg-black/[0.07] rounded-full overflow-hidden">
+                    <div
+                      className="h-full rounded-full"
+                      style={{ width: `${card.bar}%`, backgroundColor: card.bar_color }}
+                    />
+                  </div>
+                  <span className="text-[9px] text-black/35 bg-white/50 px-1.5 py-0.5 rounded-full self-start">
+                    {card.tag}
+                  </span>
+                </div>
+              </motion.div>
             ))}
           </div>
 
