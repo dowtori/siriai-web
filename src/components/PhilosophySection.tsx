@@ -1,73 +1,30 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import {
   motion,
   useScroll,
   useTransform,
   useInView,
-  useMotionValueEvent,
-  AnimatePresence,
 } from "framer-motion";
 import TurntableCarousel from "./TurntableCarousel";
 
-// ── 8 Philosophy concepts (gradients mirror TurntableCarousel) ──────
-const CONCEPTS = [
+// ── 3 philosophy statements revealed sequentially ───────────────────
+const STATEMENTS = [
   {
-    num: "01",
-    en: "Data Flow",
-    ko: "데이터 흐름 설계",
-    desc: "조직 내 데이터가 어떻게 생성되고, 이동하며, 판단에 도달하는지 설계합니다. 흐름이 없는 데이터는 소음입니다.",
-    gradient: "radial-gradient(circle at 38% 38%, #00e5ff 0%, #0047ff 55%, #001a40 100%)",
+    tag: "사고의 전환",
+    headline: ["AI를 쓰는 것이 아니라,", "AI로 생각하는 것."],
+    body: "도구와 전략의 차이는 사용자가 아닌 설계자의 관점에서 시작됩니다. 우리는 AI를 어디에 놓을지가 아니라, 어떻게 생각하게 할지를 설계합니다.",
   },
   {
-    num: "02",
-    en: "AI Strategy",
-    ko: "AI 전략 구조",
-    desc: "AI를 어디에, 언제, 어떻게 투입할지 결정하는 전략 레이어입니다. 도구 선택보다 투입 시점과 판단 기준이 더 중요합니다.",
-    gradient: "radial-gradient(circle at 62% 35%, #ffb300 0%, #ff4500 55%, #1a0800 100%)",
+    tag: "구조의 역할",
+    headline: ["구조가 있어야", "AI가 작동합니다."],
+    body: "아키텍처 없이 투입된 AI는 혼란을 자동화할 뿐입니다. 데이터 흐름, 판단 노드, 피드백 루프 — 이것들이 먼저 설계되어야 합니다.",
   },
   {
-    num: "03",
-    en: "Insight Structure",
-    ko: "인사이트 구조화",
-    desc: "데이터를 수집하는 것과 읽는 것은 다릅니다. 숫자를 맥락으로, 맥락을 판단으로 번역하는 구조가 필요합니다.",
-    gradient: "radial-gradient(circle at 45% 60%, #00ffb8 0%, #00aabb 50%, #002030 100%)",
-  },
-  {
-    num: "04",
-    en: "Architecture",
-    ko: "AI 아키텍처 설계",
-    desc: "AI 도구를 선택하기 전에 구조를 먼저 설계합니다. 데이터 흐름, 의사결정 노드, 피드백 루프 — 이 모든 것이 설계 대상입니다.",
-    gradient: "radial-gradient(circle at 55% 40%, #d400ff 0%, #7700ff 55%, #10002b 100%)",
-  },
-  {
-    num: "05",
-    en: "Literacy",
-    ko: "AI 리터러시",
-    desc: "팀이 AI와 함께 생각할 수 없다면 AI는 블랙박스에 불과합니다. 리터러시는 조직의 판단 속도를 근본적으로 바꿉니다.",
-    gradient: "radial-gradient(circle at 50% 50%, #dce8ff 0%, #8fa8ff 50%, #081020 100%)",
-  },
-  {
-    num: "06",
-    en: "Logic Layer",
-    ko: "판단의 논리화",
-    desc: "자동화는 반복을 해결합니다. 우리가 설계하는 것은 판단의 지능화 — AI가 인간의 결정을 보조하는 구조입니다.",
-    gradient: "radial-gradient(circle at 42% 58%, #ffee00 0%, #ff7700 55%, #150a00 100%)",
-  },
-  {
-    num: "07",
-    en: "Workflow Design",
-    ko: "워크플로우 설계",
-    desc: "AI가 실제 업무 흐름 안에서 작동하도록 설계합니다. 도입이 아닌 통합 — 사람과 AI가 함께 판단하는 구조입니다.",
-    gradient: "radial-gradient(circle at 60% 42%, #00ffee 0%, #6600ff 50%, #000e20 100%)",
-  },
-  {
-    num: "08",
-    en: "Integration",
-    ko: "구조가 남는다",
-    desc: "콘텐츠는 사라지지만 구조는 남습니다. 관계가 자산이 되고, 데이터가 기억이 됩니다. 이것이 우리가 설계하는 이유입니다.",
-    gradient: "radial-gradient(circle at 50% 50%, #ff00c8 0%, #8800ff 38%, #00d4ff 72%, #000818 100%)",
+    tag: "판단의 본질",
+    headline: ["판단은 데이터에서", "오지 않습니다."],
+    body: "데이터를 읽는 방법에서 옵니다. 우리는 도구를 가르치지 않습니다. 조직이 AI와 함께 생각하는 방법을 설계합니다.",
   },
 ];
 
@@ -89,39 +46,76 @@ const FEATURES = [
   },
 ];
 
-// ── Desktop: scroll-scrubbed 8-concept sequential reveal ────────────
+// ── Desktop: 280vh sticky — pure scroll-linked crossfade ────────────
 function PhilosophyDesktop() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
+  // Grid
   const gridOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
 
-  // Phase A: intro headline
-  const introOpacity = useTransform(scrollYProgress, [0, 0.07, 0.14], [0, 1, 0]);
+  // Section label
+  const labelOpacity = useTransform(scrollYProgress, [0, 0.08], [0, 1]);
 
-  // Phase B: concept gallery
-  const mainOpacity = useTransform(scrollYProgress, [0.12, 0.18, 0.82, 0.88], [0, 1, 1, 0]);
+  // TurntableCarousel — ambient background
+  const carouselOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.14, 0.80, 0.92],
+    [0, 0.20, 0.20, 0]
+  );
 
-  // Phase C: features strip
+  // Statement 1  [0.08 → 0.44]
+  const s1Opacity = useTransform(
+    scrollYProgress,
+    [0.08, 0.17, 0.36, 0.44],
+    [0, 1, 1, 0]
+  );
+  const s1Y = useTransform(
+    scrollYProgress,
+    [0.08, 0.17, 0.36, 0.44],
+    [28, 0, 0, -14]
+  );
+
+  // Statement 2  [0.36 → 0.70]
+  const s2Opacity = useTransform(
+    scrollYProgress,
+    [0.36, 0.46, 0.60, 0.70],
+    [0, 1, 1, 0]
+  );
+  const s2Y = useTransform(
+    scrollYProgress,
+    [0.36, 0.46, 0.60, 0.70],
+    [28, 0, 0, -14]
+  );
+
+  // Statement 3  [0.62 → 0.88]
+  const s3Opacity = useTransform(
+    scrollYProgress,
+    [0.62, 0.72, 0.82, 0.88],
+    [0, 1, 1, 0]
+  );
+  const s3Y = useTransform(
+    scrollYProgress,
+    [0.62, 0.72, 0.82, 0.88],
+    [28, 0, 0, -14]
+  );
+
+  const stmtMotion = [
+    { opacity: s1Opacity, y: s1Y },
+    { opacity: s2Opacity, y: s2Y },
+    { opacity: s3Opacity, y: s3Y },
+  ];
+
+  // Progress timeline fill
+  const timelineFill = useTransform(scrollYProgress, [0.08, 0.88], ["0%", "100%"]);
+
+  // Features strip
   const featuresOpacity = useTransform(scrollYProgress, [0.84, 0.96], [0, 1]);
   const featuresY = useTransform(scrollYProgress, [0.84, 0.96], [32, 0]);
-
-  // Track active concept index from scroll
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const CONCEPT_START = 0.12;
-    const CONCEPT_END = 0.85;
-    if (v <= CONCEPT_START) return setActiveIndex(0);
-    if (v >= CONCEPT_END) return setActiveIndex(7);
-    const normalized = (v - CONCEPT_START) / (CONCEPT_END - CONCEPT_START);
-    setActiveIndex(Math.min(7, Math.floor(normalized * 8)));
-  });
-
-  const concept = CONCEPTS[activeIndex];
 
   return (
     <div
@@ -142,178 +136,74 @@ function PhilosophyDesktop() {
           }}
         />
 
-        {/* ── Phase A: intro headline ── */}
+        {/* TurntableCarousel — background atmosphere */}
         <motion.div
-          className="absolute inset-0 flex flex-col justify-center px-8 lg:px-20 pointer-events-none"
-          style={{ opacity: introOpacity }}
+          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+          style={{ opacity: carouselOpacity }}
         >
-          <div className="max-w-6xl mx-auto w-full">
-            <p className="text-[11px] tracking-[0.22em] uppercase text-white/25">
-              Philosophy
-            </p>
-            <h2
-              className="mt-5 font-bold text-white leading-[1.18]"
-              style={{ fontSize: "clamp(2.2rem, 4vw, 4.8rem)", wordBreak: "keep-all" }}
-            >
-              AI를 쓰는 것이 아니라,<br />AI로 생각하는 것.
-            </h2>
+          <div className="w-full" style={{ maxWidth: "680px" }}>
+            <TurntableCarousel height={560} />
           </div>
         </motion.div>
 
-        {/* ── Phase B: concept gallery ── */}
-        <motion.div
-          className="absolute inset-0 flex items-center px-8 lg:px-20"
-          style={{ opacity: mainOpacity }}
+        {/* Section label */}
+        <motion.p
+          className="absolute top-12 left-8 lg:left-20 text-[11px] tracking-[0.22em] uppercase text-white/25"
+          style={{ opacity: labelOpacity }}
         >
-          {/* counter top-right */}
-          <div className="absolute top-8 right-8 lg:right-20">
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={activeIndex}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.25 }}
-                className="font-mono text-[11px] text-white/20 tracking-widest"
+          Philosophy
+        </motion.p>
+
+        {/* Left progress timeline */}
+        <div className="absolute left-8 lg:left-20 top-[28%] bottom-[28%] flex flex-col items-center">
+          <div className="relative w-px flex-1 bg-white/[0.06]">
+            <motion.div
+              className="absolute top-0 left-0 w-full bg-white/30 origin-top"
+              style={{ height: timelineFill }}
+            />
+          </div>
+        </div>
+
+        {/* Statements — all absolute, pure opacity crossfade */}
+        {STATEMENTS.map((s, i) => (
+          <motion.div
+            key={i}
+            className="absolute inset-0 flex flex-col justify-center pointer-events-none"
+            style={{
+              opacity: stmtMotion[i].opacity,
+              y: stmtMotion[i].y,
+              paddingLeft: "clamp(3.5rem, 8vw, 6rem)",
+              paddingRight: "clamp(3.5rem, 8vw, 6rem)",
+            }}
+          >
+            <div className="max-w-6xl mx-auto w-full">
+              <p className="text-[10px] tracking-[0.24em] uppercase text-white/20 mb-6 font-mono">
+                — {s.tag}
+              </p>
+              <h2
+                className="font-bold text-white leading-[1.15]"
+                style={{
+                  fontSize: "clamp(2.8rem, 5.5vw, 6rem)",
+                  wordBreak: "keep-all",
+                }}
               >
-                {concept.num} / 08
-              </motion.span>
-            </AnimatePresence>
-          </div>
-
-          <div className="max-w-6xl mx-auto w-full flex items-center gap-12 lg:gap-20">
-
-            {/* Left: text */}
-            <div className="flex-1 flex flex-col gap-8 min-w-0">
-
-              {/* progress pills */}
-              <div className="flex gap-1.5 items-center">
-                {CONCEPTS.map((_, i) => (
-                  <div
-                    key={i}
-                    className="h-px rounded-full transition-all duration-500"
-                    style={{
-                      width: i === activeIndex ? "28px" : "14px",
-                      backgroundColor:
-                        i === activeIndex
-                          ? "rgba(196,181,253,0.7)"
-                          : "rgba(255,255,255,0.12)",
-                    }}
-                  />
-                ))}
-              </div>
-
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, y: 22 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -14 }}
-                  transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col gap-5"
-                >
-                  <p className="text-[10px] tracking-[0.26em] uppercase text-white/20 font-mono">
-                    {concept.en}
-                  </p>
-                  <h3
-                    className="font-bold text-white leading-[1.15]"
-                    style={{
-                      fontSize: "clamp(2rem, 3.2vw, 3.8rem)",
-                      wordBreak: "keep-all",
-                    }}
-                  >
-                    {concept.ko}
-                  </h3>
-                  <p
-                    className="text-[13px] text-white/38 leading-[2] max-w-sm"
-                    style={{ wordBreak: "keep-all" }}
-                  >
-                    {concept.desc}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
+                {s.headline[0]}
+                <br />
+                {s.headline[1]}
+              </h2>
+              <p
+                className="mt-7 text-[14px] text-white/38 leading-[2] max-w-lg"
+                style={{ wordBreak: "keep-all" }}
+              >
+                {s.body}
+              </p>
             </div>
+          </motion.div>
+        ))}
 
-            {/* Right: large concept card */}
-            <div className="flex-shrink-0" style={{ width: "min(38vw, 440px)" }}>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, scale: 0.92, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 1.05, y: -12 }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative rounded-2xl overflow-hidden"
-                  style={{
-                    aspectRatio: "3 / 4",
-                    maxHeight: "70vh",
-                    background: concept.gradient,
-                  }}
-                >
-                  {/* grid texture */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
-                      backgroundSize: "36px 36px",
-                    }}
-                  />
-
-                  {/* large bg number */}
-                  <div className="absolute top-5 left-6 select-none">
-                    <span
-                      className="font-mono font-bold text-white/[0.07] leading-none"
-                      style={{ fontSize: "clamp(5rem, 12vw, 9rem)" }}
-                    >
-                      {concept.num}
-                    </span>
-                  </div>
-
-                  {/* center glow */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse at 50% 42%, rgba(255,255,255,0.12) 0%, transparent 60%)",
-                    }}
-                  />
-
-                  {/* glassmorphism edge */}
-                  <div
-                    className="absolute inset-0 pointer-events-none rounded-2xl"
-                    style={{
-                      border: "1px solid rgba(255,255,255,0.18)",
-                    }}
-                  />
-
-                  {/* bottom label */}
-                  <div
-                    className="absolute bottom-0 left-0 right-0 p-7"
-                    style={{
-                      background:
-                        "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)",
-                    }}
-                  >
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-white/40 mb-2 font-mono">
-                      {concept.en}
-                    </p>
-                    <p
-                      className="text-[1.4rem] font-bold text-white/90 leading-[1.2]"
-                      style={{ wordBreak: "keep-all" }}
-                    >
-                      {concept.ko}
-                    </p>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* ── Phase C: feature strip ── */}
+        {/* Feature strip */}
         <motion.div
-          className="absolute bottom-0 left-0 right-0 px-8 lg:px-20 pb-8 pointer-events-none"
+          className="absolute bottom-0 left-0 right-0 px-8 lg:px-20 pb-10 pointer-events-none"
           style={{ opacity: featuresOpacity, y: featuresY }}
         >
           <div className="max-w-6xl mx-auto grid grid-cols-3 divide-x divide-white/[0.07]">

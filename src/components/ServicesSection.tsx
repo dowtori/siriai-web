@@ -62,17 +62,21 @@ export default function ServicesSection() {
           </motion.h2>
         </div>
 
-        {/* 2×2 cards */}
+        {/* 2×2 cards — diagonal stagger */}
         <div className="grid md:grid-cols-2 gap-3">
-          {SERVICES.map((s, i) => (
+          {SERVICES.map((s, i) => {
+            // 0=TL, 1=TR, 2=BL, 3=BR — alternate x direction per column
+            const xDir = i % 2 === 0 ? -18 : 18;
+            const yOffset = i < 2 ? 20 : 8;
+            return (
             <motion.div
               key={s.en}
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              initial={{ opacity: 0, x: xDir, y: yOffset }}
+              animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
               transition={{
-                duration: 0.7,
+                duration: 0.75,
                 ease: [0.16, 1, 0.3, 1],
-                delay: 0.15 + i * 0.1,
+                delay: 0.12 + i * 0.1,
               }}
               className="bg-white rounded-2xl p-6 flex flex-col gap-4 border border-black/[0.05]"
             >
@@ -95,7 +99,8 @@ export default function ServicesSection() {
                 {s.desc}
               </p>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
 
       </div>

@@ -40,15 +40,35 @@ export default function ConnectionSection() {
             >
               — AI Connection
             </motion.p>
-            <motion.h2
-              initial={{ opacity: 0, y: 28 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            <h2
               className="font-bold text-black leading-[1.18]"
               style={{ fontSize: "clamp(2rem, 3.2vw, 3.6rem)", wordBreak: "keep-all" }}
             >
-              사람을 이해하고,<br />세상을 연결하는 AI
-            </motion.h2>
+              {[
+                { words: ["사람을", "이해하고,"], br: true },
+                { words: ["세상을", "연결하는", "AI"], br: false },
+              ].flatMap(({ words, br }, lineIdx) => [
+                ...words.map((word, wi) => {
+                  const globalIdx = lineIdx === 0 ? wi : 2 + wi;
+                  return (
+                    <motion.span
+                      key={`${lineIdx}-${wi}`}
+                      initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+                      animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+                      transition={{
+                        duration: 0.65,
+                        ease: [0.16, 1, 0.3, 1],
+                        delay: 0.1 + globalIdx * 0.09,
+                      }}
+                      className="inline-block mr-[0.32em] last:mr-0"
+                    >
+                      {word}
+                    </motion.span>
+                  );
+                }),
+                br ? <br key={`br-${lineIdx}`} /> : null,
+              ])}
+            </h2>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}

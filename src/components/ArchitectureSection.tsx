@@ -39,9 +39,9 @@ export default function ArchitectureSection() {
             — Structure
           </motion.p>
           <motion.h2
-            initial={{ opacity: 0, y: 28 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+            initial={{ clipPath: "inset(0 102% 0 0)" }}
+            animate={inView ? { clipPath: "inset(0 0% 0 0)" } : {}}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
             className="font-bold text-white leading-[1.18]"
             style={{ fontSize: "clamp(2.2rem, 4vw, 4.8rem)", wordBreak: "keep-all" }}
           >
