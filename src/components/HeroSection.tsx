@@ -46,8 +46,8 @@ export default function HeroSection() {
 
         {/* word-stagger headline */}
         <h1
-          className="font-bold leading-[1.3] text-black"
-          style={{ fontSize: "clamp(2rem, 2.5vw, 2.8rem)" }}
+          className="font-bold leading-[1.18] text-black"
+          style={{ fontSize: "clamp(2.6rem, 4vw, 5rem)" }}
         >
           <div className="flex flex-wrap gap-x-[0.35em] mb-[0.1em]">
             {LINE1.map((word, i) => (
