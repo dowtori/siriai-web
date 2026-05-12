@@ -65,30 +65,73 @@ export default function AIStudioSection() {
           </motion.p>
         </div>
 
-        {/* logo marquee — full bleed */}
+        {/* logo marquees — full bleed, dual row */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 0.4 }}
-          className="mt-14 border-y border-black/[0.06]"
+          className="mt-14 flex flex-col border-y border-black/[0.06]"
         >
-          <div className="flex overflow-hidden">
+          {/* row 1 — forward */}
+          <div className="flex overflow-hidden border-b border-black/[0.04]">
             <div className="flex shrink-0 animate-siriai-marquee">
               {marqueeItems.map((tool, i) => (
                 <div
                   key={i}
-                  className="inline-flex items-center justify-center px-10 py-5 border-r border-black/[0.05] last:border-r-0"
+                  className="inline-flex items-center justify-center px-10 py-5 border-r border-black/[0.05]"
                   style={{ minWidth: "180px" }}
                 >
                   <img
                     src={tool.src}
                     alt={tool.name}
                     className="h-7 w-auto object-contain"
-                    style={{ filter: "grayscale(1) opacity(0.35)" }}
+                    style={{ filter: "grayscale(1) opacity(0.55)" }}
                   />
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* row 2 — reverse */}
+          <div className="flex overflow-hidden">
+            <div className="flex shrink-0 animate-siriai-marquee-reverse">
+              {marqueeItems.map((tool, i) => (
+                <div
+                  key={i}
+                  className="inline-flex items-center justify-center px-10 py-4 border-r border-black/[0.04]"
+                  style={{ minWidth: "180px" }}
+                >
+                  <img
+                    src={tool.src}
+                    alt={tool.name}
+                    className="h-5 w-auto object-contain"
+                    style={{ filter: "grayscale(1) opacity(0.28)" }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* capability stats strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
+          className="max-w-6xl mx-auto w-full px-8 md:px-12 lg:px-20 mt-14"
+        >
+          <div className="grid grid-cols-3 divide-x divide-black/[0.08]">
+            {[
+              { num: "6+",   label: "통합 AI 툴",  desc: "목적별 최적 조합" },
+              { num: "72h",  label: "배포 사이클", desc: "캠페인 → 라이브" },
+              { num: "100%", label: "브랜드 맞춤", desc: "도구가 아닌 감각" },
+            ].map((s) => (
+              <div key={s.num} className="px-6 first:pl-0 last:pr-0 flex flex-col gap-1">
+                <span className="text-[26px] font-bold text-black/80 leading-none">{s.num}</span>
+                <span className="text-[12px] font-medium text-black/50">{s.label}</span>
+                <span className="text-[11px] text-black/30">{s.desc}</span>
+              </div>
+            ))}
           </div>
         </motion.div>
       </motion.div>

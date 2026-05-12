@@ -40,13 +40,20 @@ body {
   overflow-x: hidden;
 }
 
-/* Marquee animation for AIStudioSection */
+/* Marquee animations for AIStudioSection */
 @keyframes siriai-marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-33.333%); }
 }
+@keyframes siriai-marquee-reverse {
+  from { transform: translateX(-33.333%); }
+  to   { transform: translateX(0); }
+}
 .animate-siriai-marquee {
   animation: siriai-marquee 24s linear infinite;
+}
+.animate-siriai-marquee-reverse {
+  animation: siriai-marquee-reverse 28s linear infinite;
 }
 
 /* 스크롤바 스타일 */
