@@ -11,17 +11,17 @@
 | 챕터 | 결정 상태 |
 |------|----------|
 | 1. Design Principles | ✅ 결정 기반 |
-| 2. Mood Board References | ✅ 결정 기반 |
-| 3. Color System | 🟡 **3안 중 1안 선택 필요** |
-| 4. Typography | 🟡 **영문 폰트 3안 중 1안 선택 필요** |
+| 2. Mood Board References | ✅ Anthropic 추가 차용 확정 |
+| 3. Color System | ✅ **C안 (베이지 + 딥블루) 확정** |
+| 4. Typography | ✅ **Pretendard Variable 단독 + 토큰 추상화** |
 | 5. Layout & Grid | ✅ 결정 기반 |
-| 6. Motion | 🟡 **Lenis 유지 여부 결정 필요** |
-| 7. Generative Hero Spec | 🟡 **구현 옵션 3안 중 1안 선택 필요** |
+| 6. Motion | ✅ **Lenis 제거 확정** |
+| 7. Generative Hero Spec | ✅ **Canvas 2D 텍스트 파티클 확정** |
 | 8. Diagram System | ✅ 결정 기반 (디테일은 시안 단계) |
-| 9. Components | ✅ 결정 기반 |
+| 9. Components | ✅ **SectionIndicator 제거 확정** |
 | 10. Accessibility | ✅ 결정 기반 |
 | 11. Performance Budget | ✅ 결정 기반 |
-| 12. Open Questions | 🟡 사용자 답변 필요 |
+| 12. Open Questions | ✅ 전건 해결 (Phase C) |
 
 ---
 
@@ -94,55 +94,77 @@
 | 마우스 hover 줌·시프트 효과의 빈도 | 장식적이고 카피 우선 정체성과 충돌 |
 | 에디토리얼 타이포의 세리프 dominance | 테크 정체성과 거리 |
 
-### 2.4 추가 검토 권장 레퍼런스 (Phase C 전 사용자 검토 요청)
+### 2.4 추가 차용 레퍼런스 — *적극 차용 (Phase C 추가 확정)*
 
-다음 사이트들도 함께 보고 차용/회피를 결정하면 좋음 (사용자에게 공유 권장):
-- **Linear** (linear.app) — 어두운 톤, 미세 그라디언트, 절제된 그리드. Twelve Labs와 결이 가까움.
-- **Vercel** (vercel.com) — 한 액센트 컬러(검정+한 색)로 시스템을 끌고 가는 방식.
-- **Anthropic** (anthropic.com) — 베이지 톤 + 세리프 디스플레이 + 산세리프 본문 페어링. Siriai 크림 톤과 비교 가치.
-- **Stripe** (stripe.com/sessions/2024) — 다이어그램을 콘텐츠 자산으로 끌고 가는 가장 강한 사례.
+#### Anthropic (anthropic.com)
+
+**왜 차용하는가:** §3.1 컬러 C안(베이지 + 딥블루)과 정합성 매우 높음. Anthropic의 베이지 톤 + 차분한 색 + 신중한 카피 톤은 Siriai의 컨설팅 정체성과 결이 매우 가깝다.
+
+| 차용 요소 | 적용 위치 |
+|----------|----------|
+| 베이지 톤 위 무거운 헤드라인 + 절제된 본문 페어링 | 전 섹션 표준 anatomy (§5.3) |
+| "신중한·연구 기반" 톤의 카피 voice | PRD §2.3 Tone of Voice |
+| 좌측 정렬 헤드 + 우측 정렬 보조 텍스트의 1:1 시각 균형 | Hero(§7), Methodology(§8.1) |
+| 단색 라인 일러스트·다이어그램(아이콘 X) | Diagram A, B 시각 문법 (§8) |
+
+**차용하지 않는 요소:**
+- Anthropic의 세리프 디스플레이 폰트 — Siriai는 Pretendard 단독(§4)
+- 길게 풀어쓴 에디토리얼 단락 — Siriai는 선언적 단문
+
+#### 후속 차기 검토 (이번 v3 비차용)
+
+Linear / Vercel / Stripe Sessions — 결정 단계에서 차용 제외. 차기 페이지(Portfolio, Case Studies) 디자인 시 재검토 후보로 남김.
 
 ---
 
 ## 3. Color System
 
-### 3.1 결정 필요 — 3안 비교
+### 3.1 Palette — *C안 확정: 베이지 + 딥블루*
 
-| 안 | 배경(라이트) | 배경(다크) | 액센트 | 인상 | 추천도 |
-|---|------------|----------|-------|------|-------|
-| **A. v2 계승** | `#F4F1EB` 크림 | `#0A0A0A` 잉크 블랙 | `#c4b5fd` 라벤더 | 따뜻한 베이지 + 미감적 보라. v2 일관성. | ⭐⭐ |
-| **B. Twelve Labs형** | `#FAFAF7` 본 화이트 | `#0E0E0E` 잉크 | `#E8E8E3` 본 그레이 + `#3C3C3C` 차콜 (액센트 사실상 무채색) | 절제 극대화. 무채색 + 단 1색의 미세 색조. 매우 하이엔드. | ⭐⭐⭐ |
-| **C. 베이지 + 딥블루** | `#EFE9DD` 페이퍼 | `#0F1419` 미드나이트 블루 | `#2B3A4A` 슬레이트 + `#9CA3AF` 콜드 그레이 | Anthropic·Linear의 차분함. 베이지의 인간미 + 블루의 전문성. | ⭐⭐⭐ |
+| 역할 | 토큰 | Hex | 설명 |
+|------|------|-----|------|
+| 라이트 배경 | `--surface-base` | `#EFE9DD` | 페이퍼. 종이의 따뜻한 베이지. |
+| 라이트 카드/구분 | `--surface-raised` | `#E8E1D2` | base보다 2~3% 어두움. 카드·구분면. |
+| 다크 배경 | `--surface-inverse` | `#0F1419` | 미드나이트 블루. 검정 아닌 깊은 청 |
+| 본문 (light 위) | `--fg-default` | `#0F1419` | 미드나이트와 동일 — 의도된 미러링 |
+| 보조 (light 위) | `--fg-muted` | `#5E6470` | 슬레이트 그레이 |
+| 본문 (dark 위) | `--fg-on-inverse` | `#EFE9DD` | 페이퍼 색 — 동일 미러링 |
+| 보조 (dark 위) | `--fg-on-inverse-muted` | `#9CA3AF` | 콜드 그레이 |
+| 액센트 | `--accent` | `#2B3A4A` | 슬레이트. 채도 낮고 무거운 청. |
+| 액센트 (dark 위) | `--accent-on-inverse` | `#C7CFD8` | dark 배경에서 떠오르는 슬레이트 |
 
-> 추천: **B 또는 C**. A는 v2와의 시각 차별이 약함. 둘 중에서는 **C**가 "베이지의 따뜻함"이라는 Siriai 자산을 유지하면서 차별화가 명확.
+> 정신: **검정을 쓰지 않는다.** 모든 어두움은 미드나이트 블루 계열. 베이지 페이퍼 위의 미드나이트 텍스트가 종이·잉크의 메타포를 형성. Anthropic 결과 정합.
 
-### 3.2 Semantic Tokens (안 확정 후 채움)
+### 3.2 Semantic Tokens — *전 hex 채움*
 
 ```css
 :root {
   /* Surface */
-  --surface-base:        /* light bg */
-  --surface-raised:      /* 카드, 0.5~2% 어둡게 */
-  --surface-inverse:     /* dark sections */
+  --surface-base:          #EFE9DD;   /* paper */
+  --surface-raised:        #E8E1D2;   /* card, divider, sunken */
+  --surface-inverse:       #0F1419;   /* midnight blue (dark sections) */
 
   /* Foreground */
-  --fg-default:          /* 본문 검정 */
-  --fg-muted:            /* 보조 텍스트, 60% opacity 또는 별도 색 */
-  --fg-on-inverse:       /* 다크 섹션의 본문 */
-  --fg-on-inverse-muted: /* 다크 섹션의 보조 */
+  --fg-default:            #0F1419;   /* body on paper */
+  --fg-muted:              #5E6470;   /* secondary on paper */
+  --fg-on-inverse:         #EFE9DD;   /* body on midnight */
+  --fg-on-inverse-muted:   #9CA3AF;   /* cold grey on midnight */
 
   /* Lines */
-  --line-default:        /* rgba(0,0,0,0.08) 또는 별도 */
-  --line-strong:         /* hover/focus 시 */
-  --line-on-inverse:     /* 다크 섹션의 라인 */
+  --line-default:          rgba(15, 20, 25, 0.08);
+  --line-strong:           rgba(15, 20, 25, 0.18);
+  --line-on-inverse:       rgba(239, 233, 221, 0.12);
+  --line-on-inverse-strong:rgba(239, 233, 221, 0.24);
 
-  /* Accent */
-  --accent:              /* 안 선택 시 결정 */
-  --accent-fg:           /* accent 위 텍스트 */
+  /* Accent — luxury restraint, 1점만 노출 */
+  --accent:                #2B3A4A;   /* slate */
+  --accent-fg:             #EFE9DD;   /* paper on slate */
+  --accent-on-inverse:     #C7CFD8;   /* lifted slate on midnight */
 
   /* Interaction */
-  --focus-ring:          /* 키보드 포커스 */
-  --selection-bg:        /* ::selection */
+  --focus-ring:            #2B3A4A;
+  --selection-bg:          rgba(43, 58, 74, 0.15);
+  --selection-fg:          #0F1419;
 }
 ```
 
@@ -161,17 +183,48 @@
 
 ## 4. Typography
 
-### 4.1 결정 필요 — 영문 폰트 3안
+### 4.1 Font Stack — *Pretendard Variable 단독 + 토큰 추상화*
 
-| 안 | 폰트 | 라이선스 | 인상 | 추천 |
-|---|------|---------|------|------|
-| **A. Geist Sans** (Vercel) | Geist Sans + Geist Mono | OFL, 무료 | 모던 산세리프, 모노 페어 완비. 테크 정체성. | ⭐⭐ |
-| **B. Inter** | Inter | OFL, 무료 | 가장 안전한 산세리프. 매우 광범위. 차별화 약함. | ⭐ |
-| **C. Pretendard만 사용** (한·영 모두) | Pretendard Variable | OFL, 무료 | 한 폰트로 한·영 통합. 시각 일관성 극대화. 단, 영문 캐릭터가 한국어 산세리프 결. | ⭐⭐ |
-| **D. PP Neue Montreal** (Pangram Pangram) | 유료 ($150~) | 하이엔드 BX 표준. Schemas류 결과 매우 잘 어울림. | ⭐⭐⭐ |
+**결정 (Phase C, D2):**
+- 초기 빌드는 **Pretendard Variable** 한 폰트로 한·영 통합
+- **단, 추후 유료 영문 폰트(PP Neue Montreal 등)로 무중단 swap이 가능하도록 토큰을 추상화**
 
-> 추천: **D (PP Neue Montreal)** — 예산 허용 시. 라이선스 부담 시 **A (Geist)**.
-> 한글은 **Pretendard Variable** 유지 (v2에서 검증됨, 가중치 조절 정밀).
+#### 4.1.1 폰트 토큰 구조
+
+```css
+/* globals.css */
+:root {
+  /* Override-friendly font tokens
+     기본은 Pretendard Variable. 추후 유료 폰트 도입 시
+     :root에 *-override 변수만 정의하면 전 사이트가 swap됨. */
+
+  --font-display: var(--font-display-override, "Pretendard Variable",
+                      -apple-system, BlinkMacSystemFont, sans-serif);
+  --font-sans:    var(--font-sans-override,    "Pretendard Variable",
+                      -apple-system, BlinkMacSystemFont, sans-serif);
+  --font-mono:    var(--font-mono-override,    "IBM Plex Mono",
+                      ui-monospace, "SF Mono", monospace);
+}
+
+/* ────────────────────────────────────────────────
+   추후 유료 폰트 swap 예시 (도입 시 globals.css에 추가):
+
+:root {
+  --font-display-override: "PP Neue Montreal", "Pretendard Variable";
+  --font-sans-override:    "PP Neue Montreal", "Pretendard Variable";
+}
+
+   별도 @font-face 정의로 PP Neue Montreal woff2 로드. 한글 글리프는
+   Pretendard 폴백이 자동 처리 (영문 폰트는 한글 미포함).
+   ──────────────────────────────────────────────── */
+```
+
+#### 4.1.2 빌드업 원칙
+
+1. **모든 컴포넌트는 `var(--font-display)` 또는 `var(--font-sans)`만 사용**. `"Pretendard"` 하드코딩 금지.
+2. 폰트페이스(`@font-face` import) 정의는 **`globals.css` 한 곳에만** 집중. 컴포넌트 파일에서 폰트 직접 import 금지.
+3. 한글은 항상 Pretendard 폴백을 통해 처리됨 — 영문 전용 유료 폰트는 한글 글리프를 정의하지 않으므로 자동으로 Pretendard로 폴백.
+4. 영문 폰트 swap 시점: 내부 승인 + 라이선스 확보 + Phase D 빌드업 완료 이후. 별도 한 줄 PR로 처리 가능.
 
 ### 4.2 Type Scale (clamp 기반, 6단계)
 
@@ -187,17 +240,20 @@
 
 ### 4.3 Usage Rules
 
-| 위치 | 폰트 | 굵기 | 행간 |
-|------|------|------|------|
-| Display (영문) | 영문폰트 | 500 또는 600 (선택안에 따라) | 1.05 |
-| H1 (영문) | 영문폰트 | 600 | 1.1 |
-| H1 (한글) | Pretendard | 700 | 1.25 |
-| Body (한글) | Pretendard | 400 또는 500 | 1.75 |
-| Body (영문, 본문 안의 영문 단어) | 영문폰트 | 400 | 1.75 |
-| Eyebrow | 영문폰트 | 500 | 1.0, tracking 0.22em |
-| Mono (필요 시) | Geist Mono 또는 IBM Plex Mono | 400 | 1.5 |
+한 폰트(Pretendard Variable) 기준으로 단순화. 한·영 모두 동일 폰트, 굵기·자간으로만 위계.
+
+| 위치 | 폰트 토큰 | 굵기 | 행간 | 자간 |
+|------|----------|------|------|------|
+| Display (영문 헤로) | `--font-display` | 500 | 1.05 | -0.02em |
+| H1 (영문) | `--font-display` | 600 | 1.10 | -0.02em |
+| H1 (한글) | `--font-sans` | 700 | 1.25 | 0 |
+| H2 | `--font-sans` | 600 | 1.20 | -0.01em (영) / 0 (한) |
+| Body | `--font-sans` | 400 (강조 500) | 1.75 | 0 |
+| Eyebrow | `--font-sans` | 500 | 1.0 | 0.22em (uppercase) |
+| Mono (필요 시) | `--font-mono` | 400 | 1.5 | 0 |
 
 > `wordBreak: keep-all` 전역. 한국어 줄바꿈 손상 방지.
+> 영문 유료 폰트 swap 시 영문 굵기(500/600)는 해당 폰트 메트릭에 맞춰 1단계 가감 검토.
 
 ---
 
@@ -253,15 +309,23 @@
 | `--duration-slow` | `800ms` (히어로 type morph) |
 | `--stagger` | `60ms` (줄·아이템 간격) |
 
-### 6.2 결정 필요 — Lenis 유지 여부
+### 6.2 Smooth Scroll Policy — *Lenis 제거 확정*
 
-| 옵션 | 장 | 단 | 추천 |
-|------|---|---|-----|
-| **Lenis 유지 (v2 계승)** | 부드러운 모멘텀 = 프리미엄 감 | JS 비용, 접근성/스크롤 도구와 충돌, 모바일 fps 부담 | ⭐ |
-| **Lenis 제거, 네이티브 스크롤** | 가볍고 정직. 키보드/스크린 리더 자연 동작. Twelve Labs·Linear가 사용하는 방식. | "모멘텀의 부드러움" 일부 손실 | ⭐⭐⭐ |
-| **CSS `scroll-behavior: smooth` 만 사용** | 비용 거의 0, 앵커 점프만 부드럽게 | 일반 스크롤은 그대로 | ⭐⭐ |
+**결정 (Phase C, D3): Lenis 제거. 네이티브 스크롤 + 미세 진입 모션.**
 
-> 추천: **Lenis 제거**. 하이엔드 사이트의 트렌드는 "네이티브 스크롤 + 미세 진입 모션"으로 회귀 중. v2의 Lenis 1.55는 무거운 편이라 모바일에서 손실이 큼.
+근거:
+- v2의 Lenis(`duration: 1.55`)는 JS 비용·접근성 도구 충돌·모바일 fps 부담이 큼
+- Twelve Labs·Linear·Anthropic 모두 네이티브 스크롤 사용
+- "모멘텀 부드러움"은 일부 손실되나, 진입 애니메이션의 정밀도로 충분히 보상
+
+구현 정책:
+- `globals.css`에 `html { scroll-behavior: smooth; }` — 앵커 점프만 부드럽게
+- 진입 애니메이션은 `useInView` + framer-motion으로 처리 (Lenis 의존성 없음)
+- ScrollProgressBar의 `useScroll` 훅은 윈도우 네이티브 스크롤에서 정상 동작
+
+Phase D 의존성 정리:
+- 제거 대상: `@studio-freight/lenis`, `lenis`
+- 삭제 또는 `/v1` 이동: `src/components/SmoothScroll.tsx`
 
 ### 6.3 Scroll-linked motion 사용처 (전체 사이트에서 단 2곳)
 
@@ -287,16 +351,41 @@
 
 핵심 정서: **사고의 구조가 형성되는 순간**. 추상이지만 문장의 의미와 직결.
 
-### 7.2 결정 필요 — 구현 옵션 3안
+### 7.2 Implementation — *Canvas 2D 텍스트 파티클 확정*
 
-| 안 | 기술 | 장 | 단 | 추천 |
-|---|------|---|---|------|
-| **A. Canvas 2D 텍스트 파티클** | `<canvas>` + `requestAnimationFrame`, 폰트 캐릭터를 픽셀 샘플링 후 점으로 분해 | 가장 가벼움 (50~80KB), 모바일 fps 안정, 접근성 친화(텍스트 fallback 쉬움) | 글자 정밀도는 점 밀도에 좌우 | ⭐⭐⭐ |
-| **B. Three.js + MSDF 텍스트** | three.js + `troika-three-text` 또는 MSDF, GPU 인스턴싱 | 글자 가장 선명, 3D 회전·깊이 가능 | 번들 큼 (300KB+), 모바일 부하 | ⭐⭐ |
-| **C. SVG morph + GSAP** | SVG path morph, `gsap.MorphSVGPlugin` | 정밀하고 vector | 모핑 path 수 많아지면 비용 큼, GSAP MorphSVG 유료 | ⭐ |
+**결정 (Phase C, D4): Canvas 2D 텍스트 파티클.**
 
-> 추천: **A (Canvas 2D 텍스트 파티클)**. 가볍고, 모바일 안전하며, 접근성 fallback이 자연스럽다.
-> 단, v2가 이미 `@react-three/fiber`를 도입했으므로 **B**도 코드베이스 일관성 면에서 고려 가능.
+#### 구현 개요
+
+1. 오프스크린 `<canvas>`에 문자열(`"Architecture for thinking with AI"`)을 큰 폰트로 한 번 렌더
+2. `ctx.getImageData()`로 픽셀 샘플링 → 비투명 픽셀 좌표 배열 추출 (3~5px 간격)
+3. 각 좌표를 파티클 객체(`{x, y, targetX, targetY, vx, vy}`)로 변환
+4. RAF 루프에서 spring 보간으로 target 위치로 수렴, 마우스 위치 ±4px 끌림 적용
+5. 5종 변주(줄바꿈/자간) 사이를 페이지 활성 동안 순환
+
+#### 파라미터
+
+| 항목 | 값 |
+|------|---|
+| 파티클 수 (데스크톱) | 1,500~3,000 |
+| 파티클 수 (모바일) | 500~1,000 |
+| 파티클 크기 | 1.5px (rgba slate, 0.85 opacity) |
+| spring stiffness | 0.08 |
+| spring damping | 0.86 |
+| 변주 dwell | 2.5s (조립 머묾) + 1s (분해) + 1s (재조립) |
+| 마우스 끌림 반경 | 160px |
+| 마우스 끌림 강도 | 4px |
+
+#### 번들·의존성
+
+- **외부 라이브러리 없이 vanilla TypeScript로 구현** (50KB 미만 추정)
+- three.js, troika-three-text, GSAP, MorphSVG 모두 **불필요**
+
+#### Phase D 의존성 정리 (Lenis 제거와 함께 진행)
+
+- 제거 후보 (v3 미사용): `@react-three/fiber`, `@react-three/drei`, `@react-three/postprocessing`, `three`, `gsap`, `@gsap/react`
+- v1 라우트가 별도 청크로 코드 스플릿되면 위 패키지 유지 가능. 단 메인 번들에는 포함 안 됨.
+- v2의 `OrbCanvas.tsx`는 `/v1`로 이동(Phase D), v3 진입점에서는 import 없음.
 
 ### 7.3 Behavior Detail
 
@@ -424,14 +513,16 @@ t=7s      재정렬: 같은 문장이 약간 다른 줄바꿈/자간으로 재�
 - 스프링 물리 유지 (`stiffness: 180, damping: 28`)
 - z-index 위계는 모달 < ProgressBar < Toast
 
-### 9.7 SectionIndicator (재검토 — Open Q §12-2)
+### 9.7 SectionIndicator — *제거 확정*
 
-v2는 우측 도트 레일 11개. v3에서는:
-- **옵션 A** — 제거 (Twelve Labs·Linear 방식)
-- **옵션 B** — 단순화: 점 표시 없이 우측 하단에 작은 텍스트 `02 / 07` 페이지네이션 스타일
-- **옵션 C** — 유지하되 시각 단순화 (도트만, 라벨 hover 시에만)
+**결정 (Phase C, D5): v3에서 제거.**
 
-> 디자인 일관성과 P5(절제)를 고려할 때 **A 또는 B 추천**.
+근거:
+- P5(절제) 원칙. 7개 섹션 사이트에서 우측 도트 레일은 시각 노이즈.
+- 위치 인지 신호는 `ScrollProgressBar`(상단 1px) 단독으로 충분.
+- Twelve Labs·Linear·Anthropic 등 참조 사이트 모두 동일 결정.
+
+v2의 `src/components/SectionIndicator.tsx`는 Phase D에서 `/v1`로 이동. v3 메인 코드에서는 import 없음.
 
 ---
 
@@ -472,16 +563,19 @@ v2는 우측 도트 레일 11개. v3에서는:
 
 ## 12. Open Questions
 
-Phase C 리뷰에서 답을 받아 본 문서에 채워 넣을 항목:
+**All resolved in Phase C.** 전체 결정 로그는 plan 파일 `/root/.claude/plans/transient-nibbling-rabbit.md` 참조.
 
-1. **컬러 안** A/B/C 중 어느 것? (§3.1)
-2. **영문 폰트** A/B/C/D 중 어느 것? (§4.1) — D 선택 시 라이선스 예산 확보 필요
-3. **Lenis** 유지/제거? (§6.2)
-4. **히어로 generative** A/B/C 중 어느 것? (§7.2)
-5. **SectionIndicator** A/B/C 중 어느 것? (§9.7)
-6. **추가 레퍼런스** (Linear, Vercel, Anthropic, Stripe) 중 차용/회피로 포함할 것 있는지 (§2.4)
+요약:
+- 컬러 → **C안 (페이퍼 #EFE9DD + 미드나이트 #0F1419 + 슬레이트 #2B3A4A)** — §3 반영
+- 폰트 → **Pretendard Variable 단독 + 토큰 추상화** (PP Neue Montreal 등 무중단 swap 가능) — §4 반영
+- Lenis → **제거**, 네이티브 스크롤 + `scroll-behavior: smooth` — §6.2 반영
+- 히어로 generative → **Canvas 2D 텍스트 파티클** (외부 라이브러리 0) — §7.2 반영
+- SectionIndicator → **제거** — §9.7 반영
+- 추가 차용 레퍼런스 → **Anthropic만** — §2.4 반영
 
-> PRD의 Open Questions(섹션 06 폼 노출, 다이어그램 레이어 이름 등)는 [`PRD.next.md` §8](./PRD.next.md#8-open-questions) 참조.
+차기 단계(다크 모드 자동 전환, 추가 페이지 디자인, i18n 라우팅, CMS 연동 등) 결정이 필요한 시점에 본 챕터에 재개항한다.
+
+> PRD 결정(인라인 폼·신규 매니페스토·Siriai 단독 영문명·진단 가격 정책)은 [`PRD.next.md` §8](./PRD.next.md#8-open-questions) 참조.
 
 ---
 

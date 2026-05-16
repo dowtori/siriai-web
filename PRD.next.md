@@ -13,11 +13,11 @@
 | 1. Positioning | Siriai의 좌표, 차별화 3축, 타겟 | ✅ 결정 기반 |
 | 2. Message Hierarchy | 카피의 구조, 한·영 페어링 원칙 | ✅ 결정 기반 |
 | 3. Information Architecture | 홈 섹션 7개 압축안 | ✅ 결정 기반 |
-| 4. Section Specs | 섹션별 1페이지 스펙 + 카피 시드 | 🟡 카피 톤 검수 필요 |
-| 5. Contact Page Spec | 폼·후속 응대 | ✅ 결정 기반 |
+| 4. Section Specs | 섹션별 1페이지 스펙 + 카피 시드 | ✅ Phase C 결정 반영 |
+| 5. Contact Page Spec | 폼·후속 응대 | ✅ Phase C 결정 반영 |
 | 6. Success Criteria | 정성·정량 기준 | ✅ 결정 기반 |
 | 7. Out of Scope | 이번에 하지 않는 것 | ✅ 결정 기반 |
-| 8. Open Questions | 다음 회차 결정 | 🟡 사용자 답변 필요 |
+| 8. Open Questions | 다음 회차 결정 | ✅ 전건 해결 (Phase C) |
 
 ---
 
@@ -334,26 +334,36 @@ LITERACY       리터러시
 
 ### Section 05 — Voice
 
-**Goal:** "사람과 사상"의 신뢰. 매니페스토급 한 문장과 짧은 설명.
+**Goal:** "사람과 사상"의 신뢰. v3 포지셔닝("도구가 아니라 의사결정의 구조")을 매니페스토 한 단락으로 응축.
 
 **Layout:**
-- 풀폭, 중앙 정렬, 어두운 배경 또는 크림 — Design.md에서 결정
-- 큰 인용문 한 단락, 스크롤에 따라 줄 단위 페이드 인
-- 하단에 작성자/팀 라벨
+- 풀폭, 좌측 정렬, **어두운 배경** (Diagram B와 연속된 다크 구간으로 묶을 수 있음)
+- 큰 인용문 한 단락, 스크롤에 따라 **줄 단위 페이드 인**
+- 하단에 출처 라벨 한 줄
 
-**Copy seed:**
+**Copy seed (신규 — v3 포지셔닝 기반):**
 ```
 [Eyebrow]   05 — VOICE
 
-[Quote KR]  속도와 정확함만으로는 충분하지 않습니다.
-            의미와 타이밍이 성과를 결정합니다.
-            데이터가 방향을 제시하고, AI가 실행하며,
-            사람의 감각이 그 모든 것을 하나의 결로 완성합니다.
+[Quote EN]  We don't recommend tools.
+            We design how an organization thinks.
 
-[Caption]   — Siriai Practice Manifesto
+[Quote KR]  우리는 도구를 권하지 않습니다.
+            조직이 사고하는 방식을 설계합니다.
+
+            AI는 매주 새로워집니다.
+            그러나 의사결정의 구조가 흔들리면, 어떤 도구도 답이 될 수 없습니다.
+
+            우리가 만드는 것은 시스템입니다.
+            어떤 신호를 보고, 어떻게 판단하며, 무엇을 실행하고, 무엇을 기록할지 —
+            그 결의 정렬을 함께 합니다.
+
+[Caption]   — Siriai Manifesto, 2026
 ```
 
-**Interactions:** 줄 단위 scroll-scrub reveal (v2의 ManifestoQuoteSection 패턴 계승, 단 시각 언어는 새 시스템).
+> 마지막 문장의 "신호·판단·실행·기록"은 §03 System 다이어그램의 4개 레이어(Signal / Judgment / Action / Record)와 의도적으로 연결된다. Voice 섹션이 다이어그램의 언어적 거울 역할.
+
+**Interactions:** 줄 단위 scroll-scrub reveal (v2의 ManifestoQuoteSection 패턴 계승, 단 시각 언어는 v3 토큰 적용).
 
 **Proof element:** 카피의 권위 자체.
 
@@ -361,13 +371,13 @@ LITERACY       리터러시
 
 ### Section 06 — Contact
 
-**Goal:** 진입 장벽 낮추기. 폼이 큰 미리보기로 노출되어 "이게 다인가" 느끼게.
+**Goal:** 진입 장벽 0. 1 스크롤 안에서 폼 제출까지 가능. 마찰을 최소화한다.
 
-**Layout:**
-- 풀폭, 좌우 분할: 좌측 헤드라인 + 한 줄 안내 / 우측 폼 미리보기 (또는 `/contact`로 이동하는 큰 버튼)
-- 디자인 선택지 (Phase C 결정):
-  - **A.** 폼 자체를 인라인으로 노출 (스크롤 1회 안에 제출 가능)
-  - **B.** "Start a diagnosis →" 큰 버튼만, 클릭 시 `/contact`로 이동
+**Layout (확정 — 인라인 폼):**
+- 풀폭, 좌우 50:50 분할 (모바일 stack)
+- 좌측: Eyebrow + Headline(영문/한글) + Sub + 부가 메시지
+- 우측: **인라인 ContactForm** — 라우트 이동 없이 그 자리에서 제출
+- 폼은 `/contact` 페이지와 동일한 `<ContactForm>` 컴포넌트 재사용 (Phase D 구현 시 props로 `variant: "inline" | "page"` 분기)
 
 **Copy seed:**
 ```
@@ -375,16 +385,39 @@ LITERACY       리터러시
 
 [Headline]  Start with a diagnosis.
 
-[Sub KR]    20분 진단 통화로 시작합니다.
-            현재 운영의 구조를 살펴보고, 어디부터 손대야 할지 정리해 드립니다.
+[Sub KR]    진단 통화로 시작합니다.
+            현재 운영의 구조를 함께 살펴보고,
+            어디부터 손대야 할지 한 페이지로 정리해 드립니다.
 
-[Button]    진단 통화 신청  →
+[Form fields, 인라인]
+            이름            [text]
+            회사·소속        [text]
+            이메일          [email]
+            관심 모드        ( ) Studio  ( ) Advisory  ( ) Literacy  ( ) 미정
+            메시지(선택)    [textarea, 500자]
+            ☐ 개인정보 수집·이용에 동의합니다 [상세]
+
+[Submit]    진단 통화 신청  →
             Start a diagnosis  →
 ```
+
+> 가격 정책: **"무료" 단어 미사용** (Phase C 결정). 가격 정보는 사이트 노출 X, 후속 응대에서 조정.
+
+**Interactions:** 폼 진입 시 라벨 → 필드 stagger. Submit 후 §5.3 Submit UX와 동일.
+
+**Proof element:** "이게 다인가" 라는 가벼움 자체.
 
 ---
 
 ## 5. Contact Page Spec (`/contact`)
+
+### 5.0 홈과의 관계
+
+홈 §06의 **인라인 폼이 1차 진입점**. `/contact` 라우트는 다음 용도로 유지:
+- 직접 URL 접근, 외부 링크, SEO 인덱싱용 표준 경로
+- 검색 결과·푸터 링크에서의 정식 진입점
+- 홈 §06과 **동일한 `<ContactForm>` 컴포넌트** 재사용 (단일 진실)
+- 단독 페이지로서는 헤더 카피·진단 흐름 설명·FAQ 1~3개 부가
 
 ### 5.1 페이지 목적
 
@@ -469,15 +502,18 @@ KR  접수되었습니다. 영업일 기준 2일 이내에 회신드립니다.
 
 ## 8. Open Questions
 
-Phase C 리뷰에서 답을 받아 본 PRD에 채워 넣을 항목:
+**All resolved in Phase C.** 전체 결정 로그는 plan 파일 `/root/.claude/plans/transient-nibbling-rabbit.md` 참조.
 
-1. **Section 06 폼 노출 방식** — 인라인(A) vs 버튼 후 이동(B)?
-2. **SectionIndicator 우측 도트 레일** — 유지 / 단순화 / 제거?
-3. **§05 Voice 매니페스토 카피** — v2 매니페스토 그대로 인용 vs 신규 작성?
-4. **§03 System Diagram B의 레이어 이름** — Signal / Judgment / Action / Record가 최종인가, 또는 다른 4단어?
-5. **회사 영문명** — "Siriai" 단독 vs "Siriai Practice" 등 보조어 사용? (사이트 메타·푸터에 영향)
+요약:
+- §06 폼 노출 → **인라인** (본 PRD §4 Section 06 반영)
+- §03 System 레이어 → **Signal / Judgment / Action / Record** (본 PRD §4 Section 03 반영)
+- §05 Voice 카피 → **v3 포지셔닝 기반 신규 작성** (본 PRD §4 Section 05 반영)
+- 회사 영문명 → **"Siriai" 단독** (Practice·Studio 등 보조어 미사용)
+- 진단 통화 가격 정책 → **가격 언급 X**, CTA "진단 통화 신청 / Start a diagnosis"
 
-> Design.md의 Open Questions(컬러·폰트·Lenis·다크 모드 등)는 자매 문서 §12에서 별도 정리.
+차기 단계(Portfolio 확장, i18n 도입, CMS 연동, 다크 모드 자동 전환 등) 결정이 필요한 시점이 오면 본 챕터에 재개항한다.
+
+> Design 시스템 결정(컬러 C안, Pretendard 단독 + 토큰 추상화, Lenis 제거, Canvas 2D 히어로, SectionIndicator 제거)은 [`Design.md` §12](./Design.md#12-open-questions) 참조.
 
 ---
 
