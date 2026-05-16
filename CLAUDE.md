@@ -157,9 +157,12 @@ src/
 ```
 SUPABASE_URL=...
 SUPABASE_SERVICE_ROLE_KEY=...
+NEXT_PUBLIC_CAL_LINK=siriai/diagnosis-30min   # username/event-slug — 미설정 시 §06 좌측 placeholder 노출
 ```
 
-`.env.local` 미설정 시 console.log fallback (개발 무관).
+`.env.local` / Vercel env 미설정 시:
+- Supabase → console.log fallback (개발 무관)
+- Cal → §06 Contact 좌측 column에 placeholder 블록 노출 (`비어있는 시간을 직접 선택해…`)
 
 `contact_submissions` 테이블:
 ```sql
