@@ -60,7 +60,7 @@ export default function HeroSection() {
               maxWidth: "22ch",
             }}
           >
-            AI와 함께, 통찰의 구조를 설계합니다.
+            AI와 함께 통찰을 짓다.
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
