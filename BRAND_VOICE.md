@@ -366,14 +366,16 @@ contact@siriai.io · Seoul, KR
 
 (b) 어원 시그니처 블록 **삭제** — R8 0회 정책. (a)→(c)→(d) 3블록 구조로 단순화.
 
-### 10.7 따뜻함은 UX로 — Contact 디벨롭 (별도 라운드)
+### 10.7 따뜻함은 UX로 — Contact 디벨롭
 
-v3.2는 카피로 따뜻함을 부여하지 않는다. 따뜻함은 **Contact UX의 결**로 실현:
-- 슬롯 픽커 inline (Cal.com 등) — 사용자가 시간을 직접 고르는 가벼움
-- 커피챗·온라인 미팅 신청 옵션
-- 현재 가벼운 폼 병행 — "지금은 진단 통화까지 부담스러우면, 메모만 남겨주세요" 식의 듀얼 진입
+v3.2는 카피로 따뜻함을 부여하지 않는다. 따뜻함은 **Contact UX의 결**로 실현. 단, 잠재고객 UX 관점에서 **메인 §06 Contact에 캘린더는 너무 이르다** — 신뢰 7섹션 본 직후 30분 commitment 요구가 brand 무게감과 충돌. Cal embed는 **/contact 페이지 안에만** 위치.
 
-사례 분석은 `CONTACT_RESEARCH.md` 참조. 적용은 후속 라운드.
+| 위치 | 노출 | 사유 |
+|---|---|---|
+| 메인 홈 §06 Contact | ContactForm 단일 진입 + `/contact#schedule` 보조 링크 1줄 | 메인은 가벼운 진입(메모)만, 캘린더는 한 뎁스 안쪽 |
+| `/contact` 페이지 | 헤더 + 폼·FAQ + **Schedule 섹션 (Cal embed)** | 의도 표명한 사용자 진입, Cal 풀 노출 OK |
+
+사례 분석은 `CONTACT_RESEARCH.md` 참조.
 
 ### 10.8 변경 보류 — 명시적 비채택
 

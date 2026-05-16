@@ -57,7 +57,7 @@ npx vercel --prod    # 또는 git push → Vercel 자동 배포
 | 경로 | 콘텐츠 | metadata |
 |------|--------|----------|
 | `/` | v3 홈 (7섹션) | indexed, v3 metadata + OG |
-| `/contact` | v3 ContactPage (헤더 + 폼 + FAQ 3개) | indexed |
+| `/contact` | v3 ContactPage (헤더 + 폼·FAQ + `#schedule` Cal embed 섹션) | indexed |
 | `/api/contact` | POST → Supabase `contact_submissions` insert | — |
 | `/opengraph-image` | 동적 PNG (1200×630, 베이지 + 슬레이트 헤드라인) | — |
 | `/v1` | v1 legacy 홈 (15섹션) | **noindex**, follow |

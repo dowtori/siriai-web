@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navigation from "@/components/v3/Navigation";
 import ContactForm from "@/components/v3/ContactForm";
+import CalInlineEmbed from "@/components/v3/CalInlineEmbed";
 
 export const metadata: Metadata = {
   title: "Contact — Siriai",
@@ -62,15 +63,15 @@ export default function ContactPage() {
               lineHeight: 1.8,
               color: "var(--fg-muted)",
               wordBreak: "keep-all",
-              maxWidth: "36ch",
+              maxWidth: "40ch",
             }}
           >
-            진단 통화로 시작합니다. 현재 운영 구조를 함께 점검하고, 우선순위를 한 페이지로 정리해 드립니다.
+            진단 통화로 시작합니다. 현재 운영 구조를 함께 점검하고, 우선순위를 한 페이지로 정리해 드립니다. 메모만 남기셔도 좋고, 아래에서 직접 시간을 정하셔도 됩니다.
           </p>
         </section>
 
         {/* Form + FAQ */}
-        <section className="mx-auto max-w-screen-xl px-6 pb-32 md:px-10 md:pb-40">
+        <section className="mx-auto max-w-screen-xl px-6 pb-28 md:px-10 md:pb-32">
           <div className="grid grid-cols-1 gap-y-16 md:grid-cols-12 md:gap-x-12 md:gap-y-0">
             <div className="md:col-span-7">
               <ContactForm />
@@ -115,6 +116,51 @@ export default function ContactPage() {
                 ))}
               </ul>
             </aside>
+          </div>
+        </section>
+
+        {/* Schedule — Cal embed */}
+        <section
+          id="schedule"
+          className="border-t mx-auto max-w-screen-xl scroll-mt-24 px-6 pb-32 pt-20 md:px-10 md:pb-40 md:pt-28"
+          style={{ borderColor: "var(--line-default)" }}
+        >
+          <div className="grid grid-cols-1 gap-y-10 md:grid-cols-12 md:gap-x-12 md:gap-y-0">
+            <div className="md:col-span-4">
+              <p
+                className="text-[11px] uppercase tracking-[0.22em]"
+                style={{ color: "var(--fg-muted)" }}
+              >
+                Schedule
+              </p>
+              <h2
+                className="mt-6 tracking-[-0.02em]"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(1.5rem, 2.4vw, 2.25rem)",
+                  fontWeight: 500,
+                  lineHeight: 1.15,
+                }}
+              >
+                시간을 직접 정합니다.
+              </h2>
+              <p
+                className="mt-6"
+                style={{
+                  fontSize: "0.9375rem",
+                  lineHeight: 1.85,
+                  color: "var(--fg-muted)",
+                  wordBreak: "keep-all",
+                  maxWidth: "32ch",
+                }}
+              >
+                비어있는 시간대를 직접 선택해 진단 통화를 잡습니다. 약 30분 화상 통화.
+              </p>
+            </div>
+
+            <div className="md:col-span-8">
+              <CalInlineEmbed />
+            </div>
           </div>
         </section>
       </main>
