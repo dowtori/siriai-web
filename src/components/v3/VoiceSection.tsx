@@ -7,7 +7,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 const KR_LINES: Array<string | "break"> = [
   "우리는 도구를 권하지 않습니다.",
-  "조직이 사고하는 방식을 설계합니다.",
+  "조직이 통찰하는 구조를 설계합니다.",
   "break",
   "AI는 매주 새로워집니다.",
   "의사결정의 구조가 흔들리면, 어떤 도구도 답이 아닙니다.",
@@ -58,7 +58,7 @@ export default function VoiceSection() {
         >
           We don&apos;t recommend tools.
           <br />
-          We design how it thinks.
+          We design how insight forms.
         </motion.h2>
 
         {/* Korean manifesto — line by line */}
