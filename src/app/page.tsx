@@ -7,6 +7,7 @@ import SystemSection from "@/components/v3/SystemSection";
 import ServicesSection from "@/components/v3/ServicesSection";
 import VoiceSection from "@/components/v3/VoiceSection";
 import ContactSection from "@/components/v3/ContactSection";
+import Footer from "@/components/v3/Footer";
 
 export const metadata: Metadata = {
   title: "Siriai — Architecture for thinking with AI",
@@ -33,6 +34,7 @@ export default function V3Home() {
         <VoiceSection />
         <ContactSection />
       </main>
+      <Footer />
     </>
   );
 }
