@@ -1,7 +1,7 @@
 # Siriai Website — Design System (v3)
 
 > 본 문서는 v3 신규 디자인의 단일 출처(single source of truth)입니다.
-> 카피·정보구조는 자매 문서 [`PRD.next.md`](./PRD.next.md)를 참조합니다.
+> 카피·정보구조는 자매 문서 [`PRD.md`](./PRD.md)를 참조합니다.
 > 작성: 2026-05-16 · 상태: **DRAFT — 옵션 선택 대기**
 
 ---
@@ -575,12 +575,12 @@ v2의 `src/components/SectionIndicator.tsx`는 Phase D에서 `/v1`로 이동. v3
 
 차기 단계(다크 모드 자동 전환, 추가 페이지 디자인, i18n 라우팅, CMS 연동 등) 결정이 필요한 시점에 본 챕터에 재개항한다.
 
-> PRD 결정(인라인 폼·신규 매니페스토·Siriai 단독 영문명·진단 가격 정책)은 [`PRD.next.md` §8](./PRD.next.md#8-open-questions) 참조.
+> PRD 결정(인라인 폼·신규 매니페스토·Siriai 단독 영문명·진단 가격 정책)은 [`PRD.md` §8](./PRD.md#8-open-questions) 참조.
 
 ---
 
 ## Cross-references
 
-- 정보구조·카피·섹션 스펙 → [`PRD.next.md`](./PRD.next.md)
+- 정보구조·카피·섹션 스펙 → [`PRD.md`](./PRD.md)
 - v2 디자인 시스템 (참고용 보존) → [`PRD.md` §디자인 시스템](./PRD.md)
 - 프로젝트 운영 컨텍스트 → [`CLAUDE.md`](./CLAUDE.md), [`AGENTS.md`](./AGENTS.md)

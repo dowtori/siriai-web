@@ -2,41 +2,36 @@
 
 # Siriai Web — Agent Context
 
-> 버전: v2.0 (2026-05-11 기준)  
-> 자세한 요구사항 → [`PRD.md`](./PRD.md)
+> 버전: **v3.0** (2026-05-16 기준)
+> 요구사항·IA·카피 → [`PRD.md`](./PRD.md)
+> 디자인 시스템(컬러·폰트·모션·다이어그램) → [`Design.md`](./Design.md)
+> v2 PRD는 [`archive/PRD.v2.md`](./archive/PRD.v2.md)로 보존
 
 ---
 
 ## 새 로컬 환경 빠른 시작
 
 ```bash
-# 1. 클론
 git clone https://github.com/dowtori/siriai-web.git
 cd siriai-web
-
-# 2. 의존성 설치
 npm install
-
-# 3. 환경변수 설정 (.env.local 생성)
+# .env.local 작성 (선택)
 # SUPABASE_URL=...
 # SUPABASE_SERVICE_ROLE_KEY=...
-# → 미설정 시 contact form은 console.log fallback으로 동작 (개발 무관)
-
-# 4. 개발 서버
+# 미설정 시 contact form은 console.log fallback
 npm run dev          # http://localhost:3000
-
-# 5. 배포
-npx vercel --prod    # Vercel 프로덕션 배포 (또는 git push → 자동 배포)
+npx vercel --prod    # 또는 git push → Vercel 자동 배포
 ```
 
 ---
 
 ## 프로젝트 개요
 
-**Siriai** — AI 아키텍처 설계·AI 리터러시 구축 전문 컨설팅 기업 공식 웹사이트.  
-핵심 메시지: **"AI를 쓰는 것이 아니라, AI로 생각하는 것."**
+**Siriai** — AI 아키텍처 설계 · AI 리터러시 구축 전문 컨설팅.
+핵심 메시지: **"AI를 쓰는 것이 아니라, AI로 사고하는 구조를 설계합니다."**
 
-인플루언서 비즈니스는 수익 채널 중 하나 — 브랜딩 전면에는 AI 역량을 내세운다.
+타겟: AI 아키텍처링 수요자 (아키텍트 직군 + 전략 컨설턴트).
+어조: 선언적·간결. 설명적이지 않다.
 
 ---
 
@@ -46,147 +41,166 @@ npx vercel --prod    # Vercel 프로덕션 배포 (또는 git push → 자동 �
 |------|------|
 | Framework | Next.js 16 App Router (NOT Pages Router) |
 | Language | TypeScript strict |
-| Styling | Tailwind CSS v4 |
-| Animation | framer-motion (`useScroll`, `useTransform`, `useInView`, `motion`) |
-| Smooth Scroll | Lenis (duration: 1.55, spring easing) |
-| 3D/WebGL | `@react-three/fiber`, `@react-three/drei`, `@react-three/postprocessing` |
+| Styling | Tailwind CSS v4 + CSS variables |
+| Animation | framer-motion (`useInView`, `motion.*`, `motion.path` pathLength) |
+| Smooth Scroll | 네이티브 (`scroll-behavior: smooth`) — Lenis 미사용. v1 라우트만 Lenis. |
+| Hero generative | Canvas 2D **vanilla TypeScript** (외부 라이브러리 0) |
+| Diagrams | SVG + framer-motion (Three.js 미사용) |
 | DB | `@supabase/supabase-js` |
-| Deployment | Vercel (GitHub push → 자동 배포) |
+| Deployment | Vercel (GitHub push → 자동) |
+| Font | Pretendard Variable (dynamic subset, weight 45–920) |
 
 ---
 
-## 현재 페이지 구조 (v2.0 — 15 섹션)
+## 라우트 구조
+
+| 경로 | 콘텐츠 | metadata |
+|------|--------|----------|
+| `/` | v3 홈 (7섹션) | indexed, v3 metadata + OG |
+| `/contact` | v3 ContactPage (헤더 + 폼 + FAQ 3개) | indexed |
+| `/api/contact` | POST → Supabase `contact_submissions` insert | — |
+| `/opengraph-image` | 동적 PNG (1200×630, 베이지 + 슬레이트 헤드라인) | — |
+| `/v1` | v1 legacy 홈 (15섹션) | **noindex**, follow |
+| `/v1/contact` | v1 legacy 폼 | noindex |
+| `/v1/portfolio` | v1 legacy 포트폴리오 | noindex |
+
+> v1은 "초기 테스트 히스토리" 보존용. 운영 트래픽 없고 검색엔진 격리.
+
+---
+
+## 디렉토리 구조
 
 ```
-/ (홈페이지)  src/app/page.tsx
-│
-│  [Global Fixed]
-├── ScrollProgressBar  — 상단 1.5px 보라 그라디언트 진행 바 (spring 물리)
-├── SectionIndicator   — 우측 고정 도트 레일 11개 + 섹션 번호/레이블 (md 이상만 노출)
-├── Navigation
-│
-│  [Main]
-├── id="s-hero"         HeroSection          — cream, WebGL 오브, 단어 stagger
-├── id="s-connection"   ConnectionSection    — cream, 좌텍 + 우카드 패럴랙스 + exit
-├── id="s-relationship" RelationshipIntro    — cream, 우텍 + 좌카드(mirror) + exit
-├── id="s-architecture" ArchitectureSection  — dark olive #3D3B2A, 2-col 카드 + CTA
-├── id="s-philosophy"   PhilosophySection    — dark, sticky 280vh scroll-scrub
-├── id="s-aistudio"     AIStudioSection      — cream, 텍스트 + AI 툴 마키 + exit
-├── id="s-creator"      CreatorSection       — dark, 풀스크린 패럴랙스 배경
-├── id="s-archiving"    ArchivingSection     — cream, 좌텍 + 2×3 그리드 + exit
-│
-│  [Dark Act — div.bg-[#111110] 공유 래퍼]
-├── id="s-manifesto"    ManifestoQuoteSection — 스크롤 스크럽 줄별 reveal
-├── id="s-growth"       GrowthSection         — SVG 성장 곡선 pathLength 드로우
-│
-├── id="s-services"     ServicesSection      — cream, 2×2 서비스 카드
-├──                     WorksSection         — dark, 4×4 포토서클 그리드
-├──                     CTASection           — cream, 문의하기 버튼
-└──                     FooterSection
-
-/contact    src/app/contact/page.tsx
-/portfolio  src/app/portfolio/page.tsx
-/api/contact  src/app/api/contact/route.ts  (POST → Supabase insert)
+src/
+├─ app/
+│  ├─ page.tsx                   v3 홈 (Hero · Stance · Methodology · System · Services · Voice · Contact)
+│  ├─ contact/page.tsx           v3 ContactPage
+│  ├─ layout.tsx                 메인 layout (v3 metadata · OG · twitter)
+│  ├─ globals.css                토큰(v1 + v3) · 폰트 import · 마키 keyframes
+│  ├─ opengraph-image.tsx        동적 OG image (next/og ImageResponse)
+│  ├─ api/contact/route.ts       Supabase insert
+│  └─ v1/                        ── v1 legacy 라우트
+│     ├─ layout.tsx              v1 default metadata + robots noindex
+│     ├─ page.tsx                v1 legacy 홈
+│     ├─ contact/page.tsx        v1 legacy 폼
+│     └─ portfolio/page.tsx      v1 legacy 포트폴리오
+├─ components/
+│  ├─ v3/                        ── v3 (메인 / · /contact 사용)
+│  │  ├─ Navigation.tsx          고정 상단, scroll 시 bg-blur + 높이 축소
+│  │  ├─ HeroSection.tsx         §00 (Canvas + 정적 텍스트)
+│  │  ├─ HeroParticles.tsx       Canvas 2D 텍스트 파티클 엔진
+│  │  ├─ StanceSection.tsx       §01 좌우 비대칭, 줄별 stagger
+│  │  ├─ MethodologySection.tsx  §02 좌 텍스트 + 우 SVG Diagram A (삼각 + 코어)
+│  │  ├─ SystemSection.tsx       §03 풀폭 SVG Diagram B (4레이어 · dark)
+│  │  ├─ ServicesSection.tsx     §04 3-col 카드 (Studio/Advisory/Literacy)
+│  │  ├─ VoiceSection.tsx        §05 매니페스토 (dark · 줄별 reveal)
+│  │  ├─ ContactSection.tsx      §06 홈 인라인 wrapper
+│  │  └─ ContactForm.tsx         폼 본체 (인라인·페이지 양쪽 재사용)
+│  └─ v1/                        ── v1 legacy 컴포넌트 (22개, /v1/* 사용)
 ```
 
-**중요**: 각 섹션은 `<div id="s-xxx">` 래퍼 안에 있음. SectionIndicator가 이 ID로 IntersectionObserver를 붙임. ID 변경 시 `SectionIndicator.tsx`의 `SECTIONS` 배열도 함께 수정.
+---
+
+## 디자인 토큰 (Phase C 확정 — 베이지 + 딥블루)
+
+| 토큰 | Hex | 용도 |
+|------|-----|------|
+| `--surface-base` | `#EFE9DD` | 라이트 배경 (페이퍼) |
+| `--surface-raised` | `#E8E1D2` | 카드·강조면 |
+| `--surface-inverse` | `#0F1419` | 다크 배경 (미드나이트 블루) |
+| `--fg-default` | `#0F1419` | 본문 (light 위) |
+| `--fg-muted` | `#5E6470` | 보조 (light 위) |
+| `--fg-on-inverse` | `#EFE9DD` | 본문 (dark 위) |
+| `--fg-on-inverse-muted` | `#9CA3AF` | 보조 (dark 위) |
+| `--accent` | `#2B3A4A` | 슬레이트 액센트 (1점만 사용) |
+| `--line-default` / `--line-strong` | rgba 8%/18% | 라이트 라인 |
+| `--line-on-inverse` / `--line-on-inverse-strong` | rgba 12%/24% | 다크 라인 |
+
+> 전체 정의 → [`Design.md` §3](./Design.md) · 정신: **검정 미사용**, 모든 어두움은 미드나이트 블루.
+
+### 폰트 토큰 추상화
+
+```css
+--font-display: var(--font-display-override, "Pretendard Variable", -apple-system, sans-serif);
+--font-sans:    var(--font-sans-override,    "Pretendard Variable", -apple-system, sans-serif);
+```
+
+추후 PP Neue Montreal 도입 시 `:root`에 `--font-display-override` 한 줄만 추가하면 무중단 swap.
 
 ---
 
-## 스크롤 UX 핵심 원칙
+## 컴포넌트 패턴
 
-- **스냅 스크롤 금지** — 유저 스크롤 제어 탈취 안 함
-- **섹션 exit 애니메이션** — Connection, RelationshipIntro, AIStudio, Archiving 4개 크림 섹션에 적용
-  - `useScroll offset: ["start end", "end start"]` + `useTransform [0.60→0.90] opacity [1→0], y [0→-28px]`
-- **Philosophy sticky**: `height: "280vh"` container + `sticky top-0 h-screen` inner — 데스크톱 전용
-- **Dark Act**: ManifestoQuote + Growth는 `<div className="bg-[#111110]">` 공유 래퍼로 묶임. 두 컴포넌트에서 개별 `bg-[#111110]` 제거됨.
-- **진입 easing**: `[0.16, 1, 0.3, 1]`, stagger `delay + 0.08~0.12s`
-
----
-
-## 컴포넌트 아키텍처
-
-### 핵심 설계 원칙
-- **RAF 직접 DOM 조작**: 고빈도 애니메이션 (`TurntableCarousel`, `PhotoCircle`) — framer-motion 오버헤드 회피
-- **단방향 진입 트리거**: `useInView({ once: true, margin: "-10%" })`
-- **scroll-linked**: `useScroll` + `useTransform` — 값만 선언, Framer Motion이 RAF 최적화
-
-### `ScrollProgressBar.tsx`
-- `useScroll()` (페이지 전체) + `useSpring(scrollYProgress, { stiffness: 180, damping: 28 })`
-- 상단 고정, z-index 200, `origin-left` + `scaleX`
-
-### `SectionIndicator.tsx`
-- IntersectionObserver로 `id="s-xxx"` 요소 감지 (`rootMargin: "-42% 0px -42% 0px"`)
-- `SECTIONS` 배열로 섹션 메타 관리 (id, num, label, dark 여부)
-- 다크/크림 전환 시 dot/text 색상 자동 전환 (CSS `transition: 500ms`)
-- `hidden md:flex` — 모바일 숨김
-
-### `OrbCanvas.tsx`
-- Three.js + GLSL 커스텀 셰이더, `dynamic import (ssr: false)`
-- 마우스 → `uMouse` uniform → 광원 이동, Fresnel rim + 이리데슨트
-- `Sparkles` (count=45, color=#c4b5fd) + `Bloom` (intensity=0.7)
-
-### `TurntableCarousel.tsx`
-- CSS 3D preserve-3d, 8개 카드, `RADIUS=252`, `CARD_SIZE=164`, `AUTO_VEL=0.22`
-- `perspective: 780px`, `rotateX(-13deg)`, 중앙 코어 글로우
-- RAF 자동 회전 + PointerEvent 드래그
-
-### `PhilosophySection.tsx`
-- Desktop: `PhilosophyDesktop` (`hidden md:block`, height 280vh, sticky)
-- Mobile: `PhilosophyMobile` (`md:hidden`, useInView)
-- scroll-scrub 구간: headline [0→0.12] → carousel [0.08→0.3] → features [0.62→0.85]
-
-### `WorksSection.tsx`
-- `PhotoCircle`: RAF 기반 hover 회전 (TARGET_VEL=0.38, 감속 0.93×)
-- 이미지 16종: Context, Signal, Question, Edge, Clarity, Modeling, Oversight, Trace, Flow, Rhythm, Connection, Momentum, Evidence, Benchmark, Learning, Compounding
+- **진입 애니메이션**: `useInView(ref, { once: true, margin: "-N%" })` + `motion.X`
+- **Easing 표준**: `[0.16, 1, 0.3, 1]` 모든 진입 모션
+- **wordBreak: `keep-all`** 전역 — 한국어 줄바꿈 손상 방지
+- **다크/라이트 교차**: 섹션별 inline style (`var(--surface-inverse)` 등)
+- **SVG drawPath**: `motion.line` / `motion.path` + `initial={{ pathLength: 0 }}` → `animate={{ pathLength: 1 }}`
+- **Canvas 2D 파티클**: 오프스크린 캔버스 텍스트 렌더 → `getImageData` 픽셀 샘플링 → spring 보간 (stiffness 0.08, damping 0.86) → 마우스 끌림 160px radius
 
 ---
 
-## 디자인 시스템 요약
+## v3 IA — 7섹션
 
-| 속성 | 값 |
-|------|----|
-| Cream bg | `#F4F1EB` |
-| Dark bg | `#111110` |
-| Dark olive | `#3D3B2A` |
-| 보라 액센트 | `#c4b5fd` / `#818cf8` |
-| 헤드라인 | `clamp(2rem, 3.5vw, 4.8rem)`, font-bold, leading-[1.18~1.25] |
-| 레이블 | `text-[11px] tracking-[0.22em] uppercase` |
-| 본문 | `text-[14px] leading-[1.9]` |
-| wordBreak | `keep-all` (한국어 필수) |
-| 진입 easing | `[0.16, 1, 0.3, 1]` |
+1. **§00 Hero** — Canvas 2D 파티클로 "Architecture for thinking with AI" 조립
+2. **§01 Stance** — "We don't deploy tools. We design how decisions are made."
+3. **§02 Methodology** · Diagram A — 3축 (Architecture · Literacy · Operation) → Operating Model
+4. **§03 System** · Diagram B (dark) — 4레이어 Signal · Judgment · Action · Record
+5. **§04 Services** — 3-col (Studio · Advisory · Literacy), 카드 click → `#contact` + sessionStorage interest 저장
+6. **§05 Voice** (dark) — 매니페스토 (Signal/Judgment/Action/Record 마지막 줄로 §03와 연결)
+7. **§06 Contact** — 인라인 폼 (이름·회사·이메일·interest radio·메시지 선택·동의)
 
 ---
 
-## 브랜드 원칙 (카피 가이드)
+## 환경변수 & DB
 
-- AI 도구 나열 X → AI 운영 **구조** 설계 O
-- "인플루언서 비즈니스" 전면 노출 금지
-- 핵심 키워드: 아키텍처, 리터러시, 구조, 판단, 실행, 데이터
-- 어조: 간결·단호. 설명적이지 않고 선언적.
+```
+SUPABASE_URL=...
+SUPABASE_SERVICE_ROLE_KEY=...
+```
 
----
+`.env.local` 미설정 시 console.log fallback (개발 무관).
 
-## 다음 작업 우선순위
-
-### 즉시
-1. **Supabase 테이블 생성** — `contact_submissions` + Vercel 환경변수
-2. **SEO/OG 메타태그** — `layout.tsx`에 title, description, og:image 추가
-
-### 비주얼 완성
-1. ArchivingSection 그리드 → 실제 콘텐츠 썸네일 교체 (CSS placeholder 현재)
-2. RelationshipIntroSection 카드 → 실제 UI 목업 이미지 (Figma export)
-3. ConnectionSection 메트릭 수치 → 실제 성과 데이터
-
-### UX 개선
-1. Navigation scroll compact (고정 높이 축소 + bg blur 강화)
-2. ArchitectureSection → PhilosophySection 색상 전환 처리 (olive→dark)
-3. SectionIndicator 모바일 버전
+`contact_submissions` 테이블:
+```sql
+create table contact_submissions (
+  id          uuid primary key default gen_random_uuid(),
+  created_at  timestamptz not null default now(),
+  name        text not null,
+  company     text,
+  email       text not null,
+  interest    text,         -- v3 신규 (Studio/Advisory/Literacy/미정)
+  message     text          -- v3에서 optional (v1은 required)
+);
+```
 
 ---
 
-## 주의사항
+## 차기 작업
 
-- `ManifestoSection.tsx`, `FeaturesSection.tsx` — 레거시 파일, `page.tsx` 미사용. 삭제 가능.
-- Dark Act 래퍼 (`bg-[#111110]`): `ManifestoQuoteSection` + `GrowthSection` 두 컴포넌트 자체에는 bg 없음. 래퍼가 담당.
-- SectionIndicator ID 목록 `s-hero` ~ `s-services` — 섹션 추가/제거 시 반드시 SECTIONS 배열 동기화.
+### 운영 정리
+- `siriai.io` 운영 도메인 확정 후 `src/app/layout.tsx`의 `metadataBase` 갱신
+- Supabase `contact_submissions.interest` 컬럼 추가
+- /contact 페이지별 opengraph-image 추가 (선택)
+
+### 비주얼 정교화
+- Navigation: dark 섹션 진입 시 nav 색 invert (IntersectionObserver)
+- HeroParticles: 변주 cycle (5종 텍스트 layout 순환)
+- Services 카드 hover에서 accent 라인 강조
+- HeroParticles 모바일 fps 최적화 (파티클 수 동적 조정)
+
+### 의존성 정리
+- 자동 코드 스플릿으로 메인 / 번들에는 이미 무거운 v1 패키지 미포함 — 추가 작업 불요
+- v1 완전 폐기 결정 시 `@studio-freight/lenis`, `lenis`, `gsap`, `@gsap/react`, `three`, `@react-three/*` 제거
+
+---
+
+## v1 Legacy Notes (압축)
+
+- 15섹션 구조 (Hero · Connection · Relationship · Architecture · Philosophy · AIStudio · Creator · Archiving · Manifesto · Growth · Services · Works · CTA · Footer + Navigation/Indicator)
+- 22개 컴포넌트 `src/components/v1/`
+- Lenis SmoothScroll (duration 1.55)
+- OrbCanvas (Three.js + GLSL shader)
+- TurntableCarousel (CSS 3D preserve-3d)
+- Philosophy sticky (280vh scroll-scrub)
+- 더 상세한 내용은 [`archive/PRD.v2.md`](./archive/PRD.v2.md) 참조
