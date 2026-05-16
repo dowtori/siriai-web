@@ -85,7 +85,7 @@
 }
 
 html {
-  scroll-behavior: auto; /* v1 Lenis가 처리. v3 라우트 swap 시 'smooth'로 변경. */
+  scroll-behavior: smooth;
 }
 
 body {

@@ -51,13 +51,13 @@ export default function CTASection() {
           className="mt-12 flex flex-col sm:flex-row items-center gap-3"
         >
           <Link
-            href="/contact"
+            href="/v1/contact"
             className="px-8 py-3.5 rounded-full bg-black text-white text-[13px] font-medium hover:bg-black/80 transition-colors duration-200"
           >
             문의하기
           </Link>
           <Link
-            href="/portfolio"
+            href="/v1/portfolio"
             className="px-8 py-3.5 rounded-full border border-black/20 text-[13px] font-medium hover:border-black/50 transition-colors duration-200"
           >
             포트폴리오 보기

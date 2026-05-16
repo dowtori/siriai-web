@@ -85,7 +85,7 @@ export default function ArchitectureSection() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.46 }}
         >
           <Link
-            href="/contact"
+            href="/v1/contact"
             className="inline-block bg-white text-[#3D3B2A] text-[13px] font-semibold tracking-[0.06em] px-8 py-4 rounded-full hover:bg-white/90 transition-colors duration-200"
           >
             문의하기

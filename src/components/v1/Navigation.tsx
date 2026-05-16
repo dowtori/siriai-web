@@ -23,18 +23,18 @@ export default function Navigation() {
         borderBottom: scrolled ? "1px solid rgba(0,0,0,0.07)" : "none",
       }}
     >
-      <Link href="/" className="text-[15px] font-semibold tracking-tight">
+      <Link href="/v1" className="text-[15px] font-semibold tracking-tight">
         Siriai
       </Link>
       <div className="flex items-center gap-2">
         <Link
-          href="/portfolio"
+          href="/v1/portfolio"
           className="px-4 py-2 text-[13px] font-medium rounded-full border border-black/15 hover:border-black/40 transition-colors duration-200"
         >
           Portfolio
         </Link>
         <Link
-          href="/contact"
+          href="/v1/contact"
           className="px-4 py-2 text-[13px] font-medium rounded-full bg-black text-white hover:bg-black/80 transition-colors duration-200"
         >
           Contact

@@ -118,7 +118,7 @@ export default function PortfolioPage() {
                 케이스 공개까지 기다리기 어려우신가요?
               </p>
               <Link
-                href="/contact"
+                href="/v1/contact"
                 className="text-[13px] font-medium text-black hover:text-black/50 transition-colors duration-200"
               >
                 문의하기 →
