@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navigation from "@/components/v3/Navigation";
 import StanceSection from "@/components/v3/StanceSection";
+import VoiceSection from "@/components/v3/VoiceSection";
 
 export const metadata: Metadata = {
   title: "Siriai — Architecture for thinking with AI",
@@ -9,15 +10,6 @@ export const metadata: Metadata = {
 };
 
 type Tone = "light" | "dark";
-
-const PLACEHOLDERS: Array<{ id: string; label: string; tone: Tone }> = [
-  { id: "hero", label: "00 — HERO · Canvas 2D 텍스트 파티클", tone: "light" },
-  { id: "methodology", label: "02 — METHODOLOGY · Diagram A", tone: "light" },
-  { id: "system", label: "03 — SYSTEM · Diagram B", tone: "dark" },
-  { id: "services", label: "04 — SERVICES", tone: "light" },
-  { id: "voice", label: "05 — VOICE", tone: "dark" },
-  { id: "contact", label: "06 — CONTACT · 인라인 폼", tone: "light" },
-];
 
 export default function V3Home() {
   return (
@@ -30,16 +22,13 @@ export default function V3Home() {
           fontFamily: "var(--font-sans)",
         }}
       >
-        {/* §00 Hero — Canvas 2D 텍스트 파티클 (마지막 구현 예정) */}
         <PlaceholderSection id="hero" label="00 — HERO · Canvas 2D 텍스트 파티클" tone="light" />
-
-        {/* §01 Stance — 정적 텍스트, 진입 stagger */}
         <StanceSection />
-
-        {/* 나머지 5섹션 placeholder */}
-        {PLACEHOLDERS.slice(1).map((s) => (
-          <PlaceholderSection key={s.id} {...s} />
-        ))}
+        <PlaceholderSection id="methodology" label="02 — METHODOLOGY · Diagram A" tone="light" />
+        <PlaceholderSection id="system" label="03 — SYSTEM · Diagram B" tone="dark" />
+        <PlaceholderSection id="services" label="04 — SERVICES" tone="light" />
+        <VoiceSection />
+        <PlaceholderSection id="contact" label="06 — CONTACT · 인라인 폼" tone="light" />
       </main>
     </>
   );
