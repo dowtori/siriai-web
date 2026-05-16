@@ -24,7 +24,7 @@ const SERVICES = [
     id: "literacy",
     mode: "Literacy",
     nameKr: "리터러시",
-    tagline: "조직이 AI를 의사결정에 활용하는 법을 익힙니다.",
+    tagline: "조직이 AI로 사고하는 법을 학습합니다.",
     includes: ["진단 워크숍", "트랙별 커리큘럼", "사내 매뉴얼화"],
   },
 ];

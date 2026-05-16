@@ -17,7 +17,7 @@ const AXES = [
     key: "literacy",
     num: "02",
     title: "Literacy",
-    kr: "구성원이 AI를 의사결정에 활용하는 법을 익히는 커리큘럼.",
+    kr: "구성원이 AI로 사고하는 법을 익히는 커리큘럼.",
     desc: "진단 → 트랙별 학습 → 사내 매뉴얼화.",
   },
   {
