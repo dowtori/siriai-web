@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Siriai — Architecture for thinking with AI";
+export const alt = "Siriai — Architecture for insight";
 
 export default async function Image() {
   return new ImageResponse(
@@ -35,7 +35,7 @@ export default async function Image() {
           }}
         >
           <span>Siriai</span>
-          <span style={{ fontSize: 14 }}>Architecture for insight, AI</span>
+          <span style={{ fontSize: 14 }}>Architecture for insight</span>
         </div>
 
         {/* Headline */}
@@ -50,7 +50,7 @@ export default async function Image() {
           }}
         >
           <span>Architecture for</span>
-          <span>thinking with AI.</span>
+          <span>insight.</span>
         </div>
 
         {/* Bottom rule + caption */}

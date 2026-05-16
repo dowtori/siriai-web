@@ -9,7 +9,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 // ~8s, then reforms into the next phase. Index loops back to 0 to land on the
 // canonical headline.
 const CYCLES: string[][] = [
-  ["Architecture for", "thinking with AI."],
+  ["Architecture for", "insight."],
   ["Not tools.", "Structure."],
   ["Not output.", "Decisions."],
   ["Not deployment.", "Design."],
@@ -26,7 +26,7 @@ export default function HeroSection() {
       }}
     >
       {/* Screen-reader heading for accessibility (canvas is decorative) */}
-      <h1 className="sr-only">Architecture for thinking with AI.</h1>
+      <h1 className="sr-only">Architecture for insight.</h1>
 
       <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 gap-y-16 px-6 md:grid-cols-12 md:gap-x-12 md:gap-y-0 md:px-10">
         {/* Generative typo */}
@@ -60,7 +60,7 @@ export default function HeroSection() {
               maxWidth: "22ch",
             }}
           >
-            AI로 사고하는 구조를 설계합니다.
+            AI와 함께, 통찰의 구조를 설계합니다.
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
