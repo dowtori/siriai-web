@@ -60,7 +60,7 @@ export default function HeroSection() {
               maxWidth: "22ch",
             }}
           >
-            사람과 AI, 더불어 살다.
+            인사이트가 의사결정으로 이어지도록.
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
