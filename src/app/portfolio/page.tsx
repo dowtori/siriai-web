@@ -3,9 +3,9 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
-import Navigation from "@/components/Navigation";
-import FooterSection from "@/components/FooterSection";
-import SmoothScroll from "@/components/SmoothScroll";
+import Navigation from "@/components/v1/Navigation";
+import FooterSection from "@/components/v1/FooterSection";
+import SmoothScroll from "@/components/v1/SmoothScroll";
 
 const DOMAINS = [
   {
