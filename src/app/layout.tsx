@@ -8,11 +8,11 @@ export const metadata: Metadata = {
     template: "%s · Siriai",
   },
   description:
-    "AI 시대의 통찰과 의사결정 구조 설계. 서울 기반 AI 아키텍처 · 리터러시 컨설팅.",
+    "사람과 AI가 더불어 사는 방식 설계. 서울 기반 AI 아키텍처 · 리터러시 컨설팅.",
   openGraph: {
     title: "Siriai — Architecture for insight",
     description:
-      "AI 시대의 통찰과 의사결정 구조 설계. 서울 기반 AI 아키텍처 · 리터러시 컨설팅.",
+      "사람과 AI가 더불어 사는 방식 설계. 서울 기반 AI 아키텍처 · 리터러시 컨설팅.",
     type: "website",
     locale: "ko_KR",
     siteName: "Siriai",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Siriai — Architecture for insight",
-    description: "AI 시대의 통찰과 의사결정 구조 설계.",
+    description: "사람과 AI가 더불어 사는 방식 설계.",
   },
 };
 

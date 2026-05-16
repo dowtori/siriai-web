@@ -60,7 +60,7 @@ export default function HeroSection() {
               maxWidth: "22ch",
             }}
           >
-            AI와 함께 통찰을 짓다.
+            사람과 AI, 더불어 살다.
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
