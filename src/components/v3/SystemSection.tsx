@@ -69,6 +69,7 @@ export default function SystemSection() {
     <section
       id="system"
       ref={ref}
+      data-tone="dark"
       style={{
         backgroundColor: "var(--surface-inverse)",
         color: "var(--fg-on-inverse)",

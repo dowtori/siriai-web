@@ -25,6 +25,7 @@ export default function VoiceSection() {
     <section
       id="voice"
       ref={ref}
+      data-tone="dark"
       style={{
         backgroundColor: "var(--surface-inverse)",
         color: "var(--fg-on-inverse)",
