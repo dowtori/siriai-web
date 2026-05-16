@@ -64,9 +64,9 @@ export default function MethodologySection() {
                 lineHeight: 1.08,
               }}
             >
-              Three axes,
+              Three axes.
               <br />
-              one operating model.
+              One model.
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
@@ -80,7 +80,7 @@ export default function MethodologySection() {
                 wordBreak: "keep-all",
               }}
             >
-              하나의 운영 모델을 세 축으로 정렬합니다.
+              세 축이 하나의 모델로.
             </motion.p>
 
             <div className="mt-14 space-y-10">
@@ -208,6 +208,32 @@ function DiagramA({ inView }: { inView: boolean }) {
         />
       ))}
 
+      {/* Spoke flow — small dashes drift from vertex toward core, infinite. */}
+      {inView &&
+        [arch, lit, ops].map((p, i) => (
+          <motion.line
+            key={`spoke-flow-${i}`}
+            x1={p.x}
+            y1={p.y}
+            x2={core.x}
+            y2={core.y}
+            stroke="var(--fg-default)"
+            strokeWidth={1}
+            strokeDasharray="2 16"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.55, strokeDashoffset: [0, -36] }}
+            transition={{
+              opacity: { duration: 0.5, ease: EASE, delay: 1.9 + i * 0.05 },
+              strokeDashoffset: {
+                duration: 1.8,
+                ease: "linear",
+                delay: 1.9 + i * 0.05,
+                repeat: Infinity,
+              },
+            }}
+          />
+        ))}
+
       {/* Vertex nodes + labels */}
       {[
         { p: arch, label: "Architecture", anchor: "middle" as const, lx: 0, ly: -22, delay: 0.25 },
@@ -246,6 +272,28 @@ function DiagramA({ inView }: { inView: boolean }) {
           </motion.text>
         </g>
       ))}
+
+      {/* Core echo — expanding ring after reveal, infinite breath. */}
+      {inView && (
+        <motion.circle
+          cx={core.x}
+          cy={core.y}
+          r={32}
+          fill="none"
+          stroke="var(--fg-default)"
+          strokeWidth={1}
+          initial={{ opacity: 0, scale: 1 }}
+          animate={{ opacity: [0, 0.35, 0], scale: [1, 1.55] }}
+          transition={{
+            duration: 2.2,
+            ease: EASE,
+            delay: 1.9,
+            repeat: Infinity,
+            repeatDelay: 0.6,
+          }}
+          style={{ transformOrigin: "50% 50%", transformBox: "fill-box" }}
+        />
+      )}
 
       {/* Core node */}
       <motion.circle
