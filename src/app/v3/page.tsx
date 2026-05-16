@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Navigation from "@/components/v3/Navigation";
 import StanceSection from "@/components/v3/StanceSection";
+import MethodologySection from "@/components/v3/MethodologySection";
+import SystemSection from "@/components/v3/SystemSection";
 import VoiceSection from "@/components/v3/VoiceSection";
 
 export const metadata: Metadata = {
@@ -24,8 +26,8 @@ export default function V3Home() {
       >
         <PlaceholderSection id="hero" label="00 — HERO · Canvas 2D 텍스트 파티클" tone="light" />
         <StanceSection />
-        <PlaceholderSection id="methodology" label="02 — METHODOLOGY · Diagram A" tone="light" />
-        <PlaceholderSection id="system" label="03 — SYSTEM · Diagram B" tone="dark" />
+        <MethodologySection />
+        <SystemSection />
         <PlaceholderSection id="services" label="04 — SERVICES" tone="light" />
         <VoiceSection />
         <PlaceholderSection id="contact" label="06 — CONTACT · 인라인 폼" tone="light" />
