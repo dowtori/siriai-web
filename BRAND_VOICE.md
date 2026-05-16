@@ -270,76 +270,81 @@ We design how an organization thinks.
 
 ---
 
-## 10. Etymological Overlay (v3.1)
+## 10. Etymological Overlay (v3.2)
 
-> v3.0 §1~§9 위에 덧입히는 brand 겉옷 룰북. 사명 어원 `知り合い`의 동아시아적 따뜻함·관계성을 보조 표면에서 echo. 헤드라인·tagline·핵심 명제는 침범하지 않는다.
-> Reference: Sakana AI 류 — 자연/문화 메타포(여기서는 관계어 1축)를 사이트 보조 표면에 얇게 노출. 시각 메타포는 도입하지 않는다 (카피 레이어만).
-> 적용: 2026-05-16 · branch `claude/redesign-homepage-premium-DiV5b`.
+> 변경 이력: v3.1(2026-05-16, 어원 layer 5표면 + Footer 어원 시그니처 도입) → **v3.2(2026-05-16, 사용자 피드백 반영 — 시적 표현 회피·어원 사이트 노출 0회로 축소)**.
+>
+> 사명 `시리아이`의 어원 `知り合い`은 이름의 기원으로만 두고 **사이트 카피에는 노출하지 않는다.** 따뜻함은 카피의 시적 표현이 아니라 **UX의 결**(예: 슬롯 픽커·커피챗 신청 흐름·평이한 구어체)로 실현. 헤드라인·tagline·핵심 명제는 침범하지 않는다.
+> Reference: Sakana AI 류 어원 노출 패턴은 v3.1에서 일부 시도했으나 **Siriai brand에는 과함** — 시적·의인화 라인이 "오그라드는" 인상을 줌. v3.2에서 축소 결정.
 
-### 10.1 어원 명제
+### 10.1 어원 명제 (내부 출처 전용)
 
 > **시리아이 = `知り合い (しりあい)` = 함께 아는 사람 / 지인 / 관계.**
 >
-> 어원은 **이름의 기원**이지 **서비스 카피의 헤드**가 아니다. 어원 layer는 brand identity의 **따뜻한 결**을 보조 표면에서 echo하며, 서비스 정체성(AI 아키텍처 설계 컨설팅) 자체를 덮어쓰지 않는다.
+> 본 명제는 brand identity의 **내부 출처**로만 둔다. 어원은 작명의 기원·팀 내부의 결을 잡는 컴퍼스이지, 외부 카피에는 옮기지 않는다. 동아시아적 따뜻함·관계성은 시적 라인이 아니라 **UX와 평이한 구어체**로 표현.
 
-### 10.2 Overlay Rules — R8 ~ R10
+### 10.2 Overlay Rules — R8 ~ R11
 
 | 룰 | 정의 |
 |---|---|
-| **R8 — 일본어 원문 1회 한도** | `知り合い` 원문 노출은 **사이트 전체 합산 정확히 1회**. 위치: Footer 어원 시그니처 블록만 허용. 다른 모든 표면 금지. |
-| **R9 — 풀이어 단어종 한도** | 어원 풀이어가 페이지를 가득 채우지 않게 — **어원 layer로 신규 도입하는 라인 내에서** 각 단어종이 한 페이지 합산 ≤ 3회. baseline brand에 이미 정착된 풀이어 사용(예: `함께 설계합니다` 같은 §1.1 baseline 동사구)은 카운트 제외 — 카운트하면 baseline brand가 자동 위반이 되어 §10.8 "변경 보류"와 충돌. |
-| **R10 — 헤드 침범 금지** | 어원 라인은 **보조 표면 전용** — eyebrow / caption / intro echo / footer / success message만. L1·L2 Claim · section h2 · service tagline 침범 금지. R5c(직선적 강제 묶음)와 결합. |
+| **R8 — 어원 사이트 노출 0회** | `知り合い` 원문, `시리아이의 어원은…` 식의 풀이, `함께 아는 사이라는 뜻에서…` 식의 어원 출처 명시 — 모두 **사이트 합산 0회**. 어원은 본 문서·내부 자료에만. |
+| **R9 — 풀이어 단어종 한도** | 어원 풀이어(§10.3 Yes 단어)가 페이지를 가득 채우지 않게 — **어원 layer로 신규 도입하는 라인 내에서** 각 단어종이 한 페이지 합산 ≤ 3회. baseline brand에 이미 정착된 풀이어 사용은 카운트 제외. |
+| **R10 — 헤드 침범 금지** | 어원 풀이어 라인은 **보조 표면 전용** — caption / success message / footer mini-about만. L1·L2 Claim · section h2 · service tagline · eyebrow 침범 금지. |
+| **R11 — 시적 표현 금지** | 의인화·은유·추상명사 중첩·시적 호흡 라인 사용 금지. 예: `사람 사이에서 길어 올린 결` / `곁에 서는 깊이` / `결을 알아간다` — 모두 금지. **평이한 구어체 + 직설적 동사**로 따뜻함을 실현. R3·R4 강화. |
 
 ### 10.3 Etymology Lexicon
 
-**Yes (어원 풀이어, R9 카운트 대상)**
-관계, 함께, 곁, 지인, 결, 사이, 마주하다, 알아간다, 이어진다, 같이 본다
+**Yes (어원 풀이어, R9 카운트 대상)** — 단, 시적이지 않은 평이 문맥에서만.
+관계, 함께, 알아간다, 이어진다 (4개로 축소 — `곁 / 결 / 사이 / 마주하다 / 같이 본다`는 v3.1에서 시도했으나 시적 인상 R11 충돌, 제외)
 
-**No (어원 오용)**
-- 가족 / 패밀리 / 한 식구 — 가족주의 어조, brand 톤과 어긋남
-- 동반자 — §1.3 "더불어 살다 부적합"과 충돌
-- 따뜻함 / 정성 / 진심 — 직접 노출 시 마케팅 형용사 R3 위반
-- 인연 / 만남 — 영적·우연 어조, brand 톤과 어긋남
-- 정(情) — 한·일 어조 혼선, 의미 불명확
+**No (어원 오용 + 시적 어조)**
+- 가족 / 패밀리 / 한 식구 — 가족주의
+- 동반자 / 더불어 살다 — §1.3 위반
+- 따뜻함 / 정성 / 진심 — 마케팅 형용사 R3
+- 인연 / 만남 / 운명 — 영적·우연 어조
+- 정(情) — 한·일 어조 혼선
+- **곁 / 결 / 사이 (어원 풀이어 단독 사용) — 시적 인상 R11** (한 단어로 따뜻함을 부여하려는 시도, 오그라듦)
+- **`길어 올린 / 알아챈 / 받아 들인` 같은 시적 술어** — R11
 
 ### 10.4 표면 매핑 (강도)
 
-| 표면 | 파일 / 위치 | 강도 | 어원 노출 방식 |
+v3.1의 7표면 → **v3.2 1표면**으로 축소. 어원 layer는 사이트에서 거의 사라지고, 따뜻함은 UX(§10.7 Contact 작업 라운드)와 평이 카피로.
+
+| 표면 | 파일 / 위치 | 강도 | 처리 |
 |---|---|---|---|
-| Hero eyebrow 아래 KR 마이크로 라인 (신규) | `HeroSection.tsx` eyebrow 직후 / h2 이전 | **clue** | h2 위에 새 KR 한 줄 추가. eyebrow·h2 보존 |
-| Stance accent 보조 | `StanceSection.tsx` `Statement · 01 of 06` 아래 | warmth | 마이크로 KR 한 줄 |
-| Services intro echo | `ServicesSection.tsx` `세 모드로 함께합니다.` 직후 | warmth | 한 줄 echo caption |
-| Voice 캡션 echo | `VoiceSection.tsx` `— Siriai Manifesto, 2026` 아래 | warmth | 마이크로 KR 한 줄 |
-| ContactForm 성공 후미 | `ContactForm.tsx` 성공 메시지 마지막 라인 뒤 | warmth | 마이크로 KR 한 줄 |
-| **Footer (신규)** | `src/components/v3/Footer.tsx` | **signature** | 일본어 원문 1회 + mini about |
-| meta (layout / OG) | `layout.tsx` description / `opengraph-image.tsx` | (보류) | **변경 없음** — SEO·OG는 기능 클루 우선 |
+| ContactForm 성공 후미 | `ContactForm.tsx` 성공 메시지 마지막 라인 뒤 | warmth | **유지** — `알아가는 것부터 시작합니다.` 평이·따뜻함, R11 통과 |
+| Hero eyebrow 아래 KR 마이크로 | (신규 시도 v3.1) | — | **제거** — Hero는 eyebrow + h2로 충분, 클루는 Footer로 |
+| Stance accent 보조 | (신규 시도 v3.1) | — | **제거** — `사람과 사람 사이에…` 시적 인상 R11 |
+| Services intro echo | (신규 시도 v3.1) | — | **제거** — `곁에 서는 깊이…` 시적 인상 R11 |
+| Voice 캡션 echo | (신규 시도 v3.1) | — | **제거** — `사람 사이에서 길어 올린 결.` 사용자 명시 지적 R11 |
+| Footer 어원 시그니처 블록 (b) | `Footer.tsx` (b) | — | **제거** — R8 어원 사이트 노출 0회 |
+| Footer (a) (c) (d) | `Footer.tsx` | clue | **유지** — Manifesto echo·Mini about·연락처는 어원 layer 아님, 클루 보강 |
+| meta (layout / OG) | `layout.tsx` / `opengraph-image.tsx` | — | 변경 없음 |
 
-### 10.5 검수 체크리스트 추가 (§8 누적)
+### 10.5 검수 체크리스트 (§8 누적)
 
-- [ ] 일본어 원문 `知り合い` 사이트 합산 **정확히 1회** (R8)
-- [ ] 각 어원 풀이어 단어종이 한 페이지 합산 **≤ 3회** (R9)
-- [ ] 어원 라인이 L1·L2 Claim·section h2·tagline에 들어가지 않았는가 (R10)
-- [ ] 어원 노출 강도가 §10.4 매핑(signature / warmth / clue)과 일치
-- [ ] 모호성 보존 — 어원 layer가 서비스 정체성 자체를 덮어쓰지 않는가
+- [ ] 일본어 원문 `知り合い`·어원 풀이 사이트 합산 **0회** (R8)
+- [ ] 어원 풀이어 단어종이 신규 layer 라인 내 합산 ≤ 3회 (R9)
+- [ ] 어원·풀이어 라인이 L1·L2 Claim·h2·tagline·eyebrow 침범 0건 (R10)
+- [ ] 시적 표현 (의인화·은유·추상명사 중첩·시적 술어) 0건 (R11)
+- [ ] 모호성 보존 — 어원 layer가 서비스 정체성을 덮어쓰지 않는가
 
-### 10.6 Footer 컴포넌트 spec
+### 10.6 Footer 컴포넌트 spec (v3.2)
 
-**파일 신규**: `src/components/v3/Footer.tsx`. `src/app/page.tsx`에서 `<ContactSection />` 다음에 `<Footer />` 호출.
+**파일**: `src/components/v3/Footer.tsx`. `page.tsx`의 `<ContactSection />` 다음에 `<Footer />`.
 
-**시각 가이드 (한 줄)** — dark surface (`var(--surface-inverse)`, Voice와 연속), 4 블록 vertical stack, top divider strong line 1, mono eyebrow style (`text-[11px] uppercase tracking-[0.22em]`)로 어원 시그니처 처리, 폰트는 Pretendard, 검정 미사용.
+**시각 가이드** — dark surface(`var(--surface-inverse)`), 3 블록 vertical stack, Pretendard, 검정 미사용.
 
-**4 블록 카피 시드**
+**3 블록 카피 (v3.2 적용)**
 
 ```
 (a) Manifesto echo
 EN  We don't deploy tools. We design how decisions are made.
 KR  도구를 고르지 않고, 의사결정의 구조를 설계합니다.
 
-(b) 어원 시그니처 ── ★ 사이트 유일 일본어 원문 (R8 1회)
-SIRIAI · 知り合い (しりあい) · ones who know each other
-시리아이 — 함께 아는 사이라는 뜻의 일본어에서.
+— strong divider —
 
-(c) Mini about (3~5줄, 클루 보강)
+(c) Mini about — 클루 보강
 KR
 AI 도입을 고민하는 조직과,
 의사결정의 구조부터 설계합니다.
@@ -352,64 +357,31 @@ we design the structures behind their decisions.
 Operating model · Advisory · Literacy — three modes.
 From Seoul, since 2024.
 
+— weak divider —
+
 (d) 연락처 + 카피라이트
 contact@siriai.io · Seoul, KR
 © {year} Siriai. All rights reserved.
 ```
 
-**Footer 풀이어 카운트** (R9 검증)
-- `함께` — (b) 1회. 단어종 카운트 1.
-- `아는` — (b) 1회. 단어종 카운트 1.
-- `사이` — (b) 1회. 단어종 카운트 1.
-- (a)·(c)에서 `함께`/`아는`/`사이` 미사용 → 각 단어종 페이지 합산 안전 범위.
+(b) 어원 시그니처 블록 **삭제** — R8 0회 정책. (a)→(c)→(d) 3블록 구조로 단순화.
 
-### 10.7 5 HIGH 표면 BEFORE / AFTER 시드
+### 10.7 따뜻함은 UX로 — Contact 디벨롭 (별도 라운드)
 
-> 시드는 1차 후보. 적용 시 §10.5 체크리스트로 다듬는다.
+v3.2는 카피로 따뜻함을 부여하지 않는다. 따뜻함은 **Contact UX의 결**로 실현:
+- 슬롯 픽커 inline (Cal.com 등) — 사용자가 시간을 직접 고르는 가벼움
+- 커피챗·온라인 미팅 신청 옵션
+- 현재 가벼운 폼 병행 — "지금은 진단 통화까지 부담스러우면, 메모만 남겨주세요" 식의 듀얼 진입
 
-**Surface 1 — Hero eyebrow 아래 KR 마이크로 라인** (신규 추가, clue)
-파일: `HeroSection.tsx` eyebrow `Siriai · A practice in AI architecture` 직후 / h2 `AI로 사고하는 구조를 설계합니다.` 이전.
-```
-관계로 시작하는 AI 도입 설계.
-```
-풀이어 `관계` 1회.
-
-**Surface 2 — Stance accent 보조** (warmth)
-파일: `StanceSection.tsx` `Statement · 01 of 06` 캡션 라인 아래.
-```
-사람과 사람 사이에 AI를 배치합니다.
-```
-풀이어 `사이` 1회.
-
-**Surface 3 — Services intro echo** (warmth)
-파일: `ServicesSection.tsx` `세 모드로 함께합니다.` 직후.
-```
-곁에 서는 깊이를 모드로 나눕니다.
-```
-풀이어 `곁` 1회.
-
-**Surface 4 — Voice 캡션 echo** (warmth)
-파일: `VoiceSection.tsx` `— Siriai Manifesto, 2026` 아래.
-```
-사람 사이에서 길어 올린 결.
-```
-풀이어 `사이` 1회, `결` 1회.
-
-**Surface 5 — ContactForm 성공 후미** (warmth)
-파일: `ContactForm.tsx` 성공 메시지 마지막 라인 (`24시간 안에 이메일로 일정 옵션을 보내드립니다.`) 뒤.
-```
-알아가는 것부터 시작합니다.
-```
-풀이어 `알아가는` 1회.
+사례 분석은 `CONTACT_RESEARCH.md` 참조. 적용은 후속 라운드.
 
 ### 10.8 변경 보류 — 명시적 비채택
 
 | 항목 | 사유 |
 |---|---|
-| `layout.tsx` description (3곳) | SEO·OG는 기능 클루 우선. 어원은 본문(Footer)에 집중. R8·R10 충돌 회피 |
-| `opengraph-image.tsx` subtitle | 위와 동일. `Architecture for insight, AI`는 baseline 보조 라인 그대로 |
-| Hero eyebrow / h2 자체 | 손대지 않음. **아래에 신규 KR 한 줄을 더하는** 형태로만 |
-| Stance EN / KR body 4줄 | 균형 보존 |
-| Voice EN h2 / KR 매니페스토 본문 | manifesto 톤 자체로 강력 |
-| Services 3 카드 (Studio/Advisory/Literacy) | tagline 보호 |
-| Footer 대형 워드마크 (v1 패턴) | v3는 미니멀 typographic. 4블록 구조만 |
+| Hero / Stance / Services / Voice 모든 헤드·tagline·sub | drift 이전 baseline 보존 |
+| 모든 시적·은유 라인 | R11 |
+| 어원 사이트 노출 (원문·풀이·출처 명시) | R8 0회 |
+| `layout.tsx` description / `opengraph-image.tsx` | SEO·OG는 기능 클루 우선 |
+| Footer 어원 시그니처 블록 (b) | v3.2에서 제거 |
+| Footer 대형 워드마크 (v1 패턴) | v3는 미니멀 typographic |
