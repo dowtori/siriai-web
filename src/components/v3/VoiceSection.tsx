@@ -102,25 +102,6 @@ export default function VoiceSection() {
         >
           — Siriai Manifesto, 2026
         </motion.p>
-        <motion.p
-          initial={{ opacity: 0, y: 8 }}
-          animate={inView ? { opacity: 1, y: 0 } : undefined}
-          transition={{
-            duration: 0.9,
-            ease: EASE,
-            delay: 0.45 + KR_LINES.length * 0.12 + 0.32,
-          }}
-          className="mt-3"
-          style={{
-            fontSize: "0.9375rem",
-            lineHeight: 1.7,
-            color: "var(--fg-on-inverse-muted)",
-            wordBreak: "keep-all",
-            maxWidth: "32ch",
-          }}
-        >
-          사람 사이에서 길어 올린 결.
-        </motion.p>
       </div>
     </section>
   );

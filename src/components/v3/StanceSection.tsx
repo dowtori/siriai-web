@@ -74,21 +74,6 @@ export default function StanceSection() {
             >
               Statement · 01 of 06
             </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 8 }}
-              animate={inView ? { opacity: 1, y: 0 } : undefined}
-              transition={{ duration: 0.8, ease: EASE, delay: 1.18 }}
-              className="mt-3"
-              style={{
-                fontSize: "0.875rem",
-                lineHeight: 1.7,
-                color: "var(--fg-muted)",
-                wordBreak: "keep-all",
-                maxWidth: "32ch",
-              }}
-            >
-              사람과 사람 사이에 AI를 배치합니다.
-            </motion.p>
           </div>
 
           {/* Right — Korean body, line-by-line stagger */}

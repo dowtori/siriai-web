@@ -44,33 +44,6 @@ export default function Footer() {
           aria-hidden
         />
 
-        {/* (b) 어원 시그니처 — 사이트 유일 일본어 원문 (R8) */}
-        <div>
-          <p
-            className="text-[11px] uppercase tracking-[0.22em]"
-            style={{ color: "var(--fg-on-inverse-muted)" }}
-          >
-            Siriai · 知り合い (しりあい) · ones who know each other
-          </p>
-          <p
-            className="mt-4"
-            style={{
-              fontSize: "1rem",
-              lineHeight: 1.85,
-              wordBreak: "keep-all",
-              maxWidth: "32ch",
-            }}
-          >
-            시리아이 — 함께 아는 사이라는 뜻의 일본어에서.
-          </p>
-        </div>
-
-        <div
-          className="my-16 h-px"
-          style={{ backgroundColor: "var(--line-on-inverse)" }}
-          aria-hidden
-        />
-
         {/* (c) Mini about — 클루 보강 */}
         <div className="grid grid-cols-1 gap-y-10 md:grid-cols-2 md:gap-x-16">
           <div
