@@ -10,11 +10,11 @@ const KR_LINES: Array<string | "break"> = [
   "조직이 사고하는 방식을 설계합니다.",
   "break",
   "AI는 매주 새로워집니다.",
-  "그러나 의사결정의 구조가 흔들리면, 어떤 도구도 답이 될 수 없습니다.",
+  "의사결정의 구조가 흔들리면, 어떤 도구도 답이 아닙니다.",
   "break",
   "우리가 만드는 것은 시스템입니다.",
   "어떤 신호를 보고, 어떻게 판단하며, 무엇을 실행하고, 무엇을 기록할지 —",
-  "그 결의 정렬을 함께 합니다.",
+  "그 정렬을 함께 설계합니다.",
 ];
 
 export default function VoiceSection() {
@@ -58,7 +58,7 @@ export default function VoiceSection() {
         >
           We don&apos;t recommend tools.
           <br />
-          We design how an organization thinks.
+          We design how it thinks.
         </motion.h2>
 
         {/* Korean manifesto — line by line */}
