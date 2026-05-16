@@ -13,7 +13,7 @@ const LAYERS: Layer[] = [
     name: "01 — SIGNAL",
     y: 110,
     nodes: [
-      { x: 200, y: 110, label: "Audience" },
+      { x: 200, y: 110, label: "Inbound" },
       { x: 500, y: 110, label: "Operations" },
       { x: 800, y: 110, label: "Market" },
     ],
@@ -22,28 +22,35 @@ const LAYERS: Layer[] = [
     name: "02 — JUDGMENT",
     y: 250,
     nodes: [
-      { x: 350, y: 250, label: "Triage" },
-      { x: 650, y: 250, label: "Editorial" },
+      { x: 350, y: 250, label: "Criteria" },
+      { x: 650, y: 250, label: "Trade-offs" },
     ],
   },
   {
     name: "03 — ACTION",
     y: 390,
     nodes: [
-      { x: 200, y: 390, label: "Pipeline" },
+      { x: 200, y: 390, label: "Plays" },
       { x: 500, y: 390, label: "Channels" },
-      { x: 800, y: 390, label: "Partner" },
+      { x: 800, y: 390, label: "Allies" },
     ],
   },
   {
     name: "04 — RECORD",
     y: 530,
     nodes: [
-      { x: 350, y: 530, label: "Knowledge" },
-      { x: 650, y: 530, label: "Archive" },
+      { x: 350, y: 530, label: "Lessons" },
+      { x: 650, y: 530, label: "Index" },
     ],
   },
 ];
+
+// Flow pulse: after the reveal sequence finishes, each layer emits a pulse
+// ring on a fixed cadence, staggered top→bottom so Signal→Record reads as flow.
+const PULSE_REVEAL_END_S = 3;
+const PULSE_DURATION_S = 1.2;
+const PULSE_CYCLE_S = 4;
+const PULSE_LAYER_STAGGER_S = 0.45;
 
 // [layerFrom, nodeFrom, layerTo, nodeTo]
 const EDGES: Array<[number, number, number, number]> = [
@@ -98,9 +105,9 @@ export default function SystemSection() {
               lineHeight: 1.08,
             }}
           >
-            This is what a thinking
+            Decision flow.
             <br />
-            organization looks like.
+            Made visible.
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 14 }}
@@ -115,7 +122,7 @@ export default function SystemSection() {
               maxWidth: "48ch",
             }}
           >
-            사고하는 조직의 구조를 한 장으로 그립니다.
+            판단의 흐름을, 보이게.
           </motion.p>
         </div>
 
@@ -136,11 +143,10 @@ export default function SystemSection() {
             wordBreak: "keep-all",
           }}
         >
-          실제 클라이언트와 함께 설계한 운영 다이어그램의 추상화.
+          실제 설계 운영 구조의 추상화.
           <br />
-          레이어:{" "}
           <span style={{ color: "var(--fg-on-inverse)" }}>
-            Signal → Judgment → Action → Record
+            Signal · Judgment · Action · Record.
           </span>
         </motion.p>
       </div>
@@ -193,6 +199,35 @@ function DiagramB({ inView }: { inView: boolean }) {
           />
         );
       })}
+
+      {/* Flow pulse rings — one per node, staggered by layer for top→bottom flow. */}
+      {inView &&
+        LAYERS.map((layer, li) =>
+          layer.nodes.map((node, ni) => (
+            <motion.circle
+              key={`pulse-${li}-${ni}`}
+              cx={node.x}
+              cy={node.y}
+              r={6}
+              fill="none"
+              stroke="var(--fg-on-inverse)"
+              strokeWidth={1}
+              initial={{ scale: 1, opacity: 0 }}
+              animate={{ scale: [1, 3.4], opacity: [0.5, 0] }}
+              transition={{
+                duration: PULSE_DURATION_S,
+                ease: EASE,
+                delay: PULSE_REVEAL_END_S + li * PULSE_LAYER_STAGGER_S,
+                repeat: Infinity,
+                repeatDelay: PULSE_CYCLE_S - PULSE_DURATION_S,
+              }}
+              style={{
+                transformOrigin: "50% 50%",
+                transformBox: "fill-box",
+              }}
+            />
+          ))
+        )}
 
       {/* Nodes + node labels */}
       {LAYERS.map((layer, li) => (

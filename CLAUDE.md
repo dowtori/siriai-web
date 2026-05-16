@@ -142,7 +142,7 @@ src/
 
 ## v3 IA — 7섹션
 
-1. **§00 Hero** — Canvas 2D 파티클로 "Architecture for thinking with AI" 조립
+1. **§00 Hero** — Canvas 2D 파티클 cycle 4종 (Architecture → Not tools/output/deployment → 회귀) · 8s settled + 0.9s dissolve 무한 루프
 2. **§01 Stance** — "We don't deploy tools. We design how decisions are made."
 3. **§02 Methodology** · Diagram A — 3축 (Architecture · Literacy · Operation) → Operating Model
 4. **§03 System** · Diagram B (dark) — 4레이어 Signal · Judgment · Action · Record
@@ -180,18 +180,21 @@ create table contact_submissions (
 
 ### 운영 정리
 - `siriai.io` 운영 도메인 확정 후 `src/app/layout.tsx`의 `metadataBase` 갱신
-- Supabase `contact_submissions.interest` 컬럼 추가
+- Supabase `contact_submissions.interest` 컬럼 추가 — 마이그레이션 SQL 작성 완료 (`supabase/migrations/20260516120000_*.sql`), Dashboard SQL Editor 실행 대기
 - /contact 페이지별 opengraph-image 추가 (선택)
 
 ### 비주얼 정교화
-- Navigation: dark 섹션 진입 시 nav 색 invert (IntersectionObserver)
-- HeroParticles: 변주 cycle (5종 텍스트 layout 순환)
 - Services 카드 hover에서 accent 라인 강조
 - HeroParticles 모바일 fps 최적화 (파티클 수 동적 조정)
 
 ### 의존성 정리
 - 자동 코드 스플릿으로 메인 / 번들에는 이미 무거운 v1 패키지 미포함 — 추가 작업 불요
 - v1 완전 폐기 결정 시 `@studio-freight/lenis`, `lenis`, `gsap`, `@gsap/react`, `three`, `@react-three/*` 제거
+
+### UX 확장 (백로그 · 우선순위 낮음)
+- **Contact 톤 리디자인**: "따뜻하면서 센스 있는" 컨택 사례 서칭 후 디벨롭 (현 선언적 톤만으로는 차가움). reference 후보 — Linear/Vercel/Resend/Stripe contact 페이지·warm minimal SaaS landing.
+- **커피챗 신청 UX**: 빈 시간대 선택 → 슬롯 예약 통합. 후보 — 자체 slot picker(Supabase availability 테이블) · Cal.com inline · Calendly. interest(Studio/Advisory/Literacy)별 trigger 분기 검토.
+- 폼 단일 흐름 vs 폼·캘린더 이원화 의사결정, 한국어 친밀한 톤 카피 라인 동반 정교화
 
 ---
 
