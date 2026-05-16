@@ -17,8 +17,10 @@ const MOUSE_RADIUS = 160;
 const MOUSE_FORCE = 4;
 const DOT_COLOR = "rgba(43, 58, 74, 0.86)";
 const DOT_SIZE = 1.5;
+const CYCLE_INTERVAL_MS = 8000;
+const DISSOLVE_MS = 900;
 
-export default function HeroParticles({ lines }: { lines: string[] }) {
+export default function HeroParticles({ cycles }: { cycles: string[][] }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -35,20 +37,17 @@ export default function HeroParticles({ lines }: { lines: string[] }) {
     let width = 0;
     let height = 0;
     let particles: Particle[] = [];
+    let phaseIndex = 0;
+    let cycleTimer: ReturnType<typeof setTimeout> | null = null;
+    let dissolveTimer: ReturnType<typeof setTimeout> | null = null;
     const mouse = { x: -9999, y: -9999 };
 
-    const build = () => {
-      const rect = canvas.getBoundingClientRect();
-      width = Math.max(1, Math.floor(rect.width));
-      height = Math.max(1, Math.floor(rect.height));
-      canvas.width = width;
-      canvas.height = height;
-
+    const computeTargetsFor = (lines: string[]): Array<[number, number]> => {
       const off = document.createElement("canvas");
       off.width = width;
       off.height = height;
       const oc = off.getContext("2d");
-      if (!oc) return;
+      if (!oc) return [];
 
       const fontSize = Math.min(width / 8.5, height / 4.5);
       oc.fillStyle = "#000";
@@ -70,7 +69,11 @@ export default function HeroParticles({ lines }: { lines: string[] }) {
           if (data[idx + 3] > 128) targets.push([x, y]);
         }
       }
+      return targets;
+    };
 
+    const applyTextTargets = (targets: Array<[number, number]>) => {
+      const n = targets.length;
       if (particles.length === 0) {
         particles = targets.map(([tx, ty]) => ({
           x: Math.random() * width,
@@ -80,27 +83,62 @@ export default function HeroParticles({ lines }: { lines: string[] }) {
           vx: 0,
           vy: 0,
         }));
-      } else {
-        const n = targets.length;
-        if (n > particles.length) {
-          for (let i = particles.length; i < n; i++) {
-            particles.push({
-              x: Math.random() * width,
-              y: Math.random() * height,
-              tx: targets[i][0],
-              ty: targets[i][1],
-              vx: 0,
-              vy: 0,
-            });
-          }
-        } else if (n < particles.length) {
-          particles.length = n;
-        }
-        for (let i = 0; i < n; i++) {
-          particles[i].tx = targets[i][0];
-          particles[i].ty = targets[i][1];
-        }
+        return;
       }
+      if (n > particles.length) {
+        for (let i = particles.length; i < n; i++) {
+          particles.push({
+            // Spawn surplus particles from a position just outside the canvas so they
+            // drift into the new text shape rather than appearing mid-frame.
+            x: -40 + Math.random() * (width + 80),
+            y: -40 + Math.random() * (height + 80),
+            tx: targets[i][0],
+            ty: targets[i][1],
+            vx: 0,
+            vy: 0,
+          });
+        }
+      } else if (n < particles.length) {
+        particles.length = n;
+      }
+      for (let i = 0; i < n; i++) {
+        particles[i].tx = targets[i][0];
+        particles[i].ty = targets[i][1];
+      }
+    };
+
+    // Dissolve: every particle is sent to a random nearby point so the existing
+    // text shape breaks apart before the next sample takes hold.
+    const applyDissolveTargets = () => {
+      for (const p of particles) {
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 60 + Math.random() * 220;
+        p.tx = p.x + Math.cos(angle) * dist;
+        p.ty = p.y + Math.sin(angle) * dist;
+      }
+    };
+
+    const buildInitial = () => {
+      const rect = canvas.getBoundingClientRect();
+      width = Math.max(1, Math.floor(rect.width));
+      height = Math.max(1, Math.floor(rect.height));
+      canvas.width = width;
+      canvas.height = height;
+      const targets = computeTargetsFor(cycles[phaseIndex] ?? []);
+      applyTextTargets(targets);
+    };
+
+    const scheduleNextCycle = () => {
+      if (cycles.length < 2) return;
+      cycleTimer = setTimeout(() => {
+        applyDissolveTargets();
+        dissolveTimer = setTimeout(() => {
+          phaseIndex = (phaseIndex + 1) % cycles.length;
+          const next = computeTargetsFor(cycles[phaseIndex]);
+          applyTextTargets(next);
+          scheduleNextCycle();
+        }, DISSOLVE_MS);
+      }, CYCLE_INTERVAL_MS);
     };
 
     const tick = () => {
@@ -151,7 +189,15 @@ export default function HeroParticles({ lines }: { lines: string[] }) {
       mouse.x = -9999;
       mouse.y = -9999;
     };
-    const onResize = () => build();
+    const onResize = () => {
+      const rect = canvas.getBoundingClientRect();
+      width = Math.max(1, Math.floor(rect.width));
+      height = Math.max(1, Math.floor(rect.height));
+      canvas.width = width;
+      canvas.height = height;
+      const targets = computeTargetsFor(cycles[phaseIndex] ?? []);
+      applyTextTargets(targets);
+    };
 
     const start = async () => {
       try {
@@ -159,12 +205,13 @@ export default function HeroParticles({ lines }: { lines: string[] }) {
       } catch {
         /* noop */
       }
-      build();
+      buildInitial();
       if (reduced) {
         drawStatic();
-      } else {
-        raf = requestAnimationFrame(tick);
+        return;
       }
+      raf = requestAnimationFrame(tick);
+      scheduleNextCycle();
     };
     start();
 
@@ -174,11 +221,13 @@ export default function HeroParticles({ lines }: { lines: string[] }) {
 
     return () => {
       cancelAnimationFrame(raf);
+      if (cycleTimer) clearTimeout(cycleTimer);
+      if (dissolveTimer) clearTimeout(dissolveTimer);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerleave", onLeave);
       window.removeEventListener("resize", onResize);
     };
-  }, [lines]);
+  }, [cycles]);
 
   return (
     <canvas

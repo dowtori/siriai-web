@@ -4,7 +4,16 @@ import { motion } from "framer-motion";
 import HeroParticles from "./HeroParticles";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const LINES = ["Architecture for", "thinking with AI."];
+
+// Particle cycle phases. Each phase is rendered as two lines, dissolves after
+// ~8s, then reforms into the next phase. Index loops back to 0 to land on the
+// canonical headline.
+const CYCLES: string[][] = [
+  ["Architecture for", "thinking with AI."],
+  ["Not tools.", "Structure."],
+  ["Not output.", "Decisions."],
+  ["Not deployment.", "Design."],
+];
 
 export default function HeroSection() {
   return (
@@ -22,7 +31,7 @@ export default function HeroSection() {
       <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 gap-y-16 px-6 md:grid-cols-12 md:gap-x-12 md:gap-y-0 md:px-10">
         {/* Generative typo */}
         <div className="h-[58vh] md:col-span-7 md:h-[68vh]">
-          <HeroParticles lines={LINES} />
+          <HeroParticles cycles={CYCLES} />
         </div>
 
         {/* Static side panel */}
@@ -34,7 +43,7 @@ export default function HeroSection() {
             className="text-[11px] uppercase tracking-[0.22em]"
             style={{ color: "var(--fg-muted)" }}
           >
-            Siriai — Architecture for insight, AI
+            Siriai · A practice in AI architecture
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 14 }}
