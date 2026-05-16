@@ -60,7 +60,7 @@ export default function HeroSection() {
               maxWidth: "22ch",
             }}
           >
-            인사이트가 의사결정으로 이어지도록.
+            깊은 인사이트를 기반으로, AI와 가깝게.
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
