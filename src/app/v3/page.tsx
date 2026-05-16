@@ -3,7 +3,9 @@ import Navigation from "@/components/v3/Navigation";
 import StanceSection from "@/components/v3/StanceSection";
 import MethodologySection from "@/components/v3/MethodologySection";
 import SystemSection from "@/components/v3/SystemSection";
+import ServicesSection from "@/components/v3/ServicesSection";
 import VoiceSection from "@/components/v3/VoiceSection";
+import ContactSection from "@/components/v3/ContactSection";
 
 export const metadata: Metadata = {
   title: "Siriai — Architecture for thinking with AI",
@@ -28,9 +30,9 @@ export default function V3Home() {
         <StanceSection />
         <MethodologySection />
         <SystemSection />
-        <PlaceholderSection id="services" label="04 — SERVICES" tone="light" />
+        <ServicesSection />
         <VoiceSection />
-        <PlaceholderSection id="contact" label="06 — CONTACT · 인라인 폼" tone="light" />
+        <ContactSection />
       </main>
     </>
   );
