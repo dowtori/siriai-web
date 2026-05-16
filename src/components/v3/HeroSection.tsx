@@ -46,6 +46,20 @@ export default function HeroSection() {
             Siriai · A practice in AI architecture
           </motion.p>
           <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.27 }}
+            className="mt-3 text-[13px]"
+            style={{
+              color: "var(--fg-muted)",
+              wordBreak: "keep-all",
+              maxWidth: "26ch",
+              lineHeight: 1.7,
+            }}
+          >
+            관계로 시작하는 AI 도입 설계.
+          </motion.p>
+          <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, ease: EASE, delay: 0.34 }}

@@ -291,6 +291,16 @@ function ReceivedBlock() {
       >
         24시간 안에 이메일로 일정 옵션을 보내드립니다.
       </p>
+      <p
+        className="mt-3 text-sm"
+        style={{
+          color: "var(--fg-muted)",
+          wordBreak: "keep-all",
+          lineHeight: 1.7,
+        }}
+      >
+        알아가는 것부터 시작합니다.
+      </p>
     </div>
   );
 }

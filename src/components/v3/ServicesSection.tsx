@@ -89,6 +89,20 @@ export default function ServicesSection() {
           >
             세 모드로 함께합니다.
           </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={inView ? { opacity: 1, y: 0 } : undefined}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.36 }}
+            className="mt-4 text-sm"
+            style={{
+              lineHeight: 1.7,
+              color: "var(--fg-muted)",
+              wordBreak: "keep-all",
+              maxWidth: "32ch",
+            }}
+          >
+            곁에 서는 깊이를 모드로 나눕니다.
+          </motion.p>
         </div>
 
         <div className="mt-16 grid grid-cols-1 md:mt-20 md:grid-cols-3">
