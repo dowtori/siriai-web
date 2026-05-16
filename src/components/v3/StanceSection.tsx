@@ -57,6 +57,40 @@ export default function StanceSection() {
               <br />
               decisions are made.
             </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={inView ? { opacity: 1, y: 0 } : undefined}
+              transition={{ duration: 0.75, ease: EASE, delay: 0.28 }}
+              className="mt-6"
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(1.125rem, 1.35vw, 1.375rem)",
+                fontWeight: 500,
+                letterSpacing: "-0.01em",
+                color: "var(--fg-muted)",
+                wordBreak: "keep-all",
+                maxWidth: "28ch",
+              }}
+            >
+              도구가 아니라, 결정의 구조.
+            </motion.p>
+            <motion.div
+              initial={{ scaleY: 0 }}
+              animate={inView ? { scaleY: 1 } : undefined}
+              transition={{ duration: 1.2, ease: EASE, delay: 0.6 }}
+              className="mt-12 h-16 w-px origin-bottom"
+              style={{ backgroundColor: "var(--accent)" }}
+              aria-hidden
+            />
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : undefined}
+              transition={{ duration: 0.9, ease: EASE, delay: 1.2 }}
+              className="mt-6 text-[11px] uppercase tracking-[0.22em]"
+              style={{ color: "var(--fg-muted)" }}
+            >
+              Statement · 01 of 06
+            </motion.p>
           </div>
 
           {/* Right — Korean body, line-by-line stagger */}
@@ -81,22 +115,30 @@ export default function StanceSection() {
                     ease: EASE,
                     delay: 0.3 + i * 0.1,
                   }}
+                  className="flex items-baseline gap-5"
                 >
-                  {line}
+                  <span
+                    aria-hidden
+                    className="text-[10px] uppercase tracking-[0.22em] tabular-nums"
+                    style={{ color: "var(--fg-muted)", flex: "0 0 auto" }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span>{line}</span>
                 </motion.p>
               ))}
             </div>
 
-            {/* Thin dividing rule below body — subtle proof of structure */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={inView ? { scaleX: 1 } : undefined}
-              transition={{ duration: 1, ease: EASE, delay: 0.3 + BODY_LINES.length * 0.1 }}
-              className="mt-12 h-px origin-left"
-              style={{ backgroundColor: "var(--line-strong)", maxWidth: "44ch" }}
-            />
           </div>
         </div>
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: 1 } : undefined}
+          transition={{ duration: 1.2, ease: EASE, delay: 1.0 }}
+          className="mt-20 h-px origin-left"
+          style={{ backgroundColor: "var(--line-strong)" }}
+          aria-hidden
+        />
       </div>
     </section>
   );
