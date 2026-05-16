@@ -72,6 +72,23 @@ export default function ServicesSection() {
           >
             Three modes of engagement.
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            animate={inView ? { opacity: 1, y: 0 } : undefined}
+            transition={{ duration: 0.75, ease: EASE, delay: 0.24 }}
+            className="mt-6"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(1.125rem, 1.35vw, 1.375rem)",
+              fontWeight: 500,
+              letterSpacing: "-0.01em",
+              color: "var(--fg-muted)",
+              wordBreak: "keep-all",
+              maxWidth: "32ch",
+            }}
+          >
+            세 모드로 함께합니다.
+          </motion.p>
         </div>
 
         <div className="mt-16 grid grid-cols-1 md:mt-20 md:grid-cols-3">
@@ -83,14 +100,26 @@ export default function ServicesSection() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.75, ease: EASE, delay: 0.3 + i * 0.1 }}
-              className="group relative flex flex-col p-8 transition-colors duration-300 md:p-10
-                         border-t md:border-t md:border-l
-                         hover:bg-[color:var(--surface-raised)]"
+              className="group relative flex flex-col overflow-hidden p-8 md:p-10
+                         border-t border-[color:var(--line-default)] md:border-t md:border-l
+                         transition-colors duration-300
+                         hover:bg-[color:var(--surface-raised)]
+                         hover:border-[color:var(--accent)]"
               style={{
-                borderColor: "var(--line-default)",
                 color: "var(--fg-default)",
               }}
             >
+              <span
+                aria-hidden
+                className="absolute left-0 top-0 h-px w-full origin-left scale-x-0 transition-transform duration-700 ease-out group-hover:scale-x-100"
+                style={{ backgroundColor: "var(--accent)" }}
+              />
+              <p
+                className="mb-3 text-[10px] uppercase tracking-[0.22em]"
+                style={{ color: "var(--fg-muted)" }}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </p>
               <div className="flex items-baseline justify-between">
                 <h3
                   style={{
@@ -149,8 +178,10 @@ export default function ServicesSection() {
                 ))}
               </ul>
 
-              <div className="mt-10 flex items-center justify-between border-t pt-5"
-                   style={{ borderColor: "var(--line-default)" }}>
+              <div className="mt-10 flex items-center justify-between border-t pt-5
+                              border-[color:var(--line-default)]
+                              transition-colors duration-300
+                              group-hover:border-[color:var(--accent)]">
                 <span
                   className="text-[11px] uppercase tracking-[0.22em] transition-colors group-hover:text-[color:var(--accent)]"
                   style={{ color: "var(--fg-default)" }}
