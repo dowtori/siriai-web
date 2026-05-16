@@ -1,46 +1,108 @@
 @import "tailwindcss";
-@import "@fontsource/pretendard/400.css";
-@import "@fontsource/pretendard/500.css";
-@import "@fontsource/pretendard/600.css";
-@import "@fontsource/pretendard/700.css";
-@import "@fontsource/pretendard/800.css";
+@import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 
 :root {
-  /* Siriai Design Tokens */
-  --bg-primary: #F4F1EB;
-  --bg-dark: #0A0A0A;
-  --text-primary: #000000;
-  --text-white: #FFFFFF;
-  --text-muted: #6B6B6B;
-  --border: rgba(0, 0, 0, 0.1);
+  /* ─────────────────────────────────────────
+     Font tokens — override-friendly.
+     추후 PP Neue Montreal 등 유료 영문 폰트 도입 시:
+       :root { --font-display-override: "PP Neue Montreal", "Pretendard Variable"; }
+     globals.css에 한 줄 추가하면 전 사이트 swap.
+     ──────────────────────────────────────── */
+  --font-display: var(--font-display-override, "Pretendard Variable", -apple-system, BlinkMacSystemFont, sans-serif);
+  --font-sans:    var(--font-sans-override,    "Pretendard Variable", -apple-system, BlinkMacSystemFont, sans-serif);
+  --font-mono:    var(--font-mono-override,    "IBM Plex Mono", ui-monospace, "SF Mono", monospace);
 
-  /* Typography scale */
+  /* ─────────────────────────────────────────
+     v1 Design Tokens — legacy.
+     현 메인 / · /contact · /portfolio 가 사용. v3 swap 후 /v1/ 하위로 격리.
+     ──────────────────────────────────────── */
+  --bg-primary:   #F4F1EB;
+  --bg-dark:      #0A0A0A;
+  --text-primary: #000000;
+  --text-white:   #FFFFFF;
+  --text-muted:   #6B6B6B;
+  --border:       rgba(0, 0, 0, 0.1);
+
   --display: clamp(2.5rem, 5vw, 4.5rem);
   --heading: clamp(1.75rem, 3vw, 3rem);
-  --body: 1rem;
+  --body:    1rem;
   --caption: 0.75rem;
+
+  /* ─────────────────────────────────────────
+     v3 Design Tokens — Phase C decision (베이지 + 딥블루)
+     ──────────────────────────────────────── */
+  /* Surface */
+  --surface-base:           #EFE9DD;
+  --surface-raised:         #E8E1D2;
+  --surface-inverse:        #0F1419;
+
+  /* Foreground */
+  --fg-default:             #0F1419;
+  --fg-muted:               #5E6470;
+  --fg-on-inverse:          #EFE9DD;
+  --fg-on-inverse-muted:    #9CA3AF;
+
+  /* Lines */
+  --line-default:           rgba(15, 20, 25, 0.08);
+  --line-strong:            rgba(15, 20, 25, 0.18);
+  --line-on-inverse:        rgba(239, 233, 221, 0.12);
+  --line-on-inverse-strong: rgba(239, 233, 221, 0.24);
+
+  /* Accent — luxury restraint, 1점만 노출 */
+  --accent:                 #2B3A4A;
+  --accent-fg:              #EFE9DD;
+  --accent-on-inverse:      #C7CFD8;
+
+  /* Interaction */
+  --focus-ring:             #2B3A4A;
+  --selection-bg:           rgba(43, 58, 74, 0.15);
+  --selection-fg:           #0F1419;
 }
 
 @theme inline {
+  /* v1 utility namespace */
   --color-bg-primary: var(--bg-primary);
-  --color-bg-dark: var(--bg-dark);
-  --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  --color-bg-dark:    var(--bg-dark);
+
+  /* v3 utility namespace */
+  --color-surface-base:        var(--surface-base);
+  --color-surface-raised:      var(--surface-raised);
+  --color-surface-inverse:     var(--surface-inverse);
+  --color-fg-default:          var(--fg-default);
+  --color-fg-muted:            var(--fg-muted);
+  --color-fg-on-inverse:       var(--fg-on-inverse);
+  --color-fg-on-inverse-muted: var(--fg-on-inverse-muted);
+  --color-accent:              var(--accent);
+  --color-accent-fg:           var(--accent-fg);
+  --color-line-default:        var(--line-default);
+  --color-line-strong:         var(--line-strong);
+  --color-line-on-inverse:     var(--line-on-inverse);
+
+  /* Font utility */
+  --font-sans:    var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono:    var(--font-mono);
 }
 
 html {
-  scroll-behavior: auto; /* Lenis가 대신 처리 */
+  scroll-behavior: auto; /* v1 Lenis가 처리. v3 라우트 swap 시 'smooth'로 변경. */
 }
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* Marquee animations for AIStudioSection */
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+/* v1 전용 마키 애니메이션 (AIStudioSection) */
 @keyframes siriai-marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-33.333%); }
@@ -56,7 +118,6 @@ body {
   animation: siriai-marquee-reverse 28s linear infinite;
 }
 
-/* 스크롤바 스타일 */
 ::-webkit-scrollbar {
   width: 4px;
 }
