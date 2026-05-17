@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap");
 
 :root {
   /* ─────────────────────────────────────────
@@ -7,10 +8,14 @@
      추후 PP Neue Montreal 등 유료 영문 폰트 도입 시:
        :root { --font-display-override: "PP Neue Montreal", "Pretendard Variable"; }
      globals.css에 한 줄 추가하면 전 사이트 swap.
+
+     --font-mark: brand wordmark 전용 (푸터 풀폭 anchor). substitute(Playfair Display Black).
+     정식 brand serif 자산 확보 시 --font-mark-override로 swap.
      ──────────────────────────────────────── */
   --font-display: var(--font-display-override, "Pretendard Variable", -apple-system, BlinkMacSystemFont, sans-serif);
   --font-sans:    var(--font-sans-override,    "Pretendard Variable", -apple-system, BlinkMacSystemFont, sans-serif);
   --font-mono:    var(--font-mono-override,    "IBM Plex Mono", ui-monospace, "SF Mono", monospace);
+  --font-mark:    var(--font-mark-override,    "Playfair Display", "Times New Roman", Georgia, serif);
 
   /* ─────────────────────────────────────────
      v1 Design Tokens — legacy.

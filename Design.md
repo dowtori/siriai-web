@@ -204,7 +204,14 @@ Linear / Vercel / Stripe Sessions — 결정 단계에서 차용 제외. 차기 
                       -apple-system, BlinkMacSystemFont, sans-serif);
   --font-mono:    var(--font-mono-override,    "IBM Plex Mono",
                       ui-monospace, "SF Mono", monospace);
+  --font-mark:    var(--font-mark-override,    "Playfair Display",
+                      "Times New Roman", Georgia, serif);
 }
+
+/* --font-mark: brand wordmark 전용 토큰 (푸터 풀폭 anchor).
+   Substitute = Playfair Display Black (Google Fonts, weight 900).
+   §4 Pretendard 단독 원칙의 명시적 예외 — brand mark는 logo 자산으로 typography system 외.
+   정식 brand serif (PP Editorial New 등) 확보 시 --font-mark-override로 swap. */
 
 /* ────────────────────────────────────────────────
    추후 유료 폰트 swap 예시 (도입 시 globals.css에 추가):

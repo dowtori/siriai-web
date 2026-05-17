@@ -123,9 +123,11 @@ src/
 ```css
 --font-display: var(--font-display-override, "Pretendard Variable", -apple-system, sans-serif);
 --font-sans:    var(--font-sans-override,    "Pretendard Variable", -apple-system, sans-serif);
+--font-mark:    var(--font-mark-override,    "Playfair Display", "Times New Roman", serif);
 ```
 
 추후 PP Neue Montreal 도입 시 `:root`에 `--font-display-override` 한 줄만 추가하면 무중단 swap.
+`--font-mark`는 brand wordmark 전용 (푸터 풀폭 anchor) — 정식 brand serif 자산 확보 시 `--font-mark-override`로 swap.
 
 ---
 

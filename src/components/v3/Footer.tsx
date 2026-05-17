@@ -9,8 +9,8 @@ export default function Footer() {
         fontFamily: "var(--font-sans)",
       }}
     >
-      <div className="mx-auto max-w-screen-xl px-6 py-24 md:px-10 md:py-32">
-        {/* (a) Manifesto echo */}
+      <div className="mx-auto max-w-screen-xl px-6 pb-12 pt-24 md:px-10 md:pb-16 md:pt-32">
+        {/* (a) Manifesto — 한·영 페어링 */}
         <div>
           <p
             style={{
@@ -38,61 +38,36 @@ export default function Footer() {
           </p>
         </div>
 
-        <div
-          className="my-16 h-px"
-          style={{ backgroundColor: "var(--line-on-inverse-strong)" }}
-          aria-hidden
-        />
-
-        {/* (c) Mini about — 클루 보강 */}
-        <div className="grid grid-cols-1 gap-y-10 md:grid-cols-2 md:gap-x-16">
-          <div
+        {/* (b) Wordmark — 풀폭 serif brand anchor */}
+        <div className="mt-24 md:mt-32" aria-hidden>
+          <p
+            className="text-center"
             style={{
-              fontSize: "0.9375rem",
-              lineHeight: 1.85,
-              wordBreak: "keep-all",
+              fontFamily: "var(--font-mark)",
+              fontWeight: 900,
+              fontSize: "clamp(5.5rem, 19vw, 16rem)",
+              lineHeight: 0.95,
+              letterSpacing: "-0.02em",
+              color: "var(--fg-on-inverse)",
             }}
           >
-            AI 도입을 고민하는 조직과,
-            <br />
-            의사결정의 구조부터 설계합니다.
-            <br />
-            운영 모델 · 정기 자문 · 사내 리터러시 — 세 갈래.
-          </div>
-          <div
-            style={{
-              fontSize: "0.9375rem",
-              lineHeight: 1.85,
-              color: "var(--fg-on-inverse-muted)",
-            }}
-          >
-            For organizations bringing AI into their work,
-            <br />
-            we design the structures behind their decisions.
-            <br />
-            Operating model · Advisory · Literacy — three modes.
-          </div>
+            Siriai
+          </p>
         </div>
 
-        <div
-          className="my-16 h-px"
-          style={{ backgroundColor: "var(--line-on-inverse)" }}
-          aria-hidden
-        />
-
-        {/* (d) Contact + copyright */}
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        {/* (c) © + contact — 작은 마감 */}
+        <div className="mt-10 flex flex-col items-center gap-2 md:mt-12 md:flex-row md:justify-between">
           <p
-            className="text-[11px] uppercase tracking-[0.22em]"
+            className="text-[11px] tracking-[0.12em]"
+            style={{ color: "var(--fg-on-inverse-muted)", wordBreak: "keep-all" }}
+          >
+            © 2024 — {year} 주식회사 시리아이(SIRIAI). All Rights Reserved.
+          </p>
+          <p
+            className="text-[11px] tracking-[0.12em]"
             style={{ color: "var(--fg-on-inverse-muted)" }}
           >
             contact@siriai.io
-          </p>
-          <p
-            className="text-[11px] uppercase tracking-[0.22em]"
-            style={{ color: "var(--fg-on-inverse-muted)" }}
-          >
-            © {year} Siriai. All rights reserved.
           </p>
         </div>
       </div>

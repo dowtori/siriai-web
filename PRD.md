@@ -174,7 +174,7 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 | Navigation | 상단 고정, 스크롤 시 컴팩트(높이 -30%, 백드롭 블러), 한·영 토글 없음 (한영 병기로 처리) |
 | ScrollProgressBar | **유지**. 단 두께·색감은 Design.md에서 재정의 |
 | SectionIndicator | **재검토** — Twelve Labs류는 보통 미사용. Design.md에서 옵션 비교 후 결정 |
-| Footer | 미니멀, 한 줄 매니페스토 + 연락처 + 법적 고지. 소셜 링크 X (의도된 부재) |
+| Footer | 매니페스토 한·영 페어링 1쌍 + 풀폭 brand wordmark (serif anchor) + © · 연락처 한 줄. 소셜 링크 X (의도된 부재). §2.1 Twelve Labs 푸터 패턴 직접 차용. |
 
 ---
 
