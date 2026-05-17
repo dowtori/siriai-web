@@ -8,7 +8,7 @@ import Image from "next/image";
 
 type Tool = { name: string; w: number; h: number; src?: string };
 
-// 외주 자산 6개 + 7번째 unknown placeholder (spec엔 7 카드)
+// 외주 자산 6개 (spec엔 7 카드지만 7번째 unknown — 6개만 표시 깔끔)
 const TOOLS: Tool[] = [
   { name: "Sora",       w: 196.78, h: 107.33, src: "/c/assets/aistudio/tool1.png" },
   { name: "Gemini",     w: 232.4,  h: 112,    src: "/c/assets/aistudio/tool2.png" },
@@ -16,7 +16,6 @@ const TOOLS: Tool[] = [
   { name: "Midjourney", w: 217.47, h: 112,    src: "/c/assets/aistudio/tool4.png" },
   { name: "ChatGPT",    w: 207.2,  h: 107.33, src: "/c/assets/aistudio/tool5.png" },
   { name: "Runway",     w: 227.73, h: 98.93,  src: "/c/assets/aistudio/tool6.png" },
-  { name: "—",          w: 223.53, h: 111.77 },
 ];
 
 export default function CAIStudio() {

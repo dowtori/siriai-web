@@ -2,7 +2,7 @@
 // Frame 2147239180 spec 정밀 재구현.
 // 1280×440 row, gap 207. 좌 Frame 2147239163(593×184, H2 270×94 36/700 + 카피 593×66 16/400)
 // + 우 Frame 2147239228(440×440 라운드 64 #E8E6E0 박스, 두 흰 카드 + 가운데 Siriai pill 연결).
-// 자산: c1(첫 카드 아바타), c2(둘째 카드 아바타), c3(둘째 카드 사진).
+// 자산: c3(첫 카드 아바타 작은), c2(둘째 카드 아바타 사람), c1(둘째 카드 사진 큰).
 
 import Image from "next/image";
 
@@ -104,7 +104,7 @@ export default function CConnection() {
                   position: "relative",
                 }}
               >
-                <Image src="/c/assets/connection/c1.png" alt="" fill sizes="28px" style={{ objectFit: "cover" }} />
+                <Image src="/c/assets/connection/c3.png" alt="" fill sizes="28px" style={{ objectFit: "cover" }} />
               </div>
               <p
                 className="m-0"
@@ -237,7 +237,7 @@ export default function CConnection() {
                     overflow: "hidden",
                   }}
                 >
-                  <Image src="/c/assets/connection/c3.png" alt="" fill sizes="200px" style={{ objectFit: "cover" }} />
+                  <Image src="/c/assets/connection/c1.png" alt="" fill sizes="200px" style={{ objectFit: "cover" }} />
                 </div>
                 {/* Vector 11132 — 81×70.5 share 박스 */}
                 <div
@@ -252,14 +252,12 @@ export default function CConnection() {
                     justifyContent: "center",
                   }}
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M18 8a3 3 0 1 0-2.83-4M6 12a3 3 0 1 0 0 0M18 16a3 3 0 1 0-2.83 4M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"
-                      stroke="#000"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="18" cy="5" r="3" stroke="#000" strokeWidth="1.5" />
+                    <circle cx="6" cy="12" r="3" stroke="#000" strokeWidth="1.5" />
+                    <circle cx="18" cy="19" r="3" stroke="#000" strokeWidth="1.5" />
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 </div>
               </div>

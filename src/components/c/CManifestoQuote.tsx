@@ -77,12 +77,12 @@ function QuoteBlock({ quote, gap }: { quote: string; gap: number }) {
         }}
       />
 
-      {/* 사람 실루엣 — 185×202, mix-blend darken + blur(20). blur로 흐려지므로
-          단순 SVG 도형(머리 + 어깨 + 몸통)으로 시각 동등 (자체해결). */}
+      {/* 사람 실루엣 — spec 185×202이지만 캡처상 너무 작음. 사이즈 1.6배 키우고
+          blur는 spec 20 유지. 사람 형태(머리 + 어깨 + 몸통 사다리꼴) 더 명확. */}
       <svg
         aria-hidden="true"
-        width="185"
-        height="202"
+        width="300"
+        height="328"
         viewBox="0 0 185 202"
         style={{
           mixBlendMode: "darken",
@@ -90,14 +90,14 @@ function QuoteBlock({ quote, gap }: { quote: string; gap: number }) {
         }}
       >
         {/* 머리 */}
-        <ellipse cx="92.5" cy="58" rx="28" ry="34" fill="#000" />
-        {/* 목·어깨·몸통 (사다리꼴) */}
+        <ellipse cx="92.5" cy="55" rx="32" ry="38" fill="#000" />
+        {/* 목 (가는 연결) */}
+        <rect x="85" y="88" width="15" height="14" fill="#000" />
+        {/* 어깨·몸통 (사다리꼴) */}
         <path
-          d="M68 96 L117 96 L138 168 Q92.5 178 47 168 Z"
+          d="M62 100 L123 100 L150 186 Q92.5 200 35 186 Z"
           fill="#000"
         />
-        {/* 발치 그림자 */}
-        <ellipse cx="92.5" cy="188" rx="42" ry="9" fill="#000" opacity="0.7" />
       </svg>
     </div>
   );
