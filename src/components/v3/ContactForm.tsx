@@ -70,7 +70,7 @@ export default function ContactForm() {
           value={form.message}
           onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
           maxLength={500}
-          placeholder="어떤 대화를 시작하고 싶으신가요? 한두 문장이면 충분합니다."
+          placeholder="페인 포인트를 간략히 적어주세요. 한두 문장이면 충분합니다."
           className="mt-2 w-full resize-none border-b bg-transparent py-3 text-[15px] outline-none transition-colors focus:border-[color:var(--fg-default)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--accent)] placeholder:text-[color:var(--fg-muted)]"
           style={{
             borderColor: "var(--line-strong)",

@@ -144,11 +144,11 @@ src/
 
 1. **§00 Hero** — Canvas 2D 파티클 cycle 4종 (Architecture → Not tools/output/deployment → 회귀) · 8s settled + 0.9s dissolve 무한 루프
 2. **§01 Stance** — "Tools change. / Structure remains. / We design it." (한국어: AI 도구는 매주 등장합니다 / 바뀌어도 남는 자리가 있습니다 / 시리아이는 그 자리를 설계합니다) · 3줄 압축 · EN/KR 不 mirror
-3. **§02 Methodology** · Diagram A — 진입의 3축 (Architecture · Literacy · Mapping). 헤드 "Three ways in. / One place to begin." + 한국어 "세 갈래로 들어가, 한 자리에서 시작합니다." — 셋→하나 수렴 명시. 코어 라벨 **OPERATING MODEL** (한국어 부제: "함께 운영하는 자리."). §03(흐름)과의 시간성 분리 유지 (§02 청사진 · §03 운영 흐름).
+3. **§02 Methodology** · Diagram A — 진입의 3축 (Architecture · Literacy · Mapping). 헤드 "Three ways in. / One place to begin." + 한국어 "세 갈래로 들어가, 한 자리에서 시작합니다." — 셋→하나 수렴 명시. 코어 라벨 **OPERATING MODEL** (한국어 부제: "효율적 실행."). §03(흐름)과의 시간성 분리 유지 (§02 실행할 모델 · §03 운영 흐름).
 4. **§03 System** · Diagram B (dark) — 4레이어 Signal · Judgment · Action · Record
 5. **§04 Clients (With)** — 헤드 "Brands we've sat with." / 보조 "각자 다른 결, 같은 자세." · 단일 가로 로고 wall · slow marquee (60s) · 16 로고 (5 SVG + 11 wordmark) · 협업 분야 비공개 (트웰브랩스식 담백 톤 + 절제된 voice 1쌍)
 6. **§05 Voice** (dark) — 매니페스토 "We don't recommend tools. / We architect what stays." (Signal/Judgment/Action/Record 마지막 줄로 §03와 연결)
-7. **§06 Contact** — 인라인 폼 (이름·회사·이메일·메시지 선택·동의) · "Let's start with coffee. / 커피 한 잔으로 시작합니다." 따뜻한 톤
+7. **§06 Contact** — 인라인 폼 (이름·회사·이메일·메시지 선택·동의) · "Let's start with coffee. / 가벼운 커피챗으로, 해묵은 고민을 시원하게." + CTA "바로 스케줄 예약하기 →" (따뜻한 톤 + 직접적 CTA)
 
 > **카피웍 메타 원칙**: PRD §2.4 (One Word, One Place · Spirit over Surface · Negative Space · Indirection · Verb-led · EN/KR 不 mirror · Each Section Owns Its Voice). 'Insight' 키워드는 §00 Hero 한 자리에서만 강하게 쓴다 — 다른 섹션은 그 단어를 회피하고 동사·자세로 정합성을 만든다.
 

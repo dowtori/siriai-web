@@ -96,7 +96,7 @@ L2  Sub-claim          "Tools change. Structure remains. We design it."
 L3  Section narratives  Stance → Methodology → System → Clients → Voice → Contact
                        (각 섹션이 L2를 다른 각도에서 입증 — 단어 반복이 아닌 태도의 일관으로)
 
-L4  CTA                "Let's start with coffee." / 커피 한 잔으로 시작합니다.
+L4  CTA                "Let's start with coffee." / 가벼운 커피챗으로, 해묵은 고민을 시원하게.
 ```
 
 ### 2.2 한·영 페어링 원칙
@@ -263,7 +263,7 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 [Sub KR]    세 갈래로 들어가, 한 자리에서 시작합니다.
 
 [Core]      OPERATING MODEL
-            함께 운영하는 자리.
+            효율적 실행.
 
 [Axis 1]    ARCHITECTURE
             의사결정의 구조를 설계합니다.
@@ -280,7 +280,7 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 
 **Section logic (v3 reframe 2026-05):** §02 = 진입 (어떻게 일을 시작하는가) → §03 = 흐름 (일이 어떻게 운영되는가). Operation 축은 §03 System으로 의미 이전되었고, 그 자리에 진입의 첫 행위인 **Mapping**이 채워진다.
 
-**Diagram A spec:** Design.md §8.1 참조. 삼각 + 코어 구조 유지. **코어 라벨 OPERATING MODEL 부활** (2026-05 reframe에서 제거됐던 Negative Space 정책을 재변경 — 사용자가 셋의 수렴 가치가 시각적으로 비어 약하다고 판단). cliché 톤은 한국어 부제 '함께 운영하는 자리.'로 분산 — 1인칭 복수("함께") + 동사적("운영하는") + PRD §2.3 명사 사전("자리") 정합 + §05 매니페스토 voice("We architect what stays") 결 echo.
+**Diagram A spec:** Design.md §8.1 참조. 삼각 + 코어 구조 유지. **코어 라벨 OPERATING MODEL 부활** (2026-05 reframe에서 제거됐던 Negative Space 정책을 재변경 — 사용자가 셋의 수렴 가치가 시각적으로 비어 약하다고 판단). 한국어 부제 **'효율적 실행.'** — 셋의 수렴 결과를 client benefit(작동·실행 가능 상태)으로 명시. §03(System·흐름)과 시간성 분리 유지 (§02 = 실행할 모델 / §03 = 실제 운영 흐름).
 
 ---
 
@@ -392,15 +392,15 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 
 [Headline]  Let's start with coffee.
 
-[Sub KR]    커피 한 잔으로 시작합니다.
-            메모 한 줄이면 충분합니다.
-            어떤 대화든, 먼저 듣는 자리부터.
+[Sub KR]    가벼운 커피챗으로, 해묵은 고민을 시원하게.
+
+[CTA → 캘린더] 바로 스케줄 예약하기 →
 
 [Form fields, 인라인]
             이름            [text, required]
             회사·소속        [text]
             이메일          [email, required]
-            메시지(선택)    [textarea, 500자, placeholder: "어떤 대화를 시작하고 싶으신가요? 한두 문장이면 충분합니다."]
+            메시지(선택)    [textarea, 500자, placeholder: "페인 포인트를 간략히 적어주세요. 한두 문장이면 충분합니다."]
             ☐ 개인정보 수집·이용에 동의합니다 [상세]
 
 [Submit]    메모 보내기  →

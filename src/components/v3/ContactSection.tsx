@@ -58,7 +58,7 @@ export default function ContactSection() {
                 maxWidth: "32ch",
               }}
             >
-              커피 한 잔으로 시작합니다. 메모 한 줄이면 충분하고, 어떤 대화든 먼저 듣는 자리부터.
+              가벼운 커피챗으로, 해묵은 고민을 시원하게.
             </motion.p>
             <motion.div
               initial={{ opacity: 0 }}
@@ -71,7 +71,7 @@ export default function ContactSection() {
                 className="inline-flex items-center gap-2 text-sm transition-colors hover:opacity-70"
                 style={{ color: "var(--fg-muted)" }}
               >
-                직접 시간을 정하시려면
+                바로 스케줄 예약하기
                 <span aria-hidden>→</span>
               </Link>
             </motion.div>

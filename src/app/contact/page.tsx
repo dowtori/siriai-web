@@ -6,7 +6,7 @@ import CalInlineEmbed from "@/components/v3/CalInlineEmbed";
 export const metadata: Metadata = {
   title: "Contact — Siriai",
   description:
-    "커피 한 잔으로 시작합니다. 메모 한 줄이면 충분하고, 어떤 대화든 먼저 듣는 자리부터.",
+    "가벼운 커피챗으로, 해묵은 고민을 시원하게.",
 };
 
 const FAQ = [
@@ -66,7 +66,7 @@ export default function ContactPage() {
               maxWidth: "40ch",
             }}
           >
-커피 한 잔으로 시작합니다. 메모 한 줄이면 충분하고, 어떤 대화든 먼저 듣는 자리부터. 메모만 남기셔도 좋고, 아래에서 직접 시간을 정하셔도 됩니다.
+가벼운 커피챗으로, 해묵은 고민을 시원하게. 메모를 남기시거나, 아래에서 바로 시간을 예약하세요.
           </p>
         </section>
 

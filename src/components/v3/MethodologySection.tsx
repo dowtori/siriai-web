@@ -357,7 +357,7 @@ function DiagramA({ inView }: { inView: boolean }) {
           letterSpacing: "0.02em",
         }}
       >
-        함께 운영하는 자리.
+        효율적 실행.
       </motion.text>
     </svg>
   );
