@@ -8,17 +8,18 @@
 
 import { useEffect, useRef } from "react";
 
-// 글자 풀 70자 — 라틴 대소 + 숫자 + 기호. 각 ring은 시작 인덱스 offset 다르게.
+// 글자 풀 — 라틴 대소 + 숫자 + 기호 → 4겹에 같은 풀을 다른 offset으로 분포.
 const POOL: string[] = [
   ...Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)),   // A-Z
   ...Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i)),   // a-z
   ...Array.from({ length: 10 }, (_, i) => String.fromCharCode(48 + i)),   // 0-9
-  "·", "◯", "+", "×", "◇", "○", "−", "/",
+  "·", "◯", "+", "×", "◇", "○", "−", "/", "*", "÷",
 ];
 
-const GLYPHS_PER_RING = 60;
+const GLYPHS_PER_RING = 80;
 
-// 3겹 — 안쪽이 진하고 빠르고 굵게, 외곽이 옅고 느리고 작게(시야 외곽 흐림 메타포)
+// 4겹 — 안→밖 radius 28/38/48/58cqi, 글자 색·weight·size 미세 차등.
+//        외곽 옅음은 ink-soft 까지만(끊긴 점선 인상 회피).
 type RingLayer = {
   radiusPct: number;
   tiltDeg: number;
@@ -31,9 +32,10 @@ type RingLayer = {
 };
 
 const RING_LAYERS: RingLayer[] = [
-  { radiusPct: 35, tiltDeg: -22, baseDeg: 0,  speed: 0.20, fontSizePx: 14, fontWeight: 600, color: "var(--c-ink)",      glyphOffset: 0  },
-  { radiusPct: 42, tiltDeg: -22, baseDeg: 11, speed: 0.15, fontSizePx: 12, fontWeight: 500, color: "var(--c-ink-soft)", glyphOffset: 23 },
-  { radiusPct: 48, tiltDeg: -22, baseDeg: 23, speed: 0.11, fontSizePx: 11, fontWeight: 500, color: "var(--c-ink-mute)", glyphOffset: 47 },
+  { radiusPct: 28, tiltDeg: -22, baseDeg: 0,  speed: 0.22, fontSizePx: 13, fontWeight: 600, color: "var(--c-ink)",      glyphOffset: 0  },
+  { radiusPct: 38, tiltDeg: -22, baseDeg: 9,  speed: 0.18, fontSizePx: 13, fontWeight: 600, color: "var(--c-ink-soft)", glyphOffset: 19 },
+  { radiusPct: 48, tiltDeg: -22, baseDeg: 19, speed: 0.14, fontSizePx: 12, fontWeight: 500, color: "var(--c-ink-soft)", glyphOffset: 38 },
+  { radiusPct: 58, tiltDeg: -22, baseDeg: 27, speed: 0.10, fontSizePx: 12, fontWeight: 500, color: "var(--c-ink-soft)", glyphOffset: 57 },
 ];
 
 const MAX_SPEED_BOOST = 0.55; // 마우스 가장자리에서 추가 가속 (deg/frame)

@@ -216,7 +216,7 @@ html:has([data-route="c"]) body {
    마우스 좌우 → ring 회전 가속(사라짐 효과 없음). 외곽 mask 제거 → 띠가 가장자리까지 노출. */
 .c-hero-stage {
   position: relative;
-  width: clamp(360px, 60vw, 720px);
+  width: clamp(420px, 66vw, 820px);
   aspect-ratio: 1;
   margin-inline: auto;
   container-type: inline-size;
@@ -231,20 +231,6 @@ html:has([data-route="c"]) body {
   perspective: 1200px;
   perspective-origin: 50% 48%;
   transform-style: preserve-3d;
-}
-
-/* 중앙 시야 초점 — 단순 그래디언트 점(자산 미사용). 띠가 둘러싸는 작은 앵커. */
-.c-hero-focus {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: clamp(10px, 1.4cqi, 16px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--c-ink) 0%, var(--c-ink) 55%, rgba(10, 10, 10, 0) 100%);
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  pointer-events: none;
 }
 
 /* 글자 ring 한 겹 — JS RAF가 transform 갱신 */

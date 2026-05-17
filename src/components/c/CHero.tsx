@@ -31,7 +31,7 @@ export default function CHero() {
     <section
       id="hero"
       aria-labelledby="c-hero-heading"
-      className="c-shell flex flex-col items-center gap-10 pt-10 pb-16 text-center"
+      className="c-shell flex flex-col items-center gap-6 pt-10 pb-16 text-center"
       style={{ minHeight: "var(--c-hero-min-h)" }}
     >
       <h1 id="c-hero-heading" className="c-display max-w-[24ch]">
@@ -50,7 +50,6 @@ export default function CHero() {
       >
         <div className="c-hero-stage-inner">
           <CGlyphRing mouseNorm={mouseNorm} />
-          <div className="c-hero-focus" aria-hidden="true" />
         </div>
       </div>
     </section>
