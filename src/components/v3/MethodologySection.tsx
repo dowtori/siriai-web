@@ -65,6 +65,8 @@ export default function MethodologySection() {
               }}
             >
               Three ways in.
+              <br />
+              One place to begin.
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
@@ -78,7 +80,7 @@ export default function MethodologySection() {
                 wordBreak: "keep-all",
               }}
             >
-              세 가지 방식으로 들어갑니다.
+              세 갈래로 들어가, 한 자리에서 시작합니다.
             </motion.p>
 
             <div className="mt-14 space-y-10">
@@ -163,7 +165,7 @@ function DiagramA({ inView }: { inView: boolean }) {
       width="100%"
       style={{ overflow: "visible", maxWidth: 520 }}
       role="img"
-      aria-label="Diagram: three ways in — Architecture, Literacy, Mapping — converging at a shared core"
+      aria-label="Diagram: three ways in — Architecture, Literacy, Mapping — converging at an operating model"
     >
       {/* Outer triangle */}
       {[
@@ -293,7 +295,7 @@ function DiagramA({ inView }: { inView: boolean }) {
         />
       )}
 
-      {/* Core node — label removed (Negative Space: 침묵의 코어) */}
+      {/* Core node */}
       <motion.circle
         cx={core.x}
         cy={core.y}
@@ -306,6 +308,57 @@ function DiagramA({ inView }: { inView: boolean }) {
         transition={{ duration: 0.7, ease: EASE, delay: 1.0 }}
         style={{ transformOrigin: `${core.x}px ${core.y}px` }}
       />
+
+      {/* Core label — OPERATING / MODEL (영문 in-circle) + 함께 운영하는 자리. (KR caption) */}
+      <motion.text
+        x={core.x}
+        y={core.y - 2}
+        textAnchor="middle"
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : undefined}
+        transition={{ duration: 0.6, ease: EASE, delay: 1.5 }}
+        style={{
+          fontFamily: "var(--font-display)",
+          fontSize: 9,
+          fontWeight: 600,
+          fill: "var(--fg-default)",
+          letterSpacing: "0.16em",
+        }}
+      >
+        OPERATING
+      </motion.text>
+      <motion.text
+        x={core.x}
+        y={core.y + 11}
+        textAnchor="middle"
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : undefined}
+        transition={{ duration: 0.6, ease: EASE, delay: 1.57 }}
+        style={{
+          fontFamily: "var(--font-display)",
+          fontSize: 9,
+          fontWeight: 600,
+          fill: "var(--fg-default)",
+          letterSpacing: "0.16em",
+        }}
+      >
+        MODEL
+      </motion.text>
+      <motion.text
+        x={core.x}
+        y={core.y + 60}
+        textAnchor="middle"
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : undefined}
+        transition={{ duration: 0.6, ease: EASE, delay: 1.7 }}
+        style={{
+          fontSize: 11,
+          fill: "var(--fg-muted)",
+          letterSpacing: "0.02em",
+        }}
+      >
+        함께 운영하는 자리.
+      </motion.text>
     </svg>
   );
 }

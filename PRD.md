@@ -258,8 +258,12 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 [Eyebrow]   02 — METHODOLOGY
 
 [Headline]  Three ways in.
+            One place to begin.
 
-[Sub KR]    세 가지 방식으로 들어갑니다.
+[Sub KR]    세 갈래로 들어가, 한 자리에서 시작합니다.
+
+[Core]      OPERATING MODEL
+            함께 운영하는 자리.
 
 [Axis 1]    ARCHITECTURE
             의사결정의 구조를 설계합니다.
@@ -276,7 +280,7 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 
 **Section logic (v3 reframe 2026-05):** §02 = 진입 (어떻게 일을 시작하는가) → §03 = 흐름 (일이 어떻게 운영되는가). Operation 축은 §03 System으로 의미 이전되었고, 그 자리에 진입의 첫 행위인 **Mapping**이 채워진다.
 
-**Diagram A spec:** Design.md §8.1 참조. 삼각 + 코어 구조 유지. **코어 라벨은 제거** (Negative Space — 'OPERATING MODEL' 컨설팅 cliché 해소).
+**Diagram A spec:** Design.md §8.1 참조. 삼각 + 코어 구조 유지. **코어 라벨 OPERATING MODEL 부활** (2026-05 reframe에서 제거됐던 Negative Space 정책을 재변경 — 사용자가 셋의 수렴 가치가 시각적으로 비어 약하다고 판단). cliché 톤은 한국어 부제 '함께 운영하는 자리.'로 분산 — 1인칭 복수("함께") + 동사적("운영하는") + PRD §2.3 명사 사전("자리") 정합 + §05 매니페스토 voice("We architect what stays") 결 echo.
 
 ---
 
