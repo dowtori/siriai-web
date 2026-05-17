@@ -22,7 +22,7 @@ export default function Footer() {
               maxWidth: "32ch",
             }}
           >
-            We don&apos;t deploy tools. We design how decisions are made.
+            Insight is not a feature. It is the architecture that remains. We design it.
           </p>
           <p
             className="mt-4"

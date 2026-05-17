@@ -143,7 +143,7 @@ src/
 ## v3 IA — 7섹션
 
 1. **§00 Hero** — Canvas 2D 파티클 cycle 4종 (Architecture → Not tools/output/deployment → 회귀) · 8s settled + 0.9s dissolve 무한 루프
-2. **§01 Stance** — "We don't deploy tools. We design how decisions are made."
+2. **§01 Stance** — "Insight is not a feature. It is the architecture that remains. We design it." (한국어: 인사이트는 기능이 아닙니다 / 도구가 바뀌어도 남는 구조 / 맥락을 읽고 판단하고 재구성하는 자리 / 시리아이는 그 자리를 설계합니다)
 3. **§02 Methodology** · Diagram A — 3축 (Architecture · Literacy · Operation) → Operating Model
 4. **§03 System** · Diagram B (dark) — 4레이어 Signal · Judgment · Action · Record
 5. **§04 Clients (With)** — 단일 가로 로고 wall · slow marquee (60s) · 고객·파트너·솔루션 평탄화 · 협업 분야 비공개 (트웰브랩스식 담백 톤)

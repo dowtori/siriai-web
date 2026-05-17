@@ -90,8 +90,8 @@ Siriai의 좌표: **고추상 × 기술-브랜드 경계**. 컨설팅 펌만큼 
 L1  Hero claim         "Architecture for Insight with AI."
                        사고의 구조를 설계합니다.
 
-L2  Sub-claim          "We don't deploy tools. We design how decisions are made."
-                       도구를 배포하지 않습니다. 의사결정 방식을 설계합니다.
+L2  Sub-claim          "Insight is not a feature. It is the architecture that remains. We design it."
+                       인사이트는 기능이 아닙니다. 도구가 바뀌어도 남는 구조입니다.
 
 L3  Section narratives  Problem → Methodology → System → Services → Evidence
                        (각 섹션이 L2를 다른 각도에서 입증)
@@ -210,8 +210,9 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 ```
 [Eyebrow]   01 — STANCE
 
-[Headline]  We don't deploy tools.
-            We design how decisions are made.
+[Headline]  Insight is not a feature.
+            It is the architecture that remains.
+            We design it.
 
 [Body KR]   AI 도구는 매주 등장합니다.
             도입의 본질은 도구가 아니라, 그것이 작동하는 의사결정 구조에 있습니다.

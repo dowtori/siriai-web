@@ -4,10 +4,10 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const BODY_LINES = [
-  "AI 도구는 매주 등장합니다.",
-  "도입의 본질은 도구가 아니라, 그것이 작동하는 의사결정 구조에 있습니다.",
-  "우리는 도구를 골라드리지 않습니다.",
-  "조직이 AI와 함께 사고하는 방식을 설계합니다.",
+  "인사이트는 기능이 아닙니다.",
+  "도구가 바뀌어도 남는 구조입니다.",
+  "맥락을 읽고, 판단하고, 재구성하는 자리.",
+  "시리아이는 그 자리를 설계합니다.",
 ];
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -51,11 +51,13 @@ export default function StanceSection() {
                 lineHeight: 1.08,
               }}
             >
-              We don&apos;t deploy tools.
+              Insight is not a feature.
               <br />
-              We design how
+              It is the architecture
               <br />
-              decisions are made.
+              that remains.
+              <br />
+              We design it.
             </motion.h2>
             <motion.div
               initial={{ scaleY: 0 }}
