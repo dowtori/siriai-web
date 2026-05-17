@@ -1,58 +1,56 @@
-// 외주 원안 섹션 — Archiving: 콘텐츠 → 기억의 구조화.
-// 외주 Figma spec(Frame 2147239154) 픽셀 정밀 재구현.
-// Row 1 (Frame 2085674393): 좌 H1(824×94, 36/700 130%) + 우 라벨/카피(440×107, 18/600 + 16/400).
-// Row 2 (Frame 2147239153): 5개 카드 가로(각 236.8×236.8, 라운드 48,
-//        상단 작은 라벨 + 큰 카피 텍스트 합성, 카드별 배경 톤·이미지 다름).
-// 자산: 오픈소스 카드 이미지(사용자 허용) 수령 시 교체. 현재 컬러 톤·라벨만 정밀.
+// 외주 원안 섹션 — Archiving.
+// Frame 2147239154 spec 정밀 재구현 + 실 자산 적용.
+// 자산: a1(Card1 흑백 몸) / a2(Card3 카메라) / a3(Card4 노트북) / a4(Card5 빨간 모션).
+// Card 2(Creator Career Graph)는 사용자가 직접 제작한 차트 — Vector 11145(gradient
+// #A7583E→#A79B3E 116×89 radius 16) + Frame 2147239244 3색 라벨 + 본문 텍스트.
+
+import Image from "next/image";
 
 type Slot = {
-  bg: string;           // 단색/그라디언트 background
-  small?: string;       // 상단 작은 라벨 (옵션)
-  smallPosition?: "top" | "bottom";
-  big: string;          // 큰 카피
-  bigPosition: "top" | "bottom";
+  variant: "photo" | "graph";
+  src?: string;        // photo variant 자산
+  bg?: string;         // graph variant 배경
+  smallTop?: string;
+  bigTop?: string;
+  bigBottom?: string;
+  smallBottom?: string;
   textColor: string;
 };
 
 const SLOTS: Slot[] = [
   {
-    bg: "linear-gradient(0deg, rgba(0,0,0,0.35), rgba(0,0,0,0.35)), linear-gradient(180deg, #C9C2BC, #4B4845)",
-    small: "Vis ideas",
-    smallPosition: "top",
-    big: "Traces of\ncollective response",
-    bigPosition: "bottom",
+    variant: "photo",
+    src: "/c/assets/archiving/a1.png",
+    smallTop: "Vis ideas",
+    bigBottom: "Traces of\ncollective response",
     textColor: "#FFFFFF",
   },
   {
+    variant: "graph",
     bg: "linear-gradient(180deg, #F0EBDC 0%, #E2D4B0 100%)",
-    big: "Creator Career\nGraph",
-    bigPosition: "top",
-    small: "A structured display of creator growth.",
-    smallPosition: "bottom",
+    bigTop: "Creator Career\nGraph",
+    smallBottom: "A structured display of creator growth.",
     textColor: "#1A1A1A",
   },
   {
-    bg: "linear-gradient(0deg, rgba(0,0,0,0.35), rgba(0,0,0,0.35)), linear-gradient(180deg, #D8D6CE, #6F6962)",
-    small: "Brand Memory Layer",
-    smallPosition: "top",
-    big: "Layered memories\nof brand expressions",
-    bigPosition: "bottom",
+    variant: "photo",
+    src: "/c/assets/archiving/a2.png",
+    smallTop: "Brand Memory Layer",
+    bigBottom: "Layered memories\nof brand expressions",
     textColor: "#FFFFFF",
   },
   {
-    bg: "linear-gradient(0deg, rgba(0,0,0,0.35), rgba(0,0,0,0.35)), linear-gradient(180deg, #B8BBBE, #3A3D40)",
-    big: "Multi-Modal\nInsight Engine",
-    bigPosition: "top",
-    small: "Saving knowledge as legacy.",
-    smallPosition: "bottom",
+    variant: "photo",
+    src: "/c/assets/archiving/a3.png",
+    bigTop: "Multi-Modal\nInsight Engine",
+    smallBottom: "Saving knowledge as legacy.",
     textColor: "#FFFFFF",
   },
   {
-    bg: "linear-gradient(0deg, rgba(0,0,0,0.35), rgba(0,0,0,0.35)), linear-gradient(180deg, #E8704D, #7C2E1F)",
-    small: "Real-Time Sync:",
-    smallPosition: "top",
-    big: "Always\nin sync with reality",
-    bigPosition: "bottom",
+    variant: "photo",
+    src: "/c/assets/archiving/a4.png",
+    smallTop: "Real-Time Sync:",
+    bigBottom: "Always\nin sync with reality",
     textColor: "#FFFFFF",
   },
 ];
@@ -167,21 +165,108 @@ function ArchiveCard({ slot }: { slot: Slot }) {
       style={{
         aspectRatio: "1",
         borderRadius: 48,
-        background: slot.bg,
         overflow: "hidden",
+        background: slot.variant === "graph" ? slot.bg : undefined,
       }}
     >
+      {/* Photo variant: 자산 + dark overlay */}
+      {slot.variant === "photo" && slot.src && (
+        <>
+          <Image
+            src={slot.src}
+            alt=""
+            fill
+            sizes="(max-width: 1280px) 20vw, 240px"
+            style={{ objectFit: "cover" }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: "rgba(0, 0, 0, 0.2)" }}
+            aria-hidden="true"
+          />
+        </>
+      )}
+
+      {/* Graph variant: 직접 제작 차트 (Card 2 Creator Career Graph) */}
+      {slot.variant === "graph" && <GraphVisual />}
+
       {/* 상단 슬롯 */}
-      <div className="absolute" style={{ top: 24, left: 24, right: 24 }}>
-        {slot.smallPosition === "top" && slot.small && <p style={smallStyle}>{slot.small}</p>}
-        {slot.bigPosition === "top" && <p style={bigStyle}>{slot.big}</p>}
+      <div className="absolute" style={{ top: 24, left: 24, right: 24, zIndex: 2 }}>
+        {slot.smallTop && <p style={smallStyle}>{slot.smallTop}</p>}
+        {slot.bigTop && <p style={bigStyle}>{slot.bigTop}</p>}
       </div>
       {/* 하단 슬롯 */}
-      <div className="absolute" style={{ bottom: 24, left: 24, right: 24 }}>
-        {slot.bigPosition === "bottom" && <p style={bigStyle}>{slot.big}</p>}
-        {slot.smallPosition === "bottom" && slot.small && (
-          <p style={{ ...smallStyle, marginTop: 8 }}>{slot.small}</p>
+      <div className="absolute" style={{ bottom: 24, left: 24, right: 24, zIndex: 2 }}>
+        {slot.bigBottom && <p style={bigStyle}>{slot.bigBottom}</p>}
+        {slot.smallBottom && (
+          <p style={{ ...smallStyle, marginTop: 8 }}>{slot.smallBottom}</p>
         )}
+      </div>
+    </div>
+  );
+}
+
+/* Card 2 Creator Career Graph — 직접 제작.
+   spec: Vector 11145(gradient #A7583E→#A79B3E 116×89 radius 16) +
+         Frame 2147239244 3색 라벨 + Rectangle 1532578676(145×142 #C3C3C3 placeholder bg) */
+function GraphVisual() {
+  return (
+    <div
+      className="absolute"
+      aria-hidden="true"
+      style={{
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
+        width: "calc(100% - 48px)",
+        maxWidth: 200,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 6,
+      }}
+    >
+      {/* Vector 11145 — gradient 차트 박스 */}
+      <div
+        style={{
+          width: "100%",
+          aspectRatio: "116 / 89",
+          maxWidth: 160,
+          background: "linear-gradient(90deg, #A7583E 0%, #A79B3E 100%)",
+          borderRadius: 16,
+          position: "relative",
+        }}
+      >
+        {/* 차트 곡선 (성장 표현) */}
+        <svg
+          viewBox="0 0 116 89"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+          fill="none"
+        >
+          <path
+            d="M8 70 C24 64, 36 50, 50 40 S82 18, 108 10"
+            stroke="rgba(255,255,255,0.85)"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+          <circle cx="50" cy="40" r="2.5" fill="#FFFFFF" />
+          <circle cx="108" cy="10" r="3" fill="#FFFFFF" />
+        </svg>
+      </div>
+      {/* Frame 2147239244 — 3색 카테고리 라벨 */}
+      <div
+        className="flex flex-row items-center"
+        style={{ gap: 14, marginTop: 4 }}
+      >
+        <span style={{ fontFamily: "Helvetica Neue, system-ui, sans-serif", fontSize: 8, fontWeight: 400, color: "#A7583E" }}>
+          Reach
+        </span>
+        <span style={{ fontFamily: "Helvetica Neue, system-ui, sans-serif", fontSize: 8, fontWeight: 400, color: "#68892C" }}>
+          Depth
+        </span>
+        <span style={{ fontFamily: "Helvetica Neue, system-ui, sans-serif", fontSize: 8, fontWeight: 400, color: "#4796A4" }}>
+          Trust
+        </span>
       </div>
     </div>
   );
