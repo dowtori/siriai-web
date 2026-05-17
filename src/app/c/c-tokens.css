@@ -267,10 +267,10 @@ html:has([data-route="c"]) body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 153px;
-  height: 49px;
-  padding: 16px 20px;
-  border-radius: 20px;
+  width: 184px;
+  height: 52px;
+  padding: 16px 24px;
+  border-radius: 24px;
   font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 600;
   font-size: 14px;
@@ -278,15 +278,28 @@ html:has([data-route="c"]) body {
   color: #ffffff;
   text-decoration: none;
   isolation: isolate;
+  transition: transform 260ms var(--c-ease);
+}
+.c-arch-cta:hover {
+  transform: translateY(-1px);
 }
 
 .c-arch-cta::before {
   content: "";
   position: absolute;
+  inset: -8px;
+  background: #000;
+  border-radius: 28px;
+  filter: blur(16px);
+  opacity: 0.85;
+  z-index: -2;
+}
+.c-arch-cta::after {
+  content: "";
+  position: absolute;
   inset: 0;
   background: #000;
-  border-radius: 20px;
-  filter: blur(10px);
+  border-radius: 24px;
   z-index: -1;
 }
 
@@ -384,14 +397,16 @@ html:has([data-route="c"]) body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  filter: grayscale(0.15);
-  opacity: 0.88;
-  transition: transform 320ms var(--c-ease), filter 320ms var(--c-ease), opacity 320ms var(--c-ease);
+  opacity: 0.92;
+  transition: transform 320ms var(--c-ease), opacity 320ms var(--c-ease);
 }
 .c-aistudio-tool:hover {
   transform: scale(1.06);
-  filter: grayscale(0);
   opacity: 1;
+}
+/* 흰 배경 PNG 자산을 페이지 cream 배경과 자연 합성 — multiply 블렌딩 */
+.c-aistudio-tool img {
+  mix-blend-mode: multiply;
 }
 
 /* Relationship — 우측 카드 그룹. 카드별 hover 시 lift + shadow. */

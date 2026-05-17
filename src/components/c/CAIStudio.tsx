@@ -8,14 +8,14 @@ import Image from "next/image";
 
 type Tool = { name: string; w: number; h: number; src?: string };
 
-// 외주 자산 6개 (spec엔 7 카드지만 7번째 unknown — 6개만 표시 깔끔)
+// 자산 정확 매핑 (실제 PNG 내용 기준).
+// 사용자 지시: 불투명 흰 배경 로고(runway·DALL·E 2)는 브랜딩 방해 → 제외.
+// 유지 4종: ChatGPT(tool1), Gemini(tool3), Sora(tool4), Midjourney(tool5).
 const TOOLS: Tool[] = [
-  { name: "Sora",       w: 196.78, h: 107.33, src: "/c/assets/aistudio/tool1.png" },
-  { name: "Gemini",     w: 232.4,  h: 112,    src: "/c/assets/aistudio/tool2.png" },
-  { name: "DALL·E 2",   w: 205.33, h: 102.67, src: "/c/assets/aistudio/tool3.png" },
-  { name: "Midjourney", w: 217.47, h: 112,    src: "/c/assets/aistudio/tool4.png" },
-  { name: "ChatGPT",    w: 207.2,  h: 107.33, src: "/c/assets/aistudio/tool5.png" },
-  { name: "Runway",     w: 227.73, h: 98.93,  src: "/c/assets/aistudio/tool6.png" },
+  { name: "ChatGPT",    w: 207.2,  h: 107.33, src: "/c/assets/aistudio/tool1.png" },
+  { name: "Gemini",     w: 232.4,  h: 112,    src: "/c/assets/aistudio/tool3.png" },
+  { name: "Sora",       w: 196.78, h: 107.33, src: "/c/assets/aistudio/tool4.png" },
+  { name: "Midjourney", w: 217.47, h: 112,    src: "/c/assets/aistudio/tool5.png" },
 ];
 
 export default function CAIStudio() {

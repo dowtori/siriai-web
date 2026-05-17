@@ -46,18 +46,17 @@ function QuoteBlock({ quote, gap }: { quote: string; gap: number }) {
         marginInline: "auto",
       }}
     >
-      {/* Quote — 48/600 120% blur(3) */}
+      {/* Quote — 또렷한 검정 카피(캡처 정합: blur 제거). */}
       <p
         className="m-0 text-center"
         style={{
           fontFamily: "Pretendard",
           fontWeight: 600,
-          fontSize: "clamp(24px, 4vw, 48px)",
-          lineHeight: 1.2,
+          fontSize: "clamp(20px, 3.4vw, 40px)",
+          lineHeight: 1.35,
           color: "#000",
-          maxWidth: 1280,
+          maxWidth: 720,
           paddingInline: "clamp(20px, 5vw, 80px)",
-          filter: "blur(3px)",
           wordBreak: "keep-all",
         }}
       >
@@ -77,23 +76,23 @@ function QuoteBlock({ quote, gap }: { quote: string; gap: number }) {
         }}
       />
 
-      {/* 사람 실루엣 — 단일 부드러운 형상.
-          머리(원) + 어깨(타원)가 viewBox 안에서 살짝 겹치고, blur(20)이
-          둘을 자연스러운 한 덩어리 검은 그림자로 녹임 (캡처와 동일 인상). */}
+      {/* 사람 실루엣 — 호리병/달걀 형태.
+          캡처 정합: 작은 머리(점·원) + 둥근 큰 몸통이 부드럽게 연결.
+          blur(22)가 둘을 단일 검은 그림자로 녹임. */}
       <svg
         aria-hidden="true"
-        width="240"
-        height="280"
-        viewBox="0 0 185 202"
+        width="180"
+        height="240"
+        viewBox="0 0 185 240"
         style={{
           mixBlendMode: "darken",
-          filter: "blur(20px)",
+          filter: "blur(22px)",
         }}
       >
-        {/* 머리 — 부드러운 타원 */}
-        <ellipse cx="92.5" cy="62" rx="26" ry="32" fill="#000" />
-        {/* 어깨·몸통 — 타원 한 덩어리. 머리와 약간 겹쳐 연결이 blur로 녹음 */}
-        <ellipse cx="92.5" cy="148" rx="62" ry="54" fill="#000" />
+        {/* 머리 — 작고 동그란 점 */}
+        <ellipse cx="92.5" cy="58" rx="18" ry="22" fill="#000" />
+        {/* 몸통 — 둥근 큰 형태(머리 폭의 2.3배). 호리병 연결 */}
+        <ellipse cx="92.5" cy="160" rx="42" ry="56" fill="#000" />
       </svg>
     </div>
   );

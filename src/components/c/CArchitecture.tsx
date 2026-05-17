@@ -27,11 +27,11 @@ export default function CArchitecture() {
         style={{
           maxWidth: 1280,
           minHeight: 560,
-          padding: "64px clamp(24px, 5vw, 160px)",
-          gap: 64,
+          padding: "72px clamp(24px, 5vw, 160px)",
+          gap: 72,
           borderRadius: 80,
           background:
-            "linear-gradient(180deg, #EFE6B8 0%, #D4C883 36%, #8B7F4A 78%, #3A361F 100%)",
+            "linear-gradient(180deg, #F0E5A8 0%, #DCC982 30%, #968A52 65%, #3A3018 100%)",
           isolation: "isolate",
         }}
       >
@@ -58,8 +58,9 @@ export default function CArchitecture() {
             style={{
               fontFamily: "Pretendard",
               fontWeight: 700,
-              fontSize: "clamp(28px, 4vw, 48px)",
-              lineHeight: 1.3,
+              fontSize: "clamp(30px, 4.6vw, 56px)",
+              lineHeight: 1.25,
+              letterSpacing: "-0.015em",
               color: "#000",
               wordBreak: "keep-all",
             }}

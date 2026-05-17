@@ -156,73 +156,72 @@ export default function CRelationship() {
               }}
             />
 
-            {/* Performance 카드 — Vector 11136 (157×107 #FFF border) */}
+            {/* Performance 카드 — 흰 카드, 라운드 24, 좌상 라인그래프 + 좌하 와인레드 라벨 */}
             <div
               className="absolute c-rel-card"
               style={{
                 left: 0,
                 top: 82,
                 width: "50%",
-                height: "37%",
+                height: "40%",
                 background: "#FFF",
                 border: "0.5px solid #DFDFDF",
-                borderRadius: 16,
-                padding: 12,
+                borderRadius: 24,
+                padding: 14,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
               }}
             >
-              {/* graph icon */}
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              {/* 라인 그래프 — 단순한 상승선 */}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                 <path
-                  d="M4 19l5-6 4 3 7-9"
-                  stroke="#000"
+                  d="M3 17l5-5 4 4 9-9"
+                  stroke="#0A0A0A"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                <circle cx="9" cy="13" r="1.4" fill="#000" />
-                <circle cx="13" cy="16" r="1.4" fill="#000" />
-                <circle cx="20" cy="7" r="1.4" fill="#000" />
               </svg>
               <span
                 style={{
                   fontFamily: "Pretendard",
-                  fontWeight: 400,
+                  fontWeight: 500,
                   fontSize: 14,
                   lineHeight: 1.4,
-                  color: "#000",
+                  color: "#6F2C2C",
                 }}
               >
                 Performance
               </span>
             </div>
 
-            {/* Archive 카드 — Vector 11138 (110×86 dark radius 24) */}
+            {/* Archive 카드 — 단색 짙은 카키, 라운드 24, 좌상 아카이브 박스 아이콘 + 좌하 흰 라벨 */}
             <div
               className="absolute c-rel-card"
               style={{
                 left: 0,
-                top: "75%",
-                width: "35%",
-                height: "25%",
-                background: "linear-gradient(0deg, #1a1c10, #3F4211)",
+                top: "73%",
+                width: "42%",
+                height: "27%",
+                background: "#383C18",
                 borderRadius: 24,
-                padding: 12,
+                padding: 14,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
               }}
             >
+              {/* 아카이브 박스 — 뚜껑 + 본체 + 손잡이 슬릿 */}
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="4" width="18" height="4" rx="1" stroke="#FFF" strokeWidth="1.5" />
-                <path d="M5 8v11h14V8M10 12h4" stroke="#FFF" strokeWidth="1.5" strokeLinecap="round" />
+                <rect x="3" y="5" width="18" height="4" rx="1" stroke="#FFF" strokeWidth="1.5" fill="none" />
+                <rect x="4.5" y="9" width="15" height="11" rx="1" stroke="#FFF" strokeWidth="1.5" fill="none" />
+                <line x1="10" y1="13" x2="14" y2="13" stroke="#FFF" strokeWidth="1.5" strokeLinecap="round" />
               </svg>
               <span
                 style={{
                   fontFamily: "Pretendard",
-                  fontWeight: 400,
+                  fontWeight: 500,
                   fontSize: 14,
                   lineHeight: 1.4,
                   color: "#FFF",
@@ -232,15 +231,15 @@ export default function CRelationship() {
               </span>
             </div>
 
-            {/* Creative 사진 카드 — Frame 2147239243 (214×209) */}
+            {/* Creative 사진 카드 — 큰 사진, 라운드 24, 좌상 흰 라벨. Performance+Archive 세로 높이 차지 */}
             <div
               className="absolute overflow-hidden c-rel-card"
               style={{
                 left: "52%",
                 top: 82,
                 width: "48%",
-                height: "72%",
-                borderRadius: 16,
+                height: "78%",
+                borderRadius: 24,
               }}
             >
               <Image
@@ -254,16 +253,17 @@ export default function CRelationship() {
                 className="absolute"
                 style={{
                   inset: 0,
-                  background: "linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 100%)",
+                  background:
+                    "linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.30) 100%)",
                 }}
               />
               <span
                 className="absolute"
                 style={{
-                  left: 12,
-                  top: 12,
+                  left: 14,
+                  top: 14,
                   fontFamily: "Pretendard",
-                  fontWeight: 400,
+                  fontWeight: 500,
                   fontSize: 14,
                   lineHeight: 1.4,
                   color: "#FFF",
