@@ -185,6 +185,8 @@ create table contact_submissions (
 
 ## 차기 작업
 
+> **카피웍·디자인 반복 트랙 일지는 [`PLAN.md`](./PLAN.md) 참조.** Plan A(v3 1차 카피웍 reframe)는 1차 마무리됨. Plan B/C는 사용자가 정의 예정. 본 섹션은 트랙 무관 백로그.
+
 ### 운영 정리
 - `siriai.io` 운영 도메인 확정 후 `src/app/layout.tsx`의 `metadataBase` 갱신
 - Supabase `contact_submissions.interest` 컬럼 추가 — 마이그레이션 SQL 작성 완료 (`supabase/migrations/20260516120000_*.sql`), Dashboard SQL Editor 실행 대기
