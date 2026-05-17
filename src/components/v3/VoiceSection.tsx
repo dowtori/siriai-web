@@ -7,7 +7,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 const KR_LINES: Array<string | "break"> = [
   "우리가 만드는 것은 도구가 아닙니다.",
-  "도구가 바뀌어도 남는, 사고의 구조입니다.",
+  "사고가 흐르는 자리입니다.",
   "break",
   "가까운 거리에서 함께 사고합니다.",
   "충분히 듣고, 천천히 답합니다.",
@@ -55,9 +55,9 @@ export default function VoiceSection() {
             maxWidth: "24ch",
           }}
         >
-          What we build is structure.
+          We don&apos;t recommend tools.
           <br />
-          Insight emerges from it.
+          We architect what stays.
         </motion.h2>
 
         {/* Korean manifesto — line by line */}

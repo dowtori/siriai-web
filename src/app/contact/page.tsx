@@ -6,7 +6,7 @@ import CalInlineEmbed from "@/components/v3/CalInlineEmbed";
 export const metadata: Metadata = {
   title: "Contact — Siriai",
   description:
-    "메모 한 줄이면 충분합니다. 어떤 대화든, 먼저 듣는 자리부터.",
+    "커피 한 잔으로 시작합니다. 메모 한 줄이면 충분하고, 어떤 대화든 먼저 듣는 자리부터.",
 };
 
 const FAQ = [
@@ -53,8 +53,8 @@ export default function ContactPage() {
               maxWidth: "20ch",
             }}
           >
-            Start with
-            <br />a conversation.
+            Let&apos;s start
+            <br />with coffee.
           </h1>
           <p
             className="mt-8"
@@ -66,7 +66,7 @@ export default function ContactPage() {
               maxWidth: "40ch",
             }}
           >
-메모 한 줄이면 충분합니다. 어떤 대화든, 먼저 듣는 자리부터. 메모만 남기셔도 좋고, 아래에서 직접 시간을 정하셔도 됩니다.
+커피 한 잔으로 시작합니다. 메모 한 줄이면 충분하고, 어떤 대화든 먼저 듣는 자리부터. 메모만 남기셔도 좋고, 아래에서 직접 시간을 정하셔도 됩니다.
           </p>
         </section>
 

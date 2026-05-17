@@ -87,16 +87,16 @@ Siriai의 좌표: **고추상 × 기술-브랜드 경계**. 컨설팅 펌만큼 
 ### 2.1 Layered Claims
 
 ```
-L1  Hero claim         "Architecture for Insight with AI."
+L1  Hero claim         "Architecture for Insight with AI."  ← 'Insight' 키워드는 여기까지 (One Word, One Place)
                        사고의 구조를 설계합니다.
 
-L2  Sub-claim          "Insight is not a feature. It is the architecture that remains. We design it."
-                       인사이트는 기능이 아닙니다. 도구가 바뀌어도 남는 구조입니다.
+L2  Sub-claim          "Tools change. Structure remains. We design it."
+                       AI 도구는 매주 등장합니다. 바뀌어도 남는 자리가 있습니다.
 
-L3  Section narratives  Problem → Methodology → System → Services → Evidence
-                       (각 섹션이 L2를 다른 각도에서 입증)
+L3  Section narratives  Stance → Methodology → System → Clients → Voice → Contact
+                       (각 섹션이 L2를 다른 각도에서 입증 — 단어 반복이 아닌 태도의 일관으로)
 
-L4  CTA                "Start with a diagnosis." / 진단부터 시작합니다.
+L4  CTA                "Let's start with coffee." / 커피 한 잔으로 시작합니다.
 ```
 
 ### 2.2 한·영 페어링 원칙
@@ -115,11 +115,27 @@ L4  CTA                "Start with a diagnosis." / 진단부터 시작합니다.
 
 | Dimension | Position | Don't |
 |-----------|---------|-------|
-| 어조 | 선언적·간결·확정적 | 설명적·열거식·완곡 |
+| 어조 | 선언적·간결·확정적 + 1~2자리 따뜻한 결 | 설명적·열거식·완곡 · 전체 차가움 |
 | 인칭 | 1인칭 복수 ("우리는") 또는 무인칭 | 2인칭 직접 호명 ("당신의 비즈니스를...") |
-| 동사 | 설계, 운영, 진단, 정의, 정렬, 정리, 매핑, 구축 | 활용, 도와드리다, 향상시키다, 솔루션을 제공하다 |
-| 명사 | 구조, 시스템, 운영 모델, 리터러시, 프레임, 사고 | 솔루션, 서비스, AI 기술, 노하우, 트렌드 |
-| 길이 | 헤드 4~8단어 / 본문 1~2문장 | 3문장 이상의 본문, 형용사 중첩 |
+| 동사 | 설계, 운영, 정의, 정렬, 정리, 매핑, 구축, 듣다, 답하다 | 활용, 도와드리다, 향상시키다, 솔루션을 제공하다 |
+| 명사 | 구조, 시스템, 운영 모델, 리터러시, 프레임, 사고, 자리 | 솔루션, 서비스, AI 기술, 노하우, 트렌드 |
+| 길이 | 헤드 3~6단어 / 본문 1~2문장 | 6줄 이상 헤드, 형용사 중첩 |
+
+### 2.4 카피웍 메타 원칙 (BX/UX)
+
+> 표면 단어 반복으로 정합성을 만들지 않는다. 좋은 brand voice는 키워드 echo가 아닌 **태도의 일관**에서 나온다.
+
+| 원칙 | 의미 | 참조 |
+|------|------|------|
+| **One Word, One Place** | 강한 키워드 명사(예: Insight)는 단 한 자리(보통 Hero)에서만 강하게 쓴다. 다른 자리는 자기 톤으로 자유. | Anthropic `Frontier intelligence` · Apple `Think different` |
+| **Spirit over Surface** | 섹션 간 정합성은 단어 반복이 아닌 태도·관점·자세의 일관에서 잡힌다. | Linear · Stripe |
+| **Negative Space** | 모든 자리에서 모든 말을 하지 않는다. 의도된 침묵·여백·미언급은 정보보다 강하다. 단 빈 공간이 의미를 못 만들면 그건 그냥 빈 공간이다 — 비대칭은 비율로 검증한다. | Muji · Teenage Engineering · Patagonia |
+| **Indirection** | 키워드를 직접 정의하지 않고 그 결과·자세를 보여준다. `Insight is not a feature.` 같은 직접 정의는 노골적. | Stripe `Payments infrastructure for the internet` |
+| **Verb-led, not Noun-led** | 명사 키워드 ≪ 동사·행위 중심. 명사를 굴려 응집성을 만들지 않고 동사·자세를 굴린다. | Linear `Plan and build` · Resend `Email for developers` |
+| **EN/KR 不 mirror** | §2.2 확장. 영문·한국어가 1:1 번역이 아닌 서로 다른 의미 layer를 표현한다. 한 줄을 두 번 말하지 않는다. | — |
+| **Each Section Owns Its Voice** | 각 섹션이 독립된 voice. 헤드라인끼리 echo는 약하게, 자기 메시지에 집중. | Anthropic 홈 · Vercel |
+
+> **Anti-pattern**: LLM이 응집성을 위해 키워드를 기계적으로 반복하는 패턴 (예: §00 `Insight` → §01 헤드 `Insight is not a feature.` → §05 헤드 `Insight emerges from it.`). 인공적·반복적으로 들리며 brand voice를 약화시킨다. **Hero에 키워드를 못박은 순간 다른 자리는 그 단어를 회피해야 한다.**
 
 ---
 
@@ -210,14 +226,16 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 ```
 [Eyebrow]   01 — STANCE
 
-[Headline]  Insight is not a feature.
-            It is the architecture that remains.
+[Headline]  Tools change.
+            Structure remains.
             We design it.
 
 [Body KR]   AI 도구는 매주 등장합니다.
-            도입의 본질은 도구가 아니라, 그것이 작동하는 의사결정 구조에 있습니다.
-            우리는 도구를 골라드리지 않습니다.
-            조직이 AI와 함께 사고하는 방식을 설계합니다.
+            바뀌어도 남는 자리가 있습니다.
+            시리아이는 그 자리를 설계합니다.
+
+(주: §00 Hero에 'Insight' 키워드가 못박혀 있으므로 §01은 그 단어를 회피한다.
+ EN은 동사형(change/remain/design), KR은 시간성·자리·자세로 다른 layer 표현.)
 ```
 
 **Interactions:** 본문이 1~2단계로 진입. 줄별 stagger.
@@ -346,17 +364,19 @@ LITERACY       리터러시
 ```
 [Eyebrow]   05 — VOICE
 
-[Quote EN]  What we build is structure.
-            Insight emerges from it.
+[Quote EN]  We don't recommend tools.
+            We architect what stays.
 
 [Quote KR]  우리가 만드는 것은 도구가 아닙니다.
-            도구가 바뀌어도 남는, 사고의 구조입니다.
+            사고가 흐르는 자리입니다.
 
             가까운 거리에서 함께 사고합니다.
             충분히 듣고, 천천히 답합니다.
 
             어떤 신호를 보고, 어떻게 판단하며, 무엇을 실행하고, 무엇을 기록할지 —
             그 정렬을 함께 설계합니다.
+
+(주: §00 Hero 'Insight' 키워드 회피. §01 'Tools change. Structure remains.'와 메시지 결은 같되 동사·자세를 굴려 표면 단어를 다르게 표현.)
 
 [Caption]   — Siriai Manifesto, 2026
 ```
@@ -383,25 +403,25 @@ LITERACY       리터러시
 ```
 [Eyebrow]   06 — CONTACT
 
-[Headline]  Start with a diagnosis.
+[Headline]  Let's start with coffee.
 
-[Sub KR]    진단 통화로 시작합니다.
-            현재 운영의 구조를 함께 살펴보고,
-            어디부터 손대야 할지 한 페이지로 정리해 드립니다.
+[Sub KR]    커피 한 잔으로 시작합니다.
+            메모 한 줄이면 충분합니다.
+            어떤 대화든, 먼저 듣는 자리부터.
 
 [Form fields, 인라인]
-            이름            [text]
+            이름            [text, required]
             회사·소속        [text]
-            이메일          [email]
-            관심 모드        ( ) Studio  ( ) Advisory  ( ) Literacy  ( ) 미정
-            메시지(선택)    [textarea, 500자]
+            이메일          [email, required]
+            메시지(선택)    [textarea, 500자, placeholder: "어떤 대화를 시작하고 싶으신가요? 한두 문장이면 충분합니다."]
             ☐ 개인정보 수집·이용에 동의합니다 [상세]
 
-[Submit]    진단 통화 신청  →
-            Start a diagnosis  →
+[Submit]    메모 보내기  →
+            Send a note  →
 ```
 
 > 가격 정책: **"무료" 단어 미사용** (Phase C 결정). 가격 정보는 사이트 노출 X, 후속 응대에서 조정.
+> 톤 전환 (2026-05): "진단/diagnosis" 의료·전문 메타포 → "대화/coffee" 따뜻한 톤. §05 매니페스토의 "가까운 거리에서 함께 사고합니다"와 echo.
 
 **Interactions:** 폼 진입 시 라벨 → 필드 stagger. Submit 후 §5.3 Submit UX와 동일.
 

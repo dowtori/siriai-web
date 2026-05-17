@@ -42,8 +42,8 @@ export default function ContactSection() {
                 lineHeight: 1.08,
               }}
             >
-              Start with
-              <br />a conversation.
+              Let&apos;s start
+              <br />with coffee.
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
@@ -58,7 +58,7 @@ export default function ContactSection() {
                 maxWidth: "32ch",
               }}
             >
-              메모 한 줄이면 충분합니다. 어떤 대화든, 먼저 듣는 자리부터.
+              커피 한 잔으로 시작합니다. 메모 한 줄이면 충분하고, 어떤 대화든 먼저 듣는 자리부터.
             </motion.p>
             <motion.div
               initial={{ opacity: 0 }}

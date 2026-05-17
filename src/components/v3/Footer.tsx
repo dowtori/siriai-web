@@ -22,7 +22,7 @@ export default function Footer() {
               maxWidth: "32ch",
             }}
           >
-            Insight is not a feature. It is the architecture that remains. We design it.
+            We don&apos;t recommend tools. We architect what stays.
           </p>
           <p
             className="mt-4"
@@ -34,7 +34,7 @@ export default function Footer() {
               maxWidth: "32ch",
             }}
           >
-            도구를 고르지 않고, 의사결정의 구조를 설계합니다.
+            도구를 고르지 않고, 사고가 흐르는 자리를 만듭니다.
           </p>
         </div>
 

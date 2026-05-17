@@ -143,12 +143,14 @@ src/
 ## v3 IA — 7섹션
 
 1. **§00 Hero** — Canvas 2D 파티클 cycle 4종 (Architecture → Not tools/output/deployment → 회귀) · 8s settled + 0.9s dissolve 무한 루프
-2. **§01 Stance** — "Insight is not a feature. It is the architecture that remains. We design it." (한국어: 인사이트는 기능이 아닙니다 / 도구가 바뀌어도 남는 구조 / 맥락을 읽고 판단하고 재구성하는 자리 / 시리아이는 그 자리를 설계합니다)
+2. **§01 Stance** — "Tools change. / Structure remains. / We design it." (한국어: AI 도구는 매주 등장합니다 / 바뀌어도 남는 자리가 있습니다 / 시리아이는 그 자리를 설계합니다) · 3줄 압축 · EN/KR 不 mirror
 3. **§02 Methodology** · Diagram A — 3축 (Architecture · Literacy · Operation) → Operating Model
 4. **§03 System** · Diagram B (dark) — 4레이어 Signal · Judgment · Action · Record
 5. **§04 Clients (With)** — 단일 가로 로고 wall · slow marquee (60s) · 고객·파트너·솔루션 평탄화 · 협업 분야 비공개 (트웰브랩스식 담백 톤)
-6. **§05 Voice** (dark) — 매니페스토 (Signal/Judgment/Action/Record 마지막 줄로 §03와 연결)
-7. **§06 Contact** — 인라인 폼 (이름·회사·이메일·메시지 선택·동의) · 의도적 모호 "Start with a conversation" 톤
+6. **§05 Voice** (dark) — 매니페스토 "We don't recommend tools. / We architect what stays." (Signal/Judgment/Action/Record 마지막 줄로 §03와 연결)
+7. **§06 Contact** — 인라인 폼 (이름·회사·이메일·메시지 선택·동의) · "Let's start with coffee. / 커피 한 잔으로 시작합니다." 따뜻한 톤
+
+> **카피웍 메타 원칙**: PRD §2.4 (One Word, One Place · Spirit over Surface · Negative Space · Indirection · Verb-led · EN/KR 不 mirror · Each Section Owns Its Voice). 'Insight' 키워드는 §00 Hero 한 자리에서만 강하게 쓴다 — 다른 섹션은 그 단어를 회피하고 동사·자세로 정합성을 만든다.
 
 ---
 

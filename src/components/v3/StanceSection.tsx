@@ -4,9 +4,8 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const BODY_LINES = [
-  "인사이트는 기능이 아닙니다.",
-  "도구가 바뀌어도 남는 구조입니다.",
-  "맥락을 읽고, 판단하고, 재구성하는 자리.",
+  "AI 도구는 매주 등장합니다.",
+  "바뀌어도 남는 자리가 있습니다.",
   "시리아이는 그 자리를 설계합니다.",
 ];
 
@@ -29,7 +28,7 @@ export default function StanceSection() {
       <div className="mx-auto max-w-screen-xl px-6 py-32 md:px-10 md:py-40">
         <div className="grid grid-cols-1 gap-y-14 md:grid-cols-12 md:gap-x-12 md:gap-y-0">
           {/* Left — eyebrow + headline */}
-          <div className="md:col-span-5">
+          <div className="md:col-span-6">
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={inView ? { opacity: 1, y: 0 } : undefined}
@@ -51,11 +50,9 @@ export default function StanceSection() {
                 lineHeight: 1.08,
               }}
             >
-              Insight is not a feature.
+              Tools change.
               <br />
-              It is the architecture
-              <br />
-              that remains.
+              Structure remains.
               <br />
               We design it.
             </motion.h2>
