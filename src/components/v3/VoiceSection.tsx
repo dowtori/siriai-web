@@ -57,51 +57,88 @@ export default function VoiceSection() {
           05 — Voice
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={inView ? { opacity: 1, scaleX: 1 } : undefined}
-          transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
-          className="mt-14 h-px origin-left"
-          style={{ backgroundColor: "var(--line-on-inverse-strong)" }}
-          aria-hidden
-        />
+        {/* English declaration — display, 원본 유지 */}
+        <motion.h2
+          initial={{ opacity: 0, y: 22 }}
+          animate={inView ? { opacity: 1, y: 0 } : undefined}
+          transition={{ duration: 0.95, ease: EASE, delay: 0.18 }}
+          className="mt-14 tracking-[-0.02em]"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(2.25rem, 4.2vw, 4rem)",
+            fontWeight: 500,
+            lineHeight: 1.08,
+            maxWidth: "24ch",
+          }}
+        >
+          We don&apos;t recommend tools.
+          <br />
+          We architect what stays.
+        </motion.h2>
 
-        {BLOCKS.map((block, i) => (
-          <div key={i}>
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={inView ? { opacity: 1, y: 0 } : undefined}
-              transition={{ duration: 0.85, ease: EASE, delay: 0.4 + i * 0.18 }}
-              className="py-12 md:py-14"
-            >
-              <p
-                style={{
-                  fontFamily: "var(--font-sans)",
-                  fontSize: "clamp(1.125rem, 1.45vw, 1.5rem)",
-                  fontWeight: 400,
-                  lineHeight: 1.65,
-                  letterSpacing: "-0.005em",
-                  wordBreak: "keep-all",
-                  color: "var(--fg-on-inverse)",
-                }}
+        {/* Korean — 3블록 + hr 절제 카드 구조 */}
+        <div className="mt-20">
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={inView ? { opacity: 1, scaleX: 1 } : undefined}
+            transition={{ duration: 0.9, ease: EASE, delay: 0.45 }}
+            className="h-px origin-left"
+            style={{ backgroundColor: "var(--line-on-inverse-strong)" }}
+            aria-hidden
+          />
+
+          {BLOCKS.map((block, i) => (
+            <div key={i}>
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={inView ? { opacity: 1, y: 0 } : undefined}
+                transition={{ duration: 0.85, ease: EASE, delay: 0.6 + i * 0.18 }}
+                className="py-12 md:py-14"
               >
-                {block.text}
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scaleX: 0 }}
-              animate={inView ? { opacity: 1, scaleX: 1 } : undefined}
-              transition={{
-                duration: 0.9,
-                ease: EASE,
-                delay: 0.55 + i * 0.18,
-              }}
-              className="h-px origin-left"
-              style={{ backgroundColor: "var(--line-on-inverse-strong)" }}
-              aria-hidden
-            />
-          </div>
-        ))}
+                <p
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "clamp(1.125rem, 1.45vw, 1.5rem)",
+                    fontWeight: 400,
+                    lineHeight: 1.65,
+                    letterSpacing: "-0.005em",
+                    wordBreak: "keep-all",
+                    color: "var(--fg-on-inverse)",
+                  }}
+                >
+                  {block.text}
+                </p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={inView ? { opacity: 1, scaleX: 1 } : undefined}
+                transition={{
+                  duration: 0.9,
+                  ease: EASE,
+                  delay: 0.75 + i * 0.18,
+                }}
+                className="h-px origin-left"
+                style={{ backgroundColor: "var(--line-on-inverse-strong)" }}
+                aria-hidden
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Caption */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : undefined}
+          transition={{
+            duration: 0.9,
+            ease: EASE,
+            delay: 0.75 + BLOCKS.length * 0.18 + 0.2,
+          }}
+          className="mt-16 text-[11px] uppercase tracking-[0.22em]"
+          style={{ color: "var(--fg-on-inverse-muted)" }}
+        >
+          — Siriai Manifesto, 2026
+        </motion.p>
       </div>
     </section>
   );
