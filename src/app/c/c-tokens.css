@@ -211,38 +211,79 @@ html:has([data-route="c"]) body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Hero 글자 파편 구체 stage — 외주 BX 컨셉:
-   글자 입자가 구형으로 모여 검은 구체 형태 → 마우스 시야 메타포로 흩어짐 → 라벨 노출.
-   배경은 페이지 페이퍼색 그대로 (흰 디스크 없음). */
-.c-hero-orb-stage {
+/* Hero stage — 중앙 orb + 글자 토성 고리.
+   컨셉(사용자 재기획): 중앙에 Property 1=N orb를 fade carousel로 1장씩 노출,
+   주위를 글자 ring 2겹이 X축 -22° 기울임으로 자전. 마우스 좌우 → 회전 가속.
+   배경은 페이퍼 그대로 (디스크 없음), 외각 radial fade로 시야 메타포. */
+.c-hero-stage {
   position: relative;
-  width: clamp(320px, 60vw, 680px);
+  width: clamp(360px, 68vw, 760px);
   aspect-ratio: 1;
   margin-inline: auto;
-  /* 박스 모서리 강제 원형 클리핑 — 사각 영역 시각 노출 차단 */
-  border-radius: 50%;
-  overflow: hidden;
-  /* 외각 시야 페이드 — 더 빨리 fade로 가장자리 깔끔 */
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 48%, transparent 86%);
-  mask-image: radial-gradient(circle at 50% 50%, #000 48%, transparent 86%);
+  container-type: inline-size;
+  /* 외곽 시야 fade — 끝이 자연스럽게 사라짐 */
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 96%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 96%);
+  isolation: isolate;
 }
 
-.c-hero-orb-labels {
+/* 3D 무대 — perspective는 inner에 걸어 ring 깊이 표현 */
+.c-hero-stage-inner {
   position: absolute;
-  inset: 16% 14%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  gap: 0;
-  place-items: center;
-  pointer-events: none;
-  z-index: 0;
+  inset: 0;
+  perspective: 1200px;
+  perspective-origin: 50% 48%;
+  transform-style: preserve-3d;
 }
 
-.c-hero-orb-label {
-  font-size: clamp(10px, 1vw, 13px);
-  letter-spacing: 0.04em;
-  color: var(--c-ink);
-  font-weight: 500;
-  text-align: center;
+/* 중앙 orb 이미지 카로셀 (16장 fade transition) */
+.c-hero-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 58%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.c-hero-center-img {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 900ms var(--c-ease);
+}
+
+.c-hero-center-img[data-active="true"] {
+  opacity: 1;
+}
+
+/* 글자 ring 한 겹 — JS RAF가 transform 갱신 */
+.c-hero-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ring 위 글자 — 각 글자가 rotateY+translateZ로 원 둘레 배치 */
+.c-hero-glyph {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  white-space: nowrap;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: 0.02em;
+  user-select: none;
 }
