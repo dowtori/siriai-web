@@ -76,9 +76,9 @@ Siriai의 좌표: **고추상 × 기술-브랜드 경계**. 컨설팅 펌만큼 
 |--------|----------|----------|
 | **Architecture** | 조직·제품 안에 AI를 배치하는 운영 구조 설계 | 시스템 아키텍처 다이어그램, 의사결정 트리, 책임 매트릭스 |
 | **Literacy** | 구성원이 AI로 "생각하는 법"을 학습하는 커리큘럼 | 진단 → 트랙별 워크숍 → 운영 매뉴얼 |
-| **Operation** | 설계된 구조를 함께 운영·튜닝하는 동반 모드 | 리테이너 어드바이저리, KPI 정의, 회고 사이클 |
+| **Mapping** | 현황·문제를 함께 매핑하는 진입의 첫 행위 | 현황 진단 매핑, 결정의 결, 첫 한 페이지 |
 
-세 축이 사이트 전반에서 일관되게 반복 노출되도록 한다 (히어로 → 방법론 섹션 → 서비스 섹션 → CTA에 모두 변주로 등장).
+> v3 reframe(2026-05): 기존 Operation 축은 §03 System(흐름)으로 의미 이전. 그 자리에 진입의 행위인 **Mapping**이 채워진다. 세 축은 사이트 전반에서 반복 노출하지 않고 (One Word, One Place), §02 한 자리에서만 명확히 정의한다.
 
 ---
 
@@ -148,7 +148,7 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 ```
 00  Hero               Identity claim         [Generative typography]
 01  Stance             Problem reframing      [Quote / split layout]
-02  Methodology        Architecture · Literacy · Operation 3축   [Diagram A]
+02  Methodology        Architecture · Literacy · Mapping 진입 3축 [Diagram A]
 03  System             실제 운영 구조 다이어그램   [Diagram B]
 04  Services           Studio · Advisory · Literacy 3개 모드  [Grid 3-col]
 05  Voice              파운더/팀 관점, 매니페스토 인용         [Quote scroll-scrub]
@@ -257,25 +257,26 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 ```
 [Eyebrow]   02 — METHODOLOGY
 
-[Headline]  Three axes,
-            one operating model.
+[Headline]  Three ways in.
 
-[Sub KR]    하나의 운영 모델을 세 축으로 정렬합니다.
+[Sub KR]    세 가지 방식으로 들어갑니다.
 
 [Axis 1]    ARCHITECTURE
-            AI를 조직과 제품 안에 배치하는 운영 구조.
-            의사결정 트리, 책임 매트릭스, 데이터 흐름.
+            의사결정의 구조를 설계합니다.
+            흐름, 책임, 데이터의 자리.
 
 [Axis 2]    LITERACY
-            구성원이 AI로 사고하는 법을 익히는 커리큘럼.
-            진단 → 트랙별 학습 → 사내 매뉴얼화.
+            조직이 AI로 사고하는 법을 익힙니다.
+            관점 점검, 트랙별 학습, 사내 매뉴얼.
 
-[Axis 3]    OPERATION
-            설계를 함께 운영하며 튜닝하는 동반 모드.
-            리테이너 어드바이저리, KPI, 회고 사이클.
+[Axis 3]    MAPPING                          (← Operation에서 교체 / 진입 framing)
+            무엇이 진짜 문제인지 함께 그립니다.
+            현황 매핑, 결정의 결, 첫 한 페이지.
 ```
 
-**Diagram A spec:** Design.md §8.1 참조. 핵심은 세 축이 **삼각 또는 삼중 동심원**으로 맞물려, 가운데에 "Operating Model"이 형성되는 구조.
+**Section logic (v3 reframe 2026-05):** §02 = 진입 (어떻게 일을 시작하는가) → §03 = 흐름 (일이 어떻게 운영되는가). Operation 축은 §03 System으로 의미 이전되었고, 그 자리에 진입의 첫 행위인 **Mapping**이 채워진다.
+
+**Diagram A spec:** Design.md §8.1 참조. 삼각 + 코어 구조 유지. **코어 라벨은 제거** (Negative Space — 'OPERATING MODEL' 컨설팅 cliché 해소).
 
 ---
 

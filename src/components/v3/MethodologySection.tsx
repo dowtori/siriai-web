@@ -10,22 +10,22 @@ const AXES = [
     key: "architecture",
     num: "01",
     title: "Architecture",
-    kr: "AI를 조직과 제품 안에 배치하는 운영 구조.",
-    desc: "의사결정 트리, 책임 매트릭스, 데이터 흐름.",
+    kr: "의사결정의 구조를 설계합니다.",
+    desc: "흐름, 책임, 데이터의 자리.",
   },
   {
     key: "literacy",
     num: "02",
     title: "Literacy",
-    kr: "구성원이 AI로 사고하는 법을 익히는 커리큘럼.",
-    desc: "현황 점검 → 트랙별 학습 → 사내 매뉴얼화.",
+    kr: "조직이 AI로 사고하는 법을 익힙니다.",
+    desc: "관점 점검, 트랙별 학습, 사내 매뉴얼.",
   },
   {
-    key: "operation",
+    key: "mapping",
     num: "03",
-    title: "Operation",
-    kr: "함께 운영하며 정기적으로 점검·튜닝합니다.",
-    desc: "정기 자문, KPI, 회고 사이클.",
+    title: "Mapping",
+    kr: "무엇이 진짜 문제인지 함께 그립니다.",
+    desc: "현황 매핑, 결정의 결, 첫 한 페이지.",
   },
 ];
 
@@ -64,9 +64,7 @@ export default function MethodologySection() {
                 lineHeight: 1.08,
               }}
             >
-              Three axes.
-              <br />
-              One model.
+              Three ways in.
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
@@ -80,7 +78,7 @@ export default function MethodologySection() {
                 wordBreak: "keep-all",
               }}
             >
-              세 축이 하나의 모델로.
+              세 가지 방식으로 들어갑니다.
             </motion.p>
 
             <div className="mt-14 space-y-10">
@@ -165,7 +163,7 @@ function DiagramA({ inView }: { inView: boolean }) {
       width="100%"
       style={{ overflow: "visible", maxWidth: 520 }}
       role="img"
-      aria-label="Diagram: three axes — Architecture, Literacy, Operation — converging at an Operating Model core"
+      aria-label="Diagram: three ways in — Architecture, Literacy, Mapping — converging at a shared core"
     >
       {/* Outer triangle */}
       {[
@@ -238,7 +236,7 @@ function DiagramA({ inView }: { inView: boolean }) {
       {[
         { p: arch, label: "Architecture", anchor: "middle" as const, lx: 0, ly: -22, delay: 0.25 },
         { p: lit, label: "Literacy", anchor: "end" as const, lx: -16, ly: 6, delay: 0.4 },
-        { p: ops, label: "Operation", anchor: "start" as const, lx: 16, ly: 6, delay: 0.55 },
+        { p: ops, label: "Mapping", anchor: "start" as const, lx: 16, ly: 6, delay: 0.55 },
       ].map((n, i) => (
         <g key={`vtx-${i}`}>
           <motion.circle
@@ -295,7 +293,7 @@ function DiagramA({ inView }: { inView: boolean }) {
         />
       )}
 
-      {/* Core node */}
+      {/* Core node — label removed (Negative Space: 침묵의 코어) */}
       <motion.circle
         cx={core.x}
         cy={core.y}
@@ -308,40 +306,6 @@ function DiagramA({ inView }: { inView: boolean }) {
         transition={{ duration: 0.7, ease: EASE, delay: 1.0 }}
         style={{ transformOrigin: `${core.x}px ${core.y}px` }}
       />
-      <motion.text
-        x={core.x}
-        y={core.y - 2}
-        textAnchor="middle"
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : undefined}
-        transition={{ duration: 0.6, ease: EASE, delay: 1.2 }}
-        style={{
-          fontFamily: "var(--font-display)",
-          fontSize: 9,
-          fontWeight: 600,
-          fill: "var(--fg-default)",
-          letterSpacing: "0.16em",
-        }}
-      >
-        OPERATING
-      </motion.text>
-      <motion.text
-        x={core.x}
-        y={core.y + 11}
-        textAnchor="middle"
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : undefined}
-        transition={{ duration: 0.6, ease: EASE, delay: 1.27 }}
-        style={{
-          fontFamily: "var(--font-display)",
-          fontSize: 9,
-          fontWeight: 600,
-          fill: "var(--fg-default)",
-          letterSpacing: "0.16em",
-        }}
-      >
-        MODEL
-      </motion.text>
     </svg>
   );
 }

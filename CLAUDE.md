@@ -144,7 +144,7 @@ src/
 
 1. **§00 Hero** — Canvas 2D 파티클 cycle 4종 (Architecture → Not tools/output/deployment → 회귀) · 8s settled + 0.9s dissolve 무한 루프
 2. **§01 Stance** — "Tools change. / Structure remains. / We design it." (한국어: AI 도구는 매주 등장합니다 / 바뀌어도 남는 자리가 있습니다 / 시리아이는 그 자리를 설계합니다) · 3줄 압축 · EN/KR 不 mirror
-3. **§02 Methodology** · Diagram A — 3축 (Architecture · Literacy · Operation) → Operating Model
+3. **§02 Methodology** · Diagram A — 진입의 3축 (Architecture · Literacy · Mapping). 코어 라벨 제거 (Negative Space). §03(흐름)과의 시간성 분리.
 4. **§03 System** · Diagram B (dark) — 4레이어 Signal · Judgment · Action · Record
 5. **§04 Clients (With)** — 단일 가로 로고 wall · slow marquee (60s) · 고객·파트너·솔루션 평탄화 · 협업 분야 비공개 (트웰브랩스식 담백 톤)
 6. **§05 Voice** (dark) — 매니페스토 "We don't recommend tools. / We architect what stays." (Signal/Judgment/Action/Record 마지막 줄로 §03와 연결)
