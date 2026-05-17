@@ -211,20 +211,17 @@ html:has([data-route="c"]) body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Hero stage — 중앙 orb + 글자 토성 고리.
-   컨셉(사용자 재기획): 중앙에 Property 1=N orb를 fade carousel로 1장씩 노출,
-   주위를 글자 ring 2겹이 X축 -22° 기울임으로 자전. 마우스 좌우 → 회전 가속.
-   배경은 페이퍼 그대로 (디스크 없음), 외각 radial fade로 시야 메타포. */
+/* Hero stage — 글자 토성 고리(3겹) + 중앙 시야 초점.
+   컨셉(외주 BX + 사용자 결정): 글자 띠가 주인공, 본체는 작은 시야 초점("i→O" 로고 모티프 인용).
+   마우스 좌우 → ring 회전 가속(사라짐 효과 없음). 외곽 mask 제거 → 띠가 가장자리까지 노출. */
 .c-hero-stage {
   position: relative;
-  width: clamp(360px, 68vw, 760px);
+  width: clamp(360px, 60vw, 720px);
   aspect-ratio: 1;
   margin-inline: auto;
   container-type: inline-size;
-  /* 외곽 시야 fade — 끝이 자연스럽게 사라짐 */
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 96%);
-  mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 96%);
   isolation: isolate;
+  /* overflow visible 기본 — ring 외곽이 stage 밖으로 살짝 노출돼도 자연스러움 */
 }
 
 /* 3D 무대 — perspective는 inner에 걸어 ring 깊이 표현 */
@@ -236,30 +233,18 @@ html:has([data-route="c"]) body {
   transform-style: preserve-3d;
 }
 
-/* 중앙 orb 이미지 카로셀 (16장 fade transition) */
-.c-hero-center {
+/* 중앙 시야 초점 — 단순 그래디언트 점(자산 미사용). 띠가 둘러싸는 작은 앵커. */
+.c-hero-focus {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 58%;
+  width: clamp(10px, 1.4cqi, 16px);
   aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--c-ink) 0%, var(--c-ink) 55%, rgba(10, 10, 10, 0) 100%);
   transform: translate(-50%, -50%);
   z-index: 2;
   pointer-events: none;
-}
-
-.c-hero-center-img {
-  position: absolute;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain;
-  opacity: 0;
-  transition: opacity 900ms var(--c-ease);
-}
-
-.c-hero-center-img[data-active="true"] {
-  opacity: 1;
 }
 
 /* 글자 ring 한 겹 — JS RAF가 transform 갱신 */

@@ -1,27 +1,43 @@
 "use client";
 
-// 글자 토성 고리 — 중앙 orb 둘레를 도는 글자 ring.
-// 컨셉: 행성 표면의 띠처럼 글자들이 회전. X축 기울임으로 평면 ring 입체감.
-// 마우스 좌우 위치 → ring 회전 속도 가속 (lerp).
-// RAF 직접 style.transform 갱신 (60fps, 가벼움).
+// 글자 토성 고리 — 중앙 시야 초점 둘레를 도는 글자 ring 3겹.
+// 컨셉(외주 BX): 글자 파편이 형태를 이룬다 + 외각으로 갈수록 흐릿한 시야.
+// 구현: 3겹 × 60글자 = 180개. X축 -22° 동일 기울임, 안→밖 weight·색 점진 옅게.
+// 마우스 좌우 → 모든 ring 회전 가속 lerp (사라짐 없음).
+// RAF가 ring 컨테이너의 style.transform 직접 갱신 (60fps).
 
 import { useEffect, useRef } from "react";
 
-const GLYPHS = [
-  "A","B","C","D","E","F","G","H","I","J","K","L","M",
-  "N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
-  "0","1","2","3","4","5","6","7","8","9",
-  "·","◯","+","×","◇",
+// 글자 풀 70자 — 라틴 대소 + 숫자 + 기호. 각 ring은 시작 인덱스 offset 다르게.
+const POOL: string[] = [
+  ...Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)),   // A-Z
+  ...Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i)),   // a-z
+  ...Array.from({ length: 10 }, (_, i) => String.fromCharCode(48 + i)),   // 0-9
+  "·", "◯", "+", "×", "◇", "○", "−", "/",
 ];
 
-// 두 겹 ring으로 밀도 (토성 고리, 좁게 — 훈민정음 X)
-const RING_LAYERS = [
-  { radiusPct: 46, tiltDeg: -22, baseDeg: 0,  speed: 0.18, fontSizePx: 17, fontWeight: 600, color: "var(--c-ink-soft)" },
-  { radiusPct: 52, tiltDeg: -22, baseDeg: 17, speed: 0.13, fontSizePx: 13, fontWeight: 500, color: "var(--c-ink-mute)" },
+const GLYPHS_PER_RING = 60;
+
+// 3겹 — 안쪽이 진하고 빠르고 굵게, 외곽이 옅고 느리고 작게(시야 외곽 흐림 메타포)
+type RingLayer = {
+  radiusPct: number;
+  tiltDeg: number;
+  baseDeg: number;
+  speed: number;       // deg/frame
+  fontSizePx: number;
+  fontWeight: number;
+  color: string;
+  glyphOffset: number; // POOL 시작 인덱스 offset
+};
+
+const RING_LAYERS: RingLayer[] = [
+  { radiusPct: 35, tiltDeg: -22, baseDeg: 0,  speed: 0.20, fontSizePx: 14, fontWeight: 600, color: "var(--c-ink)",      glyphOffset: 0  },
+  { radiusPct: 42, tiltDeg: -22, baseDeg: 11, speed: 0.15, fontSizePx: 12, fontWeight: 500, color: "var(--c-ink-soft)", glyphOffset: 23 },
+  { radiusPct: 48, tiltDeg: -22, baseDeg: 23, speed: 0.11, fontSizePx: 11, fontWeight: 500, color: "var(--c-ink-mute)", glyphOffset: 47 },
 ];
 
-const MAX_SPEED_BOOST = 0.55;    // 마우스 끝 위치에서 추가 최대 가속(deg/frame)
-const SPEED_LERP = 0.06;          // 마우스 따라가는 부드러움
+const MAX_SPEED_BOOST = 0.55; // 마우스 가장자리에서 추가 가속 (deg/frame)
+const SPEED_LERP = 0.06;
 
 type Props = {
   mouseNorm: React.RefObject<{ x: number; y: number } | null>;
@@ -36,7 +52,7 @@ export default function CGlyphRing({ mouseNorm }: Props) {
   useEffect(() => {
     function loop() {
       const m = mouseNorm.current;
-      // 마우스 x(0..1) → -1..1, 가운데 0, 가장자리 ±1
+      // x(0..1) → -1..1, 가운데 0, 가장자리 ±1
       const boost = m ? (m.x - 0.5) * 2 * MAX_SPEED_BOOST : 0;
 
       for (let i = 0; i < RING_LAYERS.length; i++) {
@@ -61,7 +77,9 @@ export default function CGlyphRing({ mouseNorm }: Props) {
   return (
     <>
       {RING_LAYERS.map((layer, layerIdx) => {
-        const count = GLYPHS.length;
+        const glyphs = Array.from({ length: GLYPHS_PER_RING }, (_, i) =>
+          POOL[(i + layer.glyphOffset) % POOL.length],
+        );
         return (
           <div
             key={layerIdx}
@@ -74,8 +92,8 @@ export default function CGlyphRing({ mouseNorm }: Props) {
             }}
             aria-hidden="true"
           >
-            {GLYPHS.map((g, i) => {
-              const angle = (i / count) * 360;
+            {glyphs.map((g, i) => {
+              const angle = (i / GLYPHS_PER_RING) * 360;
               return (
                 <span
                   key={`${layerIdx}-${i}`}
