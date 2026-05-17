@@ -43,7 +43,7 @@ export default function ContactSection() {
               }}
             >
               Start with
-              <br />a diagnosis.
+              <br />a conversation.
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
@@ -58,7 +58,7 @@ export default function ContactSection() {
                 maxWidth: "32ch",
               }}
             >
-              사전 미팅으로 시작합니다. 현재 운영 구조를 함께 점검하고, 우선순위를 한 페이지로 정리해 드립니다.
+              메모 한 줄이면 충분합니다. 어떤 대화든, 먼저 듣는 자리부터.
             </motion.p>
             <motion.div
               initial={{ opacity: 0 }}

@@ -6,13 +6,13 @@ import CalInlineEmbed from "@/components/v3/CalInlineEmbed";
 export const metadata: Metadata = {
   title: "Contact — Siriai",
   description:
-    "사전 미팅으로 시작합니다. 현재 운영 구조를 함께 점검하고, 우선순위를 정리해 드립니다.",
+    "메모 한 줄이면 충분합니다. 어떤 대화든, 먼저 듣는 자리부터.",
 };
 
 const FAQ = [
   {
     q: "사전 미팅은 어떻게 진행되나요?",
-    a: "약 30분 화상 미팅입니다. 현재 운영 구조의 주요 마찰 지점을 함께 점검하고, 우선순위를 한 페이지로 정리해 드립니다.",
+    a: "약 30분 화상 미팅입니다. 먼저 듣고, 무엇이 필요한지 함께 가늠합니다.",
   },
   {
     q: "어떤 정보를 미리 준비해야 하나요?",
@@ -54,7 +54,7 @@ export default function ContactPage() {
             }}
           >
             Start with
-            <br />a diagnosis.
+            <br />a conversation.
           </h1>
           <p
             className="mt-8"
@@ -66,7 +66,7 @@ export default function ContactPage() {
               maxWidth: "40ch",
             }}
           >
-            사전 미팅으로 시작합니다. 현재 운영 구조를 함께 점검하고, 우선순위를 한 페이지로 정리해 드립니다. 메모만 남기셔도 좋고, 아래에서 직접 시간을 정하셔도 됩니다.
+메모 한 줄이면 충분합니다. 어떤 대화든, 먼저 듣는 자리부터. 메모만 남기셔도 좋고, 아래에서 직접 시간을 정하셔도 됩니다.
           </p>
         </section>
 

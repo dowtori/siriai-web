@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-const MODES = ["Studio", "Advisory", "Literacy", "미정"];
+import { useState } from "react";
 
 type Status = "idle" | "loading" | "ok" | "error";
 
@@ -11,23 +9,10 @@ export default function ContactForm() {
     name: "",
     company: "",
     email: "",
-    interest: "미정",
     message: "",
   });
   const [agreed, setAgreed] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
-
-  useEffect(() => {
-    try {
-      const m = sessionStorage.getItem("siriai-mode");
-      if (m && MODES.includes(m)) {
-        setForm((f) => ({ ...f, interest: m }));
-        sessionStorage.removeItem("siriai-mode");
-      }
-    } catch {
-      /* noop */
-    }
-  }, []);
 
   const valid = form.name.trim() && form.email.trim() && agreed;
 
@@ -72,54 +57,6 @@ export default function ContactForm() {
       />
 
       <div>
-        <span
-          className="text-[11px] uppercase tracking-[0.22em]"
-          style={{ color: "var(--fg-muted)" }}
-        >
-          Interest
-        </span>
-        <div className="mt-3 flex flex-wrap gap-x-6 gap-y-3">
-          {MODES.map((m) => {
-            const checked = form.interest === m;
-            return (
-              <label
-                key={m}
-                className="flex cursor-pointer items-center gap-2"
-                style={{ fontSize: "0.9375rem" }}
-              >
-                <input
-                  type="radio"
-                  name="interest"
-                  value={m}
-                  checked={checked}
-                  onChange={() => setForm((f) => ({ ...f, interest: m }))}
-                  className="sr-only"
-                />
-                <span
-                  className="inline-flex h-4 w-4 items-center justify-center rounded-full border transition-colors"
-                  style={{
-                    borderColor: checked
-                      ? "var(--fg-default)"
-                      : "var(--line-strong)",
-                  }}
-                >
-                  <span
-                    className="block rounded-full transition-all"
-                    style={{
-                      width: checked ? 8 : 0,
-                      height: checked ? 8 : 0,
-                      background: "var(--fg-default)",
-                    }}
-                  />
-                </span>
-                {m}
-              </label>
-            );
-          })}
-        </div>
-      </div>
-
-      <div>
         <label
           htmlFor="contact-msg"
           className="text-[11px] uppercase tracking-[0.22em]"
@@ -133,7 +70,8 @@ export default function ContactForm() {
           value={form.message}
           onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
           maxLength={500}
-          className="mt-2 w-full resize-none border-b bg-transparent py-3 text-[15px] outline-none transition-colors focus:border-[color:var(--fg-default)]"
+          placeholder="어떤 대화를 시작하고 싶으신가요? 한두 문장이면 충분합니다."
+          className="mt-2 w-full resize-none border-b bg-transparent py-3 text-[15px] outline-none transition-colors focus:border-[color:var(--fg-default)] placeholder:text-[color:var(--fg-muted)]"
           style={{
             borderColor: "var(--line-strong)",
             color: "var(--fg-default)",
@@ -289,7 +227,7 @@ function ReceivedBlock() {
           lineHeight: 1.7,
         }}
       >
-        24시간 안에 이메일로 가능한 시간을 회신드립니다.
+        24시간 안에 답신 드립니다.
       </p>
       <p
         className="mt-3 text-sm"

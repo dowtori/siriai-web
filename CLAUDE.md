@@ -148,7 +148,7 @@ src/
 4. **§03 System** · Diagram B (dark) — 4레이어 Signal · Judgment · Action · Record
 5. **§04 Clients (With)** — 단일 가로 로고 wall · slow marquee (60s) · 고객·파트너·솔루션 평탄화 · 협업 분야 비공개 (트웰브랩스식 담백 톤)
 6. **§05 Voice** (dark) — 매니페스토 (Signal/Judgment/Action/Record 마지막 줄로 §03와 연결)
-7. **§06 Contact** — 인라인 폼 (이름·회사·이메일·interest radio·메시지 선택·동의)
+7. **§06 Contact** — 인라인 폼 (이름·회사·이메일·메시지 선택·동의) · 의도적 모호 "Start with a conversation" 톤
 
 ---
 
@@ -172,7 +172,7 @@ create table contact_submissions (
   name        text not null,
   company     text,
   email       text not null,
-  interest    text,         -- v3 신규 (Studio/Advisory/Literacy/미정)
+  interest    text,         -- DEPRECATED: v3 reframe(2026-05)에서 폼·API에서 제거. 컬럼은 마이그레이션 전까지 nullable 유지.
   message     text          -- v3에서 optional (v1은 required)
 );
 ```
@@ -196,7 +196,7 @@ create table contact_submissions (
 
 ### UX 확장 (백로그 · 우선순위 낮음)
 - **Contact 톤 리디자인**: "따뜻하면서 센스 있는" 컨택 사례 서칭 후 디벨롭 (현 선언적 톤만으로는 차가움). reference 후보 — Linear/Vercel/Resend/Stripe contact 페이지·warm minimal SaaS landing.
-- **커피챗 신청 UX**: 빈 시간대 선택 → 슬롯 예약 통합. 후보 — 자체 slot picker(Supabase availability 테이블) · Cal.com inline · Calendly. interest(Studio/Advisory/Literacy)별 trigger 분기 검토.
+- **커피챗 신청 UX**: 빈 시간대 선택 → 슬롯 예약 통합. 후보 — 자체 slot picker(Supabase availability 테이블) · Cal.com inline · Calendly.
 - 폼 단일 흐름 vs 폼·캘린더 이원화 의사결정, 한국어 친밀한 톤 카피 라인 동반 정교화
 
 ---
