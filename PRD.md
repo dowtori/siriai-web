@@ -203,8 +203,6 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
             Insight with AI.
 
 [Hero KR]   AI로 사고하는 구조를 설계합니다.
-
-[Meta]      Founded in Seoul · Practice since 2024
 ```
 
 **Interactions:** 마우스 추적 1단계, scroll-out 시 페이드. 모바일에서는 generative 단순화(정적 1프레임 또는 reduced-motion fallback).

@@ -34,7 +34,7 @@ export default function Footer() {
               maxWidth: "32ch",
             }}
           >
-            도구는 권하지 않습니다. 변하지 않는 것을 설계합니다.
+            도구가 아닌 비전을 제시합니다.
           </p>
         </div>
 
@@ -58,8 +58,6 @@ export default function Footer() {
             의사결정의 구조부터 설계합니다.
             <br />
             운영 모델 · 정기 자문 · 사내 리터러시 — 세 갈래.
-            <br />
-            서울에서, 2024년부터.
           </div>
           <div
             style={{
@@ -73,8 +71,6 @@ export default function Footer() {
             we design the structures behind their decisions.
             <br />
             Operating model · Advisory · Literacy — three modes.
-            <br />
-            From Seoul, since 2024.
           </div>
         </div>
 
@@ -90,7 +86,7 @@ export default function Footer() {
             className="text-[11px] uppercase tracking-[0.22em]"
             style={{ color: "var(--fg-on-inverse-muted)" }}
           >
-            contact@siriai.io · Seoul, KR
+            contact@siriai.io
           </p>
           <p
             className="text-[11px] uppercase tracking-[0.22em]"
