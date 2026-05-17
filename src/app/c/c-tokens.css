@@ -219,9 +219,12 @@ html:has([data-route="c"]) body {
   width: clamp(320px, 60vw, 680px);
   aspect-ratio: 1;
   margin-inline: auto;
-  /* 외각 시야 페이드 (사람 시야 묘사) — 외각으로 갈수록 페이퍼 색이 자연스럽게 침투 */
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 92%);
-  mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 92%);
+  /* 박스 모서리 강제 원형 클리핑 — 사각 영역 시각 노출 차단 */
+  border-radius: 50%;
+  overflow: hidden;
+  /* 외각 시야 페이드 — 더 빨리 fade로 가장자리 깔끔 */
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 48%, transparent 86%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 48%, transparent 86%);
 }
 
 .c-hero-orb-labels {

@@ -18,16 +18,16 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 
-// 밀도: 진짜 "검은 구체"처럼 보이려면 표면 한 겹으로는 부족.
-// → N 대폭 증가 + rest radius 랜덤(두께/볼륨 부여) + 크기 다양화.
-const N = 1500;
-const SPHERE_R_MIN = 1.40;
-const SPHERE_R_MAX = 1.65;
+// 밀도: 진짜 "검은 구체"처럼 dense하게 보이려면 입자 대폭 증가 + 두께 + 큰 글자.
+// 1500도 사용자가 "택도없다" 평가 → 3000으로 2배. sphere R는 stage mask 안에 fit하게 축소.
+const N = 3000;
+const SPHERE_R_MIN = 1.20;
+const SPHERE_R_MAX = 1.42;
 
-// 시야 dispersion 파라미터 (튜닝됨)
-const DISPERSION_RADIUS = 1.15;       // 마우스 영향 반경 (world units)
-const DISPERSION_STRENGTH = 0.055;    // 가까울수록 강하게 밀려남
-const RESTORE_K = 0.020;              // spring 복귀 강도
+// 시야 dispersion 파라미터 (sphere 작아진 만큼 조정)
+const DISPERSION_RADIUS = 1.00;       // 마우스 영향 반경 (world units)
+const DISPERSION_STRENGTH = 0.050;    // 가까울수록 강하게 밀려남
+const RESTORE_K = 0.022;              // spring 복귀 강도
 const DAMPING = 0.86;                 // 속도 감쇠
 const JITTER = 0.0006;                // 상시 미세 떨림 (자연스러움)
 
@@ -158,8 +158,8 @@ function GlyphParticles({ mouseNorm }: ParticlesProps) {
       const gi = Math.floor(Math.random() * glyphCount);
       tile[i * 2] = gi % 8;
       tile[i * 2 + 1] = Math.floor(gi / 8);
-      // 크기 다양화 (0.08 ~ 0.26) — 큰 글자가 뼈대, 작은 글자가 밀도 채움
-      scale[i] = 0.08 + Math.pow(Math.random(), 1.8) * 0.18;
+      // 크기 다양화 (0.10 ~ 0.32) — 큰 글자가 뼈대, 작은 글자가 밀도 채움
+      scale[i] = 0.10 + Math.pow(Math.random(), 1.6) * 0.22;
     }
     return { rest, pos, vel, scale, tile };
   }, []);
