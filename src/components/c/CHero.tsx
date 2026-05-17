@@ -6,7 +6,7 @@
 // 내부 4×4 = 16개 키워드 라벨 grid (각 셀 180×180, 15/400 #000 center).
 // 사용자 메모: 별로면 행성 고리형(중앙 검은 덩어리 유지)으로 디벨롭.
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const TOTAL = 5;
 
@@ -40,6 +40,10 @@ const KEYWORDS_4x4 = [
 
 export default function CHero() {
   const [index, setIndex] = useState(1);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const blobsGroupRef = useRef<HTMLDivElement>(null);
+  const mouseNorm = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const current = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   function prev() {
     setIndex((i) => (i === 1 ? TOTAL : i - 1));
@@ -47,6 +51,39 @@ export default function CHero() {
   function next() {
     setIndex((i) => (i === TOTAL ? 1 : i + 1));
   }
+
+  // 마우스 트래킹 번짐 — 16 blob 그룹에 parallax translate(반대 방향, 미세 lerp).
+  // 외주 인터랙션 메모: "마우스 트래킹 번짐, 클릭시 이미지로 전환".
+  function handleMove(e: React.MouseEvent<HTMLDivElement>) {
+    const el = stageRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    mouseNorm.current = {
+      x: ((e.clientX - rect.left) / rect.width - 0.5) * 2,
+      y: ((e.clientY - rect.top) / rect.height - 0.5) * 2,
+    };
+  }
+  function handleLeave() {
+    mouseNorm.current = { x: 0, y: 0 };
+  }
+
+  useEffect(() => {
+    let raf = 0;
+    function loop() {
+      const m = mouseNorm.current;
+      // lerp 부드러움
+      current.current.x += (m.x - current.current.x) * 0.08;
+      current.current.y += (m.y - current.current.y) * 0.08;
+      const g = blobsGroupRef.current;
+      if (g) {
+        // 마우스 반대 방향으로 미세 이동 (parallax) — 표면이 번지는 인상
+        g.style.transform = `translate(${-current.current.x * 18}px, ${-current.current.y * 18}px)`;
+      }
+      raf = requestAnimationFrame(loop);
+    }
+    raf = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   return (
     <section
@@ -129,6 +166,9 @@ export default function CHero() {
           Frame 2147239248: 893×893 #3D3D3D plus-lighter opacity 0.3 blur(50) radius 999 (외각 글로우)
           Frame 2147239258: 768×768 #3D3D3D plus-lighter opacity 0.8 blur(60) radius 999 (내부 글로우) */}
       <div
+        ref={stageRef}
+        onMouseMove={handleMove}
+        onMouseLeave={handleLeave}
         className="relative"
         style={{
           width: "min(920px, 92vw)",
@@ -185,8 +225,13 @@ export default function CHero() {
             isolation: "isolate",
           }}
         >
-          {/* 흰 얼룩 16개 — Ellipse 138~153 */}
-          <div className="absolute" style={{ inset: 0 }} aria-hidden="true">
+          {/* 흰 얼룩 16개 — Ellipse 138~153. 마우스 trackk parallax 적용 그룹 */}
+          <div
+            ref={blobsGroupRef}
+            className="absolute"
+            style={{ inset: 0, willChange: "transform" }}
+            aria-hidden="true"
+          >
             {BLOBS.map((b, i) => (
               <span
                 key={i}
