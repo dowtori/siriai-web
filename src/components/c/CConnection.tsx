@@ -252,12 +252,15 @@ export default function CConnection() {
                     justifyContent: "center",
                   }}
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <circle cx="18" cy="5" r="3" stroke="#000" strokeWidth="1.5" />
-                    <circle cx="6" cy="12" r="3" stroke="#000" strokeWidth="1.5" />
-                    <circle cx="18" cy="19" r="3" stroke="#000" strokeWidth="1.5" />
-                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
-                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
+                  {/* share — 화살표 단순화 (캡처 정합) */}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path
+                      d="M14 4l-8 8 8 8"
+                      stroke="#000"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
               </div>

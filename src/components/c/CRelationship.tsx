@@ -156,7 +156,7 @@ export default function CRelationship() {
               }}
             />
 
-            {/* Performance 카드 — 흰 카드, 라운드 24, 좌상 라인그래프 + 좌하 와인레드 라벨 */}
+            {/* Performance 카드 — 흰 카드, 라운드 24. 캡처: 라벨 상단(검정) + 4점 별/스파클 하단 */}
             <div
               className="absolute c-rel-card"
               style={{
@@ -173,30 +173,27 @@ export default function CRelationship() {
                 justifyContent: "space-between",
               }}
             >
-              {/* 라인 그래프 — 단순한 상승선 */}
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M3 17l5-5 4 4 9-9"
-                  stroke="#0A0A0A"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
               <span
                 style={{
                   fontFamily: "Pretendard",
                   fontWeight: 500,
                   fontSize: 14,
                   lineHeight: 1.4,
-                  color: "#6F2C2C",
+                  color: "#000",
                 }}
               >
                 Performance
               </span>
+              {/* 4점 별/스파클 아이콘 — 캡처와 동일 */}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 2 L13.6 10.4 L22 12 L13.6 13.6 L12 22 L10.4 13.6 L2 12 L10.4 10.4 Z"
+                  fill="#0A0A0A"
+                />
+              </svg>
             </div>
 
-            {/* Archive 카드 — 단색 짙은 카키, 라운드 24, 좌상 아카이브 박스 아이콘 + 좌하 흰 라벨 */}
+            {/* Archive 카드 — 단색 짙은 카키, 라운드 24. 캡처: 라벨 상단(흰) + 다운로드 화살표 하단 */}
             <div
               className="absolute c-rel-card"
               style={{
@@ -212,12 +209,6 @@ export default function CRelationship() {
                 justifyContent: "space-between",
               }}
             >
-              {/* 아카이브 박스 — 뚜껑 + 본체 + 손잡이 슬릿 */}
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="5" width="18" height="4" rx="1" stroke="#FFF" strokeWidth="1.5" fill="none" />
-                <rect x="4.5" y="9" width="15" height="11" rx="1" stroke="#FFF" strokeWidth="1.5" fill="none" />
-                <line x1="10" y1="13" x2="14" y2="13" stroke="#FFF" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
               <span
                 style={{
                   fontFamily: "Pretendard",
@@ -229,6 +220,23 @@ export default function CRelationship() {
               >
                 Archive
               </span>
+              {/* 다운로드 화살표 — 트레이 위 아래향 화살표 (캡처 그대로) */}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 3v11M12 14l-4-4M12 14l4-4"
+                  stroke="#FFF"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M4 18h16M5 18v2h14v-2"
+                  stroke="#FFF"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </div>
 
             {/* Creative 사진 카드 — 큰 사진, 라운드 24, 좌상 흰 라벨. Performance+Archive 세로 높이 차지 */}

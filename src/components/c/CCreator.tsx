@@ -61,26 +61,32 @@ export default function CCreator() {
               fontFamily: "Pretendard",
               fontWeight: 700,
               fontSize: "clamp(28px, 4vw, 48px)",
-              lineHeight: 1.2,
+              lineHeight: 1.25,
               color: "#FFFFFF",
               wordBreak: "keep-all",
             }}
           >
-            전 세계의 크리에이터와 함께 브랜드의 관계를 구축합니다.
+            전 세계의 크리에이터와
+            <br />
+            함께 브랜드의 관계를 구축합니다.
           </h2>
           <p
             className="m-0 w-full text-center"
             style={{
               fontFamily: "Pretendard",
               fontWeight: 400,
-              fontSize: "clamp(14px, 1.4vw, 18px)",
-              lineHeight: 1.4,
+              fontSize: "clamp(13px, 1.2vw, 16px)",
+              lineHeight: 1.6,
               color: "#FFFFFF",
               wordBreak: "keep-all",
+              opacity: 0.92,
             }}
           >
-            데이터와 맥락, 감각을 결합해 브랜드와 크리에이터 사이에 오래 작동하는
-            파트너십을 설계합니다.
+            데이터와 맥락, 감각을 결합해
+            <br />
+            브랜드와 크리에이터 사이에
+            <br />
+            오래 작동하는 파트너십을 설계합니다.
           </p>
         </div>
       </div>

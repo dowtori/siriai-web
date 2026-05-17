@@ -76,23 +76,22 @@ function QuoteBlock({ quote, gap }: { quote: string; gap: number }) {
         }}
       />
 
-      {/* 사람 실루엣 — 호리병/달걀 형태.
-          캡처 정합: 작은 머리(점·원) + 둥근 큰 몸통이 부드럽게 연결.
-          blur(22)가 둘을 단일 검은 그림자로 녹임. */}
+      {/* 사람 실루엣 — 캡처 정합: 작고 길쭉한 호리병.
+          머리(작은 점) + 몸통(아래 작은 둥근 부분). blur(20). */}
       <svg
         aria-hidden="true"
-        width="180"
-        height="240"
-        viewBox="0 0 185 240"
+        width="120"
+        height="180"
+        viewBox="0 0 120 180"
         style={{
           mixBlendMode: "darken",
-          filter: "blur(22px)",
+          filter: "blur(20px)",
         }}
       >
-        {/* 머리 — 작고 동그란 점 */}
-        <ellipse cx="92.5" cy="58" rx="18" ry="22" fill="#000" />
-        {/* 몸통 — 둥근 큰 형태(머리 폭의 2.3배). 호리병 연결 */}
-        <ellipse cx="92.5" cy="160" rx="42" ry="56" fill="#000" />
+        {/* 머리 — 매우 작은 동그란 점 */}
+        <ellipse cx="60" cy="48" rx="13" ry="16" fill="#000" />
+        {/* 몸통 — 작은 둥근 형태(호리병의 아래 배). */}
+        <ellipse cx="60" cy="118" rx="28" ry="40" fill="#000" />
       </svg>
     </div>
   );
