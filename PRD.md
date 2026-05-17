@@ -346,18 +346,17 @@ LITERACY       리터러시
 ```
 [Eyebrow]   05 — VOICE
 
-[Quote EN]  We don't recommend tools.
-            We design how an organization thinks.
+[Quote EN]  What we build is structure.
+            Insight emerges from it.
 
-[Quote KR]  우리는 도구를 권하지 않습니다.
-            조직이 사고하는 방식을 설계합니다.
+[Quote KR]  우리가 만드는 것은 도구가 아닙니다.
+            도구가 바뀌어도 남는, 사고의 구조입니다.
 
-            AI는 매주 새로워집니다.
-            그러나 의사결정의 구조가 흔들리면, 어떤 도구도 답이 될 수 없습니다.
+            가까운 거리에서 함께 사고합니다.
+            충분히 듣고, 천천히 답합니다.
 
-            우리가 만드는 것은 시스템입니다.
             어떤 신호를 보고, 어떻게 판단하며, 무엇을 실행하고, 무엇을 기록할지 —
-            그 결의 정렬을 함께 합니다.
+            그 정렬을 함께 설계합니다.
 
 [Caption]   — Siriai Manifesto, 2026
 ```

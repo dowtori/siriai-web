@@ -6,13 +6,12 @@ import { useRef } from "react";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const KR_LINES: Array<string | "break"> = [
-  "우리는 도구를 권하지 않습니다.",
-  "조직이 사고하는 방식을 설계합니다.",
+  "우리가 만드는 것은 도구가 아닙니다.",
+  "도구가 바뀌어도 남는, 사고의 구조입니다.",
   "break",
-  "AI는 매주 새로워집니다.",
-  "의사결정의 구조가 흔들리면, 어떤 도구도 답이 아닙니다.",
+  "가까운 거리에서 함께 사고합니다.",
+  "충분히 듣고, 천천히 답합니다.",
   "break",
-  "우리가 만드는 것은 시스템입니다.",
   "어떤 신호를 보고, 어떻게 판단하며, 무엇을 실행하고, 무엇을 기록할지 —",
   "그 정렬을 함께 설계합니다.",
 ];
@@ -56,9 +55,9 @@ export default function VoiceSection() {
             maxWidth: "24ch",
           }}
         >
-          We don&apos;t recommend tools.
+          What we build is structure.
           <br />
-          We design how an organization thinks.
+          Insight emerges from it.
         </motion.h2>
 
         {/* Korean manifesto — line by line */}
