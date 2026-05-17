@@ -69,18 +69,28 @@ function QuoteBlock({ quote }: { quote: string }) {
         }}
       />
 
-      {/* 사람 실루엣 placeholder — 185×202, mix-blend darken + blur(20) */}
-      <div
+      {/* 사람 실루엣 — 185×202, mix-blend darken + blur(20). blur로 흐려지므로
+          단순 SVG 도형(머리 + 어깨 + 몸통)으로 시각 동등 (자체해결). */}
+      <svg
         aria-hidden="true"
+        width="185"
+        height="202"
+        viewBox="0 0 185 202"
         style={{
-          width: 185,
-          height: 202,
-          background:
-            "radial-gradient(ellipse at 50% 38%, rgba(0,0,0,0.85) 18%, rgba(0,0,0,0.45) 42%, transparent 70%)",
           mixBlendMode: "darken",
           filter: "blur(20px)",
         }}
-      />
+      >
+        {/* 머리 */}
+        <ellipse cx="92.5" cy="58" rx="28" ry="34" fill="#000" />
+        {/* 목·어깨·몸통 (사다리꼴) */}
+        <path
+          d="M68 96 L117 96 L138 168 Q92.5 178 47 168 Z"
+          fill="#000"
+        />
+        {/* 발치 그림자 */}
+        <ellipse cx="92.5" cy="188" rx="42" ry="9" fill="#000" opacity="0.7" />
+      </svg>
     </div>
   );
 }

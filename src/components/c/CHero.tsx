@@ -1,3 +1,5 @@
+"use client";
+
 // 외주 원안 Hero — Frame 2147239201 spec 정밀 재구현.
 // 920×1229 컨테이너 안에 헤더(726×245, gap 48) + 검은 920×920 구체.
 // 구체 위 흰(#DDDBD5) ellipse 16개 다양한 크기·blur로 음영 패턴 형성 →
@@ -122,67 +124,137 @@ export default function CHero() {
         </div>
       </div>
 
-      {/* 검은 구체 — Frame 2147239283 (920×920, #000, border-radius 999) */}
+      {/* Stage — 검은 920 구체 + 외부 광택·그림자.
+          Frame 2147239247: 1236×518 #1F1F1F opacity 0.6 blur(20) radius 64 (가로 그림자 박스)
+          Frame 2147239248: 893×893 #3D3D3D plus-lighter opacity 0.3 blur(50) radius 999 (외각 글로우)
+          Frame 2147239258: 768×768 #3D3D3D plus-lighter opacity 0.8 blur(60) radius 999 (내부 글로우) */}
       <div
         className="relative"
         style={{
           width: "min(920px, 92vw)",
           aspectRatio: "1",
-          background: "#000",
-          borderRadius: "50%",
-          overflow: "hidden",
           isolation: "isolate",
         }}
       >
-        {/* 흰 얼룩 16개 — Ellipse 138~153 */}
-        <div className="absolute" style={{ inset: 0 }} aria-hidden="true">
-          {BLOBS.map((b, i) => (
-            <span
-              key={i}
-              style={{
-                position: "absolute",
-                width: `${(b.w / 920) * 100}%`,
-                height: `${(b.h / 920) * 100}%`,
-                left: `${(b.left / 920) * 100}%`,
-                top: `${(b.top / 920) * 100}%`,
-                background: "#DDDBD5",
-                borderRadius: "50%",
-                filter: b.blur > 0 ? `blur(${b.blur}px)` : undefined,
-              }}
-            />
-          ))}
-        </div>
-
-        {/* 4×4 키워드 grid — Frame 2147239257 (654×720, 내부 셀 180×180) */}
+        {/* 외부 그림자 박스 — 1236×518 (가로 더 넓고 세로 짧음) */}
         <div
-          className="absolute"
+          aria-hidden="true"
           style={{
-            top: "50%",
+            position: "absolute",
             left: "50%",
+            top: "50%",
             transform: "translate(-50%, -50%)",
-            width: "min(654px, 71%)",
-            height: "min(720px, 78%)",
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gridTemplateRows: "repeat(4, 1fr)",
-            placeItems: "center",
+            width: `${(1236 / 920) * 100}%`,
+            height: `${(518 / 920) * 100}%`,
+            background: "#1F1F1F",
+            opacity: 0.6,
+            filter: "blur(20px)",
+            borderRadius: 64,
+            zIndex: -2,
+          }}
+        />
+
+        {/* 외각 글로우 — 893×893 plus-lighter blur(50) */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            width: `${(893 / 920) * 100}%`,
+            height: `${(893 / 920) * 100}%`,
+            background: "#3D3D3D",
+            mixBlendMode: "plus-lighter",
+            opacity: 0.3,
+            filter: "blur(50px)",
+            borderRadius: "50%",
+            zIndex: -1,
+          }}
+        />
+
+        {/* 검은 920 구체 */}
+        <div
+          className="relative"
+          style={{
+            width: "100%",
+            aspectRatio: "1",
+            background: "#000",
+            borderRadius: "50%",
+            overflow: "hidden",
+            isolation: "isolate",
           }}
         >
-          {KEYWORDS_4x4.map((k) => (
-            <span
-              key={k}
-              style={{
-                fontFamily: "Pretendard",
-                fontWeight: 400,
-                fontSize: "clamp(11px, 1.2vw, 15px)",
-                lineHeight: 1.2,
-                color: "#000",
-                textAlign: "center",
-              }}
-            >
-              {k}
-            </span>
-          ))}
+          {/* 흰 얼룩 16개 — Ellipse 138~153 */}
+          <div className="absolute" style={{ inset: 0 }} aria-hidden="true">
+            {BLOBS.map((b, i) => (
+              <span
+                key={i}
+                style={{
+                  position: "absolute",
+                  width: `${(b.w / 920) * 100}%`,
+                  height: `${(b.h / 920) * 100}%`,
+                  left: `${(b.left / 920) * 100}%`,
+                  top: `${(b.top / 920) * 100}%`,
+                  background: "#DDDBD5",
+                  borderRadius: "50%",
+                  filter: b.blur > 0 ? `blur(${b.blur}px)` : undefined,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* 내부 글로우 — 768×768 plus-lighter blur(60) */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+              width: `${(768 / 920) * 100}%`,
+              height: `${(768 / 920) * 100}%`,
+              background: "#3D3D3D",
+              mixBlendMode: "plus-lighter",
+              opacity: 0.8,
+              filter: "blur(60px)",
+              borderRadius: "50%",
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* 4×4 키워드 grid — Frame 2147239257 (654×720, 내부 셀 180×180) */}
+          <div
+            className="absolute"
+            style={{
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "min(654px, 71%)",
+              height: "min(720px, 78%)",
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gridTemplateRows: "repeat(4, 1fr)",
+              placeItems: "center",
+              zIndex: 2,
+            }}
+          >
+            {KEYWORDS_4x4.map((k) => (
+              <span
+                key={k}
+                style={{
+                  fontFamily: "Pretendard",
+                  fontWeight: 400,
+                  fontSize: "clamp(11px, 1.2vw, 15px)",
+                  lineHeight: 1.2,
+                  color: "#000",
+                  textAlign: "center",
+                }}
+              >
+                {k}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
