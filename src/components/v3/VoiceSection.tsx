@@ -6,30 +6,25 @@ import type { ReactNode } from "react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const BLOCKS: Array<{ text: ReactNode }> = [
-  {
-    text: <>AI 리터러시적 사고를 기반으로 한 최적의 설계.</>,
-  },
-  {
-    text: (
-      <>
-        도구로서의 AI 접근을 넘어,
-        <br />
-        니즈를 정확히 이해하고{" "}
-        <strong style={{ fontWeight: 600 }}>&lsquo;사람&rsquo;</strong>을
-        돕습니다.
-      </>
-    ),
-  },
-  {
-    text: (
-      <>
-        평균{" "}
-        <strong style={{ fontWeight: 600 }}>+32% 이상</strong>의
-        의사결정 비용 감소를 체험해보세요.
-      </>
-    ),
-  },
+const KR_LINES: Array<ReactNode | "break"> = [
+  "AI 리터러시적 사고를 기반으로 한 최적의 설계.",
+  "break",
+  "도구로서의 AI 접근을 넘어",
+  (
+    <>
+      니즈를 정확히 이해하고{" "}
+      <strong style={{ fontWeight: 600 }}>&lsquo;사람&rsquo;</strong>을
+      돕습니다.
+    </>
+  ),
+  "break",
+  (
+    <>
+      평균{" "}
+      <strong style={{ fontWeight: 600 }}>+32% 이상</strong>의 의사결정 비용
+      감소를 체험해보세요.
+    </>
+  ),
 ];
 
 export default function VoiceSection() {
@@ -46,7 +41,7 @@ export default function VoiceSection() {
         color: "var(--fg-on-inverse)",
       }}
     >
-      <div className="mx-auto max-w-3xl px-6 py-40 md:px-10 md:py-56">
+      <div className="mx-auto max-w-screen-xl px-6 py-40 md:px-10 md:py-56">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : undefined}
@@ -57,7 +52,7 @@ export default function VoiceSection() {
           05 — Voice
         </motion.p>
 
-        {/* English declaration — display, 원본 유지 */}
+        {/* English declaration — display */}
         <motion.h2
           initial={{ opacity: 0, y: 22 }}
           animate={inView ? { opacity: 1, y: 0 } : undefined}
@@ -76,53 +71,31 @@ export default function VoiceSection() {
           We architect what stays.
         </motion.h2>
 
-        {/* Korean — 3블록 + hr 절제 카드 구조 */}
-        <div className="mt-20">
-          <motion.div
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={inView ? { opacity: 1, scaleX: 1 } : undefined}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.45 }}
-            className="h-px origin-left"
-            style={{ backgroundColor: "var(--line-on-inverse-strong)" }}
-            aria-hidden
-          />
-
-          {BLOCKS.map((block, i) => (
-            <div key={i}>
-              <motion.div
+        {/* Korean manifesto — line by line */}
+        <div
+          className="mt-20 space-y-5"
+          style={{
+            fontSize: "clamp(1.0625rem, 1.3vw, 1.375rem)",
+            lineHeight: 1.85,
+            color: "var(--fg-on-inverse)",
+            maxWidth: "44ch",
+            wordBreak: "keep-all",
+          }}
+        >
+          {KR_LINES.map((line, i) =>
+            line === "break" ? (
+              <div key={i} aria-hidden className="h-3" />
+            ) : (
+              <motion.p
+                key={i}
                 initial={{ opacity: 0, y: 14 }}
                 animate={inView ? { opacity: 1, y: 0 } : undefined}
-                transition={{ duration: 0.85, ease: EASE, delay: 0.6 + i * 0.18 }}
-                className="py-12 md:py-14"
+                transition={{ duration: 0.75, ease: EASE, delay: 0.45 + i * 0.12 }}
               >
-                <p
-                  style={{
-                    fontFamily: "var(--font-sans)",
-                    fontSize: "clamp(1.125rem, 1.45vw, 1.5rem)",
-                    fontWeight: 400,
-                    lineHeight: 1.65,
-                    letterSpacing: "-0.005em",
-                    wordBreak: "keep-all",
-                    color: "var(--fg-on-inverse)",
-                  }}
-                >
-                  {block.text}
-                </p>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, scaleX: 0 }}
-                animate={inView ? { opacity: 1, scaleX: 1 } : undefined}
-                transition={{
-                  duration: 0.9,
-                  ease: EASE,
-                  delay: 0.75 + i * 0.18,
-                }}
-                className="h-px origin-left"
-                style={{ backgroundColor: "var(--line-on-inverse-strong)" }}
-                aria-hidden
-              />
-            </div>
-          ))}
+                {line}
+              </motion.p>
+            )
+          )}
         </div>
 
         {/* Caption */}
@@ -132,7 +105,7 @@ export default function VoiceSection() {
           transition={{
             duration: 0.9,
             ease: EASE,
-            delay: 0.75 + BLOCKS.length * 0.18 + 0.2,
+            delay: 0.45 + KR_LINES.length * 0.12 + 0.2,
           }}
           className="mt-16 text-[11px] uppercase tracking-[0.22em]"
           style={{ color: "var(--fg-on-inverse-muted)" }}

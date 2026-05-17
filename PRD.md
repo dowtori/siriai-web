@@ -338,36 +338,35 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 
 ### Section 05 — Voice
 
-**Goal:** "사람과 사상"의 신뢰. v3 포지셔닝("도구가 아니라 의사결정의 구조")을 영문 매니페스토 헤드 + 한국어 3블록으로 응축.
+**Goal:** "사람과 사상"의 신뢰. v3 포지셔닝("도구가 아니라 의사결정의 구조")을 매니페스토 한 단락으로 응축.
 
-**Layout (2026-05 reframe — 한국어만 3-card 변경):**
-- `max-w-3xl` 좁은 컬럼, 좌측 정렬, **어두운 배경** (Diagram B와 연속된 다크 구간으로 묶을 수 있음)
-- 상단: Eyebrow + 큰 영문 매니페스토 헤드 2줄 (원본 유지)
-- 중단: 한국어 3블록 (Method · Attitude · Outcome) + hr 4개 (상·사이·하단) — 트웰브랩스식 절제된 카드 구조
-- 하단: Caption "— Siriai Manifesto, 2026"
+**Layout:**
+- 풀폭, 좌측 정렬, **어두운 배경** (Diagram B와 연속된 다크 구간으로 묶을 수 있음)
+- 큰 영문 인용문 한 단락 → 한국어 매니페스토 (3 stanza, 줄별 stagger reveal)
+- 하단에 출처 라벨 한 줄
 
-**Copy seed (영문 헤드 유지 + 한국어 3블록 재편 — 2026-05 reframe):**
+**Copy seed (한국어 카피만 2026-05 reframe — 영문 헤드/Caption/Layout 모두 원본 유지):**
 ```
 [Eyebrow]   05 — VOICE
 
 [Quote EN]  We don't recommend tools.
             We architect what stays.
 
-[Block 1 — Method]      AI 리터러시적 사고를 기반으로 한 최적의 설계.
+[Quote KR]  AI 리터러시적 사고를 기반으로 한 최적의 설계.
 
-[Block 2 — Attitude]    도구로서의 AI 접근을 넘어,
-                        니즈를 정확히 이해하고 '사람'을 돕습니다.
+            도구로서의 AI 접근을 넘어
+            니즈를 정확히 이해하고 '사람'을 돕습니다.
 
-[Block 3 — Outcome]     평균 +32% 이상의 의사결정 비용 감소를 체험해보세요.
+            평균 +32% 이상의 의사결정 비용 감소를 체험해보세요.
 
 [Caption]   — Siriai Manifesto, 2026
 ```
 
-> 강조 처리: Block 2 `'사람'` + Block 3 `+32% 이상` → fontWeight 600 (이미지 reference 패턴 차용).
-> 영문 매니페스토는 §05 anchor로 유지 + 푸터에 echo carry — site voice 두 자리에서 결을 다르게 작동.
-> v2 패턴(scroll-scrub 줄별 reveal)은 폐기. v3는 영문 헤드 정적 fade + hr scaleX expand + 블록 stagger fade.
+> 강조 처리: stanza 2 `'사람'` + stanza 3 `+32% 이상` → fontWeight 600 (정량 수치·핵심 어휘 인라인 강조).
+> 영문 매니페스토는 §05 anchor + 푸터 echo carry — site voice 두 자리에서 결을 다르게 작동.
+> 한국어 카피 변경 사항: v2의 매니페스토(`우리가 만드는 것은 도구가 아닙니다 / 가까운 거리에서 함께 사고합니다 / 어떤 신호를 보고...`) → 2026-05 reframe (Method · Attitude · Outcome 3 stanza, 마지막에 정량 outcome evidence).
 
-**Interactions:** 영문 헤드 fade-up → hr top scaleX → 블록 stagger fade + 그 아래 hr scaleX 순차 → Caption fade.
+**Interactions:** 줄 단위 stagger fade reveal (v2의 ManifestoQuoteSection 패턴 계승, v3 토큰 적용).
 
 **Proof element:** 카피의 권위 + 정량 수치 (+32% 의사결정 비용 감소) — 매니페스토에 outcome evidence 결합.
 
