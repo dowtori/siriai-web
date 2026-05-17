@@ -26,7 +26,7 @@ export default function StanceSection() {
       }}
     >
       <div className="mx-auto max-w-screen-xl px-6 py-32 md:px-10 md:py-40">
-        <div className="grid grid-cols-1 gap-y-14 md:grid-cols-12 md:gap-x-12 md:gap-y-0">
+        <div className="grid grid-cols-1 gap-y-14 md:grid-cols-12 md:items-center md:gap-x-12 md:gap-y-0">
           {/* Left — eyebrow + headline */}
           <div className="md:col-span-6">
             <motion.p
