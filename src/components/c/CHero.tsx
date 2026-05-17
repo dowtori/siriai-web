@@ -75,6 +75,8 @@ const BLOB_PALETTES: Record<number, string[]> = {
 
 export default function CHero() {
   const [index, setIndex] = useState(1);
+  const [hoveredKeyword, setHoveredKeyword] = useState<string | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const blobsGroupRef = useRef<HTMLDivElement>(null);
   const mouseNorm = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -87,8 +89,16 @@ export default function CHero() {
     setIndex((i) => (i === TOTAL ? 1 : i + 1));
   }
 
+  // 자동 슬라이드 진행 — 5초마다 전환. hover 시 정지.
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setIndex((i) => (i === TOTAL ? 1 : i + 1));
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
   // 마우스 트래킹 번짐 — 16 blob 그룹에 parallax translate(반대 방향, 미세 lerp).
-  // 외주 인터랙션 메모: "마우스 트래킹 번짐, 클릭시 이미지로 전환".
   function handleMove(e: React.MouseEvent<HTMLDivElement>) {
     const el = stageRef.current;
     if (!el) return;
@@ -98,20 +108,28 @@ export default function CHero() {
       y: ((e.clientY - rect.top) / rect.height - 0.5) * 2,
     };
   }
+  function handleEnter() {
+    setIsPaused(true);
+  }
   function handleLeave() {
     mouseNorm.current = { x: 0, y: 0 };
+    setIsPaused(false);
+    setHoveredKeyword(null);
   }
+
+  // 호버 키워드에 대응하는 슬라이드 index(SLIDE_CONTENTS 매핑). 없으면 -1.
+  const hoveredSlideIdx = hoveredKeyword
+    ? SLIDE_CONTENTS.findIndex((c) => c.keyword === hoveredKeyword)
+    : -1;
 
   useEffect(() => {
     let raf = 0;
     function loop() {
       const m = mouseNorm.current;
-      // lerp 부드러움
       current.current.x += (m.x - current.current.x) * 0.08;
       current.current.y += (m.y - current.current.y) * 0.08;
       const g = blobsGroupRef.current;
       if (g) {
-        // 마우스 반대 방향으로 미세 이동 (parallax) — 표면이 번지는 인상
         g.style.transform = `translate(${-current.current.x * 18}px, ${-current.current.y * 18}px)`;
       }
       raf = requestAnimationFrame(loop);
@@ -203,6 +221,7 @@ export default function CHero() {
       <div
         ref={stageRef}
         onMouseMove={handleMove}
+        onMouseEnter={handleEnter}
         onMouseLeave={handleLeave}
         className="relative"
         style={{
@@ -211,25 +230,26 @@ export default function CHero() {
           isolation: "isolate",
         }}
       >
-        {/* 외부 그림자 박스 — 1236×518 (가로 더 넓고 세로 짧음) */}
+        {/* 가로로 퍼지는 부드러운 그림자 — 외주 박스(1236×518 #1F1F1F blur 20)를
+            타원 + blur 강화로 자연화. 사각형이 노출되지 않도록 차이만큼 외부로 멀리. */}
         <div
           aria-hidden="true"
           style={{
             position: "absolute",
             left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%)",
-            width: `${(1236 / 920) * 100}%`,
-            height: `${(518 / 920) * 100}%`,
-            background: "#1F1F1F",
-            opacity: 0.6,
-            filter: "blur(20px)",
-            borderRadius: 64,
+            bottom: "-4%",
+            transform: "translateX(-50%)",
+            width: "118%",
+            height: "32%",
+            background:
+              "radial-gradient(50% 50% at 50% 50%, rgba(31,31,31,0.55) 0%, rgba(31,31,31,0.20) 45%, rgba(31,31,31,0) 75%)",
+            filter: "blur(40px)",
             zIndex: -2,
+            pointerEvents: "none",
           }}
         />
 
-        {/* 외각 글로우 — 893×893 plus-lighter blur(50) */}
+        {/* 외각 글로우 — 부드러운 후광 */}
         <div
           aria-hidden="true"
           style={{
@@ -237,14 +257,14 @@ export default function CHero() {
             left: "50%",
             top: "50%",
             transform: "translate(-50%, -50%)",
-            width: `${(893 / 920) * 100}%`,
-            height: `${(893 / 920) * 100}%`,
-            background: "#3D3D3D",
-            mixBlendMode: "plus-lighter",
-            opacity: 0.3,
-            filter: "blur(50px)",
+            width: "104%",
+            height: "104%",
+            background:
+              "radial-gradient(circle at 50% 50%, rgba(80,80,80,0.32) 0%, rgba(80,80,80,0.10) 50%, rgba(80,80,80,0) 75%)",
+            filter: "blur(36px)",
             borderRadius: "50%",
             zIndex: -1,
+            pointerEvents: "none",
           }}
         />
 
@@ -268,7 +288,10 @@ export default function CHero() {
             aria-hidden="true"
           >
             {BLOBS.map((b, i) => {
-              const palette = BLOB_PALETTES[index] ?? BLOB_PALETTES[1];
+              // 슬라이드 1에서 키워드 hover 시 해당 슬라이드 팔레트로 미리보기
+              const previewIdx =
+                index === 1 && hoveredSlideIdx >= 0 ? hoveredSlideIdx + 2 : index;
+              const palette = BLOB_PALETTES[previewIdx] ?? BLOB_PALETTES[1];
               const color = palette[i % palette.length];
               return (
                 <span
@@ -325,21 +348,37 @@ export default function CHero() {
                 zIndex: 2,
               }}
             >
-              {KEYWORDS_4x4.map((k) => (
-                <span
-                  key={k}
-                  style={{
-                    fontFamily: "Pretendard",
-                    fontWeight: 400,
-                    fontSize: "clamp(11px, 1.2vw, 15px)",
-                    lineHeight: 1.2,
-                    color: "#000",
-                    textAlign: "center",
-                  }}
-                >
-                  {k}
-                </span>
-              ))}
+              {KEYWORDS_4x4.map((k) => {
+                const slideMatch = SLIDE_CONTENTS.findIndex((c) => c.keyword === k);
+                const interactive = slideMatch >= 0;
+                const isActive = hoveredKeyword === k;
+                return (
+                  <button
+                    key={k}
+                    type="button"
+                    onMouseEnter={() => setHoveredKeyword(k)}
+                    onMouseLeave={() => setHoveredKeyword((curr) => (curr === k ? null : curr))}
+                    onClick={() => interactive && setIndex(slideMatch + 2)}
+                    aria-label={interactive ? `${k} 슬라이드로 이동` : k}
+                    style={{
+                      background: "transparent",
+                      border: 0,
+                      padding: 0,
+                      fontFamily: "Pretendard",
+                      fontWeight: isActive ? 600 : 400,
+                      fontSize: "clamp(11px, 1.2vw, 15px)",
+                      lineHeight: 1.2,
+                      color: isActive ? "#A7583E" : "#000",
+                      letterSpacing: isActive ? "0.02em" : 0,
+                      cursor: interactive ? "pointer" : "default",
+                      transform: isActive ? "scale(1.12)" : "scale(1)",
+                      transition: "all 260ms cubic-bezier(0.16, 1, 0.3, 1)",
+                    }}
+                  >
+                    {k}
+                  </button>
+                );
+              })}
             </div>
           ) : (
             <div

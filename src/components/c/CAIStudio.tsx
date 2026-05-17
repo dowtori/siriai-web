@@ -82,7 +82,7 @@ export default function CAIStudio() {
                   wordBreak: "keep-all",
                 }}
               >
-                기술과 감각을 결합해, 표현의 다음 방식을 설계합니다.
+                기술과 감각을 결합해, 브랜드의 다음 표현 방식을 설계합니다.
               </p>
             </div>
 
@@ -119,44 +119,40 @@ export default function CAIStudio() {
           </div>
         </div>
 
-        {/* Row 2 — Frame 2147239150 : 7 툴 카드 가로 라인 */}
-        <div
-          className="flex w-full flex-row items-center overflow-x-auto"
-          style={{ gap: 32 }}
-        >
-          {TOOLS.map((t) => (
-            <div
-              key={t.name}
-              className="relative flex items-center justify-center"
-              style={{
-                width: t.w,
-                height: t.h,
-                flex: "0 0 auto",
-                backgroundColor: t.src ? undefined : "rgba(10, 10, 10, 0.05)",
-              }}
-            >
-              {t.src ? (
-                <Image
-                  src={t.src}
-                  alt={t.name}
-                  fill
-                  sizes="240px"
-                  style={{ objectFit: "contain" }}
-                />
-              ) : (
-                <span
-                  style={{
-                    fontFamily: "Pretendard",
-                    fontWeight: 500,
-                    fontSize: 18,
-                    color: "var(--c-ink-mute)",
-                  }}
-                >
-                  {t.name}
-                </span>
-              )}
-            </div>
-          ))}
+        {/* Row 2 — Frame 2147239150 : 툴 로고 무한 마퀴.
+            자산 6개를 2회 반복해 자연스러운 loop. hover 시 정지 + 개별 강조. */}
+        <div className="c-aistudio-marquee" aria-label="AI 툴 캐러셀">
+          <div className="c-aistudio-track">
+            {[...TOOLS, ...TOOLS].map((t, i) => (
+              <div
+                key={`${t.name}-${i}`}
+                className="c-aistudio-tool"
+                style={{ width: t.w, height: t.h }}
+                aria-hidden={i >= TOOLS.length}
+              >
+                {t.src ? (
+                  <Image
+                    src={t.src}
+                    alt={i < TOOLS.length ? t.name : ""}
+                    fill
+                    sizes="240px"
+                    style={{ objectFit: "contain" }}
+                  />
+                ) : (
+                  <span
+                    style={{
+                      fontFamily: "Pretendard",
+                      fontWeight: 500,
+                      fontSize: 18,
+                      color: "var(--c-ink-mute)",
+                    }}
+                  >
+                    {t.name}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

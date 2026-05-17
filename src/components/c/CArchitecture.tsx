@@ -7,11 +7,11 @@
 const ROWS = [
   {
     title: "Relationship Architecture",
-    desc: "관계가 만들어지는 맥락과 흐름을 구조로 만듭니다.",
+    desc: "관계가 만들어지는 역동과 호흡을 구조로 만듭니다.",
   },
   {
     title: "Insight Structure",
-    desc: "관계와 감각에서 얻은 정보를 이해 가능한 구조로 정리합니다.",
+    desc: "관계와 감각으로 얻은 정보를 이해 가능한 구조로 정리합니다.",
   },
 ];
 

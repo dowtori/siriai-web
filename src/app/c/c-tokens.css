@@ -353,3 +353,52 @@ html:has([data-route="c"]) body {
 .c-portfolio-pill:focus-visible {
   outline: none;
 }
+
+/* AIStudio — 6 툴 로고 무한 마퀴.
+   영역 hover 시 일시정지. 각 로고 hover 시 스케일 + grayscale 해제. */
+@keyframes c-aistudio-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.c-aistudio-marquee {
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.c-aistudio-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 32px;
+  animation: c-aistudio-marquee 36s linear infinite;
+}
+.c-aistudio-marquee:hover .c-aistudio-track,
+.c-aistudio-track:focus-within {
+  animation-play-state: paused;
+}
+.c-aistudio-tool {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  filter: grayscale(0.15);
+  opacity: 0.88;
+  transition: transform 320ms var(--c-ease), filter 320ms var(--c-ease), opacity 320ms var(--c-ease);
+}
+.c-aistudio-tool:hover {
+  transform: scale(1.06);
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+/* Relationship — 우측 카드 그룹. 카드별 hover 시 lift + shadow. */
+.c-rel-card {
+  transition: transform 340ms var(--c-ease), box-shadow 340ms var(--c-ease), border-color 340ms var(--c-ease);
+}
+.c-rel-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}

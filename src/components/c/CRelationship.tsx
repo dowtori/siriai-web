@@ -158,7 +158,7 @@ export default function CRelationship() {
 
             {/* Performance 카드 — Vector 11136 (157×107 #FFF border) */}
             <div
-              className="absolute"
+              className="absolute c-rel-card"
               style={{
                 left: 0,
                 top: 82,
@@ -201,7 +201,7 @@ export default function CRelationship() {
 
             {/* Archive 카드 — Vector 11138 (110×86 dark radius 24) */}
             <div
-              className="absolute"
+              className="absolute c-rel-card"
               style={{
                 left: 0,
                 top: "75%",
@@ -234,7 +234,7 @@ export default function CRelationship() {
 
             {/* Creative 사진 카드 — Frame 2147239243 (214×209) */}
             <div
-              className="absolute overflow-hidden"
+              className="absolute overflow-hidden c-rel-card"
               style={{
                 left: "52%",
                 top: 82,

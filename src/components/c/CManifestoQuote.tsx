@@ -77,27 +77,23 @@ function QuoteBlock({ quote, gap }: { quote: string; gap: number }) {
         }}
       />
 
-      {/* 사람 실루엣 — spec 185×202이지만 캡처상 너무 작음. 사이즈 1.6배 키우고
-          blur는 spec 20 유지. 사람 형태(머리 + 어깨 + 몸통 사다리꼴) 더 명확. */}
+      {/* 사람 실루엣 — 단일 부드러운 형상.
+          머리(원) + 어깨(타원)가 viewBox 안에서 살짝 겹치고, blur(20)이
+          둘을 자연스러운 한 덩어리 검은 그림자로 녹임 (캡처와 동일 인상). */}
       <svg
         aria-hidden="true"
-        width="300"
-        height="328"
+        width="240"
+        height="280"
         viewBox="0 0 185 202"
         style={{
           mixBlendMode: "darken",
           filter: "blur(20px)",
         }}
       >
-        {/* 머리 */}
-        <ellipse cx="92.5" cy="55" rx="32" ry="38" fill="#000" />
-        {/* 목 (가는 연결) */}
-        <rect x="85" y="88" width="15" height="14" fill="#000" />
-        {/* 어깨·몸통 (사다리꼴) */}
-        <path
-          d="M62 100 L123 100 L150 186 Q92.5 200 35 186 Z"
-          fill="#000"
-        />
+        {/* 머리 — 부드러운 타원 */}
+        <ellipse cx="92.5" cy="62" rx="26" ry="32" fill="#000" />
+        {/* 어깨·몸통 — 타원 한 덩어리. 머리와 약간 겹쳐 연결이 blur로 녹음 */}
+        <ellipse cx="92.5" cy="148" rx="62" ry="54" fill="#000" />
       </svg>
     </div>
   );
