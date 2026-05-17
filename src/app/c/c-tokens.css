@@ -1,0 +1,245 @@
+/* C-version scoped tokens — 외주 UX/UI 원안 충실 재현 */
+/* 폰트: Pretendard 단일 (외주 원안 확인). globals.css에서 이미 import. */
+
+[data-route="c"] {
+  /* Surface */
+  --c-paper: #FAFAF7;            /* 외주 캡처상 미세하게 따뜻한 오프화이트 */
+  --c-paper-pure: #FFFFFF;
+  --c-ink: #0A0A0A;
+  --c-ink-soft: #1A1A1A;
+  --c-ink-mute: #6B6B6B;
+  --c-ink-faint: rgba(10, 10, 10, 0.12);
+  --c-line: rgba(10, 10, 10, 0.08);
+
+  /* Accent */
+  --c-banner-grad-from: #D8D08A; /* 상단 띠 노랑-올리브 */
+  --c-banner-grad-to: #E9E2A7;
+  --c-pill-bg: rgba(10, 10, 10, 0.06);
+
+  /* Typography scale (Pretendard) */
+  --c-display-size: clamp(1.9rem, 4.2vw, 3.4rem);   /* Hero H1 */
+  --c-display-lh: 1.32;
+  --c-display-tracking: -0.02em;
+
+  --c-headline-size: clamp(1.4rem, 2.4vw, 2.1rem);
+  --c-headline-lh: 1.4;
+  --c-headline-tracking: -0.015em;
+
+  --c-body-size: clamp(0.92rem, 1vw, 1rem);
+  --c-body-lh: 1.85;
+
+  --c-meta-size: 13px;
+  --c-meta-lh: 1.6;
+
+  --c-label-size: 11px;
+  --c-label-tracking: 0.22em;
+
+  --c-nav-size: 13px;
+
+  --c-logotype-size: clamp(4.5rem, 16vw, 14rem);
+  --c-logotype-tracking: -0.025em;
+
+  --c-banner-size: 12px;
+  --c-banner-tracking: 0.005em;
+
+  /* Rhythm */
+  --c-shell-x: clamp(1.25rem, 5vw, 5rem);
+  --c-section-y: clamp(4rem, 9vh, 7rem);
+  --c-hero-min-h: clamp(620px, 86vh, 920px);
+
+  --c-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Force paper base only on /c */
+html:has([data-route="c"]) {
+  background-color: var(--c-paper);
+}
+html:has([data-route="c"]) body {
+  background-color: var(--c-paper);
+  color: var(--c-ink);
+}
+
+.c-root {
+  background-color: var(--c-paper);
+  color: var(--c-ink);
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+}
+
+.c-shell {
+  padding-inline: var(--c-shell-x);
+}
+
+/* Typography utilities */
+.c-display {
+  font-size: var(--c-display-size);
+  line-height: var(--c-display-lh);
+  letter-spacing: var(--c-display-tracking);
+  font-weight: 700;
+  color: var(--c-ink);
+  word-break: keep-all;
+  text-wrap: balance;
+  margin: 0;
+}
+
+.c-headline {
+  font-size: var(--c-headline-size);
+  line-height: var(--c-headline-lh);
+  letter-spacing: var(--c-headline-tracking);
+  font-weight: 700;
+  color: var(--c-ink);
+  word-break: keep-all;
+  margin: 0;
+}
+
+.c-body {
+  font-size: var(--c-body-size);
+  line-height: var(--c-body-lh);
+  color: var(--c-ink-mute);
+  word-break: keep-all;
+  letter-spacing: -0.005em;
+}
+
+.c-meta {
+  font-size: var(--c-meta-size);
+  line-height: var(--c-meta-lh);
+  color: var(--c-ink-mute);
+  word-break: keep-all;
+}
+
+.c-label {
+  font-size: var(--c-label-size);
+  letter-spacing: var(--c-label-tracking);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--c-ink-mute);
+}
+
+.c-divider {
+  height: 1px;
+  background-color: var(--c-line);
+  border: 0;
+  margin: 0;
+}
+
+/* Logotype (footer reveal) — Pretendard 굵게, 큰 size. 외주 원안의 풍경 위 배치를 위해 black weight. */
+.c-logotype {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: var(--c-logotype-size);
+  font-weight: 800;
+  letter-spacing: var(--c-logotype-tracking);
+  line-height: 0.9;
+  color: var(--c-ink);
+  margin: 0;
+  user-select: none;
+}
+
+/* Top banner (얇은 노랑 그라디언트 띠) */
+.c-banner {
+  background: linear-gradient(
+    90deg,
+    var(--c-paper) 0%,
+    var(--c-banner-grad-from) 35%,
+    var(--c-banner-grad-to) 65%,
+    var(--c-paper) 100%
+  );
+  font-size: var(--c-banner-size);
+  letter-spacing: var(--c-banner-tracking);
+  color: var(--c-ink);
+  font-weight: 500;
+}
+
+/* Header */
+.c-wordmark {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--c-ink);
+  text-decoration: none;
+  font-style: italic;
+}
+
+.c-nav-link {
+  font-size: var(--c-nav-size);
+  font-weight: 500;
+  color: var(--c-ink);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  transition: background-color 200ms var(--c-ease), color 200ms var(--c-ease);
+}
+
+.c-nav-link:hover,
+.c-nav-link:focus-visible {
+  background-color: var(--c-pill-bg);
+  outline: none;
+}
+
+.c-nav-link[aria-current="page"] {
+  background-color: var(--c-pill-bg);
+}
+
+/* Hero pagination indicator */
+.c-pager-arrow {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-ink-mute);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: color 200ms var(--c-ease);
+}
+
+.c-pager-arrow:hover,
+.c-pager-arrow:focus-visible {
+  color: var(--c-ink);
+  outline: none;
+}
+
+.c-pager-count {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--c-ink);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hero 글자 파편 구체 stage — 외주 BX 컨셉:
+   글자 입자가 구형으로 모여 검은 구체 형태 → 마우스 시야 메타포로 흩어짐 → 라벨 노출.
+   배경은 페이지 페이퍼색 그대로 (흰 디스크 없음). */
+.c-hero-orb-stage {
+  position: relative;
+  width: clamp(320px, 60vw, 680px);
+  aspect-ratio: 1;
+  margin-inline: auto;
+  /* 외각 시야 페이드 (사람 시야 묘사) — 외각으로 갈수록 페이퍼 색이 자연스럽게 침투 */
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 92%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 92%);
+}
+
+.c-hero-orb-labels {
+  position: absolute;
+  inset: 16% 14%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 0;
+  place-items: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.c-hero-orb-label {
+  font-size: clamp(10px, 1vw, 13px);
+  letter-spacing: 0.04em;
+  color: var(--c-ink);
+  font-weight: 500;
+  text-align: center;
+}
