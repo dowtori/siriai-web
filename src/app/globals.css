@@ -117,6 +117,9 @@ body {
 .animate-siriai-marquee-reverse {
   animation: siriai-marquee-reverse 28s linear infinite;
 }
+.animate-siriai-marquee-slow {
+  animation: siriai-marquee 60s linear infinite;
+}
 
 ::-webkit-scrollbar {
   width: 4px;

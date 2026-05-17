@@ -4,7 +4,7 @@ import HeroSection from "@/components/v3/HeroSection";
 import StanceSection from "@/components/v3/StanceSection";
 import MethodologySection from "@/components/v3/MethodologySection";
 import SystemSection from "@/components/v3/SystemSection";
-import ServicesSection from "@/components/v3/ServicesSection";
+import ClientsSection from "@/components/v3/ClientsSection";
 import VoiceSection from "@/components/v3/VoiceSection";
 import ContactSection from "@/components/v3/ContactSection";
 import Footer from "@/components/v3/Footer";
@@ -30,7 +30,7 @@ export default function V3Home() {
         <StanceSection />
         <MethodologySection />
         <SystemSection />
-        <ServicesSection />
+        <ClientsSection />
         <VoiceSection />
         <ContactSection />
       </main>

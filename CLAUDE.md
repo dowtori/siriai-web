@@ -73,7 +73,7 @@ npx vercel --prod    # 또는 git push → Vercel 자동 배포
 ```
 src/
 ├─ app/
-│  ├─ page.tsx                   v3 홈 (Hero · Stance · Methodology · System · Services · Voice · Contact)
+│  ├─ page.tsx                   v3 홈 (Hero · Stance · Methodology · System · Clients · Voice · Contact)
 │  ├─ contact/page.tsx           v3 ContactPage
 │  ├─ layout.tsx                 메인 layout (v3 metadata · OG · twitter)
 │  ├─ globals.css                토큰(v1 + v3) · 폰트 import · 마키 keyframes
@@ -92,7 +92,7 @@ src/
 │  │  ├─ StanceSection.tsx       §01 좌우 비대칭, 줄별 stagger
 │  │  ├─ MethodologySection.tsx  §02 좌 텍스트 + 우 SVG Diagram A (삼각 + 코어)
 │  │  ├─ SystemSection.tsx       §03 풀폭 SVG Diagram B (4레이어 · dark)
-│  │  ├─ ServicesSection.tsx     §04 3-col 카드 (Studio/Advisory/Literacy)
+│  │  ├─ ClientsSection.tsx      §04 With — 단일 가로 wall · slow marquee · 16 로고 (5 SVG + 11 wordmark)
 │  │  ├─ VoiceSection.tsx        §05 매니페스토 (dark · 줄별 reveal)
 │  │  ├─ ContactSection.tsx      §06 홈 인라인 wrapper
 │  │  └─ ContactForm.tsx         폼 본체 (인라인·페이지 양쪽 재사용)
@@ -146,7 +146,7 @@ src/
 2. **§01 Stance** — "We don't deploy tools. We design how decisions are made."
 3. **§02 Methodology** · Diagram A — 3축 (Architecture · Literacy · Operation) → Operating Model
 4. **§03 System** · Diagram B (dark) — 4레이어 Signal · Judgment · Action · Record
-5. **§04 Services** — 3-col (Studio · Advisory · Literacy), 카드 click → `#contact` + sessionStorage interest 저장
+5. **§04 Clients (With)** — 단일 가로 로고 wall · slow marquee (60s) · 고객·파트너·솔루션 평탄화 · 협업 분야 비공개 (트웰브랩스식 담백 톤)
 6. **§05 Voice** (dark) — 매니페스토 (Signal/Judgment/Action/Record 마지막 줄로 §03와 연결)
 7. **§06 Contact** — 인라인 폼 (이름·회사·이메일·interest radio·메시지 선택·동의)
 
@@ -187,7 +187,7 @@ create table contact_submissions (
 - /contact 페이지별 opengraph-image 추가 (선택)
 
 ### 비주얼 정교화
-- Services 카드 hover에서 accent 라인 강조
+- Clients wall — 비가용 11개 wordmark의 brand-specific 타이포 정교화 (실제 SVG 입수 시 swap)
 - HeroParticles 모바일 fps 최적화 (파티클 수 동적 조정)
 
 ### 의존성 정리
