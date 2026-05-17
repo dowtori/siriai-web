@@ -45,7 +45,7 @@ export default function StanceSection() {
               className="mt-8 tracking-[-0.02em]"
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(2rem, 4vw, 3.75rem)",
+                fontSize: "clamp(2.25rem, 4.2vw, 4rem)",
                 fontWeight: 500,
                 lineHeight: 1.08,
               }}
@@ -76,7 +76,7 @@ export default function StanceSection() {
           </div>
 
           {/* Right — Korean body, line-by-line stagger */}
-          <div className="self-end md:col-span-6 md:col-start-7">
+          <div className="md:col-span-6 md:col-start-7">
             <div
               className="space-y-5"
               style={{

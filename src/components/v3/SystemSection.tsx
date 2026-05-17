@@ -100,7 +100,7 @@ export default function SystemSection() {
             className="mt-8 tracking-[-0.02em]"
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(2rem, 4vw, 3.75rem)",
+              fontSize: "clamp(1.875rem, 3.5vw, 3.25rem)",
               fontWeight: 500,
               lineHeight: 1.08,
             }}
