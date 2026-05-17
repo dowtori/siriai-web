@@ -60,7 +60,7 @@ export default function HeroSection() {
               maxWidth: "22ch",
             }}
           >
-            AI로 사고하는 구조를 설계합니다.
+            AI 기반 인사이트, 가장 쉽고 감각적으로.
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}

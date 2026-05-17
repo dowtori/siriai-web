@@ -4,9 +4,9 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const BODY_LINES = [
-  "AI 도구는 매주 등장합니다.",
-  "바뀌어도 남는 자리가 있습니다.",
-  "시리아이는 그 자리를 설계합니다.",
+  "AI 도구는 매일 새롭게 등장합니다.",
+  "필요한 건 창의성과 결합.",
+  "시리아이는 그 구조를 설계합니다.",
 ];
 
 const EASE = [0.16, 1, 0.3, 1] as const;
