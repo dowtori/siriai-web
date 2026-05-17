@@ -9,11 +9,11 @@ import CCreator from "@/components/c/CCreator";
 import CArchiving from "@/components/c/CArchiving";
 import CManifestoQuote from "@/components/c/CManifestoQuote";
 import CGrowth from "@/components/c/CGrowth";
-import CServices from "@/components/c/CServices";
 import CFooter from "@/components/c/CFooter";
 
 // /c — 외주 UX/UI 원안 충실 재현.
-// 전체 12개 본문 블록 + Footer. Hero 인터랙션(검은 구체 reveal + 1/5 carousel)은 다음 단계.
+// 외주 spec에 Services 단독 카드 그리드 없음 — Growth(Frame 2147239155)가 4 서비스 카드를
+// 포함하는 통합 섹션. CServices 컴포넌트는 page에서 미사용(파일은 보존, 후속 결정).
 
 export default function CPage() {
   return (
@@ -30,7 +30,6 @@ export default function CPage() {
         <CArchiving />
         <CManifestoQuote />
         <CGrowth />
-        <CServices />
         <CFooter />
       </main>
     </>
