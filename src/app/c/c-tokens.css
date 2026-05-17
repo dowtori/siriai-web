@@ -258,3 +258,59 @@ html:has([data-route="c"]) body {
   letter-spacing: 0.02em;
   user-select: none;
 }
+
+/* Architecture CTA — Figma spec: Frame 2085674449(안쪽 검은 박스 + filter blur 10px)
+   + Frame 2147239162(바깥 또렷한 컨테이너). ::before로 blur 박스 깔고 텍스트는 위.
+   161×50, padding 16 20, border-radius 20, gap 10, Pretendard 600 15px #FFF. */
+.c-arch-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 161px;
+  height: 50px;
+  padding: 16px 20px;
+  border-radius: 20px;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.2;
+  color: #ffffff;
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.c-arch-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #000;
+  border-radius: 20px;
+  filter: blur(10px);
+  z-index: -1;
+}
+
+/* AIStudio pager 원형 버튼 — Figma spec: 24×24, border 0.748px #DEDEDE, radius 12.35px */
+.c-aistudio-pager-btn {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.748437px solid #dedede;
+  border-radius: 12.3492px;
+  background: transparent;
+  color: #161616;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 160ms var(--c-ease), border-color 160ms var(--c-ease);
+}
+
+.c-aistudio-pager-btn:hover,
+.c-aistudio-pager-btn:focus-visible {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-color: #bdbdbd;
+  outline: none;
+}

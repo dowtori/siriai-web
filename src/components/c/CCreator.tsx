@@ -1,65 +1,88 @@
-// 외주 원안 섹션 — Global Creators: 전 세계의 크리에이터와 함께 브랜드의 관계를 구축합니다.
-// 카피: Track A CreatorSection 차용. 풀스크린 풍경 배경.
-// TODO: 자연 풍경 사진 자산 수령 시 backgroundImage 교체. 현재는 dark olive.
+// 외주 원안 섹션 — Global Creators.
+// 외주 Figma spec(Frame 2147239207 + Rectangle 240652986) 픽셀 정밀 재구현.
+// 1280×560 박스, 라운드 80px, 배경 = 실제 풍경 이미지(Rectangle 240652986) +
+// 위에 검은 30% overlay + filter blur 16px. 가운데 866×215 카피 그룹.
+// 헤드라인(48px 700 120%) + 본문(18px 400 140%) 모두 #FFF text-align center.
+
+import Image from "next/image";
 
 export default function CCreator() {
   return (
     <section
       id="creator"
       aria-labelledby="c-creator-heading"
-      className="relative flex min-h-[80vh] items-center justify-center overflow-hidden"
-      style={{ backgroundColor: "#2A2F26" }}
+      className="c-shell py-[var(--c-section-y)]"
     >
-      {/* TODO: 풍경 사진 자산 수령 시 next/image fill로 교체 */}
       <div
-        className="pointer-events-none absolute inset-0"
+        className="relative mx-auto w-full overflow-hidden"
         style={{
-          background:
-            "linear-gradient(160deg, rgba(8,14,8,0.84) 0%, rgba(4,10,4,0.90) 100%)",
+          maxWidth: 1280,
+          aspectRatio: "1280 / 560",
+          minHeight: "min(560px, 70vw)",
+          borderRadius: 80,
+          isolation: "isolate",
         }}
-      />
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-        }}
-      />
+      >
+        {/* 배경 — Rectangle 240652986 + blur(16) + 검은 30% overlay */}
+        <div
+          className="absolute inset-0"
+          style={{ filter: "blur(16px)", transform: "scale(1.05)" }}
+          aria-hidden="true"
+        >
+          <Image
+            src="/c/assets/creator/landscape.png"
+            alt=""
+            fill
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            style={{ objectFit: "cover" }}
+            priority={false}
+          />
+        </div>
+        <div
+          className="absolute inset-0"
+          style={{ background: "rgba(0, 0, 0, 0.3)" }}
+          aria-hidden="true"
+        />
 
-      <div className="c-shell relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-7 text-center">
-        <p
-          className="c-label"
-          style={{ color: "rgba(255,255,255,0.4)" }}
-        >
-          Global Creators
-        </p>
-        <h2
-          id="c-creator-heading"
-          className="font-bold"
+        {/* 가운데 카피 그룹 — Frame 2085674450 (866×215) */}
+        <div
+          className="absolute left-1/2 top-1/2 flex w-full flex-col items-center"
           style={{
-            color: "#FFFFFF",
-            fontSize: "clamp(2.2rem, 4.6vw, 4.8rem)",
-            lineHeight: 1.2,
-            wordBreak: "keep-all",
+            transform: "translate(-50%, -50%)",
+            maxWidth: 866,
+            paddingInline: "clamp(20px, 4vw, 40px)",
+            gap: 24,
           }}
         >
-          전 세계의 크리에이터와
-          <br />
-          함께 브랜드의 관계를
-          <br />
-          구축합니다.
-        </h2>
-        <p
-          className="max-w-lg text-[15px] leading-[1.85]"
-          style={{
-            color: "rgba(255,255,255,0.5)",
-            wordBreak: "keep-all",
-          }}
-        >
-          단순 바이럴이 아닙니다. 브랜드의 언어를 이해하는 크리에이터와
-          장기적인 관계 구조를 만들어갑니다.
-        </p>
+          <h2
+            id="c-creator-heading"
+            className="m-0 w-full text-center"
+            style={{
+              fontFamily: "Pretendard",
+              fontWeight: 700,
+              fontSize: "clamp(28px, 4vw, 48px)",
+              lineHeight: 1.2,
+              color: "#FFFFFF",
+              wordBreak: "keep-all",
+            }}
+          >
+            전 세계의 크리에이터와 함께 브랜드의 관계를 구축합니다.
+          </h2>
+          <p
+            className="m-0 w-full text-center"
+            style={{
+              fontFamily: "Pretendard",
+              fontWeight: 400,
+              fontSize: "clamp(14px, 1.4vw, 18px)",
+              lineHeight: 1.4,
+              color: "#FFFFFF",
+              wordBreak: "keep-all",
+            }}
+          >
+            데이터와 맥락, 감각을 결합해 브랜드와 크리에이터 사이에 오래 작동하는
+            파트너십을 설계합니다.
+          </p>
+        </div>
       </div>
     </section>
   );
