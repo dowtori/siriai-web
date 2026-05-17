@@ -314,3 +314,42 @@ html:has([data-route="c"]) body {
   border-color: #bdbdbd;
   outline: none;
 }
+
+/* Header Portfolio pill — Figma spec(Frame 2147239182): 80×33, padding 8 12,
+   border 1px #000, filter blur(2px), border-radius 12. Architecture CTA처럼
+   ::before로 흐린 border 깔고 텍스트는 또렷. */
+.c-portfolio-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 33px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #000;
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.c-portfolio-pill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid #000;
+  border-radius: 12px;
+  filter: blur(2px);
+  z-index: -1;
+}
+
+.c-portfolio-pill:hover::before,
+.c-portfolio-pill:focus-visible::before {
+  filter: blur(1px);
+}
+.c-portfolio-pill:focus-visible {
+  outline: none;
+}
