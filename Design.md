@@ -347,7 +347,7 @@ Phase D 의존성 정리:
 
 ### 7.1 Concept
 
-> "Architecture for thinking with AI" 문장이 **조립과 해체를 반복**하며 살아 있다. 글자는 좌측에서 흘러들어와 정렬되고, 잠시 머문 뒤 다시 분해되어 흩어졌다가 다른 정렬로 재조립된다.
+> "Architecture for Insight with AI" 문장이 **조립과 해체를 반복**하며 살아 있다. 글자는 좌측에서 흘러들어와 정렬되고, 잠시 머문 뒤 다시 분해되어 흩어졌다가 다른 정렬로 재조립된다.
 
 핵심 정서: **사고의 구조가 형성되는 순간**. 추상이지만 문장의 의미와 직결.
 
@@ -357,7 +357,7 @@ Phase D 의존성 정리:
 
 #### 구현 개요
 
-1. 오프스크린 `<canvas>`에 문자열(`"Architecture for thinking with AI"`)을 큰 폰트로 한 번 렌더
+1. 오프스크린 `<canvas>`에 문자열(`"Architecture for Insight with AI"`)을 큰 폰트로 한 번 렌더
 2. `ctx.getImageData()`로 픽셀 샘플링 → 비투명 픽셀 좌표 배열 추출 (3~5px 간격)
 3. 각 좌표를 파티클 객체(`{x, y, targetX, targetY, vx, vy}`)로 변환
 4. RAF 루프에서 spring 보간으로 target 위치로 수렴, 마우스 위치 ±4px 끌림 적용
@@ -391,7 +391,7 @@ Phase D 의존성 정리:
 
 ```
 t=0       모든 글자가 화면 좌측 바깥에서 점 군집으로 대기
-t=0.4s    글자들이 우측으로 흘러들어와 "Architecture for thinking with AI" 정렬
+t=0.4s    글자들이 우측으로 흘러들어와 "Architecture for Insight with AI" 정렬
 t=2.5s    완성된 상태로 머묾, 마우스 위치에 따라 글자가 미세하게 따라옴 (±4px)
 t=6s      글자가 다시 점으로 분해되어 짧게 흩어짐
 t=7s      재정렬: 같은 문장이 약간 다른 줄바꿈/자간으로 재조립

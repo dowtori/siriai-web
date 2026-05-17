@@ -25,7 +25,7 @@
 
 ### 1.1 One-line Statement
 
-**EN:** *Siriai designs the architecture for thinking with AI.*
+**EN:** *Siriai designs the architecture for Insight with AI.*
 **KR:** 시리아이는 AI로 사고하는 구조를 설계합니다.
 
 > 톤 노트: "AI를 도입"하지 않는다. "사고의 구조를 설계"한다. 명사(아키텍처)와 동사(설계)의 조합 — 도구가 아니라 시스템에 책임을 둔다.
@@ -87,7 +87,7 @@ Siriai의 좌표: **고추상 × 기술-브랜드 경계**. 컨설팅 펌만큼 
 ### 2.1 Layered Claims
 
 ```
-L1  Hero claim         "Architecture for thinking with AI."
+L1  Hero claim         "Architecture for Insight with AI."
                        사고의 구조를 설계합니다.
 
 L2  Sub-claim          "We don't deploy tools. We design how decisions are made."
@@ -177,14 +177,14 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 - 하단: 스크롤 힌트 (단순 라인)
 
 **Generative concept:**
-"Architecture for thinking with AI" 문장이 글자 단위로 **조립·해체**되며 순환. 마우스 위치에 따라 글자가 미세하게 끌려옴. 자세한 구현은 Design.md §7 참조.
+"Architecture for Insight with AI" 문장이 글자 단위로 **조립·해체**되며 순환. 마우스 위치에 따라 글자가 미세하게 끌려옴. 자세한 구현은 Design.md §7 참조.
 
 **Copy seed:**
 ```
 [Eyebrow]   SIRIAI — ARCHITECTURE FOR INSIGHT, AI
 
 [Hero EN]   Architecture for
-            thinking with AI.
+            Insight with AI.
 
 [Hero KR]   AI로 사고하는 구조를 설계합니다.
 

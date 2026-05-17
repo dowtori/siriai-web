@@ -10,7 +10,7 @@ import ContactSection from "@/components/v3/ContactSection";
 import Footer from "@/components/v3/Footer";
 
 export const metadata: Metadata = {
-  title: "Siriai — Architecture for thinking with AI",
+  title: "Siriai — Architecture for Insight with AI",
   description:
     "AI로 사고하는 조직을 위한 의사결정 구조 설계. 서울 기반 AI 아키텍처 · 리터러시 컨설팅.",
 };

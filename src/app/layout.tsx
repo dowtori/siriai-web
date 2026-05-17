@@ -4,13 +4,13 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://siriai.io"),
   title: {
-    default: "Siriai — Architecture for thinking with AI",
+    default: "Siriai — Architecture for Insight with AI",
     template: "%s · Siriai",
   },
   description:
     "AI로 사고하는 조직을 위한 의사결정 구조 설계. 서울 기반 AI 아키텍처 · 리터러시 컨설팅.",
   openGraph: {
-    title: "Siriai — Architecture for thinking with AI",
+    title: "Siriai — Architecture for Insight with AI",
     description:
       "AI로 사고하는 조직을 위한 의사결정 구조 설계. 서울 기반 AI 아키텍처 · 리터러시 컨설팅.",
     type: "website",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Siriai — Architecture for thinking with AI",
+    title: "Siriai — Architecture for Insight with AI",
     description: "AI로 사고하는 조직을 위한 의사결정 구조 설계.",
   },
 };
