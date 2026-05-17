@@ -338,39 +338,33 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 
 ### Section 05 — Voice
 
-**Goal:** "사람과 사상"의 신뢰. v3 포지셔닝("도구가 아니라 의사결정의 구조")을 매니페스토 한 단락으로 응축.
+**Goal:** "사람과 사상"의 신뢰. v3 포지셔닝("도구가 아니라 의사결정의 구조")을 절제된 3블록으로 응축.
 
-**Layout:**
-- 풀폭, 좌측 정렬, **어두운 배경** (Diagram B와 연속된 다크 구간으로 묶을 수 있음)
-- 큰 인용문 한 단락, 스크롤에 따라 **줄 단위 페이드 인**
-- 하단에 출처 라벨 한 줄
+**Layout (2026-05 reframe — 3-card 형태):**
+- 풀폭, **어두운 배경** (Diagram B와 연속된 다크 구간으로 묶을 수 있음)
+- `max-w-3xl` 좁은 컬럼, 좌측 정렬
+- 상단·블록 사이·하단 모두 hr 라인으로 구분 (총 4개 hr) — 트웰브랩스식 절제된 카드 구조
+- 큰 영문 헤드·caption 제거 (영문 매니페스토는 푸터에 echo로 carry)
 
-**Copy seed (신규 — v3 포지셔닝 기반):**
+**Copy seed (신규 — 2026-05 reframe):**
 ```
 [Eyebrow]   05 — VOICE
 
-[Quote EN]  We don't recommend tools.
-            We architect what stays.
+[Block 1 — Method]      AI 리터러시적 사고를 기반으로 한 최적의 설계.
 
-[Quote KR]  우리가 만드는 것은 도구가 아닙니다.
-            사고가 흐르는 자리입니다.
+[Block 2 — Attitude]    도구로서의 AI 접근을 넘어,
+                        니즈를 정확히 이해하고 '사람'을 돕습니다.
 
-            가까운 거리에서 함께 사고합니다.
-            충분히 듣고, 천천히 답합니다.
-
-            어떤 신호를 보고, 어떻게 판단하며, 무엇을 실행하고, 무엇을 기록할지 —
-            그 정렬을 함께 설계합니다.
-
-(주: §00 Hero 'Insight' 키워드 회피. §01 'Tools change. Structure remains.'와 메시지 결은 같되 동사·자세를 굴려 표면 단어를 다르게 표현.)
-
-[Caption]   — Siriai Manifesto, 2026
+[Block 3 — Outcome]     평균 +32% 이상의 의사결정 비용 감소를 체험해보세요.
 ```
 
-> 마지막 문장의 "신호·판단·실행·기록"은 §03 System 다이어그램의 4개 레이어(Signal / Judgment / Action / Record)와 의도적으로 연결된다. Voice 섹션이 다이어그램의 언어적 거울 역할.
+> 강조 처리: Block 2 `'사람'` + Block 3 `+32% 이상` → fontWeight 600 (이미지 reference 패턴 차용).
+> 영문 매니페스토 "We don't recommend tools. We architect what stays." 는 §05에서 제거하고 푸터에 echo carry (Site voice anchor 1자리만 유지 — Negative Space).
+> v2 패턴(scroll-scrub 줄별 reveal)은 폐기. v3는 hr scaleX expand + 블록 stagger fade 정적 모션.
 
-**Interactions:** 줄 단위 scroll-scrub reveal (v2의 ManifestoQuoteSection 패턴 계승, 단 시각 언어는 v3 토큰 적용).
+**Interactions:** hr 라인 좌→우 scaleX 1, 블록 순차 stagger fade (delay 0.4 + i * 0.18).
 
-**Proof element:** 카피의 권위 자체.
+**Proof element:** 카피의 권위 + 정량 수치 (+32% 의사결정 비용 감소) — 매니페스토에 outcome evidence 결합.
 
 ---
 
