@@ -176,7 +176,7 @@ export default function ContactForm() {
             </svg>
           )}
         </span>
-        진단 통화 응대 목적의 개인정보 수집·이용에 동의합니다.
+        사전 미팅 안내를 위한 개인정보 수집·이용에 동의합니다.
       </label>
 
       <button
@@ -194,7 +194,7 @@ export default function ContactForm() {
         <span>
           {status === "loading"
             ? "전송 중..."
-            : "진단 통화 신청 / Start a diagnosis"}
+            : "메모 보내기 / Send a note"}
         </span>
         <span
           aria-hidden
@@ -279,7 +279,7 @@ function ReceivedBlock() {
           wordBreak: "keep-all",
         }}
       >
-        진단 통화 신청이 접수되었습니다.
+        메시지가 도착했습니다.
       </p>
       <p
         className="mt-4 text-sm"
@@ -289,7 +289,7 @@ function ReceivedBlock() {
           lineHeight: 1.7,
         }}
       >
-        24시간 안에 이메일로 일정 옵션을 보내드립니다.
+        24시간 안에 이메일로 가능한 시간을 회신드립니다.
       </p>
       <p
         className="mt-3 text-sm"

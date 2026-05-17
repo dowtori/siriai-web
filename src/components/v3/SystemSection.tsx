@@ -143,7 +143,7 @@ export default function SystemSection() {
             wordBreak: "keep-all",
           }}
         >
-          실제 설계 운영 구조의 추상화.
+          실제 운영 구조의 추상화.
           <br />
           <span style={{ color: "var(--fg-on-inverse)" }}>
             Signal · Judgment · Action · Record.

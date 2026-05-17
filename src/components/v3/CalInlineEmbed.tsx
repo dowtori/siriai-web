@@ -65,7 +65,7 @@ export default function CalInlineEmbed() {
             maxWidth: "28ch",
           }}
         >
-          비어있는 시간을 직접 선택해 진단 통화를 잡습니다.
+          비어있는 시간을 직접 선택해 사전 미팅을 정합니다.
         </p>
         <p
           className="mt-4 text-sm"

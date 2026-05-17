@@ -18,14 +18,14 @@ const AXES = [
     num: "02",
     title: "Literacy",
     kr: "구성원이 AI로 사고하는 법을 익히는 커리큘럼.",
-    desc: "진단 → 트랙별 학습 → 사내 매뉴얼화.",
+    desc: "현황 점검 → 트랙별 학습 → 사내 매뉴얼화.",
   },
   {
     key: "operation",
     num: "03",
     title: "Operation",
     kr: "함께 운영하며 정기적으로 점검·튜닝합니다.",
-    desc: "리테이너 어드바이저리, KPI, 회고 사이클.",
+    desc: "정기 자문, KPI, 회고 사이클.",
   },
 ];
 

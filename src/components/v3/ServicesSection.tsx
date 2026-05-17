@@ -18,14 +18,14 @@ const SERVICES = [
     mode: "Advisory",
     nameKr: "어드바이저리",
     tagline: "정기 자문으로 의사결정 구조를 정렬합니다.",
-    includes: ["월간 진단·회고", "의사결정 트리 정비", "임원 1:1 세션"],
+    includes: ["월간 점검·회고", "의사결정 트리 정비", "임원 1:1 세션"],
   },
   {
     id: "literacy",
     mode: "Literacy",
     nameKr: "리터러시",
     tagline: "조직이 AI로 사고하는 법을 학습합니다.",
-    includes: ["진단 워크숍", "트랙별 커리큘럼", "사내 매뉴얼화"],
+    includes: ["현황 점검 워크숍", "트랙별 커리큘럼", "사내 매뉴얼화"],
   },
 ];
 
