@@ -62,15 +62,6 @@ export default function HeroSection() {
           >
             AI 기반 인사이트, 가장 쉽고 감각적으로.
           </motion.p>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.6 }}
-            className="mt-14 text-[11px] uppercase tracking-[0.22em]"
-            style={{ color: "var(--fg-muted)" }}
-          >
-            Founded in Seoul · Est. 2024
-          </motion.p>
         </div>
       </div>
 

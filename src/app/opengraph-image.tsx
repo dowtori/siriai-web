@@ -71,7 +71,7 @@ export default async function Image() {
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "flex-end",
               alignItems: "center",
               fontSize: 18,
               letterSpacing: 4,
@@ -79,7 +79,6 @@ export default async function Image() {
               textTransform: "uppercase",
             }}
           >
-            <span>Founded in Seoul · Est. 2024</span>
             <span>siriai.io</span>
           </div>
         </div>
