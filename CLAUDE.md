@@ -146,7 +146,7 @@ src/
 2. **§01 Stance** — "Tools change. / Structure remains. / We design it." (한국어: AI 도구는 매주 등장합니다 / 바뀌어도 남는 자리가 있습니다 / 시리아이는 그 자리를 설계합니다) · 3줄 압축 · EN/KR 不 mirror
 3. **§02 Methodology** · Diagram A — 진입의 3축 (Architecture · Literacy · Mapping). 코어 라벨 제거 (Negative Space). §03(흐름)과의 시간성 분리.
 4. **§03 System** · Diagram B (dark) — 4레이어 Signal · Judgment · Action · Record
-5. **§04 Clients (With)** — 단일 가로 로고 wall · slow marquee (60s) · 고객·파트너·솔루션 평탄화 · 협업 분야 비공개 (트웰브랩스식 담백 톤)
+5. **§04 Clients (With)** — 헤드 "Brands we've sat with." / 보조 "각자 다른 결, 같은 자세." · 단일 가로 로고 wall · slow marquee (60s) · 16 로고 (5 SVG + 11 wordmark) · 협업 분야 비공개 (트웰브랩스식 담백 톤 + 절제된 voice 1쌍)
 6. **§05 Voice** (dark) — 매니페스토 "We don't recommend tools. / We architect what stays." (Signal/Judgment/Action/Record 마지막 줄로 §03와 연결)
 7. **§06 Contact** — 인라인 폼 (이름·회사·이메일·메시지 선택·동의) · "Let's start with coffee. / 커피 한 잔으로 시작합니다." 따뜻한 톤
 

@@ -102,6 +102,34 @@ export default function ClientsSection() {
         >
           With
         </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 18 }}
+          animate={inView ? { opacity: 1, y: 0 } : undefined}
+          transition={{ duration: 0.85, ease: EASE, delay: 0.12 }}
+          className="mt-6 text-center tracking-[-0.02em]"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(1.75rem, 3.2vw, 3rem)",
+            fontWeight: 500,
+            lineHeight: 1.1,
+          }}
+        >
+          Brands we&apos;ve sat with.
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          animate={inView ? { opacity: 1, y: 0 } : undefined}
+          transition={{ duration: 0.75, ease: EASE, delay: 0.24 }}
+          className="mt-5 text-center"
+          style={{
+            fontSize: "clamp(0.9375rem, 1.05vw, 1.0625rem)",
+            lineHeight: 1.75,
+            color: "var(--fg-muted)",
+            wordBreak: "keep-all",
+          }}
+        >
+          각자 다른 결, 같은 자세.
+        </motion.p>
       </div>
 
       <motion.div

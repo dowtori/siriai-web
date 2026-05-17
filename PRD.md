@@ -309,46 +309,28 @@ v2의 15개 섹션을 7개로 압축한다. 원칙: **한 섹션 = 한 메시지
 
 ---
 
-### Section 04 — Services
+### Section 04 — Clients (With)
 
-**Goal:** "어떻게 거래하는가"를 명료히. 거래 모드 3개로 압축.
+**Goal:** "누구와 함께했는가"를 절제된 voice로. 부띠끄 신뢰 evidence + 협업 분야 비공개 정책 양립.
 
 **Layout:**
-- 3-column 그리드 (모바일은 stack)
-- 각 카드: 모드명(EN) · 부제(KR) · 1줄 정의 · 포함 사항 3개 · "문의" 링크
-- 카드끼리 시각 차이 거의 없음 (수평적 선택지)
+- 가운데 정렬 eyebrow · 헤드 · 보조 1줄
+- 단일 가로 logo wall (slow marquee 60s) · 16 로고 (5 SVG + 11 wordmark)
+- 좌우 mask gradient (8% / 92%)
 
 **Copy seed:**
 ```
-[Eyebrow]   04 — SERVICES
+[Eyebrow]   With
 
-[Headline]  Three modes of engagement.
+[Headline]  Brands we've sat with.
 
-──────────────────────────────────────
-
-STUDIO         스튜디오
-운영을 함께 설계하고 함께 돌립니다.
-· 운영 구조 설계
-· 콘텐츠·캠페인 파이프라인 구축
-· 데이터·KPI 정의
-                                  → Inquire
-
-ADVISORY       어드바이저리
-정기 자문으로 의사결정의 결을 맞춥니다.
-· 월간 진단·회고
-· 의사결정 트리 정비
-· 임원 1:1 세션
-                                  → Inquire
-
-LITERACY       리터러시
-조직이 AI로 사고하는 법을 학습합니다.
-· 진단 워크숍
-· 트랙별 커리큘럼
-· 사내 매뉴얼화
-                                  → Inquire
+[Sub KR]    각자 다른 결, 같은 자세.
 ```
 
-**Interactions:** 카드 진입 시 stagger. hover에서 미세 라인 강조. 클릭 → `/contact?mode=studio` 등 prefill.
+> v3 reframe(2026-05): Services 3-column 카드(Studio/Advisory/Literacy)를 제거하고 Clients logo wall + 절제된 voice 1쌍으로 교체.
+> 협업 분야는 비공개. "고객"·"파트너"·"솔루션"을 평탄화하고, brand voice는 §05 매니페스토의 가까운 거리 자세를 변주로 echo (Spirit over Surface — 동일 단어 사용 회피).
+
+**Interactions:** 헤드·보조 진입 stagger · marquee infinite scroll. hover/click 없음 (logo는 정보가 아닌 voice).
 
 ---
 
