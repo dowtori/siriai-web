@@ -5,9 +5,17 @@
 // 사람 실루엣 185×202 (mix-blend darken, filter blur(20)) — placeholder div로 대체.
 // 자산 수령 시 실루엣 png 교체.
 
-const BLOCKS = [
-  "속도와 정확함만으로는 충분하지 않습니다. 의미와 타이밍이 성과를 결정합니다. 데이터가 방향을 제시하고, AI가 실행을 가속하며, 사람의 감각이 그 모든 것을 하나의 결로 완성합니다.",
-  "브랜드의 성장 곡선을 더 짧게, 더 높게, 더 정확하게 설계합니다. 우리는 자동화하지 않습니다. 판단을 지능화합니다.",
+const BLOCKS: Array<{ quote: string; gap: number }> = [
+  {
+    quote:
+      "속도와 정확함만으로는 충분하지 않습니다. 의미와 타이밍이 성과를 결정합니다. 데이터가 방향을 제시하고, AI가 실행을 가속하며, 사람의 감각이 그 모든 것을 하나의 결로 완성합니다.",
+    gap: 40,
+  },
+  {
+    quote:
+      "브랜드의 성장 곡선을 더 짧게, 더 높게, 더 정확하게 설계합니다. 우리는 자동화하지 않습니다. 판단을 지능화합니다.",
+    gap: 24,
+  },
 ];
 
 export default function CManifestoQuote() {
@@ -18,14 +26,14 @@ export default function CManifestoQuote() {
       className="w-full"
       style={{ background: "var(--c-paper)" }}
     >
-      {BLOCKS.map((quote, i) => (
-        <QuoteBlock key={i} quote={quote} />
+      {BLOCKS.map((b, i) => (
+        <QuoteBlock key={i} quote={b.quote} gap={b.gap} />
       ))}
     </section>
   );
 }
 
-function QuoteBlock({ quote }: { quote: string }) {
+function QuoteBlock({ quote, gap }: { quote: string; gap: number }) {
   return (
     <div
       className="flex flex-col items-center justify-center"
@@ -34,7 +42,7 @@ function QuoteBlock({ quote }: { quote: string }) {
         maxWidth: 1280,
         minHeight: "min(800px, 90vw)",
         padding: "128px 0",
-        gap: 48,
+        gap,
         marginInline: "auto",
       }}
     >

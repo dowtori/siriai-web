@@ -2,10 +2,11 @@
 
 // 외주 원안 Hero — Frame 2147239201 spec 정밀 재구현.
 // 920×1229 컨테이너 안에 헤더(726×245, gap 48) + 검은 920×920 구체.
-// 구체 위 흰(#DDDBD5) ellipse 16개 다양한 크기·blur로 음영 패턴 형성 →
-// 내부 4×4 = 16개 키워드 라벨 grid (각 셀 180×180, 15/400 #000 center).
-// 사용자 메모: 별로면 행성 고리형(중앙 검은 덩어리 유지)으로 디벨롭.
+// 슬라이드 1 = 검은 구체 + 흰 ellipse 16 + 4×4 keyword grid.
+// 슬라이드 2~5 = orb 4개 묶음 2×2 grid (Property 1=1~16 자산 활용).
+// 인터랙션: 마우스 트래킹 번짐(blob parallax) + 클릭시 슬라이드 전환.
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const TOTAL = 5;
@@ -268,38 +269,78 @@ export default function CHero() {
             }}
           />
 
-          {/* 4×4 키워드 grid — Frame 2147239257 (654×720, 내부 셀 180×180) */}
-          <div
-            className="absolute"
-            style={{
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "min(654px, 71%)",
-              height: "min(720px, 78%)",
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gridTemplateRows: "repeat(4, 1fr)",
-              placeItems: "center",
-              zIndex: 2,
-            }}
-          >
-            {KEYWORDS_4x4.map((k) => (
-              <span
-                key={k}
-                style={{
-                  fontFamily: "Pretendard",
-                  fontWeight: 400,
-                  fontSize: "clamp(11px, 1.2vw, 15px)",
-                  lineHeight: 1.2,
-                  color: "#000",
-                  textAlign: "center",
-                }}
-              >
-                {k}
-              </span>
-            ))}
-          </div>
+          {/* 슬라이드 1 = 4×4 키워드 grid. 슬라이드 2~5 = orb 4개 묶음 2×2 */}
+          {index === 1 ? (
+            <div
+              className="absolute"
+              style={{
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "min(654px, 71%)",
+                height: "min(720px, 78%)",
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gridTemplateRows: "repeat(4, 1fr)",
+                placeItems: "center",
+                zIndex: 2,
+              }}
+            >
+              {KEYWORDS_4x4.map((k) => (
+                <span
+                  key={k}
+                  style={{
+                    fontFamily: "Pretendard",
+                    fontWeight: 400,
+                    fontSize: "clamp(11px, 1.2vw, 15px)",
+                    lineHeight: 1.2,
+                    color: "#000",
+                    textAlign: "center",
+                  }}
+                >
+                  {k}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <div
+              className="absolute"
+              style={{
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "min(720px, 82%)",
+                height: "min(720px, 82%)",
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gridTemplateRows: "repeat(2, 1fr)",
+                gap: "min(16px, 2cqi)",
+                placeItems: "center",
+                zIndex: 2,
+              }}
+              aria-label={`Property 슬라이드 ${index}`}
+            >
+              {Array.from({ length: 4 }, (_, i) => {
+                const orbNo = (index - 2) * 4 + i + 1; // slide 2 → 1~4, slide 3 → 5~8, ...
+                const padded = String(orbNo).padStart(2, "0");
+                return (
+                  <div
+                    key={orbNo}
+                    className="relative"
+                    style={{ width: "100%", aspectRatio: "1" }}
+                  >
+                    <Image
+                      src={`/c/assets/orbs/${padded}.png`}
+                      alt={KEYWORDS_4x4[orbNo - 1] ?? ""}
+                      fill
+                      sizes="(max-width: 768px) 30vw, 320px"
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </section>

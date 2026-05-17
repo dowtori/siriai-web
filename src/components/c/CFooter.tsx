@@ -1,3 +1,5 @@
+import CWordmark from "./CWordmark";
+
 // 외주 원안 Footer — Frame 2147239292 픽셀 정밀 재구현.
 // 1440×1730, 3개 블록:
 //   1) Wordmark motion (1440×800, 베이지 그라디언트, 동영상 컴포지션 1_1.mp4
@@ -108,12 +110,13 @@ export default function CFooter() {
         </div>
       </div>
 
-      {/* Block 3 — Info row. 1440×330, padding 48 80, #E8E6E0 */}
+      {/* Block 3 — Info row. 1440×338, padding 64 80 40, #E8E6E0 (spec 갱신) */}
       <div
         className="w-full"
         style={{
           background: "#E8E6E0",
-          padding: "clamp(28px, 4vw, 48px) clamp(24px, 6vw, 80px)",
+          padding:
+            "clamp(40px, 5vw, 64px) clamp(24px, 6vw, 80px) clamp(28px, 3vw, 40px)",
         }}
       >
         <div
@@ -125,12 +128,8 @@ export default function CFooter() {
             className="flex flex-col items-start"
             style={{ gap: 24, maxWidth: 496 }}
           >
-            <p
-              className="c-wordmark m-0"
-              style={{ fontSize: 18, fontStyle: "italic" }}
-            >
-              Siriai
-            </p>
+            <CWordmark width={60} />
+            <span className="sr-only">Siriai</span>
             <p
               className="m-0"
               style={{

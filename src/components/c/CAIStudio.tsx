@@ -4,16 +4,19 @@
 // Row 2: 7개 툴 카드 가로 라인(각기 다른 가로 폭, 약 100~112 height), gap 32.
 // 자산 수령 대기: 7개 카드 실제 로고/이미지(현재 placeholder 라벨).
 
-type Tool = { name: string; w: number; h: number };
+import Image from "next/image";
 
+type Tool = { name: string; w: number; h: number; src?: string };
+
+// 외주 자산 6개 + 7번째 unknown placeholder (spec엔 7 카드)
 const TOOLS: Tool[] = [
-  { name: "Sora",       w: 196.78, h: 107.33 },
-  { name: "Gemini",     w: 232.4,  h: 112    },
-  { name: "DALL·E 2",   w: 205.33, h: 102.67 },
-  { name: "Midjourney", w: 217.47, h: 112    },
-  { name: "ChatGPT",    w: 207.2,  h: 107.33 },
-  { name: "Runway",     w: 227.73, h: 98.93  },
-  { name: "—",          w: 223.53, h: 111.77 }, // 7번째 unknown placeholder
+  { name: "Sora",       w: 196.78, h: 107.33, src: "/c/assets/aistudio/tool1.png" },
+  { name: "Gemini",     w: 232.4,  h: 112,    src: "/c/assets/aistudio/tool2.png" },
+  { name: "DALL·E 2",   w: 205.33, h: 102.67, src: "/c/assets/aistudio/tool3.png" },
+  { name: "Midjourney", w: 217.47, h: 112,    src: "/c/assets/aistudio/tool4.png" },
+  { name: "ChatGPT",    w: 207.2,  h: 107.33, src: "/c/assets/aistudio/tool5.png" },
+  { name: "Runway",     w: 227.73, h: 98.93,  src: "/c/assets/aistudio/tool6.png" },
+  { name: "—",          w: 223.53, h: 111.77 },
 ];
 
 export default function CAIStudio() {
@@ -125,20 +128,34 @@ export default function CAIStudio() {
           {TOOLS.map((t) => (
             <div
               key={t.name}
-              className="flex items-center justify-center"
+              className="relative flex items-center justify-center"
               style={{
                 width: t.w,
                 height: t.h,
                 flex: "0 0 auto",
-                backgroundColor: "rgba(10, 10, 10, 0.05)",
-                fontFamily: "Pretendard",
-                fontWeight: 500,
-                fontSize: 18,
-                color: "var(--c-ink-mute)",
-                letterSpacing: "0.01em",
+                backgroundColor: t.src ? undefined : "rgba(10, 10, 10, 0.05)",
               }}
             >
-              {t.name}
+              {t.src ? (
+                <Image
+                  src={t.src}
+                  alt={t.name}
+                  fill
+                  sizes="240px"
+                  style={{ objectFit: "contain" }}
+                />
+              ) : (
+                <span
+                  style={{
+                    fontFamily: "Pretendard",
+                    fontWeight: 500,
+                    fontSize: 18,
+                    color: "var(--c-ink-mute)",
+                  }}
+                >
+                  {t.name}
+                </span>
+              )}
             </div>
           ))}
         </div>

@@ -5,6 +5,7 @@
 //     소프트 톤, border-radius 12) + Contact 텍스트(16/600).
 
 import Link from "next/link";
+import CWordmark from "./CWordmark";
 
 export default function CHeader() {
   return (
@@ -18,20 +19,8 @@ export default function CHeader() {
         marginTop: 48 - 12 - 32, // banner(top 12 + height 32)와 정확한 간격
       }}
     >
-      <Link
-        href="/c"
-        aria-label="Siriai 홈"
-        style={{
-          fontFamily: "Pretendard",
-          fontStyle: "italic",
-          fontWeight: 700,
-          fontSize: 18,
-          letterSpacing: "-0.01em",
-          color: "#000",
-          textDecoration: "none",
-        }}
-      >
-        Siriai
+      <Link href="/c" aria-label="Siriai 홈" style={{ display: "block" }}>
+        <CWordmark width={54} />
       </Link>
 
       <nav aria-label="주 메뉴">
