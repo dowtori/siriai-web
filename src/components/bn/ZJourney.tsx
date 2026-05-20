@@ -9,6 +9,9 @@ import ExitCue from "./overlays/ExitCue";
 import { useZJourney } from "./useZJourney";
 
 const MARK = "var(--bn-mark), serif";
+const MONO = "var(--bn-mono), ui-monospace, SFMono-Regular, Menlo, monospace";
+const PRETENDARD =
+  '"Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';
 
 export default function ZJourney() {
   const handle = useZJourney();
@@ -16,7 +19,11 @@ export default function ZJourney() {
   return (
     <div
       className="fixed inset-0 overflow-hidden select-none"
-      style={{ touchAction: "none", background: "var(--bn-bg)" }}
+      style={{
+        touchAction: "none",
+        background: "var(--bn-bg)",
+        fontFamily: PRETENDARD,
+      }}
     >
       <Canvas
         camera={{ position: [0, 0, 6], fov: 65, near: 0.1, far: 400 }}
@@ -32,14 +39,17 @@ export default function ZJourney() {
 
       <StageOverlays handle={handle} />
 
-      {/* ── Header — editorial colophon ────────────────────── */}
+      {/* ╔══════════════════════════════════════════════════╗
+          ║  Header — A안 Hero eyebrow baseline               ║
+          ╚══════════════════════════════════════════════════╝ */}
       <header className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between px-7 py-6">
-        <div className="flex items-center gap-2.5">
+        {/* Left — wordmark + eyebrow */}
+        <div className="flex items-center gap-3">
           <span
             style={{
               fontFamily: MARK,
               fontWeight: 900,
-              fontSize: "17px",
+              fontSize: "18px",
               letterSpacing: "-0.02em",
               color: "var(--bn-ink)",
               lineHeight: 1,
@@ -53,43 +63,31 @@ export default function ZJourney() {
           />
           <span
             style={{
-              fontFamily: MARK,
-              fontStyle: "italic",
+              fontFamily: MONO,
               fontWeight: 400,
-              fontSize: "11px",
+              fontSize: "10.5px",
               color: "var(--bn-ink-muted)",
-              letterSpacing: "0.04em",
-            }}
-          >
-            an essay in six layers
-          </span>
-        </div>
-        <div className="flex flex-col items-end gap-1">
-          <span
-            style={{
-              fontFamily: MARK,
-              fontStyle: "italic",
-              fontWeight: 400,
-              fontSize: "11px",
-              color: "var(--bn-accent)",
-              letterSpacing: "0.04em",
-            }}
-          >
-            Vol. I — 2026
-          </span>
-          <span
-            style={{
-              fontFamily: MARK,
-              fontWeight: 400,
-              fontSize: "9.5px",
-              color: "var(--bn-ink-faint)",
-              letterSpacing: "0.5em",
+              letterSpacing: "0.22em",
               textTransform: "uppercase",
             }}
           >
-            Architecture of Thought
+            A practice in AI architecture
           </span>
         </div>
+
+        {/* Right — chapter label (mono) */}
+        <span
+          style={{
+            fontFamily: MONO,
+            fontWeight: 400,
+            fontSize: "10.5px",
+            color: "var(--bn-ink-faint)",
+            letterSpacing: "0.32em",
+            textTransform: "uppercase",
+          }}
+        >
+          Vol. I — MMXXVI
+        </span>
       </header>
 
       <ProgressRail handle={handle} />
@@ -124,23 +122,31 @@ export default function ZJourney() {
         <rect width="100%" height="100%" filter="url(#bn-grain)" />
       </svg>
 
-      {/* ── Bottom rule + colophon ────────────────────────── */}
-      <div className="pointer-events-none absolute bottom-7 left-7 z-10 flex items-center gap-3">
-        <span
-          className="block h-px w-6"
-          style={{ background: "var(--bn-accent)" }}
-        />
+      {/* ╔══════════════════════════════════════════════════╗
+          ║  Bottom colophon — real © / contact (A안 footer)  ║
+          ╚══════════════════════════════════════════════════╝ */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex items-center justify-between px-7">
         <span
           style={{
-            fontFamily: MARK,
-            fontStyle: "italic",
+            fontFamily: MONO,
             fontWeight: 400,
-            fontSize: "11px",
-            color: "var(--bn-ink-muted)",
-            letterSpacing: "0.04em",
+            fontSize: "10px",
+            color: "var(--bn-ink-faint)",
+            letterSpacing: "0.18em",
           }}
         >
-          Seoul, MMXXVI
+          © 2024 — 2026 주식회사 시리아이 (SIRIAI)
+        </span>
+        <span
+          style={{
+            fontFamily: MONO,
+            fontWeight: 400,
+            fontSize: "10px",
+            color: "var(--bn-ink-faint)",
+            letterSpacing: "0.18em",
+          }}
+        >
+          contact@siriai.io
         </span>
       </div>
     </div>

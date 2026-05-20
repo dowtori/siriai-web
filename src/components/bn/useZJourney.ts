@@ -99,13 +99,20 @@ export function useZJourney(): ZJourneyHandle {
   return { targetRef, progressRef, velocityRef };
 }
 
+// ── A안 v3 7-section IA를 B안 z-tunnel 6 stage로 매핑 ──
+//   Stage I  → §00 Hero        — L1 claim
+//   Stage II → §01 Stance       — L2 sub-claim
+//   Stage III→ §03 System       — 4 노드 decision flow (Signal·Judgment·Action·Record)
+//   Stage IV → §02 Methodology  — 3축 (Architecture·Literacy·Mapping)
+//   Stage V  → §05 Voice        — manifesto
+//   Stage VI → §06 Contact      — CTA
 export const STAGES = [
-  { id: 0, numeral: "I", label: "Architecture of Thought", from: 0.0, to: 0.16 },
-  { id: 1, numeral: "II", label: "Beyond Tools", from: 0.16, to: 0.32 },
-  { id: 2, numeral: "III", label: "Structures That Think", from: 0.32, to: 0.5 },
-  { id: 3, numeral: "IV", label: "Operating Model", from: 0.5, to: 0.68 },
-  { id: 4, numeral: "V", label: "Six Seats", from: 0.68, to: 0.86 },
-  { id: 5, numeral: "VI", label: "Run It Together", from: 0.86, to: 1.0 },
+  { id: 0, numeral: "I", label: "Hero", from: 0.0, to: 0.16 },
+  { id: 1, numeral: "II", label: "Stance", from: 0.16, to: 0.32 },
+  { id: 2, numeral: "III", label: "System", from: 0.32, to: 0.5 },
+  { id: 3, numeral: "IV", label: "Methodology", from: 0.5, to: 0.68 },
+  { id: 4, numeral: "V", label: "Voice", from: 0.68, to: 0.86 },
+  { id: 5, numeral: "VI", label: "Contact", from: 0.86, to: 1.0 },
 ] as const;
 
 export function stageProgress(progress: number, from: number, to: number) {

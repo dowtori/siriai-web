@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import type { ZJourneyHandle } from "../useZJourney";
 
 const MARK = "var(--bn-mark), serif";
+const MONO = "var(--bn-mono), ui-monospace, SFMono-Regular, Menlo, monospace";
 
 export default function ExitCue({ handle }: { handle: ZJourneyHandle }) {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -31,8 +32,20 @@ export default function ExitCue({ handle }: { handle: ZJourneyHandle }) {
   return (
     <div
       ref={wrapRef}
-      className="pointer-events-none absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3"
+      className="pointer-events-none absolute bottom-[5.5rem] left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3"
     >
+      <span
+        style={{
+          fontFamily: MONO,
+          fontWeight: 400,
+          fontSize: "10.5px",
+          color: "var(--bn-ink-faint)",
+          letterSpacing: "0.4em",
+          textTransform: "uppercase",
+        }}
+      >
+        Scroll
+      </span>
       <svg
         ref={arrowRef}
         width="14"
@@ -55,23 +68,11 @@ export default function ExitCue({ handle }: { handle: ZJourneyHandle }) {
           fontStyle: "italic",
           fontWeight: 400,
           fontSize: "13px",
-          color: "var(--bn-ink)",
-          letterSpacing: "0.04em",
+          color: "var(--bn-ink-muted)",
+          letterSpacing: "0.02em",
         }}
       >
-        Enter the architecture
-      </span>
-      <span
-        style={{
-          fontFamily: MARK,
-          fontWeight: 400,
-          fontSize: "9.5px",
-          color: "var(--bn-ink-faint)",
-          letterSpacing: "0.45em",
-          textTransform: "uppercase",
-        }}
-      >
-        Drag · Scroll · Space
+        to enter the architecture
       </span>
     </div>
   );

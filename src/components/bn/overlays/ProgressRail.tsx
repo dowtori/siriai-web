@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { STAGES, type ZJourneyHandle } from "../useZJourney";
 
 const MARK = "var(--bn-mark), serif";
+const MONO = "var(--bn-mono), ui-monospace, SFMono-Regular, Menlo, monospace";
 
 export default function ProgressRail({ handle }: { handle: ZJourneyHandle }) {
   const fillRef = useRef<HTMLDivElement>(null);
@@ -70,17 +71,17 @@ export default function ProgressRail({ handle }: { handle: ZJourneyHandle }) {
         <span
           ref={labelRef}
           style={{
-            fontFamily: MARK,
+            fontFamily: MONO,
             fontWeight: 400,
-            fontSize: "11px",
-            letterSpacing: "0.4em",
+            fontSize: "10.5px",
+            letterSpacing: "0.32em",
             textTransform: "uppercase",
             color: "var(--bn-ink-muted)",
             wordBreak: "keep-all",
             lineHeight: 1.3,
           }}
         >
-          Architecture of Thought
+          Hero
         </span>
       </div>
       <div className="relative h-[280px] w-px" style={{ background: "var(--bn-rule)" }}>

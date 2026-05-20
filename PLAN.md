@@ -207,10 +207,78 @@ src/components/bn/
 **Round 1 commits** (예정):
 - `feat(bn): /bn 라우트 + ZJourney 부트스트랩 — z축 진입 prototype` (Stage 0/1, useZJourney, overlay)
 
+#### Round 2 — 2026-05-20 — editorial cinematic 결로 표면 전체 교체
+**커밋**: `0ddf9aa`
+
+사용자 피드백 *"사용감은 좋은데 브랜딩 수준이 너무 낮아."* 응대. 선택지: **Editorial cinematic** (A24 / Acne Studios / Mubi). 5개 표면 동시 교체.
+
+| 표면 | Before | After |
+|---|---|---|
+| 색 | `#05050A` + 라일락 `#c4b5fd` + 흰 | `#0A0908` warm + copper `#B8916A` + ivory `#F2EAD3` |
+| 워드마크 | "SIRIAI" 시스템 sans bold | "Siriai" Playfair Display Black `-0.06em` |
+| 한국어 | 시스템 fallback | Pretendard 800 명시 |
+| 배경 | 2400 라일락 별 generic | 1100 ivory dust + sparse copper sparks + Fresnel volumetric glow |
+| UI copy | "Drag·Scroll·Space"·"/bn" dev-y | "Enter the architecture" italic · "an essay in six layers" · "Vol. I — 2026" · "Seoul, MMXXVI" |
+
+폰트: next/font/google Playfair Display 400/700/900 italic, `--bn-mark` 변수로 /bn 라우트 격리.
+3D: Fresnel back-side volumetric glow material (Lusion 결) 추가, SVG `feTurbulence` film grain `mix-blend-overlay` 0.07.
+
+#### Round 3 — 2026-05-20 — A안 카피·voice 정합 (UX 라이팅 격상)
+**커밋**: (이번 라운드)
+
+사용자 피드백 *"UX라이팅이나 철학은 [A안 URL] 정도 수준은 되면 좋겠다."* 응대.
+
+**진단 메모** (이 일지 직전 종합 보고에 상세):
+- B안 Round 2는 editorial **패스티시**(pastiche). 결은 잡았으나 시리아이 사상 0 노출 — A24-style short film에 머물렀음.
+- 6 stage 라벨 ("Architecture of Thought · Beyond Tools · Structures That Think · Operating Model · Six Seats · Run It Together") **자체 발명** — A안 spec에 없음. PRD §2.1 baseline 무시.
+- Stage 1 한국어 1줄 "AI는 도구가 아니다." — manifesto layer 약함 (R6 위반).
+- Bottom colophon "Seoul, MMXXVI" — 영문 sprezzatura, 실제 회사정보 부재.
+
+**A안 voice 시스템 흡수** (BRAND_VOICE.md 정독):
+- Reference DNA — 3-tone 합금: Anthropic(base) × Studio Dumbar(manifesto) × Resend(functional)
+- 3-layer voice: A·Manifesto / B·Editorial / C·Functional
+- 7 rules — R5c (직선 강제 묶음 금지), R7 (AI 도구명·`Multi-Agent` 헤드 노출 금지), One Word One Place (Insight = Hero에만)
+
+**B안 6 stage z-tunnel ↔ A안 v3 7-section 매핑** (PRD §3.1):
+| Stage | A안 §  | EN | KR |
+|---|---|---|---|
+| I | §00 Hero | Architecture for / Insight with AI. | AI로 사고하는 구조를 설계합니다. |
+| II | §01 Stance | Tools change. / Structure remains. / We design it. | AI 도구는 매일 새롭게 등장합니다. / 필요한 건 창의성과 결합. / 시리아이는 그 구조를 설계합니다. |
+| III | §03 System | Decision flow. / Made visible. | 판단의 흐름을, 보이게. + Signal·Judgment·Action·Record 4 노드 |
+| IV | §02 Methodology | Three ways in. / One place to begin. | 세 갈래로 들어가, 한 자리에서 시작합니다. + Architecture·Literacy·Mapping 3축 |
+| V | §05 Voice | We don't recommend tools. / We architect what stays. | 도구로서의 AI 접근을 넘어 / 니즈를 정확히 이해하고 '사람'을 돕습니다. + "— Siriai Manifesto, MMXXVI" |
+| VI | §06 Contact | Let's start / with coffee. | 가벼운 커피챗으로, 해묵은 고민을 시원하게. + "Send a note →" CTA |
+
+**디자인 토큰 통합**:
+- B안 cinematic 토큰 (`--bn-bg` `#0A0908` / `--bn-ink` `#F2EAD3` / `--bn-accent` copper) **유지**
+- A안 폰트 토큰 흡수: `--bn-mark` (Playfair) + 신규 `--bn-mono` (IBM Plex Mono via `next/font/google`) + Pretendard inherit
+- 보조 액센트 `--bn-accent-blue` `#7A8A9A` (A안 `#2B3A4A`의 dark 베이스용 lift)
+- metadata title·description A안 baseline 복원
+
+**Voice Architecture 적용**:
+- Layer A · Manifesto (Stage I·II·V) — Playfair 워드마크/헤드 4–8단어 마침표 종결
+- Layer B · Editorial (Stage III·IV) — Anthropic 결 다이어그램 라벨
+- Layer C · Functional (Stage VI + ProgressRail/ExitCue/colophon) — IBM Plex Mono 라벨, 동사 종결
+
+**ProgressRail · ExitCue · header · bottom colophon editorial 교체**:
+- ProgressRail 라벨 폰트 Playfair → IBM Plex Mono (functional 결)
+- ExitCue: "Drag · Scroll · Space" → "Scroll / ↓ / to enter the architecture" (A안 Hero scroll hint 결)
+- Header: "Siriai · /bn" → "Siriai" + "A practice in AI architecture" mono + "Vol. I — MMXXVI" (A안 Hero eyebrow baseline)
+- Bottom colophon: "Seoul, MMXXVI" italic → "© 2024 — 2026 주식회사 시리아이 (SIRIAI)" + "contact@siriai.io" 실제 정보 (A안 Footer 결)
+
+**현재 라운드 범위**: 카피 전면 교체 only. Stage III·IV 다이어그램 (4 node / 3 axis cinematic reveal), Stage V manifesto stagger, Stage VI CTA 비주얼 풀빌드는 **Round 4**.
+
 ### 2.6 마무리 상태
 
 - ✅ 트랙 정의 + 빈 브랜치 + Round 1 prototype (Stage 0/1)
-- ⏸ 사용자 피드백 대기 (prototype 검토 후 Round 2 — Stage 2–5 확장 또는 결 조정)
+- ✅ Round 2 — editorial cinematic 결 표면 전체 교체 (5개 표면)
+- ✅ Round 3 — A안 voice·copy 정합 (6 stage 카피·colophon·폰트 토큰)
+- ⏸ 사용자 피드백 대기 — Round 4 후보:
+  1. Stage III 4-node cinematic reveal (Signal·Judgment·Action·Record 3D 또는 SVG)
+  2. Stage IV 3-axis prism (Architecture·Literacy·Mapping)
+  3. Stage V 매니페스토 stagger (한국어 줄별 진입)
+  4. Stage VI CTA 도착 화면 (Cal.com inline 또는 Contact form 미니)
+  5. CoreOrb 동적 morph (Stage 3 → 4 노드 → 3 축 prism 변형)
 
 ---
 
