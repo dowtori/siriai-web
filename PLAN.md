@@ -143,10 +143,74 @@ PRD v3.0 (2026-05-16 기준) 위에서 다음 영역을 사용자 피드백으�
 - 매 라운드 본 §2에 일지 누적 (§1 Plan A 일지와 동일 형식)
 - 새 세션 시작 — context 격리 위해 별도 세션. 본 §2와 CLAUDE.md를 시작 전 필독
 
-### 2.5 마무리 상태
+### 2.5 진행 일지
 
-- ⏳ 신규 트랙 — 새 세션에서 진행 예정
-- 사전 작업: 본 트랙 정의 + 빈 브랜치 push 완료
+#### Round 1 — 2026-05-20 — 부트스트랩·prototype Hero
+**브랜치**: `claude/visual-impact-bn` (master 분기) · **라우트**: `/bn`
+
+**Reference board (5)**:
+1. **Lusion (lusion.co)** — camera depth navigation. 마우스 drag로 카메라 yaw, scroll로 z 진입. 각 stage가 3D scene 내 spatial layer. → B안 핵심 메타포 채택.
+2. **Stripe Sessions 2024 hero** — 정제된 typography가 large scale로 호흡, 미세 motion이 압도감 형성. → typographic mass + 절제된 motion 결합 채택.
+3. **Active Theory** — frame transitions, particle storm으로 stage 전환. → 깊이 fog + particle field로 stage 경계 처리.
+4. **Resn** — drag/click이 의미 trigger. micro-interactions로 cinematic. → drag·scroll dual input + inertia 모델 채택.
+5. **Bruno Simon (참고)** — 3D world navigation의 즐거움. 결은 다름(playful vs premium) → 패스.
+
+**선택 결**: Lusion(공간 메타포) × Stripe Sessions(typographic premium) × Active Theory(layer 전환).
+
+**컨셉 sketch — "Architecture of Thought · z-axis tunnel"**:
+6-stage z축 tunnel. progress 0→1을 wheel·drag·keyboard로 추진.
+
+| Stage | Progress | Visual | Copy seed |
+|---|---|---|---|
+| 0 | 0.00–0.16 | massive wordmark "SIRIAI" 정면 | Architecture of Thought |
+| 1 | 0.16–0.32 | wordmark 가로질러 첫 layer 진입 | AI는 도구가 아니다 |
+| 2 | 0.32–0.50 | orb / particle field 통과 | 사고하는 구조 |
+| 3 | 0.50–0.68 | 3D 격자 architecture 노출 | 운영 모델 |
+| 4 | 0.68–0.86 | 6 capability nodes (지식·판단·실행·기록·연결·성장) | 자리 6 |
+| 5 | 0.86–1.00 | convergence point + CTA | 함께 운영합니다 |
+
+각 stage = camera.z 구간 + DOM overlay reveal. 진입/이탈은 opacity·scale + 3D depth fog.
+
+**기술 스택 결정**:
+- **R3F + drei + postprocessing**: master에 이미 설치, 추가 번들 0. PerspectiveCamera z 보간으로 z축 진입 자연스러움.
+- **GSAP/ScrollTrigger 대신 custom RAF + damping**: scroll이 normal scroll이 아닌 progress driver라 GSAP scroll-linked 안 맞음.
+- **Lenis 비활성**: body overflow lock. 일반 scroll 사용 안 함.
+- **framer-motion**: DOM overlay UI reveal (text·label).
+- **Spline / Rive 패스**: third-party hosted = control·번들 부담. Rive는 2D vector라 z-depth 약함.
+
+**인터랙션 모델**:
+- 입력: `wheel.deltaY`, pointer drag dy, `ArrowDown/Up/Space/PageDown` → progressVelocity 누적
+- smoothing: progress += (target - progress) * 0.08
+- 카메라: `camera.position.z = -progress * 40`
+- stage visibility: progress 구간 기반 fade·scale (각 stage 자체에서 useFrame)
+- 종료 조건: progress ≥ 1 → "Enter site" CTA 노출 → 클릭 시 `/` 또는 `/c`로 라우팅
+- ESC 또는 back-drag로 stage 역방향 가능
+
+**라우트·디렉토리**:
+```
+src/app/bn/
+├── layout.tsx     — 본 라우트 전용 (no SmoothScroll, no Navigation, body overflow lock)
+└── page.tsx       — ZJourney 컨테이너
+src/components/bn/
+├── ZJourney.tsx
+├── useZJourney.ts
+├── stages/
+│   ├── Stage0Wordmark.tsx
+│   └── Stage1Statement.tsx
+└── overlays/
+    ├── ProgressRail.tsx
+    └── ExitCue.tsx
+```
+
+**Round 1 prototype 범위** (이 라운드): Stage 0/1만, 입력·카메라·overlay 동기화 검증. Stage 2–5는 Round 2+.
+
+**Round 1 commits** (예정):
+- `feat(bn): /bn 라우트 + ZJourney 부트스트랩 — z축 진입 prototype` (Stage 0/1, useZJourney, overlay)
+
+### 2.6 마무리 상태
+
+- ✅ 트랙 정의 + 빈 브랜치 + Round 1 prototype (Stage 0/1)
+- ⏸ 사용자 피드백 대기 (prototype 검토 후 Round 2 — Stage 2–5 확장 또는 결 조정)
 
 ---
 
