@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import { STAGES, type ZJourneyHandle } from "../useZJourney";
 
-const MARK = "var(--bn-mark), serif";
 const MONO = "var(--bn-mono), ui-monospace, SFMono-Regular, Menlo, monospace";
 
 export default function ProgressRail({ handle }: { handle: ZJourneyHandle }) {
@@ -36,14 +35,15 @@ export default function ProgressRail({ handle }: { handle: ZJourneyHandle }) {
         d.style.background = isActive
           ? "var(--bn-accent)"
           : isPassed
-            ? "rgba(184,145,106,0.55)"
-            : "rgba(242,234,211,0.18)";
+            ? "rgba(159,179,200,0.55)"
+            : "rgba(232,234,238,0.18)";
       });
       if (labelRef.current) {
         labelRef.current.textContent = STAGES[activeIdx].label;
       }
       if (numeralRef.current) {
-        numeralRef.current.textContent = STAGES[activeIdx].numeral + ".";
+        // Roman numeral 대신 0-padded mono 인덱스 (II → 02 식). functional 결.
+        numeralRef.current.textContent = String(activeIdx).padStart(2, "0");
       }
       raf = requestAnimationFrame(tick);
     };
@@ -53,20 +53,19 @@ export default function ProgressRail({ handle }: { handle: ZJourneyHandle }) {
 
   return (
     <div className="pointer-events-none absolute right-7 top-1/2 z-10 flex -translate-y-1/2 items-center gap-5">
-      <div className="flex flex-col items-end gap-1.5 text-right">
+      <div className="flex flex-col items-end gap-2 text-right">
         <span
           ref={numeralRef}
           style={{
-            fontFamily: MARK,
-            fontStyle: "italic",
-            fontWeight: 400,
-            fontSize: "20px",
+            fontFamily: MONO,
+            fontWeight: 500,
+            fontSize: "11px",
             color: "var(--bn-accent)",
-            letterSpacing: "0.02em",
+            letterSpacing: "0.18em",
             lineHeight: 1,
           }}
         >
-          I.
+          00
         </span>
         <span
           ref={labelRef}
@@ -102,7 +101,7 @@ export default function ProgressRail({ handle }: { handle: ZJourneyHandle }) {
                 dotsRef.current[i] = el;
               }}
               className="h-[7px] w-[7px] rounded-full transition-[transform,background] duration-200 ease-out"
-              style={{ background: "rgba(242,234,211,0.18)" }}
+              style={{ background: "rgba(232,234,238,0.18)" }}
             />
           ))}
         </div>

@@ -20,7 +20,7 @@ export default function CoreOrb({ handle }: { handle: ZJourneyHandle }) {
         blending: THREE.AdditiveBlending,
         side: THREE.BackSide,
         uniforms: {
-          uColor: { value: new THREE.Color("#B8916A") },
+          uColor: { value: new THREE.Color("#9FB3C8") },
           uIntensity: { value: 0.55 },
         },
         vertexShader: /* glsl */ `
@@ -91,17 +91,17 @@ export default function CoreOrb({ handle }: { handle: ZJourneyHandle }) {
       {/* Wireframe icosahedron — architecture hint */}
       <mesh ref={wireRef}>
         <icosahedronGeometry args={[1.4, 1]} />
-        <meshBasicMaterial color="#B8916A" wireframe transparent opacity={0} />
+        <meshBasicMaterial color="#9FB3C8" wireframe transparent opacity={0} />
       </mesh>
       {/* Inner core */}
       <mesh ref={coreRef}>
         <sphereGeometry args={[1, 32, 32]} />
-        <meshBasicMaterial color="#F2EAD3" transparent opacity={0} />
+        <meshBasicMaterial color="#E8EAEE" transparent opacity={0} />
       </mesh>
       {/* Orbital ring */}
       <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
         <ringGeometry args={[2.2, 2.3, 128]} />
-        <meshBasicMaterial color="#B8916A" transparent opacity={0} side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#9FB3C8" transparent opacity={0} side={THREE.DoubleSide} />
       </mesh>
     </group>
   );

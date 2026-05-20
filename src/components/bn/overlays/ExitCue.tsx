@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import type { ZJourneyHandle } from "../useZJourney";
 
-const MARK = "var(--bn-mark), serif";
 const MONO = "var(--bn-mono), ui-monospace, SFMono-Regular, Menlo, monospace";
 
 export default function ExitCue({ handle }: { handle: ZJourneyHandle }) {
@@ -62,18 +61,6 @@ export default function ExitCue({ handle }: { handle: ZJourneyHandle }) {
           strokeLinejoin="round"
         />
       </svg>
-      <span
-        style={{
-          fontFamily: MARK,
-          fontStyle: "italic",
-          fontWeight: 400,
-          fontSize: "13px",
-          color: "var(--bn-ink-muted)",
-          letterSpacing: "0.02em",
-        }}
-      >
-        to enter the architecture
-      </span>
     </div>
   );
 }

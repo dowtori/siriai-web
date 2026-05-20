@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import type { CSSProperties, ReactNode } from "react";
-import { Fraunces, IBM_Plex_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 
-// Fraunces — variable serif with optical sizing + soft/wonk axes.
-// Editorial New(Locomotive) 결의 가장 가까운 무료 대안. 워드마크·헤드 모두 담당.
-const fraunces = Fraunces({
+// Geist Sans + Geist Mono — Vercel grotesque.
+// Anthropic · Linear · Vercel 결. AI 컨설팅의 차가운 정체성.
+// italic 미지원 — 모든 italic 자리는 regular + tracking으로 대체.
+const geist = Geist({
   subsets: ["latin"],
   weight: ["400", "500", "700", "900"],
-  style: ["normal", "italic"],
   variable: "--bn-mark",
   display: "swap",
 });
 
-const plexMono = IBM_Plex_Mono({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--bn-mono",
@@ -20,30 +20,29 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Siriai — Architecture for Insight with AI",
+  title: "Siriai — AI Architecture Practice",
   description:
-    "AI로 사고하는 조직을 위한 의사결정 구조 설계. 서울 기반 AI 아키텍처 · 리터러시 컨설팅.",
+    "AI 아키텍처 설계 컨설팅. 도구가 아닌 운영 구조를, 트렌드가 아닌 사고의 형태를 설계합니다.",
 };
 
-const editorialTokens: CSSProperties = {
-  // ── Editorial cinematic palette (B안) ────────────────
-  ["--bn-bg" as never]: "#0A0908",
-  ["--bn-bg-deep" as never]: "#050403",
-  ["--bn-ink" as never]: "#F2EAD3",
-  ["--bn-ink-muted" as never]: "rgba(242,234,211,0.55)",
-  ["--bn-ink-faint" as never]: "rgba(242,234,211,0.28)",
-  ["--bn-accent" as never]: "#B8916A", // copper — primary
-  ["--bn-accent-deep" as never]: "#7A5C42",
-  ["--bn-accent-blue" as never]: "#7A8A9A", // luxury restraint deep blue tint (A안 #2B3A4A 변주 — dark bg에 맞춰 lift)
-  ["--bn-rule" as never]: "rgba(242,234,211,0.12)",
+const tokens: CSSProperties = {
+  // ── Cool cinematic palette (Round 6 자율 재설계) ─────
+  ["--bn-bg" as never]: "#08090B",          // cool off-black (warm #0A0908 → cool)
+  ["--bn-bg-deep" as never]: "#04050A",
+  ["--bn-ink" as never]: "#E8EAEE",         // cool ivory (warm #F2EAD3 → cool gray)
+  ["--bn-ink-muted" as never]: "rgba(232,234,238,0.55)",
+  ["--bn-ink-faint" as never]: "rgba(232,234,238,0.28)",
+  ["--bn-accent" as never]: "#9FB3C8",      // cool steel (copper #B8916A → cool)
+  ["--bn-accent-deep" as never]: "#5C7790",
+  ["--bn-rule" as never]: "rgba(232,234,238,0.12)",
 };
 
 export default function BNLayout({ children }: { children: ReactNode }) {
   return (
     <div
-      className={`${fraunces.variable} ${plexMono.variable} antialiased`}
+      className={`${geist.variable} ${geistMono.variable} antialiased`}
       style={{
-        ...editorialTokens,
+        ...tokens,
         background: "var(--bn-bg)",
         color: "var(--bn-ink)",
       }}

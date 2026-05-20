@@ -8,7 +8,7 @@ import ProgressRail from "./overlays/ProgressRail";
 import ExitCue from "./overlays/ExitCue";
 import { useZJourney } from "./useZJourney";
 
-const MARK = "var(--bn-mark), serif";
+const MARK = "var(--bn-mark), system-ui, sans-serif";
 const MONO = "var(--bn-mono), ui-monospace, SFMono-Regular, Menlo, monospace";
 const PRETENDARD =
   '"Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';
@@ -30,8 +30,8 @@ export default function ZJourney() {
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
       >
-        <color attach="background" args={["#0A0908"]} />
-        <fog attach="fog" args={["#0A0908", 12, 90]} />
+        <color attach="background" args={["#08090B"]} />
+        <fog attach="fog" args={["#08090B", 12, 90]} />
         <Suspense fallback={null}>
           <Scene handle={handle} />
         </Suspense>
@@ -39,17 +39,14 @@ export default function ZJourney() {
 
       <StageOrchestrator handle={handle} />
 
-      {/* ╔══════════════════════════════════════════════════╗
-          ║  Header — A안 Hero eyebrow baseline               ║
-          ╚══════════════════════════════════════════════════╝ */}
+      {/* ── Header — wordmark + functional caption ────────── */}
       <header className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between px-7 py-6">
-        {/* Left — wordmark + eyebrow */}
         <div className="flex items-center gap-3">
           <span
             style={{
               fontFamily: MARK,
-              fontWeight: 900,
-              fontSize: "18px",
+              fontWeight: 700,
+              fontSize: "16px",
               letterSpacing: "-0.02em",
               color: "var(--bn-ink)",
               lineHeight: 1,
@@ -71,11 +68,10 @@ export default function ZJourney() {
               textTransform: "uppercase",
             }}
           >
-            A practice in AI architecture
+            AI Architecture Practice
           </span>
         </div>
 
-        {/* Right — chapter label (mono) */}
         <span
           style={{
             fontFamily: MONO,
@@ -86,26 +82,26 @@ export default function ZJourney() {
             textTransform: "uppercase",
           }}
         >
-          Vol. I — MMXXVI
+          Seoul · 2026
         </span>
       </header>
 
       <ProgressRail handle={handle} />
       <ExitCue handle={handle} />
 
-      {/* ── Vignette (warm) ───────────────────────────────── */}
+      {/* ── Vignette (cool) ───────────────────────────────── */}
       <div
         className="pointer-events-none absolute inset-0 z-[5]"
         style={{
           background:
-            "radial-gradient(ellipse at center, transparent 45%, rgba(5,4,3,0.55) 92%, rgba(5,4,3,0.8) 100%)",
+            "radial-gradient(ellipse at center, transparent 45%, rgba(4,5,10,0.55) 92%, rgba(4,5,10,0.85) 100%)",
         }}
       />
 
-      {/* ── Film grain overlay (SVG fractal noise) ────────── */}
+      {/* ── Film grain overlay (cool tint) ────────────────── */}
       <svg
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-[6] h-full w-full opacity-[0.07] mix-blend-overlay"
+        className="pointer-events-none absolute inset-0 z-[6] h-full w-full opacity-[0.05] mix-blend-overlay"
       >
         <filter id="bn-grain">
           <feTurbulence
@@ -116,15 +112,13 @@ export default function ZJourney() {
           />
           <feColorMatrix
             type="matrix"
-            values="0 0 0 0 1   0 0 0 0 0.96   0 0 0 0 0.86   0 0 0 1 0"
+            values="0 0 0 0 0.91   0 0 0 0 0.93   0 0 0 0 0.97   0 0 0 1 0"
           />
         </filter>
         <rect width="100%" height="100%" filter="url(#bn-grain)" />
       </svg>
 
-      {/* ╔══════════════════════════════════════════════════╗
-          ║  Bottom colophon — real © / contact (A안 footer)  ║
-          ╚══════════════════════════════════════════════════╝ */}
+      {/* ── Bottom colophon — © + contact (mono) ──────────── */}
       <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex items-center justify-between px-7">
         <span
           style={{

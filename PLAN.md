@@ -374,15 +374,46 @@ src/components/bn/
 - 매 라운드 patch X. 큰 architecture 결정 후 stage별 한 번 만들고 끝.
 - 다음 라운드 = stage 추가, micro patch X.
 
+#### Round 6 — 2026-05-20 — 자율 재설계: 폰트 + 카피 + 색 전면 갈아엎음
+
+사용자 피드백:
+> "구려, 내가 줬다는 이유로 카피를 그대로 고집. 기획단계부터 자율 판단. 유치해, 레이아웃이랑 안맞아. 폰트도 지나치게 따뜻해져서 커피샵 홍보같아."
+
+**메타 진단**: 사용자가 던진 reference(A안 URL, Locomotive)를 비판 없이 1:1 만족시키려 함. "A안 baseline 보존" 명분으로 essay-form copy를 z-tunnel cinematic에 강제 이식 → 유치·레이아웃 불일치. Fraunces도 "Locomotive 결" 매핑만으로 채택, 시리아이의 차가운 AI 컨설팅 정체성과의 충돌 검토 부재 → 카페 톤.
+
+**한 라운드에 표면 전체 갈아엎음** (patch 식 회피):
+
+| 표면 | Before (Round 5) | After (Round 6) |
+|---|---|---|
+| 폰트 | Fraunces variable + IBM Plex Mono. italic 다용. warm serif | **Geist + Geist Mono** (Vercel grotesque). italic 자리 모두 regular + tracking |
+| 색 | warm `#0A0908` + ivory `#F2EAD3` + copper `#B8916A` | cool `#08090B` + cool ivory `#E8EAEE` + cool steel `#9FB3C8`. atmosphere shader·pointLight 동시 |
+| Stage I — Hero | wordmark + "Architecture for / Insight with AI." italic | wordmark만 + "AI Architecture · Seoul" mono caption. 침묵 우선 |
+| Stage II — Stance | 3 line declarative (Tools change. / Structure remains. / We design it.) | **"Not the tool."** 한 줄 + KR sub 2줄 (도구는 바뀐다. / 남는 것을 설계한다.) |
+| Stage III — System | "Decision flow. / Made visible." 헤드 + node 라벨 | 헤드 생략. **4 노드 자체가 큰 라벨 헤드** (Signal · Judgment · Action · Record). KR sub "판단의 흐름." |
+| Stage IV — Method | "Three ways in. / One place to begin." 헤드 + 3축 caption | 헤드 생략. **3축 자체가 큰 라벨** (Architecture / Literacy / Mapping). KR sub "세 갈래의 진입." |
+| Stage V — Voice | "We don't recommend tools. / We architect what stays." + A안 KR + italic attrib | **"Architecture, not the agent."** + 자율 KR 3줄 (도구를 권하지 않는다. / 남는 자리를 설계한다. / 사고가 흐르는 형태로.) + "Siriai · 2026" mono |
+| Stage VI — Contact | "Let's start / with coffee." cafe 톤 + "Send a note" italic | **"Begin a diagnosis."** + KR "사고의 매핑부터." + CTA "Open a Dialogue" mono uppercase |
+| ProgressRail | Roman numeral italic (I.) | mono 0-padded index (00) |
+| ExitCue | "Scroll" + arrow + italic caption | "Scroll" + arrow만 |
+| Header | "A practice in AI architecture" + "Vol. I — MMXXVI" italic | "AI Architecture Practice" + "Seoul · 2026" mono |
+
+**카피 자율 판단 원칙**:
+- declarative 1인칭 ("We design / We architect") 줄임 → 사물 묘사·negation
+- 헤드 1–3단어 default. Stage III·IV는 헤드 생략, 라벨 자체가 main typography
+- "Let's start with coffee" 같은 cafe 톤 폐기
+- italic 자리 모두 regular + tracking (Geist italic 미지원, 차가운 결 강화)
+
+**메타 학습** (§1.5 회귀 방지 원칙 확장):
+- 사용자 reference를 1:1 만족시키지 말 것. 비평적 흡수 + 시리아이 정체성 기준 자율 판단.
+- 사용자가 던진 키워드("Locomotive 매력적", "A안 URL")는 baseline 신호일 뿐, 그대로 채택 X.
+- 폰트·색 선택 reasoning이 약하면 즉시 재고. "차가운 AI 컨설팅"에 warm serif가 들어왔으면 그 자체 충돌 신호.
+- 카피를 reference에서 그대로 가져오는 건 자율 판단 부재 표시.
+
 ### 2.6 마무리 상태
 
-- ✅ 트랙 정의 + 빈 브랜치 + Round 1 prototype (Stage 0/1)
-- ✅ Round 2 — editorial cinematic 결 표면 전체 교체 (5개 표면)
-- ✅ Round 3 — A안 voice·copy 정합 (6 stage 카피·colophon·폰트 토큰)
-- ✅ Round 4 — z motion + Fraunces variable + word stagger + velocity streak + Stage disjoint
-- ⏳ Round 5 — z-tunnel Atlas architecture 분해 + Stage I·II·V 새 mechanic (진행 중)
-- ⏸ Round 6 — Stage III·IV (decision graph + 3-axis prism)
-- ⏸ Round 7 — Stage VI + atmosphere 조율 + 마감 polish
+- ✅ Round 1 prototype + Round 2 editorial cinematic + Round 3 voice 정합 + Round 4 z motion + Round 5 architecture 분해
+- ✅ **Round 6 — 자율 재설계 (Geist + cool 색 + 카피 자율 새작성)**
+- ⏸ Round 7 — Stage III·IV 다이어그램 풀빌드 + Stage VI inline form + atmosphere 조율 + mobile polish
 
 ---
 

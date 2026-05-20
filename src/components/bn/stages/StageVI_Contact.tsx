@@ -1,9 +1,9 @@
 "use client";
 
 /**
- * Stage VI — Contact (§06) · placeholder
- * Round 7에서 inline mini form 또는 Cal.com inline embed 풀빌드 예정.
- * 본 라운드는 CTA 카피 + Send a note → 외부 라우팅 link.
+ * Stage VI — Contact
+ * Artifact: CTA gate (정면 frame).
+ * Copy: "Let's start with coffee." (cafe 톤) 폐기. cinematic professional로 재작성.
  */
 
 import { useEffect, useRef } from "react";
@@ -19,6 +19,7 @@ import type { StageProps } from "./StageI_Hero";
 
 export default function StageVI_Contact({ handle, from, to }: StageProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const eyebrowRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLHeadingElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -29,16 +30,18 @@ export default function StageVI_Contact({ handle, from, to }: StageProps) {
       const p = handle.progressRef.current;
       applyStageTransform(wrapRef.current, p, from, to);
       const lp = localProgress(p, from, to);
+
       const setFade = (el: HTMLElement | null, delay: number) => {
         if (!el) return;
-        const opIn = clamp01((lp - delay) / 0.22);
+        const opIn = clamp01((lp - delay) / 0.2);
         el.style.opacity = String(opIn);
       };
-      setFade(headRef.current, 0.1);
-      setFade(subRef.current, 0.35);
-      setFade(ctaRef.current, 0.55);
+      setFade(eyebrowRef.current, 0.0);
+      setFade(headRef.current, 0.15);
+      setFade(subRef.current, 0.4);
+      setFade(ctaRef.current, 0.6);
       if (ctaRef.current) {
-        ctaRef.current.style.pointerEvents = lp > 0.6 ? "auto" : "none";
+        ctaRef.current.style.pointerEvents = lp > 0.65 ? "auto" : "none";
       }
       raf = requestAnimationFrame(tick);
     };
@@ -53,41 +56,37 @@ export default function StageVI_Contact({ handle, from, to }: StageProps) {
       style={{ transformStyle: "preserve-3d" }}
     >
       <div className="flex flex-col items-center gap-9 px-6 text-center">
-        <div className="flex items-center gap-3">
-          <span className="h-px w-6" style={{ background: "var(--bn-accent)" }} />
+        <div ref={eyebrowRef} style={{ opacity: 0 }}>
           <span
             style={{
               fontFamily: MONO,
               fontWeight: 400,
               fontSize: "10.5px",
-              letterSpacing: "0.3em",
+              letterSpacing: "0.4em",
               textTransform: "uppercase",
               color: "var(--bn-ink-faint)",
             }}
           >
             05 — Contact
           </span>
-          <span className="h-px w-6" style={{ background: "var(--bn-accent)" }} />
         </div>
+
         <h2
           ref={headRef}
           style={{
             opacity: 0,
             fontFamily: MARK,
-            fontStyle: "italic",
-            fontWeight: 400,
-            fontSize: "clamp(2.4rem, 7.4vw, 7rem)",
-            lineHeight: 1.04,
-            letterSpacing: "-0.02em",
+            fontWeight: 500,
+            fontSize: "clamp(2.6rem, 8vw, 7.8rem)",
+            lineHeight: 1.0,
+            letterSpacing: "-0.045em",
             color: "var(--bn-ink)",
-            textShadow: "0 0 60px rgba(10,9,8,0.6)",
-            fontVariationSettings: '"opsz" 144, "SOFT" 60',
+            textShadow: "0 0 60px rgba(8,9,11,0.6)",
           }}
         >
-          Let&apos;s start
-          <br />
-          with coffee.
+          Begin a diagnosis.
         </h2>
+
         <p
           ref={subRef}
           style={{
@@ -99,8 +98,9 @@ export default function StageVI_Contact({ handle, from, to }: StageProps) {
             wordBreak: "keep-all",
           }}
         >
-          가벼운 커피챗으로, 해묵은 고민을 시원하게.
+          사고의 매핑부터.
         </p>
+
         <div
           ref={ctaRef}
           className="flex flex-col items-center gap-3"
@@ -112,19 +112,17 @@ export default function StageVI_Contact({ handle, from, to }: StageProps) {
             style={{
               borderColor: "var(--bn-accent)",
               color: "var(--bn-ink)",
-              fontFamily: MARK,
-              fontStyle: "italic",
-              fontWeight: 400,
-              fontSize: "15px",
-              letterSpacing: "0.02em",
-              background: "rgba(184,145,106,0.05)",
+              fontFamily: MONO,
+              fontWeight: 500,
+              fontSize: "13px",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              background: "rgba(159,179,200,0.05)",
               pointerEvents: "auto",
             }}
           >
-            Send a note
-            <span aria-hidden style={{ fontFamily: MONO }}>
-              →
-            </span>
+            Open a Dialogue
+            <span aria-hidden>→</span>
           </a>
           <span
             style={{
