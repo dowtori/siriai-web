@@ -268,17 +268,52 @@ src/components/bn/
 
 **현재 라운드 범위**: 카피 전면 교체 only. Stage III·IV 다이어그램 (4 node / 3 axis cinematic reveal), Stage V manifesto stagger, Stage VI CTA 비주얼 풀빌드는 **Round 4**.
 
+#### Round 4 — 2026-05-20 — z motion 진짜 도입 + Locomotive 결 흡수
+**커밋**: (이번 라운드)
+
+사용자 피드백 (스크린샷 첨부):
+> "이런식으로 많이 겹치고, z축을 구현하려는 시도는 좋았는데 움직임이 너무 정적이야. 카피는 작업 원칙 등 수준에 대해서 이야기한거다보니, 완전히 가져다 놓은 의도가 이후 디벨롭과 경험에 맞는 변주를 위해서라고 이해할게. 맞나? https://studiodumbar.com/ https://locomotive.ca/en 와 같은 감도 좋은 것 같아. 특히 locomotive 의 폰트스타일은 매력적이네."
+
+**확인된 사용자 의도**:
+- A안 카피 그대로 가져온 의도 = 수준 baseline 확보. z-tunnel 경험에 맞는 motion 변주는 이후 라운드. → Yes 확정.
+- Studio Dumbar · Locomotive 결의 typography·motion이 매력적.
+
+**진단 (Round 3 결과 스크린샷 분석)**:
+- Stage II(0.16–0.50)와 Stage III(0.32–0.68) range가 겹쳐서 progress ≈ 0.4 지점에서 두 헤드라인 동시 visible → 가독성 무너짐.
+- camera z만 보간되고 DOM 텍스트는 `scale()` envelope만 → 진짜 z motion 부재, "zoom" 인상으로 정적.
+
+**Round 4 조치 (5개)**:
+
+| # | 항목 | 변경 |
+|---|------|------|
+| 1 | Stage 범위 disjoint | I:`0–0.18` · II:`0.18–0.36` · III:`0.36–0.54` · IV:`0.54–0.72` · V:`0.72–0.90` · VI:`0.90–1.0`. 인접 cross-fade는 `stageOpacity()` fadeRatio 0.18로 자연 dissolve. 겹침 해소. |
+| 2 | Perspective + translateZ | `StageOverlays` 부모 `perspective: 1400px`. 각 stage wrapper `transform-style: preserve-3d` + `translateZ()`. `stageZ()` helper로 stage 외부 -480/+480px, 활성 구간에서 -480→+480 보간. → DOM 텍스트가 진짜 z 깊이에서 카메라로 다가오고 통과해 사라짐. |
+| 3 | Fraunces variable font | Playfair Display → Fraunces (Google Fonts, variable, opsz·SOFT·WONK axes). Editorial New(Locomotive 결)의 무료 대안. `--bn-mark` 토큰 swap. fontVariationSettings `opsz 144, SOFT 40~50` 적용. |
+| 4 | Word stagger | Stage I~VI 영문 헤드 단어 단위 span 분해. `wordOpacityY()` helper로 stage 활성 진입 시 단어별 stagger fall-in (translateY 18px → 0, opacity 0 → 1). Studio Dumbar 결. |
+| 5 | Velocity-based starfield streak | `useZJourney.velocityRef` → `StarField` shader uniform `uVelocity`로 전달. point size boost (1 + vel × 0.45) + group rotation 가속 (`baseSpin + vel × 0.05`) + alpha boost. 빠른 진행 시 별 streak 인상. |
+
+**helper 함수 신설** (StageOverlays.tsx):
+- `stageOpacity(p, from, to, fadeRatio)` — 양쪽 fade envelope
+- `stageZ(p, from, to, zRange, ext)` — stage 외부 ±zRange, 활성 구간 보간 (ext 만큼 진입/이탈 z motion 확장)
+- `wordOpacityY(p, from, to, wordIdx, wordCount, fadeRatio)` — 단어 단위 stagger
+- `applyStageTransform(el, p, from, to)` — wrapper에 opacity + translateZ 일괄 적용
+- `Words` 컴포넌트 — 영문 헤드를 line/word span 분해 + refs-array 자동 등록
+
+**Round 5 후보 (이번 결 검증 후)**:
+1. Stage 진입 시 letterbox curtain (cinematic frame transition · Locomotive 결)
+2. Char-level micro stagger (단어 → 글자 단위 더 세밀, Dumbar Google Sans Flex 결)
+3. CoreOrb Stage별 morph (3 → 4 노드 → 3 prism 변형)
+4. Mobile 입력 최적화 (touch deltaY 감도 + perspective 정도 조정)
+5. Stage III·IV 다이어그램 비주얼 풀빌드 (4 노드 SVG node-edge 또는 3 prism 3D)
+6. Velocity-based RGB chromatic aberration (postprocessing)
+
 ### 2.6 마무리 상태
 
 - ✅ 트랙 정의 + 빈 브랜치 + Round 1 prototype (Stage 0/1)
 - ✅ Round 2 — editorial cinematic 결 표면 전체 교체 (5개 표면)
 - ✅ Round 3 — A안 voice·copy 정합 (6 stage 카피·colophon·폰트 토큰)
-- ⏸ 사용자 피드백 대기 — Round 4 후보:
-  1. Stage III 4-node cinematic reveal (Signal·Judgment·Action·Record 3D 또는 SVG)
-  2. Stage IV 3-axis prism (Architecture·Literacy·Mapping)
-  3. Stage V 매니페스토 stagger (한국어 줄별 진입)
-  4. Stage VI CTA 도착 화면 (Cal.com inline 또는 Contact form 미니)
-  5. CoreOrb 동적 morph (Stage 3 → 4 노드 → 3 축 prism 변형)
+- ✅ Round 4 — z motion 진짜 도입 (perspective + translateZ) + Locomotive 결 (Fraunces variable) + Dumbar 결 (word stagger) + velocity streak + Stage disjoint
+- ⏸ 사용자 피드백 대기
 
 ---
 

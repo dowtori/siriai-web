@@ -100,19 +100,15 @@ export function useZJourney(): ZJourneyHandle {
 }
 
 // ── A안 v3 7-section IA를 B안 z-tunnel 6 stage로 매핑 ──
-//   Stage I  → §00 Hero        — L1 claim
-//   Stage II → §01 Stance       — L2 sub-claim
-//   Stage III→ §03 System       — 4 노드 decision flow (Signal·Judgment·Action·Record)
-//   Stage IV → §02 Methodology  — 3축 (Architecture·Literacy·Mapping)
-//   Stage V  → §05 Voice        — manifesto
-//   Stage VI → §06 Contact      — CTA
+//   각 stage는 disjoint하게 분리. 인접 stage 사이 0.02 cross-fade로 짧은 dissolve.
+//   active 폭 ≈ 0.18, cross-fade ≈ 0.02 (Round 4 — 겹침 가독성 회복)
 export const STAGES = [
-  { id: 0, numeral: "I", label: "Hero", from: 0.0, to: 0.16 },
-  { id: 1, numeral: "II", label: "Stance", from: 0.16, to: 0.32 },
-  { id: 2, numeral: "III", label: "System", from: 0.32, to: 0.5 },
-  { id: 3, numeral: "IV", label: "Methodology", from: 0.5, to: 0.68 },
-  { id: 4, numeral: "V", label: "Voice", from: 0.68, to: 0.86 },
-  { id: 5, numeral: "VI", label: "Contact", from: 0.86, to: 1.0 },
+  { id: 0, numeral: "I", label: "Hero", from: 0.0, to: 0.18 },
+  { id: 1, numeral: "II", label: "Stance", from: 0.18, to: 0.36 },
+  { id: 2, numeral: "III", label: "System", from: 0.36, to: 0.54 },
+  { id: 3, numeral: "IV", label: "Methodology", from: 0.54, to: 0.72 },
+  { id: 4, numeral: "V", label: "Voice", from: 0.72, to: 0.9 },
+  { id: 5, numeral: "VI", label: "Contact", from: 0.9, to: 1.0 },
 ] as const;
 
 export function stageProgress(progress: number, from: number, to: number) {

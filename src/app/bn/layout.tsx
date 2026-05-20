@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import type { CSSProperties, ReactNode } from "react";
-import { Playfair_Display, IBM_Plex_Mono } from "next/font/google";
+import { Fraunces, IBM_Plex_Mono } from "next/font/google";
 
-const playfair = Playfair_Display({
+// Fraunces — variable serif with optical sizing + soft/wonk axes.
+// Editorial New(Locomotive) 결의 가장 가까운 무료 대안. 워드마크·헤드 모두 담당.
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
+  weight: ["400", "500", "700", "900"],
   style: ["normal", "italic"],
   variable: "--bn-mark",
   display: "swap",
@@ -39,7 +41,7 @@ const editorialTokens: CSSProperties = {
 export default function BNLayout({ children }: { children: ReactNode }) {
   return (
     <div
-      className={`${playfair.variable} ${plexMono.variable} antialiased`}
+      className={`${fraunces.variable} ${plexMono.variable} antialiased`}
       style={{
         ...editorialTokens,
         background: "var(--bn-bg)",
