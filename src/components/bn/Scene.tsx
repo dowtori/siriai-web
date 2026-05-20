@@ -23,8 +23,8 @@ export default function Scene({ handle }: { handle: ZJourneyHandle }) {
 
   return (
     <>
-      <ambientLight intensity={0.25} />
-      <pointLight position={[0, 0, 4]} intensity={1.4} color="#c4b5fd" distance={20} />
+      <ambientLight intensity={0.18} />
+      <pointLight position={[0, 0, 4]} intensity={1.25} color="#B8916A" distance={22} />
       <StarField />
       <CoreOrb handle={handle} />
     </>

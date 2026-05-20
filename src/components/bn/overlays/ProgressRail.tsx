@@ -3,10 +3,13 @@
 import { useEffect, useRef } from "react";
 import { STAGES, type ZJourneyHandle } from "../useZJourney";
 
+const MARK = "var(--bn-mark), serif";
+
 export default function ProgressRail({ handle }: { handle: ZJourneyHandle }) {
   const fillRef = useRef<HTMLDivElement>(null);
   const dotsRef = useRef<(HTMLDivElement | null)[]>([]);
   const labelRef = useRef<HTMLSpanElement>(null);
+  const numeralRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     let raf = 0;
@@ -28,15 +31,18 @@ export default function ProgressRail({ handle }: { handle: ZJourneyHandle }) {
         if (!d) return;
         const isActive = i === activeIdx;
         const isPassed = i < activeIdx;
-        d.style.transform = `scale(${isActive ? 1.6 : 1})`;
+        d.style.transform = `scale(${isActive ? 1.7 : 1})`;
         d.style.background = isActive
-          ? "#c4b5fd"
+          ? "var(--bn-accent)"
           : isPassed
-            ? "rgba(196,181,253,0.55)"
-            : "rgba(255,255,255,0.18)";
+            ? "rgba(184,145,106,0.55)"
+            : "rgba(242,234,211,0.18)";
       });
       if (labelRef.current) {
         labelRef.current.textContent = STAGES[activeIdx].label;
+      }
+      if (numeralRef.current) {
+        numeralRef.current.textContent = STAGES[activeIdx].numeral + ".";
       }
       raf = requestAnimationFrame(tick);
     };
@@ -45,22 +51,47 @@ export default function ProgressRail({ handle }: { handle: ZJourneyHandle }) {
   }, [handle]);
 
   return (
-    <div className="pointer-events-none absolute right-6 top-1/2 z-10 flex -translate-y-1/2 items-center gap-4">
-      <div className="flex flex-col items-end gap-1 text-right">
-        <span className="text-[9px] tracking-[0.4em] uppercase text-white/35">Layer</span>
+    <div className="pointer-events-none absolute right-7 top-1/2 z-10 flex -translate-y-1/2 items-center gap-5">
+      <div className="flex flex-col items-end gap-1.5 text-right">
+        <span
+          ref={numeralRef}
+          style={{
+            fontFamily: MARK,
+            fontStyle: "italic",
+            fontWeight: 400,
+            fontSize: "20px",
+            color: "var(--bn-accent)",
+            letterSpacing: "0.02em",
+            lineHeight: 1,
+          }}
+        >
+          I.
+        </span>
         <span
           ref={labelRef}
-          className="text-[11px] tracking-[0.25em] text-white/85 transition-colors"
-          style={{ wordBreak: "keep-all" }}
+          style={{
+            fontFamily: MARK,
+            fontWeight: 400,
+            fontSize: "11px",
+            letterSpacing: "0.4em",
+            textTransform: "uppercase",
+            color: "var(--bn-ink-muted)",
+            wordBreak: "keep-all",
+            lineHeight: 1.3,
+          }}
         >
           Architecture of Thought
         </span>
       </div>
-      <div className="relative h-[260px] w-px bg-white/10">
+      <div className="relative h-[280px] w-px" style={{ background: "var(--bn-rule)" }}>
         <div
           ref={fillRef}
-          className="absolute inset-x-0 top-0 h-full origin-top bg-[#c4b5fd]"
-          style={{ transform: "scaleY(0)", transition: "none" }}
+          className="absolute inset-x-0 top-0 h-full origin-top"
+          style={{
+            background: "var(--bn-accent)",
+            transform: "scaleY(0)",
+            transition: "none",
+          }}
         />
         <div className="absolute -right-[3.5px] top-0 flex h-full flex-col justify-between">
           {STAGES.map((s, i) => (
@@ -70,7 +101,7 @@ export default function ProgressRail({ handle }: { handle: ZJourneyHandle }) {
                 dotsRef.current[i] = el;
               }}
               className="h-[7px] w-[7px] rounded-full transition-[transform,background] duration-200 ease-out"
-              style={{ background: "rgba(255,255,255,0.18)" }}
+              style={{ background: "rgba(242,234,211,0.18)" }}
             />
           ))}
         </div>

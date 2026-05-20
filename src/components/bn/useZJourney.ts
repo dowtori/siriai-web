@@ -100,12 +100,12 @@ export function useZJourney(): ZJourneyHandle {
 }
 
 export const STAGES = [
-  { id: 0, label: "Architecture of Thought", from: 0.0, to: 0.16 },
-  { id: 1, label: "AI는 도구가 아니다", from: 0.16, to: 0.32 },
-  { id: 2, label: "사고하는 구조", from: 0.32, to: 0.5 },
-  { id: 3, label: "운영 모델", from: 0.5, to: 0.68 },
-  { id: 4, label: "여섯 자리", from: 0.68, to: 0.86 },
-  { id: 5, label: "함께 운영합니다", from: 0.86, to: 1.0 },
+  { id: 0, numeral: "I", label: "Architecture of Thought", from: 0.0, to: 0.16 },
+  { id: 1, numeral: "II", label: "Beyond Tools", from: 0.16, to: 0.32 },
+  { id: 2, numeral: "III", label: "Structures That Think", from: 0.32, to: 0.5 },
+  { id: 3, numeral: "IV", label: "Operating Model", from: 0.5, to: 0.68 },
+  { id: 4, numeral: "V", label: "Six Seats", from: 0.68, to: 0.86 },
+  { id: 5, numeral: "VI", label: "Run It Together", from: 0.86, to: 1.0 },
 ] as const;
 
 export function stageProgress(progress: number, from: number, to: number) {
