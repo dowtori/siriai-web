@@ -307,13 +307,82 @@ src/components/bn/
 5. Stage III·IV 다이어그램 비주얼 풀빌드 (4 노드 SVG node-edge 또는 3 prism 3D)
 6. Velocity-based RGB chromatic aberration (postprocessing)
 
+#### Round 5–7 — 2026-05-20 — z-tunnel "Atlas" 전면 재설계
+
+사용자 피드백:
+> "디테일을 유지하면서 작은 부분 강제 수정 X, 전체 경험을 폭넓은 관점에서 구성해서 애초에 작은 문제 안 생기게."
+
+**메타 진단** (4 라운드 작업 회고):
+- Round 1에 정해진 mechanic ("DOM text가 z방향으로 다가옴")이 6 stage 모두 동일 → 차별화 0
+- Round 2/3/4는 같은 mechanic의 parameter patch (색·폰트·카피·envelope·perspective)
+- 6 stage가 다 똑같이 생김 (텍스트만 다름) → A안 7-section과 본질 다름
+- 결과: 겹침·정적·평범 같은 작은 문제는 **architecture 평평함의 표면 표출**
+
+**선택된 architecture — z-tunnel "Atlas"**:
+z 메타포 유지. 각 stage가 **자기 고유 artifact + 자기 mechanic**. z축은 stage 사이 transition mechanism으로만, stage 내부는 각자의 표정.
+
+| # | A안 § | Artifact | 고유 mechanic |
+|---|---|---|---|
+| I | Hero | Siriai 워드마크 (분해·재조립 logotype) | 글자가 카메라 안쪽 z=-300 흩어져 시작, 진입 시 z=0 정렬 |
+| II | Stance | 3-line parallax statement | 3 line이 다른 z 깊이 (-120, 0, +120). 마우스 X/Y parallax |
+| III | System | 4-node decision graph | Signal·Judgment·Action·Record 4 노드 z 다른 위치, 진입 시 edge 연결. A안 Diagram B의 spatial 변주 |
+| IV | Methodology | 3-axis 회전 prism | Architecture·Literacy·Mapping 3 face 3D prism. 카메라가 prism 안으로 진입, 회전. A안 Diagram A의 spatial 변주 |
+| V | Voice | Book-page manifesto | z 정지 (quiet beat). 큰 typography, 매니페스토 줄별 reveal. 다른 stage가 motion이면 V는 호흡 |
+| VI | Contact | CTA gate | "Send a note →" 카메라 정면 frame. inline form 또는 /contact 라우팅 |
+
+**작은 문제 자동 해결 메커니즘**:
+- 겹침 → stage별 시각적 인공물이 다르므로 가독성 무너지지 않음 (range envelope에 의존 X)
+- 정적 → stage별 다양한 mechanic 누적으로 자연 생동감
+- 차별화 → 6 stage 각각 표정. 시리아이 사상 6개가 각자 시각적 형태
+- 카피 부담 → 시각 sigil로 의미 보강
+
+**Plan 분할** (한 라운드에 6 stage 모두 신규 mechanic 구현은 회귀 위험):
+
+| Round | 범위 |
+|---|---|
+| **Round 5** | architecture 분해 (stages/ 디렉토리, StageOrchestrator) + Stage I (워드마크 reassemble) + Stage II (3-line parallax) + Stage V (book-page) 시범 구현 + Stage III·IV·VI 카피만 새 구조로 이전 |
+| **Round 6** | Stage III (4-node decision graph) + Stage IV (3-axis prism) — R3F geometry/SVG |
+| **Round 7** | Stage VI (CTA gate inline form) + atmosphere 조율 (Stage V에서 CoreOrb·StarField 약화) + Mobile 최적화 + 마감 polish |
+
+**Round 5 본 라운드 구현** (코드 변경 큼 — patch 식 회귀 위험 회피 위해 architecture를 한 번에 새로):
+
+코드 구조 변경:
+```
+src/components/bn/
+├── ZJourney.tsx           — 변경 (StageOrchestrator 합성)
+├── Scene.tsx              — 변경 (atmosphere only, stage 분리)
+├── StarField.tsx          ✓ (변경 없음)
+├── CoreOrb.tsx            ✓ (변경 없음)
+├── useZJourney.ts         ✓ (변경 없음)
+├── shared/
+│   └── stageMath.ts       — 신규 (stageOpacity/stageZ/wordOpacityY 분리)
+├── stages/
+│   ├── StageI_Hero.tsx        — 신규 mechanic (워드마크 reassemble)
+│   ├── StageII_Stance.tsx     — 신규 mechanic (3-line parallax)
+│   ├── StageIII_System.tsx    — 이전 (placeholder, Round 6 풀빌드)
+│   ├── StageIV_Methodology.tsx — 이전 (placeholder)
+│   ├── StageV_Voice.tsx       — 신규 mechanic (book-page manifesto)
+│   └── StageVI_Contact.tsx    — 이전 (placeholder)
+└── overlays/
+    ├── ProgressRail.tsx   ✓
+    └── ExitCue.tsx        ✓
+```
+
+기존 `StageOverlays.tsx` 폐기, 분해.
+
+진행 원칙 변경:
+- 매 라운드 patch X. 큰 architecture 결정 후 stage별 한 번 만들고 끝.
+- 다음 라운드 = stage 추가, micro patch X.
+
 ### 2.6 마무리 상태
 
 - ✅ 트랙 정의 + 빈 브랜치 + Round 1 prototype (Stage 0/1)
 - ✅ Round 2 — editorial cinematic 결 표면 전체 교체 (5개 표면)
 - ✅ Round 3 — A안 voice·copy 정합 (6 stage 카피·colophon·폰트 토큰)
-- ✅ Round 4 — z motion 진짜 도입 (perspective + translateZ) + Locomotive 결 (Fraunces variable) + Dumbar 결 (word stagger) + velocity streak + Stage disjoint
-- ⏸ 사용자 피드백 대기
+- ✅ Round 4 — z motion + Fraunces variable + word stagger + velocity streak + Stage disjoint
+- ⏳ Round 5 — z-tunnel Atlas architecture 분해 + Stage I·II·V 새 mechanic (진행 중)
+- ⏸ Round 6 — Stage III·IV (decision graph + 3-axis prism)
+- ⏸ Round 7 — Stage VI + atmosphere 조율 + 마감 polish
 
 ---
 

@@ -3,7 +3,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import Scene from "./Scene";
-import StageOverlays from "./StageOverlays";
+import StageOrchestrator from "./stages/StageOrchestrator";
 import ProgressRail from "./overlays/ProgressRail";
 import ExitCue from "./overlays/ExitCue";
 import { useZJourney } from "./useZJourney";
@@ -37,7 +37,7 @@ export default function ZJourney() {
         </Suspense>
       </Canvas>
 
-      <StageOverlays handle={handle} />
+      <StageOrchestrator handle={handle} />
 
       {/* ╔══════════════════════════════════════════════════╗
           ║  Header — A안 Hero eyebrow baseline               ║
