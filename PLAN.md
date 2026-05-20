@@ -108,20 +108,49 @@ PRD v3.0 (2026-05-16 기준) 위에서 다음 영역을 사용자 피드백으�
 
 ---
 
-## 2. Plan B / Plan C — 후속 트랙 (placeholder)
+## 2. Plan B — 비주얼 중심 / z축 진입 (시작 단계, 2026-05)
 
-사용자가 정의 예정. 본 문서에 트랙 시작 시 다음 형식으로 추가:
+### 2.1 컨셉 (사용자 정의)
 
-```
-## N. Plan X — [트랙 이름] ([시작일])
-### N.1 범위
-### N.2 변경 카피 인벤토리
-### N.3 디자인·기술 변경
-### N.4 spec 문서 동기화
-### N.5 마무리 상태
-```
+- 첫 장면 **비주얼 와우 듬뿍**한 초입부 — 몰입도·임팩트 최우선
+- UX: 좌우/상하 스크롤이 아닌 **z축 진입** — 드래그/스크롤 시 화면 중앙부로 들어가는 경험
+- 사용자 기존 `/b` 작업물보다 **한 단계 더 압도적**인 비주얼 (레퍼런스 출발점: 사용자 제공 `https://siriai-7bc0x7gre-dowtoris-projects.vercel.app/b`)
+- 후보 레퍼런스 결: Active Theory · Resn · Lusion · Bruno Simon · Atlassian Loom hero · Stripe Sessions · GitHub Universe hero 류
+- A안과 voice·카피 정합 **강제 X** — 비주얼이 일차 매개. PRD §2.3·§2.4 voice 원칙은 baseline일 뿐
 
-**알려진 백로그 후보** (CLAUDE.md "차기 작업" + 본 트랙 잔여):
+### 2.2 베이스·라우트·브랜치
+
+| 항목 | 값 |
+|------|----|
+| 브랜치 | `claude/visual-impact-bn` (master에서 분기) |
+| 베이스 | `master` (v2 — Three.js · GSAP · Lenis · OrbCanvas 자산 포함, 3D·드래그 인터랙션 즉시 활용 가능) |
+| 작업·프리뷰 라우트 | `/bn` |
+| A안 격리 | 다른 브랜치, 다른 라우트, 다른 디자인 토큰 가능 |
+
+### 2.3 시작 시 미해결 항목 (새 세션 첫 라운드에 결정)
+
+1. 레퍼런스 서치 + 보드 정리 (3-5개 strongest, 각 5줄 분석)
+2. 컨셉 sketch (텍스트 IA + 인터랙션 흐름)
+3. 기술 스택 (Three.js / @react-three/fiber / Spline / Rive / Canvas 2D / WebGL shader 직접) — z축 인터랙션 구현 난이도·번들 크기·성능 trade-off
+4. 인터랙션 모델 상세 (z축 진입 — drag·scroll·hover trigger / 단계별 reveal / 종료 조건)
+5. 라우트·컴포넌트 디렉토리 결정 (예: `src/app/bn/`, `src/components/bn/`)
+6. 첫 prototype (Hero 단독)
+
+### 2.4 진행 원칙
+
+- A안 코드·디자인 토큰(`--surface-base`, `--font-display` 등)은 import 가능하나 **강제 정합 아님**. 색·폰트·motion 모두 재정의 가능
+- PRD §2.3 voice 원칙은 카피웍 baseline. 다만 B안은 비주얼이 일차 매개라 voice 톤·동사 사전 재정의 가능
+- 매 라운드 본 §2에 일지 누적 (§1 Plan A 일지와 동일 형식)
+- 새 세션 시작 — context 격리 위해 별도 세션. 본 §2와 CLAUDE.md를 시작 전 필독
+
+### 2.5 마무리 상태
+
+- ⏳ 신규 트랙 — 새 세션에서 진행 예정
+- 사전 작업: 본 트랙 정의 + 빈 브랜치 push 완료
+
+---
+
+
 
 운영 정리:
 - `siriai.io` 운영 도메인 확정 후 `metadataBase` 갱신
