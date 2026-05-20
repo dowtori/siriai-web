@@ -32,7 +32,15 @@ export function useZJourney(): ZJourneyHandle {
     };
     raf = requestAnimationFrame(tick);
 
+    // Input field guard — form input/textarea 위에서는 wheel/key를 가로채지 않음
+    const isInputTarget = (target: EventTarget | null) => {
+      if (!(target instanceof HTMLElement)) return false;
+      const tag = target.tagName;
+      return tag === "INPUT" || tag === "TEXTAREA" || target.isContentEditable;
+    };
+
     const onWheel = (e: WheelEvent) => {
+      if (isInputTarget(e.target)) return;
       e.preventDefault();
       const norm = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
       targetRef.current = clamp(targetRef.current + norm * 0.00065);
@@ -40,6 +48,7 @@ export function useZJourney(): ZJourneyHandle {
 
     const stageStep = 0.165;
     const onKey = (e: KeyboardEvent) => {
+      if (isInputTarget(e.target)) return;
       switch (e.key) {
         case "ArrowDown":
         case "PageDown":
@@ -63,16 +72,21 @@ export function useZJourney(): ZJourneyHandle {
 
     let dragging = false;
     let lastY = 0;
+    let pointerType: "mouse" | "touch" | "pen" = "mouse";
     const onPointerDown = (e: PointerEvent) => {
+      if (isInputTarget(e.target)) return;
       if (e.pointerType === "mouse" && e.button !== 0) return;
       dragging = true;
       lastY = e.clientY;
+      pointerType = (e.pointerType || "mouse") as typeof pointerType;
     };
     const onPointerMove = (e: PointerEvent) => {
       if (!dragging) return;
       const dy = lastY - e.clientY;
       lastY = e.clientY;
-      targetRef.current = clamp(targetRef.current + dy * 0.0023);
+      // touch는 mouse drag보다 감도 더 크게 (작은 화면 = 큰 multiplier)
+      const mult = pointerType === "touch" ? 0.0038 : 0.0023;
+      targetRef.current = clamp(targetRef.current + dy * mult);
     };
     const onPointerUp = () => {
       dragging = false;

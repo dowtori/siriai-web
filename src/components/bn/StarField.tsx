@@ -92,8 +92,15 @@ export default function StarField({ handle }: { handle?: ZJourneyHandle }) {
   useFrame((_, dt) => {
     if (!ref.current) return;
     const vel = handle?.velocityRef.current ?? 0;
-    // velocity 의해 rotation 가속 — 빠른 진행이 시각적 streak 인상
-    const baseSpin = 0.009;
+    const p = handle?.progressRef.current ?? 0;
+    // Stage V (0.72–0.90) quiet beat — rotation 감속
+    let quietMul = 1;
+    if (p > 0.72 && p < 0.92) {
+      const lp = Math.min(1, (p - 0.72) / 0.1);
+      const out = Math.max(0, (p - 0.88) / 0.04);
+      quietMul = 1 - lp * 0.7 * (1 - out);
+    }
+    const baseSpin = 0.009 * quietMul;
     const velSpin = vel * 0.05;
     ref.current.rotation.z += dt * (baseSpin + velSpin);
 

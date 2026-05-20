@@ -54,11 +54,20 @@ export default function CoreOrb({ handle }: { handle: ZJourneyHandle }) {
     const ambientLp = stageProgress(p, 0, 0.7); // visible from start
     const t = state.clock.elapsedTime;
 
+    // Stage V (0.72–0.90) quiet beat — glow intensity 약화
+    let quietMul = 1;
+    if (p > 0.72 && p < 0.92) {
+      const inT = Math.min(1, (p - 0.72) / 0.1);
+      const outT = Math.max(0, (p - 0.88) / 0.04);
+      quietMul = 1 - inT * 0.55 * (1 - outT);
+    }
+
     if (glowRef.current) {
       const s = 3.4 + ambientLp * 1.6;
       glowRef.current.scale.setScalar(s);
-      glowRef.current.rotation.y += dt * 0.06;
-      glowMaterial.uniforms.uIntensity.value = 0.32 + ambientLp * 0.4;
+      glowRef.current.rotation.y += dt * 0.06 * quietMul;
+      glowMaterial.uniforms.uIntensity.value =
+        (0.32 + ambientLp * 0.4) * quietMul;
     }
     if (wireRef.current) {
       const s = 0.18 + lp * 2.0;

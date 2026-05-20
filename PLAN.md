@@ -409,11 +409,41 @@ src/components/bn/
 - 폰트·색 선택 reasoning이 약하면 즉시 재고. "차가운 AI 컨설팅"에 warm serif가 들어왔으면 그 자체 충돌 신호.
 - 카피를 reference에서 그대로 가져오는 건 자율 판단 부재 표시.
 
+#### Round 7 — 2026-05-20 — Stage III/IV/VI 풀빌드 + atmosphere + mobile (자율 완료)
+
+사용자 지시:
+> "Plan D는 다른 세션에서 하고있는 작업이야. 충돌하지않게해줘. /goal 이후 완료까지 자체판단으로 진행"
+
+**Plan D 정리**: 본 브랜치 history에서 `Design-D.md` / `PRD-D.md` 제거 (chore commit). 다음 commit부터 `git add -A` 대신 specific files만 add.
+
+**자율 완료 모드 — 한 라운드에 5개 항목 일괄**:
+
+| # | 항목 | 변경 |
+|---|------|------|
+| 1 | **Stage III** SVG node-edge graph | placeholder → 4 노드 (Signal · Judgment · Action · Record) horizontal graph. 노드별 dot marker + 큰 typography label + 노드 사이 connecting line (CSS scaleX 0→1 stagger). decision flow의 spatial 시각화. |
+| 2 | **Stage IV** SVG triangle prism | placeholder → 3축 triangle vertex 배치 (top center · bottom-left · bottom-right) + SVG path가 stroke-dashoffset로 progress 따라 그려짐 + 중앙 convergence dot. Architecture · Literacy · Mapping 3축의 시각화. |
+| 3 | **Stage VI** inline mini form | CTA link placeholder → name · email · message 3 field inline form. /api/contact POST. pending → success state. 성공 시 "Signal received." quiet acknowledgment + contact@siriai.io. |
+| 4 | **Atmosphere 조율** Stage V quiet beat | StarField rotation 감속 (progress 0.72-0.90 동안 baseSpin × 0.3) + CoreOrb glow intensity·rotation 약화 (× 0.45). Stage V가 다른 stage의 motion 가운데 정적 호흡. |
+| 5 | **Mobile 입력 최적화** | useZJourney pointer drag multiplier touch ≠ mouse (0.0038 vs 0.0023). + form input/textarea/contentEditable 위에서는 wheel·keyboard 가로채지 않음 (`isInputTarget` 가드). |
+
+**자율 판단 디테일**:
+- Stage III·IV의 큰 다이어그램은 SVG 또는 CSS로 — R3F 3D는 stage 안 carry 안 함 (Canvas 분리 비효율). atmosphere는 R3F 유지, stage 내부 다이어그램은 DOM/SVG.
+- Stage VI submit success message: A안의 "회신드립니다" 톤보다 cinematic하게 "Signal received." + 영업일 기준 2일 회신 약속.
+- mobile perspective는 유지 (1400px). touch 감도만 보강 — 시각적 차이 최소화.
+
 ### 2.6 마무리 상태
 
-- ✅ Round 1 prototype + Round 2 editorial cinematic + Round 3 voice 정합 + Round 4 z motion + Round 5 architecture 분해
-- ✅ **Round 6 — 자율 재설계 (Geist + cool 색 + 카피 자율 새작성)**
-- ⏸ Round 7 — Stage III·IV 다이어그램 풀빌드 + Stage VI inline form + atmosphere 조율 + mobile polish
+- ✅ Round 1–5 (prototype · editorial · voice · z motion · architecture)
+- ✅ Round 6 — 자율 재설계 (Geist + cool 색 + 카피 새작성)
+- ✅ **Round 7 — Stage III/IV/VI 풀빌드 + atmosphere quiet beat + mobile (자율 완료)**
+
+**B안 z-tunnel Atlas 핵심 architecture 완성**:
+- 6 stage 각자 고유 mechanic (워드마크 reassemble · parallax statement · node graph · triangle prism · book-page · mini form)
+- atmosphere stage-aware (Stage V quiet beat)
+- mobile + form input 입력 격리
+- 카피·voice·폰트·색 모두 시리아이 정체성 (차가운 AI 컨설팅) 기준 자율 판단
+
+**Plan D 분리 확인**: visual-impact-bn 브랜치에서 Design-D.md / PRD-D.md 제거 완료. 다른 세션의 Plan D 작업과 무충돌.
 
 ---
 
