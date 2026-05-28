@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap");
+/* Playfair Display는 layout.tsx의 <link>로 로드 — Tailwind v4가 pretendard CSS를
+   inline할 때 후속 @import url(...)이 spec 위반(@import rules must precede all rules)
+   이 되어 빌드 fail. */
 
 :root {
   /* ─────────────────────────────────────────
@@ -62,6 +64,23 @@
   --focus-ring:             #2B3A4A;
   --selection-bg:           rgba(43, 58, 74, 0.15);
   --selection-fg:           #0F1419;
+
+  /* ─────────────────────────────────────────
+     A1 (Mystic Compressed) tokens.
+     /a1 라우트 전용. PRD-A1 §4 · RESEARCH-A1 §5 참조.
+     Pure #FFF / #000 거부 — paper는 2% warm tint, midnight는 off-black.
+     ──────────────────────────────────────── */
+  --a1-paper:               #FAFAF7;
+  --a1-midnight:            #0B0F14;
+  --a1-ink:                 #0F1419;
+  --a1-on-midnight:         #E8E6DE;
+  --a1-mute:                #5E6470;
+  --a1-on-mute:             #8B919C;
+  --a1-hairline:            rgba(15, 20, 25, 0.12);
+  --a1-hairline-strong:     rgba(15, 20, 25, 0.22);
+  --a1-hairline-on-midnight: rgba(232, 230, 222, 0.14);
+  --a1-accent-warm:         #C77B3A;
+  --a1-accent-deep:         #2B3A4A;
 }
 
 @theme inline {

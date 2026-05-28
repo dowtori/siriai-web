@@ -131,8 +131,8 @@ A안 토큰과 **공존**. A1 전용은 `--a1-*` prefix.
 ```
 src/app/a1/
 ├─ page.tsx                A1 페이지 (3 stage stack)
-├─ layout.tsx              A1-specific (noindex, follow)
-└─ _h/                     디버깅 하네스 (§8)
+├─ layout.tsx              A1-specific (noindex, follow) + DebugPanel mount
+└─ h/                      디버깅 하네스 (§8)
    ├─ page.tsx             하네스 인덱스
    ├─ stage-1/page.tsx     Stage 1 isolation
    ├─ stage-2/page.tsx     Stage 2 isolation
@@ -159,7 +159,7 @@ A안 컴포넌트(`src/components/v3/*`) **import 가능하나 강제 X**. 재�
 
 **목적**: monopo 결의 모션 튜닝이 본질 — duration·easing·blur·cursor lerp 등을 빌드·새로고침 cycle 없이 라이브 조절·검증.
 
-### 8.1 Motion Debug Panel (`/a1?debug=1`)
+### 8.1 Motion Debug Panel (`/a1?debug=1` 또는 ⌘D)
 
 - 우측 floating panel (`Cmd+D` toggle, 또는 `?debug=1` URL param)
 - 컨트롤 (slider + value display):
@@ -176,7 +176,9 @@ A안 컴포넌트(`src/components/v3/*`) **import 가능하나 강제 X**. 재�
 - **"Copy as code"** 버튼 — 현 값을 `:root` CSS variable definition으로 클립보드 복사 (확정값을 코드로 옮기는 ritual)
 - **"Reset to recommended"** 버튼 — `RESEARCH-A1.md` §4 baseline으로 일괄 복원
 
-### 8.2 Stage Isolation (`/a1/_h/stage-N`)
+### 8.2 Stage Isolation (`/a1/h/stage-N`)
+
+> 명명 참고: Next.js 16 App Router에서 `_` prefix 폴더는 private convention(라우팅 제외). 그래서 `_h` 대신 `h` 사용.
 
 - 각 stage 단독 렌더링 (전후 stage 비가시)
 - URL query로 상태 강제:
@@ -189,7 +191,7 @@ A안 컴포넌트(`src/components/v3/*`) **import 가능하나 강제 X**. 재�
 
 ### 8.3 노출 정책
 
-- `/a1/_h/*` · `?debug=1`: robots noindex (A1 라우트 자체가 noindex이므로 자동)
+- `/a1/h/*` · `?debug=1`: robots noindex (A1 라우트 자체가 noindex이므로 자동)
 - 운영 빌드에 포함 — 게이팅 별도 X. 단순함 우선.
 - 옵션: 환경변수 `NEXT_PUBLIC_A1_DEBUG_HIDDEN=1`로 hide 처리 (향후)
 
@@ -206,7 +208,7 @@ A안 컴포넌트(`src/components/v3/*`) **import 가능하나 강제 X**. 재�
 **Phase A1.1 — 기반**
 - `globals.css` `--a1-*` 토큰 추가
 - `/a1/layout.tsx` (noindex), 빈 `/a1/page.tsx`
-- `/a1/_h/*` 하네스 (DebugPanel + stage isolation)
+- `/a1/h/*` 하네스 (DebugPanel + stage isolation)
 - 빈 Stage1/2/3 placeholder (스크롤만 동작)
 
 **Phase A1.2 — Stage 1 Hero**

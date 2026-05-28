@@ -207,9 +207,31 @@ PRD v3.0 (2026-05-16 기준) 위에서 다음 영역을 사용자 피드백으�
 - §2 카피: Methodology head만 mystic reset, System head는 carry
 - 기타 추천안: Lozenge + Numbered 병용, Geist Mono 도입, Lenis `lerp: 0.08`
 
-### 3.5 다음
+### 3.5 Phase A1.1 — 기반 구축 (2026-05-28 완료)
 
-Phase A1.1 (기반: `--a1-*` 토큰 + `/a1` 라우트 + 하네스 + Stage placeholder) 진입 직전.
+산출물:
+- ✅ `src/app/globals.css` — `--a1-*` 토큰 11개 추가 (paper · midnight · ink · on-midnight · mute · on-mute · hairline · hairline-strong · hairline-on-midnight · accent-warm · accent-deep)
+- ✅ `src/components/a1/motion-context.tsx` — `A1MotionProvider` + `useA1Motion()` hook, 8 파라미터, localStorage hydration, prefers-reduced-motion 감지
+- ✅ `src/components/a1/DebugPanel.tsx` — 우측 floating, 8 slider, Copy as code / Reset, ⌘D 토글, `?debug=1` 자동 노출
+- ✅ `src/app/a1/layout.tsx` — noindex, `A1MotionProvider` + `DebugPanel` mount
+- ✅ `src/app/a1/page.tsx` — Stage 1·2·3 stack
+- ✅ `src/components/a1/Stage[1|2|3]*.tsx` — placeholder. Stage 1은 다크 + blur reveal + 천천히 도는 외곽 ring, Stage 2는 흰 + lozenge bullet · numbered + clients ribbon placeholder, Stage 3은 다크 inset manifesto card + 1px border button
+- ✅ `src/app/a1/h/page.tsx` — 하네스 인덱스 (stages 링크 + URL flags 표 + routes)
+- ✅ `src/app/a1/h/stage-[1|2|3]/page.tsx` — stage isolation. `badge` prop으로 화면 좌상단에 harness 표시
+
+빌드 이슈 해결:
+- pre-existing globals.css의 Playfair @import url() 라인이 Tailwind v4 PostCSS inline 후 spec 위반(@import rules must precede all rules). 본 트랙에서 fix — link 태그를 `layout.tsx` head로 옮김
+- 초기 폴더명 `_h`가 Next.js 16 App Router의 private folder convention으로 404 — `h`로 rename
+- React 19 lint rule `react-hooks/set-state-in-effect` — localStorage hydration 케이스에 eslint-disable + 명시 주석
+
+검증:
+- `npm run lint` — A1 파일 0 error
+- `npx tsc --noEmit` — A1 파일 0 error
+- 라우트: `/a1` `/a1?debug=1` `/a1/h` `/a1/h/stage-1` `/a1/h/stage-2` `/a1/h/stage-3` 전부 200, `/` 도 200 (CSS fix 후 회복)
+
+### 3.6 다음
+
+Phase A1.2 — Stage 1 Hero 실제 구현 (MysticCursor Canvas 2D blob, RotatingForm SVG/Canvas 정제, blur reveal 정밀화)
 
 ### 3.5 진행 원칙
 

@@ -31,6 +31,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="h-full antialiased">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap"
+        />
+      </head>
       <body className="min-h-full">{children}</body>
     </html>
   );
