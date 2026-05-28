@@ -176,12 +176,49 @@ PRD v3.0 (2026-05-16 기준) 위에서 다음 영역을 사용자 피드백으�
 
 ---
 
-## 3. 다른 로컬에서 작업 재개 가이드
+## 3. Plan A1 — Mystic Compressed (시작 단계, 2026-05-28)
+
+### 3.1 컨셉 (사용자 정의 + 회의 후 정리)
+
+- 3대 키워드: **신비주의 · 느린 · 스마트한**
+- Hero(다크 신비) + 본문(흰 미니멀) 두 모드 + 전환점이 디자인 임팩트
+- 스크롤 ~2.5–3 viewport로 압축 (A안 7섹션 대비 60% 축소)
+- Voice·UX 라이팅·정보 응축은 A안 carry, mood만 mystic swap
+
+### 3.2 베이스·라우트·브랜치
+
+| 항목 | 값 |
+|---|---|
+| 브랜치 | `claude/mystic-compressed-a1` (A안 HEAD `7bb9263`에서 분기) |
+| 베이스 | A안 v3 (베이지 + Pretendard + framer-motion) |
+| 프리뷰 라우트 | `/a1` (`/`는 A안 유지) |
+
+### 3.3 산출물 (Phase A1.0 — research + PRD + 하네스 design)
+
+- ✅ `RESEARCH-A1.md` — 레퍼런스 9개 분석 + 모션·컬러 baseline 권고 + 구현 참고
+- ✅ `PRD-A1.md` — 컨셉·구조·토큰·하네스·구현 단계 spec
+- ⏳ 사용자 승인 대기 (PRD-A1 §10 결정 항목 8개 + §12 체크리스트)
+
+### 3.4 다음 (승인 후)
+
+Phase A1.1 (기반) → A1.6 (마무리) — PRD-A1 §9 참조.
+
+### 3.5 진행 원칙
+
+- A안과 격리. A안 컴포넌트 import 가능하나 강제 X.
+- 매 Phase 종료 시 본 §3에 일지 누적.
+- 디버깅 하네스(`/a1/_h/*`)로 모션 파라미터 라이브 튜닝 — 빌드·새로고침 cycle 없이 결을 잡는다.
+
+---
+
+## 4. 다른 로컬에서 작업 재개 가이드
 
 ```bash
 git clone https://github.com/dowtori/siriai-web.git
 cd siriai-web
 git checkout claude/redesign-homepage-premium-DiV5b   # Plan A 작업 브랜치
+# git checkout claude/visual-impact-bn               # Plan B (별도 세션)
+# git checkout claude/mystic-compressed-a1           # Plan A1 (본 세션 진행 중)
 npm install
 # .env.local (선택) — Supabase 미설정 시 contact form은 console.log fallback
 npm run dev
