@@ -237,16 +237,16 @@ A안 컴포넌트(`src/components/v3/*`) **import 가능하나 강제 X**. 재�
 
 ---
 
-## 10. 결정 필요 항목 (Phase A1.1 진입 전)
+## 10. 결정 사항 (2026-05-28 확정)
 
-1. **하네스 구조** — 본 PRD §8.1 + §8.2 그대로 진행 OK?
-2. **Lozenge vs Numbered bullet** — §2에서 둘 다 사용? 택1?
-3. **Clients (With) 처리** — Stage 2 안에 포함 vs §3 진입 직전 단독 ribbon vs 폐기 (압축이 본질)?
-4. **State-aware ambient** — Stage 1 motion ↔ Stage 3 진입 echo, 구현?
-5. **Mono caption font 도입** — Geist Mono / JetBrains Mono / 폐기 (Pretendard만)?
-6. **Lenis 정식 도입** — `lerp: 0.08` 또는 native smooth 유지?
-7. **§2 카피 헤드 reset 범위** — Methodology·System head 둘 다 reset / 한 쪽만 / 둘 다 carry?
-8. **운영 / 갈아끼우기 시점** — 평가 후 결정. 본 PRD 범위 외.
+1. **하네스 구조** — ✅ §8.1 + §8.2 그대로 (Motion Debug Panel + Stage Isolation)
+2. **Lozenge vs Numbered bullet** — ✅ 둘 다 사용. Lozenge(pill)는 주, Numbered는 보조
+3. **Clients (With) 처리** — ✅ Stage 2 → 3 사이 단독 가로 ribbon. marquee 60s → 90s 더 느리게. 호흡 1번 + 시각 break
+4. **State-aware ambient** — ✅ 도입. Stage 1 motion이 Stage 3 진입(scrollProgress 기반) 시 10–15% 가속 + opacity +8%
+5. **Mono caption font** — ✅ Geist Mono 도입. footnote · dot indicator · lozenge bullet 번호 한정
+6. **Lenis 정식 도입** — ✅ A1 한정 `lerp: 0.08`, `smoothWheel: true`. v1 패키지 재활용
+7. **§2 카피 헤드 reset** — ✅ Methodology만 reset(mystic 톤). System head("Decision flow. / Made visible.")는 carry. 구체 카피는 Phase A1.4에서 후보 다수 제시 후 결정
+8. **운영 `/` 갈아끼우기 시점** — ⏳ 평가 후 결정. 본 PRD 범위 외
 
 ---
 
@@ -261,14 +261,12 @@ A안 컴포넌트(`src/components/v3/*`) **import 가능하나 강제 X**. 재�
 
 ---
 
-## 12. 승인 체크리스트
+## 12. 승인 체크리스트 (2026-05-28 완료)
 
-본 PRD 진행 전 사용자 확인:
-
-- [ ] 컨셉(§1) · 3 stage 구조(§2) · 모션 baseline(§3) OK
-- [ ] 디자인 토큰(§4) · 컬러 OK
-- [ ] 카피 reset 정책(§6) OK
-- [ ] 라우트·파일 구조(§7) OK
-- [ ] 디버깅 하네스 구조(§8) OK
-- [ ] §10 결정 항목 8개 답변
-- [ ] 구현 단계(§9) Phase A1.1부터 시작 OK
+- [x] 컨셉(§1) · 3 stage 구조(§2) · 모션 baseline(§3) OK
+- [x] 디자인 토큰(§4) · 컬러 OK
+- [x] 카피 reset 정책(§6) OK (§10.7 — Methodology만 reset)
+- [x] 라우트·파일 구조(§7) OK
+- [x] 디버깅 하네스 구조(§8) OK
+- [x] §10 결정 항목 8개 확정
+- [x] 구현 단계(§9) Phase A1.1부터 시작 OK

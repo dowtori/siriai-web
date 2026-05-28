@@ -197,11 +197,19 @@ PRD v3.0 (2026-05-16 기준) 위에서 다음 영역을 사용자 피드백으�
 
 - ✅ `RESEARCH-A1.md` — 레퍼런스 9개 분석 + 모션·컬러 baseline 권고 + 구현 참고
 - ✅ `PRD-A1.md` — 컨셉·구조·토큰·하네스·구현 단계 spec
-- ⏳ 사용자 승인 대기 (PRD-A1 §10 결정 항목 8개 + §12 체크리스트)
+- ✅ 사용자 승인 완료 (2026-05-28) — §10 결정 8개 확정, §12 체크리스트 완료
 
-### 3.4 다음 (승인 후)
+### 3.4 확정 사항 (2026-05-28)
 
-Phase A1.1 (기반) → A1.6 (마무리) — PRD-A1 §9 참조.
+- 하네스: Motion Debug Panel(`/a1?debug=1`) + Stage Isolation(`/a1/_h/stage-N`) 통합형
+- Clients(With): Stage 2 → 3 사이 단독 가로 ribbon, marquee 90s
+- State-aware ambient: 도입 (Stage 3 진입 시 10–15% 가속 + opacity +8%)
+- §2 카피: Methodology head만 mystic reset, System head는 carry
+- 기타 추천안: Lozenge + Numbered 병용, Geist Mono 도입, Lenis `lerp: 0.08`
+
+### 3.5 다음
+
+Phase A1.1 (기반: `--a1-*` 토큰 + `/a1` 라우트 + 하네스 + Stage placeholder) 진입 직전.
 
 ### 3.5 진행 원칙
 
