@@ -294,10 +294,50 @@ DebugPanel 라이브 연동 매핑:
 - transition isolation harness `/a1/h/transition-12` (필요시 추가)
 - scroll-linked variant (monopo.vn 원형) — 현 시간 기반과 비교 평가 후 결정
 
-### 3.9 다음
+### 3.9 Phase A1.4 — Stage 2 정제 (2026-05-29)
 
-Phase A1.4 — Stage 2 정제 (lozenge bullet · thread connector ·
-Methodology mystic 카피 reset · clients ribbon marquee 90s).
+구조 결정 (사용자 문답):
+- **Stage 2**: Methodology + System을 **한 통합 블록 + thread connector**로 합침. ~50% whitespace.
+- **Clients (With)**: Stage 2 → Stage 3 사이 **단독 가로 ribbon**. 90s slow marquee.
+
+산출물:
+- `src/components/v3/ClientsSection.tsx` — `LOGOS` `LogoItem` `Logo` 타입을 named export로 노출 (A1 재사용. 격리 원칙 준수: 강제 X, 재사용 가능).
+- `src/components/a1/Stage2Composition.tsx` 전면 재작성:
+  - 통합 헤드 "Three doors. / Four moves." + 한국어 echo "세 갈래로 들어가, 네 결로 흐릅니다."
+  - 3 axes lozenge row (Architecture · Literacy · Mapping)
+  - thread connector — 단일 vertical `motion.path` (height 140, `var(--a1-hairline-strong)`, `pathLength` 0→1, 1.4s)
+  - 4 layers lozenge row (Signal · Judgment · Action · Record)
+  - 모두 가운데 정렬, max-width 880, padding `200px 24px 240px` — `~50% empty ratio`
+  - `Lozenge` 내부 컴포넌트 — PRD spec: padding `4px 12px`, mono 11px, 01/02 prefix mute
+  - 시퀀스 타이밍: T_HEAD_STAGGER 0.15s · T_KR_HEAD 0.45s · T_AXES_START 0.85s · T_THREAD_START 1.25s · T_LAYERS_START 1.85s. lozenge stagger `revealStagger × 0.6`.
+- `src/components/a1/Stage23ClientsRibbon.tsx` 신규:
+  - paper 베이스, 위아래 hairline border
+  - 90s marquee (`animationDuration: "90s"` inline override — Tailwind `animate-siriai-marquee-slow` keyframe duration 갱신)
+  - mask gradient 좌우 fade
+  - eyebrow "With"만 — Stage 2 통합 헤드와 톤 균형
+- `src/app/a1/page.tsx` — Stage2Composition ↔ Stage23ClientsRibbon ↔ Stage3Outro 순으로 마운트
+- harness `/a1/h/stage-2`는 Stage2Composition 단독 마운트 — 신규 콘텐츠 자동 반영. transition harness는 별도 생성 안 함 (Phase A1.3 백로그).
+
+카피웍 메모:
+- A안 §02 "Three ways in. / One place to begin." → A1 Stage 2 "Three doors. / Four moves." (mystic reset: 3축 + 4결 통합 흐름 함축, "갈래·결" 한국어 결과 매핑)
+- A안 §03 OPERATING MODEL 코어 라벨은 Stage 2에서 폐기 — thread connector가 흐름 자체로 의미 carry. 별도 라벨 없이 미니멀.
+
+검증:
+- `npm run lint` — A1 + 수정 v3 파일 0 error (v1 OrbCanvas legacy error는 pre-existing, 빌드 무관)
+- `npx tsc --noEmit` — 0 error
+- 라우트: `/a1` 전체 흐름 (Hero → wash → 통합 블록 → ribbon → outro) · `/a1/h/stage-2` Stage 2 isolation
+
+선택적 백로그 (Phase A1.4.x):
+- thread connector를 단순 단일 line → **3→1→4 funnel** 구조로 진화 (3 axes에서 line 3개 가운데 수렴 → 코어 점 → 4 layers로 4개 분기). OPERATING MODEL 의미 시각화. motion.path stagger.
+- Methodology head 카피 재정제 — "Three doors. / Four moves." vs "Three ways in. / Four moves on." vs 그 외. 사용자 피드백 round.
+- Clients ribbon 헤드 — "With" eyebrow vs 카피 추가 vs 텍스트 0. 미니멀 방향 선택.
+- transition harness `/a1/h/transition-12` 추가 (Phase A1.3 백로그 carry).
+
+### 3.10 다음
+
+Phase A1.5 — Stage 3 (Voice + Contact) 정제. dark inset card manifesto +
+ContactForm reuse + CTA "바로 스케줄 예약하기 →" + state-aware ambient
+(옵션: Stage 1 cursor blob ambient speed up 10–15%).
 
 ### 3.5 진행 원칙
 
