@@ -229,9 +229,43 @@ PRD v3.0 (2026-05-16 기준) 위에서 다음 영역을 사용자 피드백으�
 - `npx tsc --noEmit` — A1 파일 0 error
 - 라우트: `/a1` `/a1?debug=1` `/a1/h` `/a1/h/stage-1` `/a1/h/stage-2` `/a1/h/stage-3` 전부 200, `/` 도 200 (CSS fix 후 회복)
 
-### 3.6 다음
+### 3.6 Phase A1.2 — Stage 1 Hero 정제 (2026-05-28 완료)
 
-Phase A1.2 — Stage 1 Hero 실제 구현 (MysticCursor Canvas 2D blob, RotatingForm SVG/Canvas 정제, blur reveal 정밀화)
+산출물:
+- ✅ `src/components/a1/MysticCursor.tsx` — Canvas 2D ink wash blob.
+  midnight 베이스 위에 paper white 색의 radial gradient를 마우스 위치
+  lerp 따라옴. `cursorLerp` `cursorRadius` 파라미터 DebugPanel 연동
+  (slider 움직이면 즉시 반영). `forcedCursor` prop 또는 URL
+  `?cursor=x,y`로 위치 강제. DPR 처리, resize handling,
+  prefers-reduced-motion 시 비활성.
+- ✅ `src/components/a1/RotatingForm.tsx` — SVG 동심원 3 + 내부 dashed
+  cross + counter-rotating inner ring + core dot + echo ring. hairline
+  only (rgba 14%). `rotationDuration` `ambientLoop` DebugPanel 연동.
+- ✅ `src/components/a1/Stage1Hero.tsx` 정제 — placeholder ring 제거,
+  MysticCursor + RotatingForm 마운트, blur reveal 정밀화 (영문 14px→0,
+  한국어 6px→0 + 영문 종료 후 호흡), scroll hint motion ambient
+  파라미터 연동, `useSearchParams`로 cursor URL 파싱 (useMemo).
+
+검증:
+- `npm run lint` — A1 파일 0 error (MysticCursor의 React 19
+  `no-ref-in-render` lint는 ref update를 useEffect로 분리하여 해결.
+  Stage1Hero는 useState/useEffect 제거하고 useSearchParams로 단순화)
+- `npx tsc --noEmit` — A1 파일 0 error
+- 라우트: `/a1` `/a1?debug=1` `/a1?cursor=400,300` `/a1/h/stage-1`
+  `/a1/h/stage-1?cursor=120,160` 전부 200
+
+DebugPanel 라이브 연동 매핑:
+- `revealDuration` · `revealStagger` — 영문/한국어 등장 속도
+- `cursorLerp` — 잉크 따라옴 부드러움 (0.04 굼뜸 → 0.20 즉각)
+- `cursorRadius` — 잉크 번짐 반경 (80–280px)
+- `rotationDuration` — 외곽 dashed ring 회전 (counter-ring은 1.6배 느림)
+- `ambientLoop` — core dot 호흡 + echo ring + scroll hint 깜빡
+
+### 3.7 다음
+
+Phase A1.3 — Stage 1 → Stage 2 transition (gradient wash dissolve
+600–900ms). 그 후 Phase A1.4 — Stage 2 정제 (lozenge bullet · thread
+connector · Methodology mystic 카피 reset · clients ribbon marquee).
 
 ### 3.5 진행 원칙
 
