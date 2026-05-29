@@ -261,11 +261,43 @@ DebugPanel 라이브 연동 매핑:
 - `rotationDuration` — 외곽 dashed ring 회전 (counter-ring은 1.6배 느림)
 - `ambientLoop` — core dot 호흡 + echo ring + scroll hint 깜빡
 
-### 3.7 다음
+### 3.7 Phase A1.2.1 — 마이크로 압축 (2026-05-29)
 
-Phase A1.3 — Stage 1 → Stage 2 transition (gradient wash dissolve
-600–900ms). 그 후 Phase A1.4 — Stage 2 정제 (lozenge bullet · thread
-connector · Methodology mystic 카피 reset · clients ribbon marquee).
+피드백: "히어로섹션에 말이 너무 많다". 영문 3 + 한국어 echo 3 + eyebrow 1 = 7줄 → 3줄로 정리.
+
+변경:
+- `src/components/a1/Stage1Hero.tsx`
+  - 한국어 echo 3줄(`KR_TEXT`) 완전 제거
+  - eyebrow "Stage 1 · Mystic Hero" 제거 (placeholder 신호 폐기)
+  - 영문 3줄만 carry: "Tools change. / Structure remains. / We design it."
+  - `ENTRY_SILENCE = 0.5s` — 페이지 진입 후 첫 줄까지의 silence. 신비주의 결의 호흡.
+
+검증: `npm run lint` · `npx tsc --noEmit` A1 파일 0 error.
+
+### 3.8 Phase A1.3 — Stage 1 → 2 transition wash (2026-05-29)
+
+산출물:
+- `src/components/a1/Stage12Transition.tsx` — 40vh midnight 베이스 + inner gradient layer (linear-gradient midnight 0% → paper 65%). `viewport={{ once: true, margin: "-20%" }}` 진입 시 opacity 0→1, duration `params.stageTransition` (default 0.8s), ease `cubic-bezier(0.7, 0, 0.3, 1)` (PRD §3 stage transition). `aria-hidden` (장식). reducedMotion 시 duration 0 (즉시 paper).
+- `src/app/a1/page.tsx`에 Stage1Hero ↔ Stage2Composition 사이 마운트.
+
+설계 논거:
+- MysticCursor는 Stage1Hero의 `overflow:hidden` + `position:relative` 컨테이너에 클리핑됨 → 별도 cursor blob fade out 처리 불필요. Stage 1 영역을 스크롤하여 벗어나면 자동 클리핑.
+- 40vh — 호흡과 빈 공간 사이 균형. 너무 길면 사용자 피로, 너무 짧으면 morph가 갑작스러움.
+- gradient stop을 0% → 65%로 둬 위쪽 midnight 호흡이 더 길게 — 잉크가 종이로 번지는 결.
+- DebugPanel `Stage transition` slider (0.3–1.5s) 라이브 연동 자동 (motion-context 통해).
+
+검증:
+- `npm run lint` · `npx tsc --noEmit` A1 파일 0 error
+- 라우트 `/a1` — Stage 1 mystic → 스크롤 → wash dissolve → Stage 2 paper. Stage 2 상단 `padding: 160px 24px 200px`의 paper와 매끄럽게 이어짐.
+
+선택적 백로그:
+- transition isolation harness `/a1/h/transition-12` (필요시 추가)
+- scroll-linked variant (monopo.vn 원형) — 현 시간 기반과 비교 평가 후 결정
+
+### 3.9 다음
+
+Phase A1.4 — Stage 2 정제 (lozenge bullet · thread connector ·
+Methodology mystic 카피 reset · clients ribbon marquee 90s).
 
 ### 3.5 진행 원칙
 
