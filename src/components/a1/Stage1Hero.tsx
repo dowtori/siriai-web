@@ -15,13 +15,10 @@ type Props = {
 };
 
 const EN_LINES = ["Tools change.", "Structure remains.", "We design it."];
-const KR_TEXT = [
-  "AI 도구는 매일 새롭게 등장합니다.",
-  "필요한 건 창의성과 결합.",
-  "시리아이는 그 구조를 설계합니다.",
-];
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+// 페이지 진입 후 첫 줄까지의 silence — 신비주의 결의 호흡.
+const ENTRY_SILENCE = 0.5;
 
 export default function Stage1Hero({ badge, forcedCursor: forcedFromProps }: Props) {
   const { params, reducedMotion } = useA1Motion();
@@ -37,9 +34,6 @@ export default function Stage1Hero({ badge, forcedCursor: forcedFromProps }: Pro
     const [x, y] = cursorParam.split(",").map(Number);
     return Number.isFinite(x) && Number.isFinite(y) ? { x, y } : undefined;
   }, [forcedFromProps, cursorParam]);
-
-  // 영문이 끝난 뒤 한국어가 등장하기까지 호흡 (영문 3줄 × stagger + 여유)
-  const krDelay = stagger * EN_LINES.length + reveal * 0.6;
 
   return (
     <section
@@ -83,7 +77,7 @@ export default function Stage1Hero({ badge, forcedCursor: forcedFromProps }: Pro
         </span>
       )}
 
-      {/* Layer 2 — text composition */}
+      {/* Layer 2 — text composition. 영문 3줄만, 한국어 echo 폐기. */}
       <div
         style={{
           position: "relative",
@@ -94,22 +88,6 @@ export default function Stage1Hero({ badge, forcedCursor: forcedFromProps }: Pro
           pointerEvents: "none",
         }}
       >
-        <motion.p
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reveal, ease: EASE }}
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: 11,
-            letterSpacing: "0.22em",
-            textTransform: "uppercase",
-            color: "var(--a1-on-mute)",
-            marginBottom: 56,
-          }}
-        >
-          Stage 1 · Mystic Hero
-        </motion.p>
-
         {EN_LINES.map((line, i) => (
           <motion.h1
             key={line}
@@ -122,7 +100,7 @@ export default function Stage1Hero({ badge, forcedCursor: forcedFromProps }: Pro
             transition={{
               duration: reveal * 1.4,
               ease: EASE,
-              delay: i * stagger,
+              delay: ENTRY_SILENCE + i * stagger,
             }}
             style={{
               fontSize: "clamp(2.5rem, 5.8vw, 5rem)",
@@ -135,38 +113,6 @@ export default function Stage1Hero({ badge, forcedCursor: forcedFromProps }: Pro
             {line}
           </motion.h1>
         ))}
-
-        <div
-          style={{
-            marginTop: 48,
-            fontSize: 14,
-            lineHeight: 1.9,
-            color: "var(--a1-on-mute)",
-            wordBreak: "keep-all",
-            display: "flex",
-            flexDirection: "column",
-            gap: 4,
-          }}
-        >
-          {KR_TEXT.map((line, i) => (
-            <motion.p
-              key={line}
-              initial={{
-                opacity: 0,
-                filter: reducedMotion ? "blur(0px)" : "blur(6px)",
-              }}
-              animate={{ opacity: 0.7, filter: "blur(0px)" }}
-              transition={{
-                duration: reveal,
-                ease: EASE,
-                delay: krDelay + i * (stagger * 0.6),
-              }}
-              style={{ margin: 0 }}
-            >
-              {line}
-            </motion.p>
-          ))}
-        </div>
       </div>
 
       {/* Scroll hint — 천천히 깜빡. reducedMotion 시 정적. */}
