@@ -372,10 +372,33 @@ DebugPanel 라이브 연동 매핑:
 - `src/app/a1/h/page.tsx` — Transitions section 신규 ("1-2 · Wash 1 → 2" 항목).
 - `npm run build` 통과 — 16 라우트 모두 static prerender 성공.
 
-### 3.13 다음
+### 3.13 Phase A1.2.x — Hero 진화 1라운드 (2026-05-30, 자율 결정)
 
-**Phase A1.5.x — preview round (대기)**: Vercel preview에서 Stage 2 funnel + Stage 3 paper 통합 결 확인 후 미세 정제 신호.
+사용자 평가 "기초 정도 수준" → 깊이 보강 3 갈래 자율 결정:
+
+1. **MysticCursor 다층화** (`MysticCursor.tsx`):
+   - inner warm wash (#E8E6DE 잉크 번짐, 기존 유지·미세 강화 0.10→0.11)
+   - **outer cool halo 신규** — 청회색(176,197,220) ring, radius 1.75×, alpha 0.028. 한기·깊이감.
+   - 두 layer 합성 시 색온 대비.
+
+2. **RotatingForm 정교화** (`RotatingForm.tsx`):
+   - middle solid ring(r=200) → **4-arc segmentation**. 각 arc 80도, 사이 10도 break (코어 십자축 정렬). Signal · Judgment · Action · Record 4 layers prefigure (Stage 2 §03 의미 시각 hint).
+   - **core dot cursor magnetism**: 뷰포트 중앙→마우스 unit vector로 코어 group `<g>` translate. max drift 6px, lerp 0.06, dist saturation 400px. `coreGroupRef.setAttribute("transform", ...)` 직접 DOM write (rAF, framer animate와 충돌 없음). reducedMotion 시 비활성.
+
+3. **배경 grain noise overlay** (`Stage1Hero.tsx`):
+   - SVG `feTurbulence` fractalNoise baseFreq 0.9 octaves 2 stitchTiles.
+   - `feColorMatrix` warm gray (0.92, 0.92, 0.88) alpha 0.35.
+   - `mixBlendMode: soft-light` opacity 0.55.
+   - reducedMotion 시 미마운트. zIndex 0 (cursor/form 아래).
+   - 잉크 결·페이퍼 텍스처감.
+
+검증: `npm run build` 통과 (16 라우트 prerender).
+
+### 3.14 다음
+
+**Phase A1.5.x · A1.2.x — preview round (대기)**: Vercel preview에서 Hero 진화 + Stage 2 funnel + Stage 3 paper 통합 결 확인 후 미세 정제 신호.
 백로그:
+- Hero 진화 2라운드 후보: char-level reveal mask, RotatingForm cursor-rotation-bias, scroll hint 정교, parallax depth on form
 - thread funnel 좌표·코어 크기·line 두께 미세
 - Voice 매니페스토 한국어 stanza 줄 띄움·강조 정교화
 - ContactForm 토큰 A1 페이퍼 micro mismatch 발견 시 wrapper 또는 A1용 분리

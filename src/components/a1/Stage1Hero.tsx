@@ -60,6 +60,36 @@ export default function Stage1Hero({ badge, forcedCursor: forcedFromProps }: Pro
         <CursorQueryMystic override={forcedFromProps} />
       </Suspense>
 
+      {/* Layer 0.5 — grain noise overlay (SVG feTurbulence). 잉크 결, soft-light blend. */}
+      {!reducedMotion && (
+        <svg
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            pointerEvents: "none",
+            mixBlendMode: "soft-light",
+            opacity: 0.55,
+            zIndex: 0,
+          }}
+        >
+          <filter id="a1-grain-stage1">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.9"
+              numOctaves={2}
+              stitchTiles="stitch"
+            />
+            <feColorMatrix
+              values="0 0 0 0 0.92  0 0 0 0 0.92  0 0 0 0 0.88  0 0 0 0.35 0"
+            />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#a1-grain-stage1)" />
+        </svg>
+      )}
+
       {/* Layer 1 — central rotating form (hairline only). */}
       <RotatingForm />
 

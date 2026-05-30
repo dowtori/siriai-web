@@ -82,14 +82,25 @@ export default function MysticCursor({ forcedCursor }: Props) {
       ctx.fillStyle = "rgba(11, 15, 20, 0.06)";
       ctx.fillRect(0, 0, width, height);
 
-      // ink wash blob — radial gradient, warm paper color over midnight
-      const g = ctx.createRadialGradient(curX, curY, 0, curX, curY, cursorRadius);
-      g.addColorStop(0, "rgba(232, 230, 222, 0.10)");
-      g.addColorStop(0.45, "rgba(232, 230, 222, 0.04)");
-      g.addColorStop(1, "rgba(232, 230, 222, 0)");
-      ctx.fillStyle = g;
+      // inner warm wash — paper 잉크 번짐
+      const gWarm = ctx.createRadialGradient(curX, curY, 0, curX, curY, cursorRadius);
+      gWarm.addColorStop(0, "rgba(232, 230, 222, 0.11)");
+      gWarm.addColorStop(0.45, "rgba(232, 230, 222, 0.04)");
+      gWarm.addColorStop(1, "rgba(232, 230, 222, 0)");
+      ctx.fillStyle = gWarm;
       ctx.beginPath();
       ctx.arc(curX, curY, cursorRadius, 0, Math.PI * 2);
+      ctx.fill();
+
+      // outer cool halo — 한기 ring, 깊이감
+      const outerR = cursorRadius * 1.75;
+      const gCool = ctx.createRadialGradient(curX, curY, cursorRadius * 0.7, curX, curY, outerR);
+      gCool.addColorStop(0, "rgba(176, 197, 220, 0)");
+      gCool.addColorStop(0.55, "rgba(176, 197, 220, 0.028)");
+      gCool.addColorStop(1, "rgba(176, 197, 220, 0)");
+      ctx.fillStyle = gCool;
+      ctx.beginPath();
+      ctx.arc(curX, curY, outerR, 0, Math.PI * 2);
       ctx.fill();
 
       raf = requestAnimationFrame(animate);
