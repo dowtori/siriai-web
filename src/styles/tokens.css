@@ -12,10 +12,18 @@
   --c-ink-soft:#4A443C;    /* secondary text */
   --c-muted:#857C70;       /* captions */
   --c-line:#DCD4C6;        /* hairline border */
-  --c-accent:#C0532F;      /* terracotta — use 1~2x per screen */
-  --c-accent-soft:#E3C4B3; /* dusty rose tint */
-  --c-accent-ink:#8F3A1F;  /* accent hover/text */
-  --c-dark:#1C1A17;        /* dark contrast section */
+
+  /* Accent : SIRIAI brand lavender (preserved).
+     산출물 원본은 테라코타(#C0532F)였으나, 기존 브랜드 자산
+     (OrbCanvas Sparkles/Bloom, Growth gradient, card strip 등에 박힌
+     #c4b5fd/#818cf8)을 우선하여 보라 계열로 교정. 사용자 결정(2026-05-30).
+     주의: --c-accent(#c4b5fd)는 라이트 베이스 위 텍스트로는 대비 부족 →
+     CTA 텍스트·아이콘에는 --c-accent-ink(#818cf8) 권장. */
+  --c-accent:#c4b5fd;      /* lavender — primary brand accent */
+  --c-accent-soft:#ece6f5; /* soft lavender tint (background) */
+  --c-accent-ink:#818cf8;  /* indigo — hover / dense text on light */
+
+  --c-dark:#111110;        /* dark contrast section (코드 정합: 산출물 #1C1A17→#111110) */
   --c-dark-ink:#F2ECE1;    /* text on dark */
 
   /* ---- Typography ---- */
