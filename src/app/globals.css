@@ -5,6 +5,15 @@
 @import "@fontsource/pretendard/700.css";
 @import "@fontsource/pretendard/800.css";
 
+/* SIRIAI 비주얼 시스템 토큰 (design/visual-system 트랙).
+   기존 :root 토큰과 namespace 분리(--c-*, --f-*, --t-*, --s-*, --r-*, --dur-*, --ease).
+   D-1 본격 치환 전까진 정의만 — 기존 토큰은 그대로 살아있음 → 컴포넌트 무영향. */
+@import "../styles/tokens.css";
+
+/* Fraunces (에디토리얼 세리프 — 헤드라인용). 본문 Pretendard 위 페어링.
+   font-display:swap로 CLS 방지. 한글 헤드라인은 Pretendard 또는 Noto Serif KR fallback. */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&display=swap");
+
 :root {
   /* Siriai Design Tokens */
   --bg-primary: #F4F1EB;
