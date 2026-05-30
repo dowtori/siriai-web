@@ -1,0 +1,63 @@
+/* =========================================================
+   SIRIAI · Design Tokens
+   클로드 코드에 그대로 붙여 쓰는 단일 소스. :root에 import.
+   무드: 미니멀·여백 + 감성·에디토리얼 + 절제된 인터랙티브.
+   ========================================================= */
+:root{
+  /* ---- Color : warm editorial, quiet premium ---- */
+  --c-canvas:#F5F1EA;      /* page bg (warm paper) */
+  --c-surface:#FFFFFF;     /* card / raised */
+  --c-surface-2:#EEE8DD;   /* sunken / tint */
+  --c-ink:#1C1A17;         /* primary text */
+  --c-ink-soft:#4A443C;    /* secondary text */
+  --c-muted:#857C70;       /* captions */
+  --c-line:#DCD4C6;        /* hairline border */
+  --c-accent:#C0532F;      /* terracotta — use 1~2x per screen */
+  --c-accent-soft:#E3C4B3; /* dusty rose tint */
+  --c-accent-ink:#8F3A1F;  /* accent hover/text */
+  --c-dark:#1C1A17;        /* dark contrast section */
+  --c-dark-ink:#F2ECE1;    /* text on dark */
+
+  /* ---- Typography ---- */
+  --f-serif:'Fraunces',Georgia,'Noto Serif KR',serif;  /* display/headline */
+  --f-sans:'Inter','Pretendard',system-ui,sans-serif;  /* body/UI */
+  --f-kr:'Pretendard',system-ui,sans-serif;
+
+  --t-display:clamp(3.5rem,7vw,7rem);  /* 56→112 hero */
+  --t-h1:clamp(2.5rem,4.5vw,4rem);     /* 40→64 */
+  --t-h2:2.5rem;    /* 40 */
+  --t-h3:1.75rem;   /* 28 */
+  --t-lg:1.25rem;   /* 20 */
+  --t-body:1.0625rem; /* 17 */
+  --t-sm:.875rem;   /* 14 */
+  --t-xs:.75rem;    /* 12 */
+  --lh-tight:1.05;  --lh-body:1.6;
+  --ls-tight:-0.015em; --ls-eyebrow:0.18em;
+
+  /* ---- Spacing (8px base) ---- */
+  --s-1:4px;  --s-2:8px;  --s-3:12px; --s-4:16px; --s-5:24px;
+  --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px; --s-10:128px;
+  --section-y:clamp(64px,10vw,128px);
+  --maxw:1200px; --maxw-text:720px; --gutter:32px;
+
+  /* ---- Radius & elevation ---- */
+  --r-sm:4px; --r-md:8px; --r-lg:16px; --r-pill:999px;
+  --shadow-sm:0 1px 2px rgba(28,26,23,.06);
+  --shadow-md:0 8px 30px rgba(28,26,23,.08);
+
+  /* ---- Motion ---- */
+  --ease:cubic-bezier(0.22,1,0.36,1);
+  --dur-fast:200ms; --dur:300ms; --dur-slow:480ms;
+}
+
+/* Reduced-motion: 모든 모션 끄기 */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+/* ---- Optional Tailwind v4 @theme mapping ----
+@theme {
+  --color-canvas:#F5F1EA; --color-ink:#1C1A17; --color-accent:#C0532F;
+  --font-serif:'Fraunces',serif; --font-sans:'Inter','Pretendard',sans-serif;
+}
+*/

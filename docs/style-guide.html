@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIRIAI — Visual Style Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    /* ===== SIRIAI DESIGN TOKENS ===== */
+    /* Color — warm editorial, quiet premium */
+    --c-canvas:#F5F1EA;     /* page background (warm paper) */
+    --c-surface:#FFFFFF;    /* card / raised surface */
+    --c-surface-2:#EEE8DD;  /* sunken / tint block */
+    --c-ink:#1C1A17;        /* primary text (warm near-black) */
+    --c-ink-soft:#4A443C;   /* secondary text */
+    --c-muted:#857C70;      /* tertiary / captions */
+    --c-line:#DCD4C6;       /* hairline borders */
+    --c-accent:#C0532F;     /* terracotta — beauty warmth, use sparingly */
+    --c-accent-soft:#E3C4B3;/* dusty rose tint */
+    --c-accent-ink:#8F3A1F; /* accent on hover / text */
+    --c-dark:#1C1A17;       /* dark contrast section bg */
+    --c-dark-ink:#F2ECE1;   /* text on dark */
+
+    /* Typography */
+    --f-serif:'Fraunces',Georgia,'Nanum Myeongjo',serif;        /* display / headline */
+    --f-sans:'Inter','Pretendard',system-ui,sans-serif;         /* body / UI */
+    --f-kr:'Pretendard',system-ui,sans-serif;                   /* korean body */
+
+    /* Type scale (desktop) */
+    --t-display:clamp(3.5rem,7vw,7rem);   /* 56→112px hero */
+    --t-h1:clamp(2.5rem,4.5vw,4rem);      /* 40→64 */
+    --t-h2:2.5rem;   /* 40 */
+    --t-h3:1.75rem;  /* 28 */
+    --t-lg:1.25rem;  /* 20 */
+    --t-body:1.0625rem; /* 17 */
+    --t-sm:0.875rem; /* 14 */
+    --t-xs:0.75rem;  /* 12 */
+
+    /* Spacing — 8px base */
+    --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px;
+    --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px; --s-10:128px;
+
+    /* Radius & elevation */
+    --r-sm:4px; --r-md:8px; --r-lg:16px; --r-pill:999px;
+    --shadow-sm:0 1px 2px rgba(28,26,23,.06);
+    --shadow-md:0 8px 30px rgba(28,26,23,.08);
+
+    /* Motion */
+    --ease:cubic-bezier(0.22,1,0.36,1);
+    --dur-fast:200ms; --dur:300ms; --dur-slow:480ms;
+    --maxw:1200px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--c-canvas);color:var(--c-ink);
+    font-family:var(--f-sans);font-size:var(--t-body);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--s-6)}
+  section{padding:var(--s-9) 0;border-top:1px solid var(--c-line)}
+  h1,h2,h3{font-family:var(--f-serif);font-weight:400;line-height:1.05;letter-spacing:-0.01em}
+  .eyebrow{font-family:var(--f-sans);font-size:var(--t-xs);letter-spacing:0.18em;text-transform:uppercase;color:var(--c-accent);margin-bottom:var(--s-4)}
+  .lede{font-size:var(--t-lg);color:var(--c-ink-soft);max-width:56ch}
+  code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.85em;background:var(--c-surface-2);padding:2px 6px;border-radius:var(--r-sm)}
+
+  /* ---- top banner ---- */
+  .topbar{position:sticky;top:0;z-index:20;background:rgba(245,241,234,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--c-line)}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+  .brand{font-family:var(--f-serif);font-size:1.4rem;letter-spacing:-0.02em}
+  .brand b{font-weight:600}
+  .nav a{font-size:var(--t-sm);color:var(--c-ink-soft);text-decoration:none;margin-left:var(--s-5)}
+  .nav a:hover{color:var(--c-accent)}
+
+  /* ---- hero demo ---- */
+  .hero{min-height:78vh;display:flex;flex-direction:column;justify-content:center;text-align:center;border-top:none}
+  .hero h1{font-size:var(--t-display);font-weight:300}
+  .hero h1 em{font-style:italic;color:var(--c-accent)}
+  .hero .lede{margin:var(--s-5) auto 0}
+
+  /* swatches */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--s-4)}
+  .sw{border:1px solid var(--c-line);border-radius:var(--r-md);overflow:hidden;background:var(--c-surface)}
+  .sw .chip{height:84px}
+  .sw .meta{padding:var(--s-3)}
+  .sw .meta b{display:block;font-size:var(--t-sm)}
+  .sw .meta span{font-size:var(--t-xs);color:var(--c-muted);font-family:'SF Mono',monospace}
+
+  /* type specimens */
+  .spec{border-bottom:1px solid var(--c-line);padding:var(--s-5) 0;display:grid;grid-template-columns:130px 1fr;gap:var(--s-5);align-items:baseline}
+  .spec .tag{font-size:var(--t-xs);color:var(--c-muted);font-family:'SF Mono',monospace}
+  .d-display{font-family:var(--f-serif);font-size:var(--t-display);font-weight:300;line-height:1}
+  .d-h1{font-family:var(--f-serif);font-size:var(--t-h1);font-weight:400}
+  .d-h2{font-family:var(--f-serif);font-size:var(--t-h2)}
+  .d-h3{font-family:var(--f-serif);font-size:var(--t-h3)}
+  .d-lg{font-size:var(--t-lg)}
+  .d-body{font-size:var(--t-body)}
+  .d-sm{font-size:var(--t-sm);color:var(--c-ink-soft)}
+
+  /* spacing scale */
+  .sp-row{display:flex;align-items:center;gap:var(--s-4);margin-bottom:var(--s-2)}
+  .sp-bar{height:16px;background:var(--c-accent-soft);border-radius:2px}
+  .sp-row span{font-size:var(--t-xs);color:var(--c-muted);font-family:'SF Mono',monospace;width:90px}
+
+  /* buttons */
+  .btns{display:flex;gap:var(--s-4);flex-wrap:wrap;align-items:center}
+  .btn{font-family:var(--f-sans);font-size:var(--t-sm);font-weight:500;padding:14px 28px;border-radius:var(--r-pill);border:1px solid transparent;cursor:pointer;transition:all var(--dur) var(--ease);text-decoration:none;display:inline-flex;gap:8px;align-items:center}
+  .btn-primary{background:var(--c-ink);color:var(--c-canvas)}
+  .btn-primary:hover{background:var(--c-accent-ink)}
+  .btn-ghost{background:transparent;color:var(--c-ink);border-color:var(--c-ink)}
+  .btn-ghost:hover{background:var(--c-ink);color:var(--c-canvas)}
+  .btn-link{padding:0;color:var(--c-accent);border-radius:0;border-bottom:1px solid var(--c-accent)}
+  .btn-link:hover{color:var(--c-accent-ink)}
+
+  /* cards */
+  .grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--s-5)}
+  .card{background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--r-lg);overflow:hidden;transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+  .card .ph{aspect-ratio:4/3;background:linear-gradient(135deg,var(--c-accent-soft),var(--c-surface-2));display:flex;align-items:flex-end;padding:var(--s-4)}
+  .card .ph small{font-family:'SF Mono',monospace;font-size:var(--t-xs);color:var(--c-accent-ink)}
+  .card .body{padding:var(--s-5)}
+  .card .body h3{font-size:var(--t-h3);margin-bottom:var(--s-2)}
+  .card .body p{font-size:var(--t-sm);color:var(--c-ink-soft)}
+  .card .body .kpi{margin-top:var(--s-4);display:flex;gap:var(--s-5)}
+  .card .kpi b{font-family:var(--f-serif);font-size:1.6rem;display:block;color:var(--c-accent)}
+  .card .kpi small{font-size:var(--t-xs);color:var(--c-muted)}
+
+  /* dark section */
+  .dark{background:var(--c-dark);color:var(--c-dark-ink)}
+  .dark h2{color:var(--c-dark-ink)}
+  .dark .lede{color:#C9C0B2}
+
+  /* reveal demo */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity var(--dur-slow) var(--ease),transform var(--dur-slow) var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  .note{background:var(--c-surface-2);border-left:3px solid var(--c-accent);padding:var(--s-4) var(--s-5);border-radius:0 var(--r-md) var(--r-md) 0;font-size:var(--t-sm);color:var(--c-ink-soft);margin-top:var(--s-5)}
+  pre{background:var(--c-dark);color:#E8E0D2;padding:var(--s-5);border-radius:var(--r-md);overflow:auto;font-size:13px;line-height:1.7;font-family:'SF Mono',ui-monospace,monospace}
+  pre .c{color:#8A8273}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6)}
+  @media(max-width:720px){.spec{grid-template-columns:1fr;gap:var(--s-2)}.grid2{grid-template-columns:1fr}}
+  h2.sec{font-size:var(--t-h2);margin-bottom:var(--s-2)}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <div class="brand"><b>SIRIAI</b></div>
+  <nav class="nav"><a href="#color">Color</a><a href="#type">Type</a><a href="#space">Space</a><a href="#comp">Components</a><a href="#motion">Motion</a><a href="#tokens">Tokens</a></nav>
+</div></div>
+
+<!-- HERO DEMO -->
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">Visual Style Guide · v1</p>
+  <h1>We make K&#8209;culture<br><em>travel the world.</em></h1>
+  <p class="lede">SIRIAI 홈페이지의 비주얼 언어를 한 장에 담았습니다. 클로드 코드가 이 페이지를 열어 그대로 맞출 수 있도록 — 컬러·타입·간격·컴포넌트·모션·토큰까지.</p>
+  <div class="btns" style="justify-content:center;margin-top:32px">
+    <a class="btn btn-primary" href="#tokens">디자인 토큰 보기 &rarr;</a>
+    <a class="btn btn-ghost" href="#comp">컴포넌트</a>
+  </div>
+</div></header>
+
+<!-- COLOR -->
+<section id="color"><div class="wrap">
+  <p class="eyebrow">01 — Color</p>
+  <h2 class="sec">웜 뉴트럴 베이스 · 액센트 1색</h2>
+  <p class="lede" style="margin-bottom:40px">채도 높은 색 대신 따뜻한 종이톤 위에 잉크 블랙. 강조는 테라코타 한 가지만, 아주 가끔. 이 절제가 고급감을 만든다.</p>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#F5F1EA"></div><div class="meta"><b>Canvas</b><span>#F5F1EA</span></div></div>
+    <div class="sw"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid #DCD4C6"></div><div class="meta"><b>Surface</b><span>#FFFFFF</span></div></div>
+    <div class="sw"><div class="chip" style="background:#EEE8DD"></div><div class="meta"><b>Surface 2</b><span>#EEE8DD</span></div></div>
+    <div class="sw"><div class="chip" style="background:#1C1A17"></div><div class="meta"><b>Ink</b><span>#1C1A17</span></div></div>
+    <div class="sw"><div class="chip" style="background:#4A443C"></div><div class="meta"><b>Ink soft</b><span>#4A443C</span></div></div>
+    <div class="sw"><div class="chip" style="background:#857C70"></div><div class="meta"><b>Muted</b><span>#857C70</span></div></div>
+    <div class="sw"><div class="chip" style="background:#DCD4C6"></div><div class="meta"><b>Line</b><span>#DCD4C6</span></div></div>
+    <div class="sw"><div class="chip" style="background:#C0532F"></div><div class="meta"><b>Accent</b><span>#C0532F</span></div></div>
+    <div class="sw"><div class="chip" style="background:#E3C4B3"></div><div class="meta"><b>Accent soft</b><span>#E3C4B3</span></div></div>
+    <div class="sw"><div class="chip" style="background:#1C1A17"></div><div class="meta"><b>Dark section</b><span>#1C1A17</span></div></div>
+  </div>
+  <div class="note">규칙: 액센트(#C0532F)는 화면당 1–2회만. CTA·링크·작은 강조에만. 큰 면적 채색 금지 — 채우면 톤이 무너진다.</div>
+</div></section>
+
+<!-- TYPE -->
+<section id="type"><div class="wrap">
+  <p class="eyebrow">02 — Typography</p>
+  <h2 class="sec">세리프(헤드라인) &times; 산세리프(본문)</h2>
+  <p class="lede" style="margin-bottom:24px">Fraunces(에디토리얼 세리프)로 감성과 위계를, Inter/Pretendard(산세리프)로 가독과 신뢰를. 한글은 Pretendard, 헤드라인 한글은 명조 계열도 가능.</p>
+  <div class="spec"><span class="tag">display / 300<br>56→112px</span><div class="d-display">Aa 시리아이</div></div>
+  <div class="spec"><span class="tag">h1 / 400<br>40→64px</span><div class="d-h1">Stories that scale across borders</div></div>
+  <div class="spec"><span class="tag">h2 / 400<br>40px</span><div class="d-h2">국경을 넘는 브랜드의 이야기</div></div>
+  <div class="spec"><span class="tag">h3 / 400<br>28px</span><div class="d-h3">Case Study — TOCOBO Japan</div></div>
+  <div class="spec"><span class="tag">lede / 20px</span><div class="d-lg">데이터로 설계하고, 감성으로 완성합니다. 글로벌 크리에이터 네트워크로 브랜드를 현지의 언어로 번역합니다.</div></div>
+  <div class="spec"><span class="tag">body / 17px</span><div class="d-body">SIRIAI는 K뷰티·K팝 브랜드의 일본·북미 인플루언서 캠페인을 기획·실행합니다. 모집부터 콘텐츠 검수, 성과 리포트까지 한 팀에서.</div></div>
+  <div class="spec"><span class="tag">small / 14px</span><div class="d-sm">Influencer Marketing · Branding Strategy · Creative Production</div></div>
+  <div class="note">헤드라인 letter-spacing −0.01~−0.02em, line-height 1.05. 본문 line-height 1.6, 폭 56–68ch로 제한해 읽기 좋게.</div>
+</div></section>
+
+<!-- SPACE -->
+<section id="space"><div class="wrap">
+  <p class="eyebrow">03 — Spacing &amp; Layout</p>
+  <h2 class="sec">8px 그리드 · 사치스러운 여백</h2>
+  <p class="lede" style="margin-bottom:32px">모든 간격은 8의 배수. 섹션 사이는 96–128px로 크게 띄운다. "적게 담아 비싸 보이게."</p>
+  <div class="grid2">
+    <div>
+      <div class="sp-row"><span>--s-1 · 4</span><div class="sp-bar" style="width:4px"></div></div>
+      <div class="sp-row"><span>--s-2 · 8</span><div class="sp-bar" style="width:8px"></div></div>
+      <div class="sp-row"><span>--s-3 · 12</span><div class="sp-bar" style="width:12px"></div></div>
+      <div class="sp-row"><span>--s-4 · 16</span><div class="sp-bar" style="width:16px"></div></div>
+      <div class="sp-row"><span>--s-5 · 24</span><div class="sp-bar" style="width:24px"></div></div>
+      <div class="sp-row"><span>--s-6 · 32</span><div class="sp-bar" style="width:32px"></div></div>
+      <div class="sp-row"><span>--s-7 · 48</span><div class="sp-bar" style="width:48px"></div></div>
+      <div class="sp-row"><span>--s-8 · 64</span><div class="sp-bar" style="width:64px"></div></div>
+      <div class="sp-row"><span>--s-9 · 96</span><div class="sp-bar" style="width:96px"></div></div>
+      <div class="sp-row"><span>--s-10 · 128</span><div class="sp-bar" style="width:128px"></div></div>
+    </div>
+    <div>
+      <p class="d-sm" style="margin-bottom:12px"><b>레이아웃 규칙</b></p>
+      <p class="d-sm">· 콘텐츠 max-width 1200px, 본문 텍스트 블록은 680–760px로 더 좁게.</p>
+      <p class="d-sm">· 컬럼 좌우 여백(gutter) 32px 이상.</p>
+      <p class="d-sm">· 섹션 상하 패딩 96–128px. 모바일은 64–80px.</p>
+      <p class="d-sm">· 비대칭 그리드 허용 — 잡지처럼 텍스트와 이미지의 정렬을 일부러 어긋나게.</p>
+      <p class="d-sm">· 라운드는 작게(4–16px), 버튼만 pill. 과한 둥근 모서리는 감성을 깎는다.</p>
+      <div class="note" style="margin-top:24px">radius: <code>--r-sm 4</code> / <code>--r-md 8</code> / <code>--r-lg 16</code> / <code>--r-pill 999</code></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- COMPONENTS -->
+<section id="comp"><div class="wrap">
+  <p class="eyebrow">04 — Components</p>
+  <h2 class="sec">버튼 · 케이스 카드</h2>
+  <div class="btns" style="margin:24px 0 48px">
+    <a class="btn btn-primary" href="#">프로젝트 문의 &rarr;</a>
+    <a class="btn btn-ghost" href="#">서비스 보기</a>
+    <a class="btn btn-link" href="#">캠페인 사례 전체보기</a>
+  </div>
+  <div class="grid3">
+    <article class="card"><div class="ph"><small>K-BEAUTY / JP TIKTOK</small></div><div class="body"><h3>TOCOBO</h3><p>일본 틱톡 크리에이터 캠페인 — 모집부터 검수까지.</p><div class="kpi"><div><b>3.2M</b><small>조회수</small></div><div><b>+48%</b><small>유입</small></div></div></div></article>
+    <article class="card"><div class="ph"><small>K-POP / US TIKTOK</small></div><div class="body"><h3>NCT WISH</h3><p>북미 팬덤 대상 바이럴 캠페인 설계.</p><div class="kpi"><div><b>5.1M</b><small>조회수</small></div><div><b>120</b><small>크리에이터</small></div></div></div></article>
+    <article class="card"><div class="ph"><small>BRANDING</small></div><div class="body"><h3>무신사</h3><p>캠페인 대시보드 · 성과 리포트 운영.</p><div class="kpi"><div><b>24</b><small>캠페인</small></div><div><b>4.7</b><small>평점</small></div></div></div></article>
+  </div>
+  <div class="note">카드 호버: <code>translateY(-4px)</code> + 부드러운 그림자. 빠르게(300ms). 케이스는 개요 → 과정 → 성과(지표 KPI) 3단 구성을 따른다.</div>
+</div></section>
+
+<!-- MOTION (dark) -->
+<section id="motion" class="dark"><div class="wrap">
+  <p class="eyebrow" style="color:var(--c-accent-soft)">05 — Motion</p>
+  <h2 class="sec">조용한 모션 · 짧고 빠르게</h2>
+  <p class="lede" style="margin-bottom:32px">화려함이 아니라 타이밍. 모든 모션은 ease-out(0.22,1,0.36,1), 200–480ms. 콘텐츠를 가리는 모션은 전부 삭제.</p>
+  <div class="grid2">
+    <div>
+      <p class="reveal d-lg" style="margin-bottom:16px">↑ 이 블록들은 스크롤 진입 시 <b>아래에서 부드럽게 등장</b>합니다.</p>
+      <p class="reveal d-sm" style="color:#C9C0B2;margin-bottom:8px">translateY(24px) → 0 · opacity 0 → 1</p>
+      <p class="reveal d-sm" style="color:#C9C0B2;margin-bottom:8px">stagger 60–80ms (줄/카드 단위)</p>
+      <p class="reveal d-sm" style="color:#C9C0B2">스무스 스크롤은 Lenis(lerp≈0.1) + GSAP ScrollTrigger.</p>
+    </div>
+    <div>
+<pre><span class="c">/* 모션 토큰 */</span>
+--ease: cubic-bezier(0.22,1,0.36,1);
+--dur-fast: 200ms;  <span class="c">/* hover */</span>
+--dur:      300ms;  <span class="c">/* 기본 */</span>
+--dur-slow: 480ms;  <span class="c">/* reveal */</span>
+
+<span class="c">/* 권장 스택 */</span>
+Lenis + GSAP ScrollTrigger
+SplitText → 줄 단위 stagger reveal
+prefers-reduced-motion 존중(끄기)</pre>
+    </div>
+  </div>
+  <div class="note" style="background:#2A2722;border-left-color:var(--c-accent);color:#C9C0B2">주의: 느린 모션·과한 패럴랙스·자동재생 캐러셀 = 싸 보임. 시그니처 모션은 히어로 1곳에만.</div>
+</div></section>
+
+<!-- TOKENS -->
+<section id="tokens"><div class="wrap">
+  <p class="eyebrow">06 — Design Tokens</p>
+  <h2 class="sec">복사해서 코드에 바로</h2>
+  <p class="lede" style="margin-bottom:24px">아래 CSS 변수를 <code>:root</code>에 붙이면 이 페이지와 동일한 시스템이 됩니다. (동봉된 <code>SIRIAI_design-tokens.css</code> 파일과 동일)</p>
+<pre><span class="c">/* SIRIAI design tokens — paste into :root */</span>
+--c-canvas:#F5F1EA;  --c-surface:#FFFFFF;  --c-surface-2:#EEE8DD;
+--c-ink:#1C1A17;     --c-ink-soft:#4A443C; --c-muted:#857C70;
+--c-line:#DCD4C6;    --c-accent:#C0532F;   --c-accent-soft:#E3C4B3;
+--c-accent-ink:#8F3A1F; --c-dark:#1C1A17;  --c-dark-ink:#F2ECE1;
+
+--f-serif:'Fraunces',Georgia,serif;
+--f-sans:'Inter','Pretendard',system-ui,sans-serif;
+
+--t-display:clamp(3.5rem,7vw,7rem); --t-h1:clamp(2.5rem,4.5vw,4rem);
+--t-h2:2.5rem; --t-h3:1.75rem; --t-lg:1.25rem; --t-body:1.0625rem; --t-sm:.875rem;
+
+--s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;
+--s-6:32px;--s-7:48px;--s-8:64px;--s-9:96px;--s-10:128px;
+
+--r-sm:4px; --r-md:8px; --r-lg:16px; --r-pill:999px;
+--ease:cubic-bezier(0.22,1,0.36,1);
+--dur-fast:200ms; --dur:300ms; --dur-slow:480ms;</pre>
+  <div class="note">폰트 로드: Google Fonts <code>Fraunces</code> + <code>Inter</code>, 한글 <code>Pretendard</code>(jsdelivr CDN). 자세한 사용법은 <code>SIRIAI_03_클로드코드_협업_프롬프트.md</code> 참고.</div>
+</div></section>
+
+<footer style="padding:48px 0;text-align:center;color:var(--c-muted);font-size:13px;border-top:1px solid var(--c-line)">
+  SIRIAI Visual Style Guide · 클로드 코드 협업용 리빙 스펙 · 이 파일을 브라우저로 열어 스크린샷을 찍어 코드와 비교하세요.
+</footer>
+
+<script>
+  // scroll reveal demo
+  const io=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*70);io.unobserve(e.target)}})},{threshold:.2});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
