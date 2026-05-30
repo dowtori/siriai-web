@@ -1,0 +1,118 @@
+/* ─────────────────────────────────────────────────────────
+   V4 — Redesign 프로토타입 테마 (격리 스코프 .v4-scope)
+   키워드: 신비주의 · 느린 · 스마트
+   - 바디: 흰색 기반(white-based) + 필요시 다크 변주 (twelvelabs/gemini 결)
+   - Hero: 다크·신비주의 (별개 경험, monopo 결)
+   - 디자인 포인트: pill 버튼 · 불렛 디테일 / 오브젝트 절제
+   프로덕션 토큰(:root) 미변경 — 전부 .v4-scope 하위로 스코프.
+   ───────────────────────────────────────────────────────── */
+.v4-scope {
+  /* light (base) */
+  --v4-paper: #ffffff;
+  --v4-paper-2: #f7f6f3;     /* subtle raised / alt band */
+  --v4-ink: #0f1419;
+  --v4-muted: #565d68;
+  --v4-faint: #9298a2;
+  --v4-line: rgba(15, 20, 25, 0.10);
+  --v4-line-strong: rgba(15, 20, 25, 0.16);
+
+  /* dark (변주 / hero) — warm off-black, pure #000 거부 */
+  --v4-midnight: #0b0f14;
+  --v4-on-midnight: #e9e7df;
+  --v4-on-midnight-muted: #99a0ab;
+  --v4-line-dark: rgba(233, 231, 223, 0.14);
+
+  /* accent — 절제, 버튼·불렛·강조 1점 */
+  --v4-accent: #2b3a4a;
+  --v4-accent-soft: #eef2f6;
+  --v4-glow: #4f7bbf;        /* hero 신비 글로우 (cool luminous) */
+
+  --v4-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --v4-ease-slow: cubic-bezier(0.16, 1, 0.3, 1);
+
+  background: var(--v4-paper);
+  color: var(--v4-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* eyebrow / kicker */
+.v4-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--v4-muted);
+  font-weight: 500;
+}
+
+/* pill button — 디자인 포인트 */
+.v4-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-size: 0.94rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0.95em 1.6em;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.4s var(--v4-ease), color 0.4s var(--v4-ease),
+    border-color 0.4s var(--v4-ease), transform 0.4s var(--v4-ease);
+}
+.v4-btn .v4-btn-dot {
+  width: 6px; height: 6px; border-radius: 999px;
+  background: currentColor; opacity: 0.85;
+  transition: transform 0.5s var(--v4-ease);
+}
+.v4-btn:hover .v4-btn-dot { transform: translateX(3px); }
+
+.v4-btn--primary { background: var(--v4-ink); color: var(--v4-paper); }
+.v4-btn--primary:hover { background: var(--v4-accent); }
+
+.v4-btn--ghost { background: transparent; color: var(--v4-ink); border-color: var(--v4-line-strong); }
+.v4-btn--ghost:hover { border-color: var(--v4-ink); background: var(--v4-ink); color: var(--v4-paper); }
+
+.v4-btn--onDark { background: var(--v4-on-midnight); color: var(--v4-midnight); }
+.v4-btn--onDark:hover { background: #fff; }
+
+/* bullet — 디자인 포인트 (커스텀 마커) */
+.v4-bullets { list-style: none; margin: 0; padding: 0; }
+.v4-bullet {
+  position: relative;
+  padding-left: 1.6em;
+  line-height: 1.6;
+}
+.v4-bullet::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.66em;
+  width: 7px; height: 7px;
+  border-radius: 2px;
+  background: var(--v4-accent);
+  transform: rotate(45deg);
+}
+.v4-bullet--onDark::before { background: var(--v4-glow); }
+
+/* hairline */
+.v4-hr { height: 1px; background: var(--v4-line); border: 0; }
+
+/* responsive — 모바일 그리드 스택 */
+@media (max-width: 760px) {
+  .v4-practice-grid,
+  .v4-pillar-grid,
+  .v4-proof-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* reduced motion: 신비주의 ambient 정지 */
+@media (prefers-reduced-motion: reduce) {
+  .v4-scope *,
+  .v4-scope *::before,
+  .v4-scope *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
