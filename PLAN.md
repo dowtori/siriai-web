@@ -445,7 +445,38 @@ DebugPanel 라이브 연동 매핑:
 
 검증: `npm run build` 통과 (16 라우트).
 
-### 3.16 다음
+### 3.16 Phase A1.8 — Hero 상호작용 아키텍처 재설계 (Revelation) (2026-05-30, 사용자 깊은 피드백)
+
+사용자: "Hero 구현 의도(철학)를 모르겠다", "여전히 빠르고 직선적", "숫자 만지지 말고 설계를 다시".
+
+**진단**:
+- 기존 Hero는 *무드*만 있고 *thesis* 없음. 잉크 트레일 + 회전 휠 = 신비 장식, Siriai에 대해 아무것도 말 안 함.
+- "직선적" 근본 원인 = **직접 조작(direct manipulation)**. 잉크 블롭이 커서에 묶인 목줄(1:1 비례 인과). lerp는 목줄 길이만 바꿈, 관계는 못 바꿈. 반응형 설계를 숫자로 못 느리게 함.
+- 짜집기 = 4개 무관한 시스템(canvas 블롭 + svg 휠 + grain + text).
+
+**재설계 원칙 (사용자 문답 → Revelation 채택)**:
+> 사용자가 '그리게' 하지 말고, 자기 존재를 가진 구조를 '드러내게' 하라.
+- 카피 "Tools change. Structure remains. We design it."를 상호작용으로 인코딩.
+- 구조는 이미 어둠 속에 완성 존재 → 커서=lantern, 빛이 닿은 자리만 드러남.
+
+**산출물**:
+- `src/components/a1/LatticeField.tsx` 신규 (Canvas 2D, 4 시스템을 하나의 thesis로 통일):
+  - **world에 고정된 설계된 lattice** — seeded PRNG(mulberry32, fixed seed)로 결정론적 노드+엣지 격자(SPACING 84, JITTER 26). "we design it" = 같은 위치 = 항상 같은 구조. **커서가 콘텐츠를 끌고 다니지 않음** → puppet/직선 느낌 제거의 핵심.
+  - **lantern 조명** — lerp된 커서 위치 기준 smoothstep falloff. 빛 닿은 노드만 조도↑.
+  - **사진 현상(felt slowness)** — REVEAL_RISE 0.045(~1.1s), REVEAL_FALL 0.012(~4s). 빠르게 움직여도 구조는 천천히 떠오름/가라앉음. 느림이 *관계*에서 옴, lerp 숫자 아님.
+  - **기억 잔존("structure remains")** — MEM_DECAY 0.9986(half-life ~8s), MEM_CAP 0.2. 드러낸 구조가 제자리에 희미하게 남음(트레일 paint가 아니라 고정 lattice 잔광).
+  - **중앙 heart** — CORE_RADIUS 168 always-lit 코어가 텍스트 뒤 안정 anchor. ambientLoop 자기 시간으로 호흡(coreScale). → 3 시간(현상·기억·호흡)이 한 구조 위에서.
+  - reducedMotion: lattice 정적 희미 렌더, 인터랙션 0.
+  - forcedCursor(harness ?cursor) 지원.
+- `Stage1Hero.tsx` — MysticCursor→LatticeField swap(Suspense·LanternQuery 래퍼 유지), RotatingForm 레이어 제거. grain·text 유지.
+- **삭제**: `MysticCursor.tsx` `RotatingForm.tsx` (cursor magnetism·4-arc segment·잉크 블롭·회전 휠 전부 폐기 → 짜집기 해소).
+- `Stage12Transition.tsx` 주석 갱신.
+
+검증: `npm run build` 통과(16 라우트), lint a1 0 error.
+
+> **디자인 포인트(고정)**: "한 화면에 여러 시간이 흐른다" → Hero에서 구체화 = **Revelation**. 신비=어둠 속 구조, 느림=현상/기억의 시간 상수, 스마트=설계된(결정론적) lattice가 곧 정보 구조의 은유.
+
+### 3.17 다음
 
 **Phase A1.5.x · A1.2.x — preview round (대기)**: Vercel preview에서 Hero 진화 + Stage 2 funnel + Stage 3 paper 통합 결 확인 후 미세 정제 신호.
 백로그:

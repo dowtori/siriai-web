@@ -3,8 +3,7 @@
 import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useMemo } from "react";
-import MysticCursor from "./MysticCursor";
-import RotatingForm from "./RotatingForm";
+import LatticeField from "./LatticeField";
 import { useA1Motion } from "./motion-context";
 
 type ForcedCursor = { x: number; y: number };
@@ -21,7 +20,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 // 페이지 진입 후 첫 줄까지의 silence — 신비주의 결의 호흡.
 const ENTRY_SILENCE = 0.7;
 
-function CursorQueryMystic({ override }: { override?: ForcedCursor }) {
+function LanternQuery({ override }: { override?: ForcedCursor }) {
   const sp = useSearchParams();
   const cursorParam = sp.get("cursor");
   const forced = useMemo<ForcedCursor | undefined>(() => {
@@ -30,7 +29,7 @@ function CursorQueryMystic({ override }: { override?: ForcedCursor }) {
     const [x, y] = cursorParam.split(",").map(Number);
     return Number.isFinite(x) && Number.isFinite(y) ? { x, y } : undefined;
   }, [override, cursorParam]);
-  return <MysticCursor forcedCursor={forced} />;
+  return <LatticeField forcedCursor={forced} />;
 }
 
 export default function Stage1Hero({ badge, forcedCursor: forcedFromProps }: Props) {
@@ -55,10 +54,11 @@ export default function Stage1Hero({ badge, forcedCursor: forcedFromProps }: Pro
         isolation: "isolate",
       }}
     >
-      {/* Layer 0 — Canvas ink wash. midnight 위에 잔향 페인팅.
+      {/* Layer 0 — Revelation lattice. 어둠 속 설계된 구조를 lantern(커서)이
+          드러낸다. world에 고정 · 결정론적 · 사진처럼 현상 · 희미하게 잔존.
           useSearchParams는 Suspense에 wrap (Next 16 static prerender 요구). */}
-      <Suspense fallback={<MysticCursor forcedCursor={forcedFromProps} />}>
-        <CursorQueryMystic override={forcedFromProps} />
+      <Suspense fallback={<LatticeField forcedCursor={forcedFromProps} />}>
+        <LanternQuery override={forcedFromProps} />
       </Suspense>
 
       {/* Layer 0.5 — grain noise overlay (SVG feTurbulence). 잉크 결, soft-light blend. */}
@@ -90,9 +90,6 @@ export default function Stage1Hero({ badge, forcedCursor: forcedFromProps }: Pro
           <rect width="100%" height="100%" filter="url(#a1-grain-stage1)" />
         </svg>
       )}
-
-      {/* Layer 1 — central rotating form (hairline only). */}
-      <RotatingForm />
 
       {badge && (
         <span

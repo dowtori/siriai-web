@@ -9,7 +9,7 @@ const EASE_TRANSITION = [0.7, 0, 0.3, 1] as const;
 /**
  * Stage 1 (midnight) → Stage 2 (paper) wash dissolve.
  * 잉크가 종이로 번지듯 위→아래 gradient morph, 600–900ms.
- * MysticCursor는 Stage1Hero의 overflow:hidden에 클리핑되어 자동 fade out.
+ * Hero LatticeField는 Stage1Hero의 overflow:hidden에 클리핑되어 자동 fade out.
  */
 export default function Stage12Transition() {
   const { params, reducedMotion } = useA1Motion();
