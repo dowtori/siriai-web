@@ -335,9 +335,23 @@ DebugPanel 라이브 연동 매핑:
 
 ### 3.10 다음
 
-Phase A1.5 — Stage 3 (Voice + Contact) 정제. dark inset card manifesto +
-ContactForm reuse + CTA "바로 스케줄 예약하기 →" + state-aware ambient
-(옵션: Stage 1 cursor blob ambient speed up 10–15%).
+**Phase A1.4.x — Stage 2 preview 정제 round (대기 중)**
+
+사용자가 Vercel preview에서 Stage 2 결을 본 후 피드백 → 미세 조정.
+백로그 후보 (3.9 §선택적 백로그 carry):
+- thread connector 진화 — 단순 line → 3→1→4 funnel (motion.path stagger)
+- Methodology head 카피 재정제 — "Three doors. / Four moves." vs 대안
+- Clients ribbon eyebrow — "With" vs 텍스트 0
+- lozenge spacing / row gap / vertical 호흡 미세 조정
+- transition harness `/a1/h/transition-12` 추가 (Phase A1.3 carry)
+
+**Phase A1.5 — Stage 3 (Voice + Contact) 구조 결정 (사용자 문답 2026-05-29):**
+- **구조**: 한 통합 블록 — manifesto → CTA로 자연 흐름. Stage 2 통합 결 일관.
+- **톤**: paper 일관 — A1 미니멀 일관성 우선. dark 없음.
+- 콘텐츠: A안 §05 매니페스토 carry + ContactForm reuse + CTA "바로 스케줄 예약하기 →"
+- 옵션: state-aware ambient — Stage 1 cursor blob ambient를 Stage 3 진입 시 10–15% speed up (현재 결정 보류, A1.5 진행 중 판단)
+
+진행은 Stage 2 preview round 종료 후.
 
 ### 3.5 진행 원칙
 

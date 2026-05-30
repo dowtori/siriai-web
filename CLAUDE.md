@@ -207,6 +207,12 @@ create table contact_submissions (
 
 ---
 
+## Agent 협업 메모
+
+- AskUserQuestion 사용 시 옵션 중 추천안을 첫 번째에 두고 label 끝에 `(Recommended)` 표기. 사용자 결정 가속.
+
+---
+
 ## v1 Legacy Notes (압축)
 
 - 15섹션 구조 (Hero · Connection · Relationship · Architecture · Philosophy · AIStudio · Creator · Archiving · Manifesto · Growth · Services · Works · CTA · Footer + Navigation/Indicator)
