@@ -41,6 +41,7 @@ export default function Stage1Hero({ badge, forcedCursor: forcedFromProps }: Pro
   return (
     <section
       data-a1-stage="1"
+      data-a1-tone="dark"
       style={{
         position: "relative",
         minHeight: "100vh",

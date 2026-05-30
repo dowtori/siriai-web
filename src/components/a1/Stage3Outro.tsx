@@ -96,6 +96,7 @@ export default function Stage3Outro({ badge }: Props) {
 
   return (
     <section
+      id="a1-contact"
       data-a1-stage="3"
       style={{
         position: "relative",

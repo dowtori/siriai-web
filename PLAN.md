@@ -394,7 +394,28 @@ DebugPanel 라이브 연동 매핑:
 
 검증: `npm run build` 통과 (16 라우트 prerender).
 
-### 3.14 다음
+### 3.14 Phase A1.6 — 페이지 크롬 (Nav + Footer) (2026-05-30, 사용자 문답)
+
+문답 결정:
+- **Nav + Footer 크롬 추가** (vs 모바일 패스 / Hero 2라운드 / Stage 2·3 미세)
+- **Footer 톤 = Midnight 봉인** (vs paper 일관) — Hero(midnight)↔Footer(midnight) 양끝 아크. dark→light→dark.
+
+산출물:
+- `src/components/a1/A1Navigation.tsx` 신규:
+  - 고정 상단, scroll>16px 시 bg-blur + 높이 72→56 축소 (v3 Navigation 패턴 미러, A1 토큰).
+  - `[data-a1-tone="dark"]` IntersectionObserver (rootMargin `0 0 -90% 0`) — dark 섹션이 상단 strip 뒤면 색 반전. 초기 `onDark=true` (hero 위 깜빡임 방지).
+  - 브랜드 "Siriai" → scrollTo top, "Contact" → `#a1-contact`.
+- `src/components/a1/A1Footer.tsx` 신규 (midnight):
+  - (a) 영문 매니페스토 echo "We don't recommend tools. We architect what stays." + 한국어 "도구가 아닌 비전을 제시합니다." (v3 Footer carry)
+  - (b) 풀폭 serif wordmark "Siriai" (`var(--font-mark)` 900, clamp 5.5–16rem) — blur+y reveal anchor
+  - (c) © 2024–year 주식회사 시리아이 + contact@siriai.io
+  - `data-a1-tone="dark"` — Nav 색 반전 트리거 (footer 위에서도 dark nav).
+- 마킹: `Stage1Hero` `Stage12Transition` `A1Footer`에 `data-a1-tone="dark"`. `Stage3Outro` 섹션에 `id="a1-contact"` (Nav Contact 앵커).
+- `src/app/a1/page.tsx` — `<A1Navigation/>` + `<main>...</main>` + `<A1Footer/>` 래핑. 크롬은 / preview에만, harness 라우트는 stage isolation 유지 (nav/footer 미포함).
+
+검증: `npm run build` 통과 (16 라우트 prerender).
+
+### 3.15 다음
 
 **Phase A1.5.x · A1.2.x — preview round (대기)**: Vercel preview에서 Hero 진화 + Stage 2 funnel + Stage 3 paper 통합 결 확인 후 미세 정제 신호.
 백로그:

@@ -19,6 +19,7 @@ export default function Stage12Transition() {
     <section
       aria-hidden
       data-a1-stage="transition-12"
+      data-a1-tone="dark"
       style={{
         position: "relative",
         height: "40vh",
