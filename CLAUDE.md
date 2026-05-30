@@ -185,6 +185,43 @@ npx vercel --prod    # Vercel 프로덕션 배포 (또는 git push → 자동 �
 
 ---
 
+## SIRIAI 비주얼 규칙 (반드시 준수 — `design/visual-system` 트랙)
+
+> 출처: `docs/visual-workflow.md` §C · `docs/style-guide.html`(리빙 스펙) · `docs/reference-report.md`
+> 적용 범위: **메인 `/`(v3) — 비주얼 시스템만** (산출물의 K뷰티·인플루언서 카피/케이스는 채택 안 함, AI 컨설팅 정체성 유지)
+
+**무드**: 미니멀·여백 + 감성·에디토리얼 + 절제된 모션. "조용한 고급감". 경쟁사가 시끄럽게 갈 때 우리는 조용히 가서 차별화.
+
+### 색
+- 모든 색은 `src/styles/tokens.css` 의 CSS 변수만 사용. HEX 하드코딩 금지.
+- 배경은 `--c-canvas`(웜 페이퍼). 액센트 `--c-accent`(보라 #c4b5fd)는 화면당 1~2회만.
+- 큰 면적 채색 금지. 대비 섹션은 `--c-dark` 사용.
+- **⚠️ 브랜드 액센트 = 보라** (`#c4b5fd`/`#818cf8`). 산출물 원본 테라코타는 제안값이라 폐기. OrbCanvas·Growth·card strip 자산 그대로 보존.
+
+### 타입
+- 헤드라인은 `--f-serif`(Fraunces), 본문·UI는 `--f-sans`(Inter/Pretendard).
+- 히어로 헤드라인은 `--t-display`, weight 300, line-height 1.05, letter-spacing -0.015em.
+- 본문 폭은 `--maxw-text`(720px) 이하로 제한. line-height 1.6.
+
+### 간격·레이아웃
+- 8px 그리드. 모든 margin/padding은 `--s-*` 토큰.
+- 섹션 상하 패딩 `--section-y`. 컨테이너 `--maxw`(1200px), gutter `--gutter`.
+- 라운드는 작게(`--r-sm`~`--r-lg`). pill은 버튼만. 과한 둥근 모서리 금지.
+- 비대칭/에디토리얼 그리드 허용. 여백을 사치스럽게 — 한 화면에 적게 담기.
+
+### 모션
+- 모든 transition은 `--ease`, 200~480ms. 느린 모션 금지.
+- 스크롤 등장: translateY(24px)+opacity, stagger 60~80ms.
+- 시그니처 모션은 히어로 1곳에만. 자동재생 캐러셀·과한 패럴랙스 금지.
+- `prefers-reduced-motion` 반드시 존중.
+
+### 작업 규칙
+- 새 컴포넌트는 `docs/style-guide.html`의 패턴(버튼/카드/타입)을 먼저 참고.
+- UI를 바꾸면 설명 말고 스크린샷을 찍어 `style-guide.html`과 대조해 차이를 보고.
+- 접근성: 대비 AA 이상, 포커스 링 유지, 시맨틱 태그.
+
+---
+
 ## 주의사항
 
 - `ManifestoSection.tsx`, `FeaturesSection.tsx` — 레거시 파일, `page.tsx` 미사용. 삭제 가능.
