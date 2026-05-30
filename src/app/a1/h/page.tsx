@@ -6,6 +6,10 @@ const STAGES = [
   { num: 3, name: "Voice + Contact", route: "/a1/h/stage-3" },
 ];
 
+const TRANSITIONS = [
+  { id: "1-2", name: "Wash 1 → 2", route: "/a1/h/transition-12" },
+];
+
 const QUERY_FLAGS = [
   { q: "?debug=1", desc: "모션 디버그 패널 자동 노출 (⌘D / Ctrl+D 토글)" },
   { q: "?scroll=0.5", desc: "scrollProgress 강제 (0–1, Phase A1.3+ 의미 있음)" },
@@ -130,6 +134,81 @@ export default function A1HarnessIndex() {
                     }}
                   >
                     {s.route} →
+                  </span>
+                </Link>
+              </li>
+            ))}
+            <li style={{ borderBottom: "1px solid var(--a1-hairline)" }} />
+          </ul>
+        </section>
+
+        <section style={{ marginTop: 64 }}>
+          <h2
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: "var(--a1-mute)",
+              margin: 0,
+            }}
+          >
+            Transitions
+          </h2>
+          <ul
+            style={{
+              listStyle: "none",
+              padding: 0,
+              margin: "20px 0 0",
+              display: "flex",
+              flexDirection: "column",
+              gap: 1,
+            }}
+          >
+            {TRANSITIONS.map((t) => (
+              <li key={t.id}>
+                <Link
+                  href={t.route}
+                  style={{
+                    display: "flex",
+                    alignItems: "baseline",
+                    gap: 24,
+                    padding: "20px 0",
+                    borderTop: "1px solid var(--a1-hairline)",
+                    color: "var(--a1-ink)",
+                    textDecoration: "none",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 11,
+                      letterSpacing: "0.18em",
+                      color: "var(--a1-mute)",
+                      minWidth: 32,
+                    }}
+                  >
+                    {t.id}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 22,
+                      fontWeight: 400,
+                      letterSpacing: "-0.01em",
+                    }}
+                  >
+                    {t.name}
+                  </span>
+                  <span
+                    style={{
+                      marginLeft: "auto",
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 11,
+                      color: "var(--a1-mute)",
+                    }}
+                  >
+                    {t.route} →
                   </span>
                 </Link>
               </li>

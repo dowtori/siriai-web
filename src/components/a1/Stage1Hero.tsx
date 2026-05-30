@@ -2,14 +2,15 @@
 
 import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { Suspense, useMemo } from "react";
 import MysticCursor from "./MysticCursor";
 import RotatingForm from "./RotatingForm";
 import { useA1Motion } from "./motion-context";
 
+type ForcedCursor = { x: number; y: number };
 type Props = {
   /** 강제 cursor 위치 — harness에서 ?cursor=x,y로 전달 */
-  forcedCursor?: { x: number; y: number };
+  forcedCursor?: ForcedCursor;
   /** 좌상단 isolation 표시 */
   badge?: string;
 };
@@ -20,20 +21,22 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 // 페이지 진입 후 첫 줄까지의 silence — 신비주의 결의 호흡.
 const ENTRY_SILENCE = 0.5;
 
+function CursorQueryMystic({ override }: { override?: ForcedCursor }) {
+  const sp = useSearchParams();
+  const cursorParam = sp.get("cursor");
+  const forced = useMemo<ForcedCursor | undefined>(() => {
+    if (override) return override;
+    if (!cursorParam) return undefined;
+    const [x, y] = cursorParam.split(",").map(Number);
+    return Number.isFinite(x) && Number.isFinite(y) ? { x, y } : undefined;
+  }, [override, cursorParam]);
+  return <MysticCursor forcedCursor={forced} />;
+}
+
 export default function Stage1Hero({ badge, forcedCursor: forcedFromProps }: Props) {
   const { params, reducedMotion } = useA1Motion();
   const reveal = reducedMotion ? 0 : params.revealDuration;
   const stagger = reducedMotion ? 0 : params.revealStagger;
-
-  // URL ?cursor=x,y 파싱 — harness에서만 의미. props로 직접 받으면 우선.
-  const sp = useSearchParams();
-  const cursorParam = sp.get("cursor");
-  const forcedCursor = useMemo<Props["forcedCursor"]>(() => {
-    if (forcedFromProps) return forcedFromProps;
-    if (!cursorParam) return undefined;
-    const [x, y] = cursorParam.split(",").map(Number);
-    return Number.isFinite(x) && Number.isFinite(y) ? { x, y } : undefined;
-  }, [forcedFromProps, cursorParam]);
 
   return (
     <section
@@ -51,8 +54,11 @@ export default function Stage1Hero({ badge, forcedCursor: forcedFromProps }: Pro
         isolation: "isolate",
       }}
     >
-      {/* Layer 0 — Canvas ink wash. midnight 위에 잔향 페인팅. */}
-      <MysticCursor forcedCursor={forcedCursor} />
+      {/* Layer 0 — Canvas ink wash. midnight 위에 잔향 페인팅.
+          useSearchParams는 Suspense에 wrap (Next 16 static prerender 요구). */}
+      <Suspense fallback={<MysticCursor forcedCursor={forcedFromProps} />}>
+        <CursorQueryMystic override={forcedFromProps} />
+      </Suspense>
 
       {/* Layer 1 — central rotating form (hairline only). */}
       <RotatingForm />

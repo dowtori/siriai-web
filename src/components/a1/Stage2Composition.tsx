@@ -20,10 +20,25 @@ const T_HEAD_STAGGER = 0.15;
 const T_KR_HEAD = 0.45;
 const T_AXES_START = 0.85;
 const T_THREAD_START = 1.25;
-const T_LAYERS_START = 1.85;
+// thread funnel — 3→1→4 구조. 4 layers lozenge는 lines2와 약간 overlap.
+const T_FUNNEL_LINES1_DURATION = 0.6;
+const T_FUNNEL_CORE_DELTA = 0.7;
+const T_FUNNEL_CORE_DURATION = 0.3;
+const T_FUNNEL_LINES2_DELTA = 1.0;
+const T_FUNNEL_LINES2_DURATION = 0.6;
+const T_FUNNEL_STAGGER = 0.04;
+const T_LAYERS_START = T_THREAD_START + T_FUNNEL_LINES2_DELTA; // 2.25s
 
-const THREAD_HEIGHT = 140;
-const THREAD_BASELINE = 1.4; // PRD §3 motion.path pathLength 1.4s
+// Funnel SVG 좌표계 — 280×140 추상 다이어그램. lozenge row와 별도 정렬.
+const FUNNEL = {
+  width: 280,
+  height: 140,
+  axesXs: [50, 140, 230],
+  coreX: 140,
+  coreY: 60,
+  layersXs: [35, 105, 175, 245],
+  layersY: 140,
+};
 
 function Lozenge({
   index,
@@ -68,9 +83,10 @@ export default function Stage2Composition({ badge }: Props) {
   const { params, reducedMotion } = useA1Motion();
   const reveal = reducedMotion ? 0 : params.revealDuration;
   const lozengeReveal = reducedMotion ? 0 : params.revealDuration * 0.7;
-  // lozenge stagger — revealStagger 기반, 약간 빠르게.
   const lozengeStep = reducedMotion ? 0 : params.revealStagger * 0.6;
-  const threadDuration = reducedMotion ? 0 : THREAD_BASELINE;
+  const fLines1 = reducedMotion ? 0 : T_FUNNEL_LINES1_DURATION;
+  const fCore = reducedMotion ? 0 : T_FUNNEL_CORE_DURATION;
+  const fLines2 = reducedMotion ? 0 : T_FUNNEL_LINES2_DURATION;
 
   return (
     <section
@@ -145,11 +161,7 @@ export default function Stage2Composition({ badge }: Props) {
           }}
           whileInView={{ opacity: 0.72, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-15%" }}
-          transition={{
-            duration: reveal,
-            ease: EASE,
-            delay: T_KR_HEAD,
-          }}
+          transition={{ duration: reveal, ease: EASE, delay: T_KR_HEAD }}
           style={{
             marginTop: 36,
             fontSize: 14,
@@ -186,9 +198,9 @@ export default function Stage2Composition({ badge }: Props) {
         </ul>
 
         <svg
-          width={2}
-          height={THREAD_HEIGHT}
-          viewBox={`0 0 2 ${THREAD_HEIGHT}`}
+          width={FUNNEL.width}
+          height={FUNNEL.height}
+          viewBox={`0 0 ${FUNNEL.width} ${FUNNEL.height}`}
           style={{
             display: "block",
             marginTop: 28,
@@ -197,20 +209,56 @@ export default function Stage2Composition({ badge }: Props) {
           }}
           aria-hidden
         >
-          <motion.path
-            d={`M 1 0 L 1 ${THREAD_HEIGHT}`}
-            stroke="var(--a1-hairline-strong)"
-            strokeWidth={1}
-            fill="none"
-            initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
+          {FUNNEL.axesXs.map((x, i) => (
+            <motion.path
+              key={`axis-${i}`}
+              d={`M ${x} 0 L ${FUNNEL.coreX} ${FUNNEL.coreY}`}
+              stroke="var(--a1-hairline-strong)"
+              strokeWidth={1}
+              fill="none"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              viewport={{ once: true, margin: "-15%" }}
+              transition={{
+                duration: fLines1,
+                ease: EASE,
+                delay: T_THREAD_START + i * T_FUNNEL_STAGGER,
+              }}
+            />
+          ))}
+
+          <motion.circle
+            cx={FUNNEL.coreX}
+            cy={FUNNEL.coreY}
+            fill="var(--a1-ink)"
+            initial={{ r: 0, opacity: 0 }}
+            whileInView={{ r: 3, opacity: 0.92 }}
             viewport={{ once: true, margin: "-15%" }}
             transition={{
-              duration: threadDuration,
+              duration: fCore,
               ease: EASE,
-              delay: T_THREAD_START,
+              delay: T_THREAD_START + T_FUNNEL_CORE_DELTA,
             }}
           />
+
+          {FUNNEL.layersXs.map((x, i) => (
+            <motion.path
+              key={`layer-${i}`}
+              d={`M ${FUNNEL.coreX} ${FUNNEL.coreY} L ${x} ${FUNNEL.layersY}`}
+              stroke="var(--a1-hairline-strong)"
+              strokeWidth={1}
+              fill="none"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              viewport={{ once: true, margin: "-15%" }}
+              transition={{
+                duration: fLines2,
+                ease: EASE,
+                delay:
+                  T_THREAD_START + T_FUNNEL_LINES2_DELTA + i * T_FUNNEL_STAGGER,
+              }}
+            />
+          ))}
         </svg>
 
         <ul

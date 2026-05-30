@@ -333,25 +333,54 @@ DebugPanel 라이브 연동 매핑:
 - Clients ribbon 헤드 — "With" eyebrow vs 카피 추가 vs 텍스트 0. 미니멀 방향 선택.
 - transition harness `/a1/h/transition-12` 추가 (Phase A1.3 백로그 carry).
 
-### 3.10 다음
+### 3.10 Phase A1.4.x — Stage 2 정제 (2026-05-30, 자율 결정)
 
-**Phase A1.4.x — Stage 2 preview 정제 round (대기 중)**
+자율 결정 (사용자 위임 "고민있는 부분 추천안으로"):
+- **Thread connector funnel 진화** — 단순 vertical line → **3→1→4 funnel** 구조.
+  3 axes lozenge에서 line 3개가 가운데 코어(반지름 3 ink dot)로 수렴 → 코어에서 line 4개가 4 layers lozenge로 분기. SVG 280×140 추상 다이어그램 (lozenge row와 별도 정렬).
+  motion: lines1 pathLength stagger (0.04s) duration 0.6s → core r 0→3 (0.3s) → lines2 pathLength stagger duration 0.6s. 4 layers lozenge는 lines2와 overlap (T_LAYERS_START 1.85→2.25).
+- **Methodology head 카피 유지** — "Three doors. / Four moves." (피드백 시 redirect 가능)
+- **Clients ribbon eyebrow 유지** — "With" 카피 (Stage 2 톤 균형)
+- **state-aware ambient 보류** — A1.5 후속 백로그.
 
-사용자가 Vercel preview에서 Stage 2 결을 본 후 피드백 → 미세 조정.
-백로그 후보 (3.9 §선택적 백로그 carry):
-- thread connector 진화 — 단순 line → 3→1→4 funnel (motion.path stagger)
-- Methodology head 카피 재정제 — "Three doors. / Four moves." vs 대안
-- Clients ribbon eyebrow — "With" vs 텍스트 0
-- lozenge spacing / row gap / vertical 호흡 미세 조정
-- transition harness `/a1/h/transition-12` 추가 (Phase A1.3 carry)
+산출물:
+- `src/components/a1/Stage2Composition.tsx` — funnel 좌표계 (`FUNNEL` 상수), lines1·core·lines2 분리 motion timing.
 
-**Phase A1.5 — Stage 3 (Voice + Contact) 구조 결정 (사용자 문답 2026-05-29):**
-- **구조**: 한 통합 블록 — manifesto → CTA로 자연 흐름. Stage 2 통합 결 일관.
-- **톤**: paper 일관 — A1 미니멀 일관성 우선. dark 없음.
-- 콘텐츠: A안 §05 매니페스토 carry + ContactForm reuse + CTA "바로 스케줄 예약하기 →"
-- 옵션: state-aware ambient — Stage 1 cursor blob ambient를 Stage 3 진입 시 10–15% speed up (현재 결정 보류, A1.5 진행 중 판단)
+### 3.11 Phase A1.5 — Stage 3 paper 통합 (2026-05-30, 사용자 문답 결정 적용)
 
-진행은 Stage 2 preview round 종료 후.
+결정 (사용자 문답 2026-05-29):
+- **구조**: 한 통합 블록 — manifesto → CTA로 자연 흐름
+- **톤**: paper 일관 — dark 없음
+
+산출물:
+- `src/components/a1/Stage3Outro.tsx` 전면 재작성:
+  - dark inset card 폐기, 전체 paper 베이스
+  - Voice 영문 매니페스토 line별 blur reveal ("We don't recommend tools. / We architect what stays.")
+  - 한국어 stanza 3개 stagger reveal — '사람' '+32% 이상' fontWeight 600 강조 (`renderEmphasis` helper)
+  - Caption "— Siriai Manifesto, 2026"
+  - hairline divider 호흡
+  - Contact head "Let's start with coffee." + 한국어 "가벼운 커피챗으로, 해묵은 고민을 시원하게."
+  - A안 `ContactForm` import reuse (격리 원칙: 강제 X, 재사용 가능)
+  - 보조 link "또는 바로 스케줄 예약하기 →" → `/contact#schedule`
+  - 가운데 정렬 column (max-width 880), form은 max-width 480 좌측 정렬
+  - 시퀀스: head stagger 0.15s → stanza 0.45+0.15×3 → caption 0.95 → contact head 1.25 → 한국어 1.45 → form 1.7 → schedule link 1.95 (총 ~2.5s mystic 호흡)
+
+### 3.12 Phase A1.3.x — Suspense fix + harness 보강 (2026-05-30, build 통과 fix)
+
+- **빌드 실패 해소**: `Stage1Hero` `useSearchParams` 사용처가 Next 16 static prerender에서 Suspense boundary 누락 에러 발생 (이전 commit `dc1db46`까지도 동일 — Vercel preview 빌드 실패 가능성). `CursorQueryMystic` child 컴포넌트로 분리하고 `Suspense fallback={<MysticCursor forcedCursor={forcedFromProps} />}`로 감싸 prerender 통과.
+- `src/app/a1/h/transition-12/page.tsx` 신규 — Stage 1 잔여물(80vh midnight) → Stage12Transition (40vh wash) → Stage 2 paper 잔여(80vh) 스크롤 시뮬레이션. badge 자동.
+- `src/app/a1/h/page.tsx` — Transitions section 신규 ("1-2 · Wash 1 → 2" 항목).
+- `npm run build` 통과 — 16 라우트 모두 static prerender 성공.
+
+### 3.13 다음
+
+**Phase A1.5.x — preview round (대기)**: Vercel preview에서 Stage 2 funnel + Stage 3 paper 통합 결 확인 후 미세 정제 신호.
+백로그:
+- thread funnel 좌표·코어 크기·line 두께 미세
+- Voice 매니페스토 한국어 stanza 줄 띄움·강조 정교화
+- ContactForm 토큰 A1 페이퍼 micro mismatch 발견 시 wrapper 또는 A1용 분리
+- state-aware ambient (Stage 1 cursor blob speed up 10–15% on stage 3 진입)
+- DebugPanel에 funnel 단계별 sub-duration slider 추가
 
 ### 3.5 진행 원칙
 
