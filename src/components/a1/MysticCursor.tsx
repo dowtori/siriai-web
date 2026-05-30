@@ -78,8 +78,9 @@ export default function MysticCursor({ forcedCursor }: Props) {
       curX += (mouseX - curX) * cursorLerp;
       curY += (mouseY - curY) * cursorLerp;
 
-      // soft fade trail — midnight 위에 살짝 덮어서 잔향이 천천히 사라짐
-      ctx.fillStyle = "rgba(11, 15, 20, 0.06)";
+      // long-decay trail — 잔향이 오래 남도록 fade alpha 극단적으로 낮춤.
+      // 0.06 → 0.022 (잔향 ~3배 길어짐). production-grade mystic의 핵심.
+      ctx.fillStyle = "rgba(11, 15, 20, 0.022)";
       ctx.fillRect(0, 0, width, height);
 
       // inner warm wash — paper 잉크 번짐

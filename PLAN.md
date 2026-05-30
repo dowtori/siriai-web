@@ -415,7 +415,37 @@ DebugPanel 라이브 연동 매핑:
 
 검증: `npm run build` 통과 (16 라우트 prerender).
 
-### 3.15 다음
+### 3.15 Phase A1.7 — 짜집기 reset · 디자인 포인트 재정의 (2026-05-30, 사용자 깊은 피드백)
+
+사용자 피드백: "Hero 느림 미반영", "Stage 2-3 스크롤 너무 길다", "원안 짜집기 느낌", "UX는 정량 직역 X, production-grade 결로".
+
+**디자인 포인트 재정의 (한 줄)**:
+> "한 화면에 여러 시간이 흐른다."
+- 신비 = layer 분리, 느림 = 시간 상수의 차이, 스마트 = 그 분리를 정보 구조로 표현 (lozenge)
+
+**짜집기 진단**:
+- Hero: 모든 layer가 같은 시간선에서 동시 마우스 반응 → "여러 가지가 마우스 따라옴". cursor magnetism + 4-arc segment는 forward-noise.
+- Stage 2/3: padding 200/240·200/200 + 다중 spacer 104+140+96+124 → 페이지 5+ vp (PRD 3.5vp 원안 크게 초과).
+- 시그니처 불통일: lozenge + funnel SVG + 4-arc + char reveal — 한 페이지 시그니처 부재.
+
+**적용 (production-grade 기준 — monopo·Resn 검증 수준)**:
+
+1. **Hero 시간 layering** — 정량 직역 X. cursor lerp 자체로 느림 만들지 않고 **잔향(fade trail)을 극단적으로 늘려** mystic 느림:
+   - `MysticCursor`: fade alpha `0.06 → 0.022` (잔향 ~3배 길어짐). lerp 0.09→0.08(production-grade 유지).
+   - `motion-context` defaults: cursorLerp 0.09→0.08, cursorRadius 180→240(잔향 영역↑), rotationDuration 10→14s, revealStagger 0.12→0.22(텍스트 줄간 호흡↑), revealDuration 0.8→1.0, ambientLoop 8→12.
+   - cursorLerp range min 0.04→0.015(슬라이더 극단 가능), rotationDuration max 20→40, cursorRadius max 280→320.
+   - `RotatingForm` — **4-arc segment 폐기**(middle solid ring 복귀, forward-noise 제거), **cursor magnetism 폐기**(coreGroupRef 제거). 자기 시간 회전만, 마우스 무관 — 안정 기준점.
+   - `Stage1Hero` ENTRY_SILENCE 0.5→0.7s.
+
+2. **Stage 2/3 압축** (정보 구조 유지, padding·spacer만):
+   - Stage 2 padding `200/240` → `clamp(96,12vw,128)/clamp(96,12vw,128)`. 내부 spacer 104→56, thread svg margin 28+28→12+12, KR head margin 36→28.
+   - Stage 3 padding `200/200` → `clamp(96,12vw,128)/clamp(112,14vw,144)`. divider hairline 폐기 → 단순 spacer 96px. 매니페스토 margin 56→40, contact head→KR 18→14, form margin 56→40, schedule link 40→32.
+   - Stage12Transition height 40vh→28vh.
+   - 페이지 총량 5+vp → ~3vp (PRD 원안 회복).
+
+검증: `npm run build` 통과 (16 라우트).
+
+### 3.16 다음
 
 **Phase A1.5.x · A1.2.x — preview round (대기)**: Vercel preview에서 Hero 진화 + Stage 2 funnel + Stage 3 paper 통합 결 확인 후 미세 정제 신호.
 백로그:

@@ -19,7 +19,7 @@ const EN_LINES = ["Tools change.", "Structure remains.", "We design it."];
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 // 페이지 진입 후 첫 줄까지의 silence — 신비주의 결의 호흡.
-const ENTRY_SILENCE = 0.5;
+const ENTRY_SILENCE = 0.7;
 
 function CursorQueryMystic({ override }: { override?: ForcedCursor }) {
   const sp = useSearchParams();

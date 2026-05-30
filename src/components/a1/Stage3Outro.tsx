@@ -102,7 +102,7 @@ export default function Stage3Outro({ badge }: Props) {
         position: "relative",
         background: "var(--a1-paper)",
         color: "var(--a1-ink)",
-        padding: "200px 24px 200px",
+        padding: "clamp(96px, 12vw, 128px) 24px clamp(112px, 14vw, 144px)",
         fontFamily: "var(--font-sans)",
       }}
     >
@@ -163,14 +163,14 @@ export default function Stage3Outro({ badge }: Props) {
 
         <div
           style={{
-            marginTop: 56,
+            marginTop: 40,
             maxWidth: "46ch",
             fontSize: "clamp(0.9375rem, 1.05vw, 1.0625rem)",
             lineHeight: 1.95,
             color: "var(--a1-ink)",
             display: "flex",
             flexDirection: "column",
-            gap: 22,
+            gap: 18,
           }}
         >
           {STANZAS.map((stanza, i) => (
@@ -190,7 +190,7 @@ export default function Stage3Outro({ badge }: Props) {
           viewport={{ once: true, margin: "-15%" }}
           transition={{ duration: reveal, ease: EASE, delay: T_CAPTION }}
           style={{
-            marginTop: 56,
+            marginTop: 40,
             fontFamily: "var(--font-mono)",
             fontSize: 10,
             letterSpacing: "0.22em",
@@ -201,15 +201,7 @@ export default function Stage3Outro({ badge }: Props) {
           — Siriai Manifesto, 2026
         </motion.p>
 
-        <div
-          aria-hidden
-          style={{
-            width: 1,
-            height: 96,
-            background: "var(--a1-hairline)",
-            margin: "120px auto 80px",
-          }}
-        />
+        <div style={{ height: 96 }} />
 
         <motion.h3
           initial={{
@@ -238,7 +230,7 @@ export default function Stage3Outro({ badge }: Props) {
           viewport={{ once: true, margin: "-15%" }}
           transition={{ duration: reveal, ease: EASE, delay: T_CONTACT_KR }}
           style={{
-            marginTop: 18,
+            marginTop: 14,
             fontSize: 15,
             lineHeight: 1.85,
             color: "var(--a1-mute)",
@@ -255,7 +247,7 @@ export default function Stage3Outro({ badge }: Props) {
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: reveal, ease: EASE, delay: T_FORM }}
           style={{
-            marginTop: 56,
+            marginTop: 40,
             width: "100%",
             maxWidth: 480,
             textAlign: "left",
@@ -269,7 +261,7 @@ export default function Stage3Outro({ badge }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: reveal, ease: EASE, delay: T_SCHEDULE_LINK }}
-          style={{ marginTop: 40 }}
+          style={{ marginTop: 32 }}
         >
           <Link
             href={calLink ? "/contact#schedule" : "/contact#schedule"}

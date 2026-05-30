@@ -95,7 +95,7 @@ export default function Stage2Composition({ badge }: Props) {
         position: "relative",
         background: "var(--a1-paper)",
         color: "var(--a1-ink)",
-        padding: "200px 24px 240px",
+        padding: "clamp(96px, 12vw, 128px) 24px clamp(96px, 12vw, 128px)",
         fontFamily: "var(--font-sans)",
       }}
     >
@@ -163,7 +163,7 @@ export default function Stage2Composition({ badge }: Props) {
           viewport={{ once: true, margin: "-15%" }}
           transition={{ duration: reveal, ease: EASE, delay: T_KR_HEAD }}
           style={{
-            marginTop: 36,
+            marginTop: 28,
             fontSize: 14,
             lineHeight: 1.85,
             color: "var(--a1-mute)",
@@ -173,7 +173,7 @@ export default function Stage2Composition({ badge }: Props) {
           {KR_HEAD}
         </motion.p>
 
-        <div style={{ height: 104 }} />
+        <div style={{ height: 56 }} />
 
         <ul
           style={{
@@ -203,8 +203,8 @@ export default function Stage2Composition({ badge }: Props) {
           viewBox={`0 0 ${FUNNEL.width} ${FUNNEL.height}`}
           style={{
             display: "block",
-            marginTop: 28,
-            marginBottom: 28,
+            marginTop: 12,
+            marginBottom: 12,
             overflow: "visible",
           }}
           aria-hidden

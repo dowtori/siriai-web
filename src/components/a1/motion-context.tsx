@@ -22,14 +22,14 @@ export type A1MotionParams = {
 };
 
 export const A1_MOTION_DEFAULTS: A1MotionParams = {
-  revealDuration: 0.8,
-  revealStagger: 0.12,
-  cursorLerp: 0.09,
-  cursorRadius: 180,
-  rotationDuration: 10,
+  revealDuration: 1.0,
+  revealStagger: 0.22,
+  cursorLerp: 0.08,
+  cursorRadius: 240,
+  rotationDuration: 14,
   hoverDuration: 0.2,
   stageTransition: 0.8,
-  ambientLoop: 8,
+  ambientLoop: 12,
 };
 
 export const A1_MOTION_RANGES: Record<
@@ -37,13 +37,13 @@ export const A1_MOTION_RANGES: Record<
   { min: number; max: number; step: number; unit: string; label: string }
 > = {
   revealDuration: { min: 0.3, max: 2.0, step: 0.05, unit: "s", label: "Text reveal" },
-  revealStagger: { min: 0.04, max: 0.3, step: 0.01, unit: "s", label: "Line stagger" },
-  cursorLerp: { min: 0.04, max: 0.2, step: 0.005, unit: "", label: "Cursor lerp" },
-  cursorRadius: { min: 80, max: 280, step: 5, unit: "px", label: "Cursor radius" },
-  rotationDuration: { min: 4, max: 20, step: 0.5, unit: "s", label: "Rotation" },
+  revealStagger: { min: 0.04, max: 0.4, step: 0.01, unit: "s", label: "Line stagger" },
+  cursorLerp: { min: 0.015, max: 0.2, step: 0.005, unit: "", label: "Cursor lerp" },
+  cursorRadius: { min: 80, max: 320, step: 5, unit: "px", label: "Cursor radius" },
+  rotationDuration: { min: 8, max: 40, step: 0.5, unit: "s", label: "Rotation" },
   hoverDuration: { min: 0.1, max: 0.4, step: 0.02, unit: "s", label: "Hover" },
   stageTransition: { min: 0.3, max: 1.5, step: 0.05, unit: "s", label: "Stage transition" },
-  ambientLoop: { min: 3, max: 15, step: 0.5, unit: "s", label: "Ambient loop" },
+  ambientLoop: { min: 3, max: 20, step: 0.5, unit: "s", label: "Ambient loop" },
 };
 
 const STORAGE_KEY = "siriai_a1_motion_v1";

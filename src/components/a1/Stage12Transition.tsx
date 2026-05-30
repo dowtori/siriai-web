@@ -22,7 +22,7 @@ export default function Stage12Transition() {
       data-a1-tone="dark"
       style={{
         position: "relative",
-        height: "40vh",
+        height: "28vh",
         background: "var(--a1-midnight)",
         overflow: "hidden",
       }}
