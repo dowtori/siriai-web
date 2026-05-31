@@ -1,6 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import V4GlassButton from "./V4GlassButton";
 
 /**
@@ -11,6 +13,9 @@ import V4GlassButton from "./V4GlassButton";
 const V4HeroScene = dynamic(() => import("./V4HeroScene"), { ssr: false });
 
 export default function V4HeroV2() {
+  const reduce = useReducedMotion() ?? false;
+  const [reveal, setReveal] = useState(false);
+  const showKr = reduce || reveal;
   return (
     <section style={{ position: "relative", height: "100vh", overflow: "hidden", background: "var(--v4-midnight)", color: "var(--v4-on-midnight)" }}>
       <div style={{ position: "absolute", inset: 0 }}>
@@ -23,13 +28,27 @@ export default function V4HeroV2() {
       </div>
 
       <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "0 24px", zIndex: 2 }}>
-        <h1 style={{ margin: 0, fontFamily: "var(--font-display)", fontWeight: 500, fontSize: "clamp(2.6rem, 6.2vw, 5.6rem)", lineHeight: 1.06, letterSpacing: "-0.024em", textShadow: "0 2px 50px rgba(0,0,0,0.5)" }}>
-          <span style={{ display: "block" }}>Architecture for</span>
-          <span style={{ display: "block" }}>Insight with AI.</span>
-        </h1>
-        <p style={{ margin: "clamp(24px, 3.5vw, 40px) 0 clamp(36px, 4.5vw, 56px)", fontSize: "clamp(0.95rem, 1.4vw, 1.15rem)", color: "var(--v4-on-midnight-muted)" }}>
-          AI 기반 인사이트, 가장 쉽고 감각적으로.
-        </p>
+        {/* 헤드라인(영문) — 호버 시 한글 태그라인이 천천히 드러남 (monopo 결). reduced-motion이면 항상 표시 */}
+        <div
+          onMouseEnter={() => setReveal(true)}
+          onMouseLeave={() => setReveal(false)}
+          style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+        >
+          <h1 style={{ margin: 0, fontFamily: "var(--font-display)", fontWeight: 500, fontSize: "clamp(2.6rem, 6.2vw, 5.6rem)", lineHeight: 1.06, letterSpacing: "-0.024em", textShadow: "0 2px 50px rgba(0,0,0,0.5)" }}>
+            <span style={{ display: "block" }}>Architecture for</span>
+            <span style={{ display: "block" }}>Insight with AI.</span>
+          </h1>
+          {/* 공간 항상 예약(레이아웃 시프트 방지), opacity로만 reveal */}
+          <motion.p
+            initial={false}
+            animate={{ opacity: showKr ? 1 : 0, y: showKr ? 0 : -4 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            style={{ margin: "clamp(20px, 3vw, 34px) 0 0", fontSize: "clamp(0.95rem, 1.4vw, 1.15rem)", color: "var(--v4-on-midnight-muted)", pointerEvents: "none" }}
+          >
+            AI 기반 인사이트, 가장 쉽고 감각적으로.
+          </motion.p>
+        </div>
+        <div style={{ height: "clamp(36px, 4.5vw, 56px)" }} />
         <V4GlassButton label="Talk to us" href="#contact" />
       </div>
 
