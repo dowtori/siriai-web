@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import V4GlassButton from "./V4GlassButton";
 
 /**
  * V4 ACT 1 — Hero (재설계).
@@ -9,6 +8,7 @@ import V4GlassButton from "./V4GlassButton";
  * 텍스트 모션 없음. 스크롤 확대 없음. 카피 v3 그대로.
  */
 const V4HeroScene = dynamic(() => import("./V4HeroScene"), { ssr: false });
+const V4HeroToken = dynamic(() => import("./V4HeroToken"), { ssr: false });
 
 export default function V4HeroV2() {
   return (
@@ -33,7 +33,7 @@ export default function V4HeroV2() {
         <p style={{ margin: "clamp(24px, 3.5vw, 40px) 0 clamp(36px, 4.5vw, 56px)", fontSize: "clamp(0.95rem, 1.4vw, 1.15rem)", color: "var(--v4-on-midnight-muted)" }}>
           AI 기반 인사이트, 가장 쉽고 감각적으로.
         </p>
-        <V4GlassButton label="Talk to us" href="#contact" />
+        <V4HeroToken />
       </div>
 
       {/* 스크롤 큐 */}
