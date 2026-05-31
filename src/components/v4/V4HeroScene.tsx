@@ -2,117 +2,112 @@
 
 import { useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { ScreenQuad } from "@react-three/drei";
 import * as THREE from "three";
 
 /**
- * V4 Hero 3D 씬 — WebGL 깊이 (원본 구현).
- * 노드 래티스(지능/구조 은유) + 깊이 더스트 + fog + bloom + 스크롤 카메라 돌리 + 마우스 패럴랙스.
- * ssr:false 동적 임포트 전용 (V4HeroV2에서 로드).
+ * V4 Hero 배경 — GLSL 안개/오로라 + 은은한 luminous core (원본 구현).
+ * 미스트 속에서 천천히 흐르는 발광 형상. 노드 오브(v1) 폐기. bloom 없이 셰이더 자체 글로우.
+ * 마우스에 미세 반응. 스크롤 확대 없음. ssr:false 동적 로드 전용.
  */
-const GLOW = "#5b8cc8";
-const NODE_N = 260;
-const NODE_R = 2.25;
-const NEIGHBORS = 3;
-const DUST_N = 1500;
-
-function buildNodes() {
-  const pos = new Float32Array(NODE_N * 3);
-  const pts: THREE.Vector3[] = [];
-  const golden = Math.PI * (3 - Math.sqrt(5));
-  for (let i = 0; i < NODE_N; i++) {
-    const y = 1 - (i / (NODE_N - 1)) * 2;
-    const r = Math.sqrt(1 - y * y);
-    const theta = golden * i;
-    const v = new THREE.Vector3(Math.cos(theta) * r, y, Math.sin(theta) * r).multiplyScalar(NODE_R);
-    pts.push(v);
-    pos[i * 3] = v.x; pos[i * 3 + 1] = v.y; pos[i * 3 + 2] = v.z;
+const vertexShader = /* glsl */ `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = vec4(position.xy, 0.0, 1.0);
   }
-  const seg: number[] = [];
-  for (let i = 0; i < pts.length; i++) {
-    const d = pts
-      .map((p, j) => ({ j, dist: p.distanceTo(pts[i]) }))
-      .filter((o) => o.j !== i)
-      .sort((a, b) => a.dist - b.dist)
-      .slice(0, NEIGHBORS);
-    for (const { j } of d) if (j > i) seg.push(pts[i].x, pts[i].y, pts[i].z, pts[j].x, pts[j].y, pts[j].z);
-  }
-  return { pos, lines: new Float32Array(seg) };
-}
+`;
 
-function buildDust() {
-  const pos = new Float32Array(DUST_N * 3);
-  for (let i = 0; i < DUST_N; i++) {
-    pos[i * 3] = (Math.random() - 0.5) * 18;
-    pos[i * 3 + 1] = (Math.random() - 0.5) * 12;
-    pos[i * 3 + 2] = -2 - Math.random() * 12;
-  }
-  return pos;
-}
+const fragmentShader = /* glsl */ `
+  precision highp float;
+  varying vec2 vUv;
+  uniform float uTime;
+  uniform vec2  uMouse;
+  uniform vec2  uRes;
 
-function Scene({ progress, reduce }: { progress: React.MutableRefObject<number>; reduce: boolean }) {
-  const group = useRef<THREE.Group>(null);
-  const dust = useRef<THREE.Points>(null);
-  const { camera, pointer } = useThree();
-  const node = useMemo(buildNodes, []);
-  const dustPos = useMemo(buildDust, []);
+  float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }
+  float noise(vec2 p){
+    vec2 i = floor(p), f = fract(p);
+    float a = hash(i), b = hash(i + vec2(1.0,0.0)),
+          c = hash(i + vec2(0.0,1.0)), d = hash(i + vec2(1.0,1.0));
+    vec2 u = f*f*(3.0-2.0*f);
+    return mix(a,b,u.x) + (c-a)*u.y*(1.0-u.x) + (d-b)*u.x*u.y;
+  }
+  float fbm(vec2 p){
+    float v = 0.0, a = 0.5;
+    for(int i=0;i<5;i++){ v += a*noise(p); p *= 2.02; a *= 0.5; }
+    return v;
+  }
+
+  void main(){
+    float aspect = uRes.x / max(uRes.y, 1.0);
+    vec2 uv = vUv;
+    vec2 p = vec2((uv.x - 0.5) * aspect, uv.y - 0.5);
+    vec2 m = uMouse * 0.12;
+
+    float t = uTime * 0.025;
+    // domain-warped fbm — 천천히 흐르는 안개
+    float q = fbm(p * 2.1 + vec2(t, t * 0.6) + m);
+    float n = fbm(p * 2.1 + q * 1.6 + vec2(-t * 0.5, t * 0.45) + m);
+
+    vec3 base = vec3(0.043, 0.059, 0.078);  // #0b0f14
+    vec3 glow = vec3(0.30, 0.55, 0.80);     // cool indigo
+
+    float r = length(p);
+    float vig = smoothstep(0.95, 0.18, r);          // 중심으로 모이는 빛
+    float core = smoothstep(0.62, 0.0, r);          // 은은한 luminous core
+    float mist = smoothstep(0.34, 0.96, n) * vig;
+
+    vec3 col = base;
+    col += glow * mist * 0.85;
+    col += glow * core * (0.10 + 0.06 * n);          // 코어 발광 (노이즈로 호흡)
+    col *= mix(0.55, 1.0, vig);                       // 가장자리 어둠
+
+    gl_FragColor = vec4(col, 1.0);
+  }
+`;
+
+function Aurora() {
+  const { pointer, size } = useThree();
+  const mat = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        vertexShader,
+        fragmentShader,
+        uniforms: {
+          uTime: { value: 0 },
+          uMouse: { value: new THREE.Vector2(0, 0) },
+          uRes: { value: new THREE.Vector2(1, 1) },
+        },
+        depthTest: false,
+        depthWrite: false,
+      }),
+    []
+  );
 
   useFrame((_, delta) => {
-    const d = Math.min(delta, 0.05);
-    const p = progress.current;
-    if (group.current) {
-      if (!reduce) {
-        group.current.rotation.y += d * 0.045;
-        group.current.rotation.x += (pointer.y * 0.18 - group.current.rotation.x) * 0.04;
-        group.current.position.x += (pointer.x * 0.4 - group.current.position.x) * 0.04;
-      }
-      group.current.scale.setScalar(0.92 + p * 0.16);
-    }
-    if (dust.current && !reduce) dust.current.rotation.y -= d * 0.012;
-    const targetZ = reduce ? 6 : 6 - p * 1.9;
-    camera.position.z += (targetZ - camera.position.z) * 0.06;
-    camera.lookAt(0, 0, 0);
+    const u = mat.uniforms;
+    u.uTime.value += Math.min(delta, 0.05);
+    u.uMouse.value.x += (pointer.x - u.uMouse.value.x) * 0.03;
+    u.uMouse.value.y += (pointer.y - u.uMouse.value.y) * 0.03;
+    u.uRes.value.set(size.width, size.height);
   });
 
   return (
-    <>
-      <fog attach="fog" args={["#0b0f14", 6.5, 17]} />
-      <points ref={dust}>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[dustPos, 3]} />
-        </bufferGeometry>
-        <pointsMaterial size={0.018} color={GLOW} transparent opacity={0.5} sizeAttenuation depthWrite={false} blending={THREE.AdditiveBlending} />
-      </points>
-      <group ref={group}>
-        <lineSegments>
-          <bufferGeometry>
-            <bufferAttribute attach="attributes-position" args={[node.lines, 3]} />
-          </bufferGeometry>
-          <lineBasicMaterial color={GLOW} transparent opacity={0.14} depthWrite={false} blending={THREE.AdditiveBlending} />
-        </lineSegments>
-        <points>
-          <bufferGeometry>
-            <bufferAttribute attach="attributes-position" args={[node.pos, 3]} />
-          </bufferGeometry>
-          <pointsMaterial size={0.07} color={"#cfe0ff"} transparent opacity={0.95} sizeAttenuation depthWrite={false} blending={THREE.AdditiveBlending} />
-        </points>
-      </group>
-      <EffectComposer>
-        <Bloom intensity={0.85} luminanceThreshold={0.06} luminanceSmoothing={0.25} mipmapBlur />
-      </EffectComposer>
-    </>
+    <ScreenQuad>
+      <primitive object={mat} attach="material" />
+    </ScreenQuad>
   );
 }
 
-export default function V4HeroScene({ progress, reduce }: { progress: React.MutableRefObject<number>; reduce: boolean }) {
+export default function V4HeroScene() {
   return (
     <Canvas
-      camera={{ position: [0, 0, 6], fov: 50 }}
       dpr={[1, 2]}
-      gl={{ antialias: true, alpha: false }}
+      gl={{ antialias: false, alpha: false }}
       onCreated={({ gl }) => gl.setClearColor("#0b0f14", 1)}
     >
-      <Scene progress={progress} reduce={reduce} />
+      <Aurora />
     </Canvas>
   );
 }
