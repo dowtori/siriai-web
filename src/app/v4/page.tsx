@@ -1,4 +1,4 @@
-import V4Hero from "@/components/v4/V4Hero";
+import V4HeroV2 from "@/components/v4/V4HeroV2";
 import V4Practice from "@/components/v4/V4Practice";
 import V4Proof from "@/components/v4/V4Proof";
 import V4Closing from "@/components/v4/V4Closing";
@@ -11,7 +11,7 @@ import V4Closing from "@/components/v4/V4Closing";
 export default function V4Home() {
   return (
     <main>
-      <V4Hero />
+      <V4HeroV2 />
       <V4Practice />
       <V4Proof />
       <V4Closing />
